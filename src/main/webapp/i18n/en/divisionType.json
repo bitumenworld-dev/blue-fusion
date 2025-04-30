@@ -1,0 +1,9 @@
+{
+  "blueFusionApp": {
+    "DivisionType": {
+      "null": "",
+      "CONTRACT": "CONTRACT",
+      "DIVISION": "DIVISION"
+    }
+  }
+}

@@ -8,7 +8,24 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "assetPlant": "Asset Plant",
+        "assetPlantServiceReading": "Asset Plant Service Reading",
+        "fuelIssueanceType": "Fuel Issueance Type",
+        "assetPlantPhoto": "Asset Plant Photo",
+        "contractDivision": "Contract Division",
+        "site": "Site",
+        "manufacturer": "Manufacturer",
+        "manufacturerModel": "Manufacturer Model",
+        "company": "Company",
+        "plantCategory": "Plant Category",
+        "plantSubcategory": "Plant Subcategory",
+        "workshop": "Workshop",
+        "siteContract": "Site Contract",
+        "employee": "Employee",
+        "fuelTransactionType": "Fuel Transaction Type",
+        "fuelTransactionHeader": "Fuel Transaction Header",
+        "fuelTransactionLine": "Fuel Transaction Line",
+        "fuelPump": "Fuel Pump"
       },
       "account": {
         "main": "Account",

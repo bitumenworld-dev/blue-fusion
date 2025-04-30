@@ -1,0 +1,5 @@
+export enum ConsumptionUnit {
+  KILOMETERS_PER_LITRE = 'KILOMETERS_PER_LITRE',
+
+  LITRES_PER_HOUR = 'LITRES_PER_HOUR',
+}

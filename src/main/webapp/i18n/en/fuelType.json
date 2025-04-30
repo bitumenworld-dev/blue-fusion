@@ -1,0 +1,11 @@
+{
+  "blueFusionApp": {
+    "FuelType": {
+      "null": "",
+      "PETROL": "PETROL",
+      "DIESEL": "DIESEL",
+      "NONE": "NONE",
+      "OTHER": "OTHER"
+    }
+  }
+}

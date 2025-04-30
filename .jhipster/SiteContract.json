@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20250430082351"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "siteContractId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "siteId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contractId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "SiteContract",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

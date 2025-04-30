@@ -1,0 +1,225 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-asset-plant-service-reading-heading"
+        data-cy="AssetPlantServiceReadingCreateUpdateHeading"
+        jhiTranslate="blueFusionApp.assetPlantServiceReading.home.createOrEditLabel"
+      >
+        Create or edit a Asset Plant Service Reading
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.assetPlantServiceReading.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_assetPlantServiceReadingId"
+            jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantServiceReadingId"
+            >Asset Plant Service Reading Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="assetPlantServiceReadingId"
+            id="field_assetPlantServiceReadingId"
+            data-cy="assetPlantServiceReadingId"
+            formControlName="assetPlantServiceReadingId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assetPlantId" jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantId"
+            >Asset Plant Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="assetPlantId"
+            id="field_assetPlantId"
+            data-cy="assetPlantId"
+            formControlName="assetPlantId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_nextServiceSmrReading"
+            jhiTranslate="blueFusionApp.assetPlantServiceReading.nextServiceSmrReading"
+            >Next Service Smr Reading</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nextServiceSmrReading"
+            id="field_nextServiceSmrReading"
+            data-cy="nextServiceSmrReading"
+            formControlName="nextServiceSmrReading"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_estimatedUnitsPerDay"
+            jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedUnitsPerDay"
+            >Estimated Units Per Day</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="estimatedUnitsPerDay"
+            id="field_estimatedUnitsPerDay"
+            data-cy="estimatedUnitsPerDay"
+            formControlName="estimatedUnitsPerDay"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_estimatedNextServiceDate"
+            jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedNextServiceDate"
+            >Estimated Next Service Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_estimatedNextServiceDate"
+              data-cy="estimatedNextServiceDate"
+              type="text"
+              class="form-control"
+              name="estimatedNextServiceDate"
+              ngbDatepicker
+              #estimatedNextServiceDateDp="ngbDatepicker"
+              formControlName="estimatedNextServiceDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="estimatedNextServiceDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latestSmrReadings" jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrReadings"
+            >Latest Smr Readings</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="latestSmrReadings"
+            id="field_latestSmrReadings"
+            data-cy="latestSmrReadings"
+            formControlName="latestSmrReadings"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_serviceInterval" jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceInterval"
+            >Service Interval</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="serviceInterval"
+            id="field_serviceInterval"
+            data-cy="serviceInterval"
+            formControlName="serviceInterval"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastServiceDate" jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceDate"
+            >Last Service Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_lastServiceDate"
+              data-cy="lastServiceDate"
+              type="text"
+              class="form-control"
+              name="lastServiceDate"
+              ngbDatepicker
+              #lastServiceDateDp="ngbDatepicker"
+              formControlName="lastServiceDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="lastServiceDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latestSmrDate" jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrDate"
+            >Latest Smr Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_latestSmrDate"
+              data-cy="latestSmrDate"
+              type="text"
+              class="form-control"
+              name="latestSmrDate"
+              ngbDatepicker
+              #latestSmrDateDp="ngbDatepicker"
+              formControlName="latestSmrDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="latestSmrDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastServiceSmr" jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceSmr"
+            >Last Service Smr</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="lastServiceSmr"
+            id="field_lastServiceSmr"
+            data-cy="lastServiceSmr"
+            formControlName="lastServiceSmr"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_serviceUnit" jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceUnit"
+            >Service Unit</label
+          >
+          <select class="form-control" name="serviceUnit" formControlName="serviceUnit" id="field_serviceUnit" data-cy="serviceUnit">
+            <option [ngValue]="null">{{ 'blueFusionApp.ServiceUnit.null' | translate }}</option>
+            @for (serviceUnit of serviceUnitValues; track $index) {
+              <option [value]="serviceUnit">{{ 'blueFusionApp.ServiceUnit.' + serviceUnit | translate }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+import { DriverOrOperator } from 'app/entities/enumerations/driver-or-operator.model';
+import { HorseOrTrailer } from 'app/entities/enumerations/horse-or-trailer.model';
+import { SMRReaderType } from 'app/entities/enumerations/smr-reader-type.model';
+import { FuelType } from 'app/entities/enumerations/fuel-type.model';
+import { ConsumptionUnit } from 'app/entities/enumerations/consumption-unit.model';
+import { PlantHoursStatus } from 'app/entities/enumerations/plant-hours-status.model';
+
+export interface IAssetPlant {
+  id: number;
+  assetPlantId?: number | null;
+  fleetNumber?: string | null;
+  numberPlate?: string | null;
+  fleetDescription?: string | null;
+  ownerId?: number | null;
+  accessibleByCompany?: string | null;
+  driverOrOperator?: keyof typeof DriverOrOperator | null;
+  plantCategoryId?: number | null;
+  plantSubcategoryId?: string | null;
+  manufacturerId?: number | null;
+  modelId?: number | null;
+  yearOfManufacture?: number | null;
+  colour?: string | null;
+  horseOrTrailer?: keyof typeof HorseOrTrailer | null;
+  smrReaderType?: keyof typeof SMRReaderType | null;
+  currentSmrIndex?: number | null;
+  engineNumber?: string | null;
+  engineCapacityCc?: string | null;
+  currentSiteId?: number | null;
+  currentContractId?: number | null;
+  currentOperatorId?: number | null;
+  ledgerCode?: string | null;
+  fuelType?: keyof typeof FuelType | null;
+  tankCapacityLitres?: number | null;
+  consumptionUnit?: keyof typeof ConsumptionUnit | null;
+  plantHoursStatus?: keyof typeof PlantHoursStatus | null;
+  isPrimeMover?: boolean | null;
+  capacityTons?: number | null;
+  capacityM3Loose?: number | null;
+  capacityM3Tight?: number | null;
+  maximumConsumption?: number | null;
+  minimumConsumption?: number | null;
+  maximumSmrOnFullTank?: number | null;
+  trackConsumption?: boolean | null;
+  trackSmrReading?: boolean | null;
+  trackService?: boolean | null;
+  isDeleted?: boolean | null;
+  requestWeeklyMileage?: boolean | null;
+  sent?: boolean | null;
+  chassisNumber?: string | null;
+  currentLocation?: string | null;
+}
+
+export type NewAssetPlant = Omit<IAssetPlant, 'id'> & { id: null };
