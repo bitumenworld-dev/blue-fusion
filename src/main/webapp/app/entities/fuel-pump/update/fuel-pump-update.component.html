@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-fuel-pump-heading" data-cy="FuelPumpCreateUpdateHeading" jhiTranslate="blueFusionApp.fuelPump.home.createOrEditLabel">
+        Create or edit a Fuel Pump
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.fuelPump.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuelPumpId" jhiTranslate="blueFusionApp.fuelPump.fuelPumpId">Fuel Pump Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="fuelPumpId"
+            id="field_fuelPumpId"
+            data-cy="fuelPumpId"
+            formControlName="fuelPumpId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuelPumpNumber" jhiTranslate="blueFusionApp.fuelPump.fuelPumpNumber">Fuel Pump Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fuelPumpNumber"
+            id="field_fuelPumpNumber"
+            data-cy="fuelPumpNumber"
+            formControlName="fuelPumpNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_currentStorageUnitId" jhiTranslate="blueFusionApp.fuelPump.currentStorageUnitId"
+            >Current Storage Unit Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="currentStorageUnitId"
+            id="field_currentStorageUnitId"
+            data-cy="currentStorageUnitId"
+            formControlName="currentStorageUnitId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

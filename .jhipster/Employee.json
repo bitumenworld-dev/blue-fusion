@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20250430082352"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "employeeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contractActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Employee",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20250430082356"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fuelPumpId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fuelPumpNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currentStorageUnitId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "FuelPump",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

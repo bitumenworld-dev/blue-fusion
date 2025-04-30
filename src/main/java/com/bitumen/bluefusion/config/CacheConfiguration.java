@@ -50,6 +50,24 @@ public class CacheConfiguration {
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.Authority.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlant.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlantServiceReading.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelIssueanceType.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlantPhoto.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.ContractDivision.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.Site.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.Manufacturer.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.ManufacturerModel.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.Company.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.PlantCategory.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.PlantSubcategory.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.Workshop.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.SiteContract.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.Employee.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelTransactionType.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelTransactionHeader.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelTransactionLine.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelPump.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,119 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-contract-division-heading"
+        data-cy="ContractDivisionCreateUpdateHeading"
+        jhiTranslate="blueFusionApp.contractDivision.home.createOrEditLabel"
+      >
+        Create or edit a Contract Division
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.contractDivision.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_contractDivisionId" jhiTranslate="blueFusionApp.contractDivision.contractDivisionId"
+            >Contract Division Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="contractDivisionId"
+            id="field_contractDivisionId"
+            data-cy="contractDivisionId"
+            formControlName="contractDivisionId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_contractDivisionNumber" jhiTranslate="blueFusionApp.contractDivision.contractDivisionNumber"
+            >Contract Division Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contractDivisionNumber"
+            id="field_contractDivisionNumber"
+            data-cy="contractDivisionNumber"
+            formControlName="contractDivisionNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_companyId" jhiTranslate="blueFusionApp.contractDivision.companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_buildSmartReference" jhiTranslate="blueFusionApp.contractDivision.buildSmartReference"
+            >Build Smart Reference</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="buildSmartReference"
+            id="field_buildSmartReference"
+            data-cy="buildSmartReference"
+            formControlName="buildSmartReference"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_shiftStart" jhiTranslate="blueFusionApp.contractDivision.shiftStart">Shift Start</label>
+          <input
+            type="time"
+            class="form-control"
+            name="shiftStart"
+            id="field_shiftStart"
+            data-cy="shiftStart"
+            formControlName="shiftStart"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_shiftEnd" jhiTranslate="blueFusionApp.contractDivision.shiftEnd">Shift End</label>
+          <input type="time" class="form-control" name="shiftEnd" id="field_shiftEnd" data-cy="shiftEnd" formControlName="shiftEnd" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="blueFusionApp.contractDivision.type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'blueFusionApp.DivisionType.null' | translate }}</option>
+            @for (divisionType of divisionTypeValues; track $index) {
+              <option [value]="divisionType">{{ 'blueFusionApp.DivisionType.' + divisionType | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_completed" jhiTranslate="blueFusionApp.contractDivision.completed">Completed</label>
+          <input type="checkbox" class="form-check" name="completed" id="field_completed" data-cy="completed" formControlName="completed" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

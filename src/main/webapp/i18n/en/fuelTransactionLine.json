@@ -1,0 +1,34 @@
+{
+  "blueFusionApp": {
+    "fuelTransactionLine": {
+      "home": {
+        "title": "Fuel Transaction Lines",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fuel Transaction Line",
+        "createOrEditLabel": "Create or edit a Fuel Transaction Line",
+        "notFound": "No Fuel Transaction Lines found"
+      },
+      "created": "A new Fuel Transaction Line is created with identifier {{ param }}",
+      "updated": "A Fuel Transaction Line is updated with identifier {{ param }}",
+      "deleted": "A Fuel Transaction Line is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fuel Transaction Line {{ id }}?"
+      },
+      "detail": {
+        "title": "Fuel Transaction Line"
+      },
+      "id": "ID",
+      "fuelTransactionLineId": "Fuel Transaction Line Id",
+      "fuelTransactionHeaderId": "Fuel Transaction Header Id",
+      "assetPlantId": "Asset Plant Id",
+      "contractDivisionId": "Contract Division Id",
+      "issuanceTypeId": "Issuance Type Id",
+      "pumpId": "Pump Id",
+      "storageUnitId": "Storage Unit Id",
+      "litres": "Litres",
+      "meterReadingStart": "Meter Reading Start",
+      "meterReadingEnd": "Meter Reading End",
+      "multiplier": "Multiplier"
+    }
+  }
+}

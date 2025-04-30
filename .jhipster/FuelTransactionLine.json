@@ -1,0 +1,57 @@
+{
+  "annotations": {
+    "changelogDate": "20250430082355"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fuelTransactionLineId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fuelTransactionHeaderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "assetPlantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contractDivisionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "issuanceTypeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "pumpId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "storageUnitId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "litres",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "meterReadingStart",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "meterReadingEnd",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "multiplier",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "FuelTransactionLine",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
