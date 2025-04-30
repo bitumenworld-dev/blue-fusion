@@ -1,0 +1,206 @@
+enum DriverOrOperator {
+    DRIVER, OPERATOR, NONE
+}
+
+enum HorseOrTrailer {
+    HORSE, TRAILER, NONE
+}
+
+enum SMRReaderType {
+    KILOMETER, HOUR, DAY, NONE
+}
+
+enum FuelType {
+    PETROL, DIESEL, NONE, OTHER
+}
+
+enum ConsumptionUnit {
+    KILOMETERS_PER_LITRE, LITRES_PER_HOUR
+}
+
+enum PlantHoursStatus {
+    OPERATIONAL, BREAK_DOWN, SERVICE
+}
+
+enum ServiceUnit {
+KILOMETER_BASED, HOUR_BASED
+}
+
+enum AssetPlantPhotoLabel{
+PHOTO, DATA_PLATE, REG_BOOK
+}
+enum DivisionType {
+CONTRACT, DIVISION
+}
+
+entity AssetPlant {
+    assetPlantId Long
+    fleetNumber String
+    numberPlate String
+    fleetDescription String
+    ownerId Long
+    accessibleByCompany String
+    driverOrOperator DriverOrOperator
+    plantCategoryId Long
+    plantSubcategoryId String
+    manufacturerId Long
+    modelId Long
+    yearOfManufacture Integer
+    colour String
+    horseOrTrailer HorseOrTrailer
+    smrReaderType SMRReaderType
+    currentSmrIndex Integer
+    engineNumber String
+    engineCapacityCc String
+    currentSiteId Long
+    currentContractId Long
+    currentOperatorId Long
+    ledgerCode String
+    fuelType FuelType
+    tankCapacityLitres Float
+    consumptionUnit ConsumptionUnit
+    plantHoursStatus PlantHoursStatus
+    isPrimeMover Boolean
+    capacityTons Float
+    capacityM3Loose Float
+    capacityM3Tight Float
+    maximumConsumption Float
+    minimumConsumption Float
+    maximumSmrOnFullTank Float
+    trackConsumption Boolean
+    trackSmrReading Boolean
+    trackService Boolean
+    isDeleted Boolean
+    requestWeeklyMileage Boolean
+    sent Boolean
+    chassisNumber String
+    currentLocation String
+}
+
+entity AssetPlantServiceReading {
+    assetPlantServiceReadingId Long
+    assetPlantId Long
+    nextServiceSmrReading Float
+    estimatedUnitsPerDay Float
+    estimatedNextServiceDate LocalDate
+    latestSmrReadings Float
+    serviceInterval Float
+    lastServiceDate LocalDate
+    latestSmrDate LocalDate
+    lastServiceSmr Float
+    serviceUnit ServiceUnit
+}
+entity FuelIssueanceType {
+    fuelIssueTypeId Long
+    fuelIssueType String
+}
+entity AssetPlantPhoto {
+    assetPlantPhotoId Long
+    name String
+    image ImageBlob
+    assetPlantId Long
+    assetPlantPhotoLabel AssetPlantPhotoLabel
+}
+entity ContractDivision {
+    contractDivisionId Long
+    contractDivisionNumber String
+    companyId Long
+    buildSmartReference String
+    shiftStart LocalTime
+    shiftEnd LocalTime
+    type DivisionType
+    completed Boolean
+}
+entity Site {
+    siteId Long  
+    siteName String
+    latitude String
+    longitude String
+    isActive Boolean
+    siteNotes String
+    siteImageUrl String
+    companyId Long
+}
+entity Manufacturer {
+    manufacturerId Long
+    manufacturerName String
+}
+
+entity ManufacturerModel {
+    modelId Long 
+    modelName String
+}
+
+entity Company {
+    companyId Long
+    name String
+    description String
+}
+
+entity PlantCategory {
+    plantCategoryId Long 
+    plantCategoryCode String
+    plantCategoryName String
+    plantCategoryDescription String
+    isAudited Boolean
+}
+
+entity PlantSubcategory {
+    plantSubcategoryId Long
+    plantSubcategoryCode String
+    plantSubcategoryName String
+    plantSubcategoryDescription String
+    isAudited Boolean
+}
+
+entity Workshop {
+    workshopId Long
+    siteId Long
+    workshopName String
+}
+
+entity SiteContract {
+    siteContractId Long 
+    siteId Long
+    contractId Long
+}
+
+entity Employee {
+    employeeId Long
+    contractActive Boolean
+}
+
+entity FuelTransactionType {
+    fuelTransactionTypeId Long
+    fuelTransactionType String
+    isActive Boolean
+}
+
+entity FuelTransactionHeader {
+    fuelTransactionHeaderId Long
+    companyId Long
+    supplierId Long
+    transactionTypeId Long
+    fuelType FuelType
+    orderNumber String
+    deliveryNote String
+    grvNumber String
+    invoiceNumber String
+    pricePerLitre Float
+    note String
+    registrationNumber String
+    attendeeId Long
+    operatorId Long
+}
+// Set pagination options
+
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
