@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (assetPlantServiceReading(); as assetPlantServiceReadingRef) {
+      <div>
+        <h2 data-cy="assetPlantServiceReadingDetailsHeading">
+          <span jhiTranslate="blueFusionApp.assetPlantServiceReading.detail.title">Asset Plant Service Reading</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.id }}</span>
+          </dd>
+          <dt>
+            <span jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantServiceReadingId">Asset Plant Service Reading Id</span>
+          </dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.assetPlantServiceReadingId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantId">Asset Plant Id</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.assetPlantId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.nextServiceSmrReading">Next Service Smr Reading</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.nextServiceSmrReading }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedUnitsPerDay">Estimated Units Per Day</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.estimatedUnitsPerDay }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedNextServiceDate">Estimated Next Service Date</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.estimatedNextServiceDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrReadings">Latest Smr Readings</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.latestSmrReadings }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceInterval">Service Interval</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.serviceInterval }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceDate">Last Service Date</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.lastServiceDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrDate">Latest Smr Date</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.latestSmrDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceSmr">Last Service Smr</span></dt>
+          <dd>
+            <span>{{ assetPlantServiceReadingRef.lastServiceSmr }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceUnit">Service Unit</span></dt>
+          <dd>
+            <span [jhiTranslate]="'blueFusionApp.ServiceUnit.' + (assetPlantServiceReadingRef.serviceUnit ?? 'null')">{{
+              { null: '', KILOMETER_BASED: 'KILOMETER_BASED', HOUR_BASED: 'HOUR_BASED' }[assetPlantServiceReadingRef.serviceUnit ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button
+          type="button"
+          [routerLink]="['/asset-plant-service-reading', assetPlantServiceReadingRef.id, 'edit']"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "blueFusionApp": {
+    "SMRReaderType": {
+      "null": "",
+      "KILOMETER": "KILOMETER",
+      "HOUR": "HOUR",
+      "DAY": "DAY",
+      "NONE": "NONE"
+    }
+  }
+}
