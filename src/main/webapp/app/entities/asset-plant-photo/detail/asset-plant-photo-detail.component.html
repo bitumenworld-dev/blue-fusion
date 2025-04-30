@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (assetPlantPhoto(); as assetPlantPhotoRef) {
+      <div>
+        <h2 data-cy="assetPlantPhotoDetailsHeading">
+          <span jhiTranslate="blueFusionApp.assetPlantPhoto.detail.title">Asset Plant Photo</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ assetPlantPhotoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantPhoto.assetPlantPhotoId">Asset Plant Photo Id</span></dt>
+          <dd>
+            <span>{{ assetPlantPhotoRef.assetPlantPhotoId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantPhoto.name">Name</span></dt>
+          <dd>
+            <span>{{ assetPlantPhotoRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantPhoto.image">Image</span></dt>
+          <dd>
+            @if (assetPlantPhotoRef.image) {
+              <div>
+                <a (click)="openFile(assetPlantPhotoRef.image ?? '', assetPlantPhotoRef.imageContentType)">
+                  <img
+                    [src]="'data:' + assetPlantPhotoRef.imageContentType + ';base64,' + assetPlantPhotoRef.image"
+                    style="max-width: 100%"
+                    alt="assetPlantPhoto"
+                  />
+                </a>
+                {{ assetPlantPhotoRef.imageContentType }}, {{ byteSize(assetPlantPhotoRef.image ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantPhoto.assetPlantId">Asset Plant Id</span></dt>
+          <dd>
+            <span>{{ assetPlantPhotoRef.assetPlantId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.assetPlantPhoto.assetPlantPhotoLabel">Asset Plant Photo Label</span></dt>
+          <dd>
+            <span [jhiTranslate]="'blueFusionApp.AssetPlantPhotoLabel.' + (assetPlantPhotoRef.assetPlantPhotoLabel ?? 'null')">{{
+              { null: '', PHOTO: 'PHOTO', DATA_PLATE: 'DATA_PLATE', REG_BOOK: 'REG_BOOK' }[
+                assetPlantPhotoRef.assetPlantPhotoLabel ?? 'null'
+              ]
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/asset-plant-photo', assetPlantPhotoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

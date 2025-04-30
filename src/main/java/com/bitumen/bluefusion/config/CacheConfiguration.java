@@ -50,6 +50,10 @@ public class CacheConfiguration {
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.Authority.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlant.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlantServiceReading.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.FuelIssueanceType.class.getName());
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlantPhoto.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

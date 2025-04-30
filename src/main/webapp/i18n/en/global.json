@@ -8,7 +8,10 @@
       "entities": {
         "main": "Entities",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "assetPlant": "Asset Plant",
+        "assetPlantServiceReading": "Asset Plant Service Reading",
+        "fuelIssueanceType": "Fuel Issueance Type",
+        "assetPlantPhoto": "Asset Plant Photo"
       },
       "account": {
         "main": "Account",
