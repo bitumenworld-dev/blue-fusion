@@ -1,0 +1,28 @@
+{
+  "blueFusionApp": {
+    "plantSubcategory": {
+      "home": {
+        "title": "Plant Subcategories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Plant Subcategory",
+        "createOrEditLabel": "Create or edit a Plant Subcategory",
+        "notFound": "No Plant Subcategories found"
+      },
+      "created": "A new Plant Subcategory is created with identifier {{ param }}",
+      "updated": "A Plant Subcategory is updated with identifier {{ param }}",
+      "deleted": "A Plant Subcategory is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plant Subcategory {{ id }}?"
+      },
+      "detail": {
+        "title": "Plant Subcategory"
+      },
+      "id": "ID",
+      "plantSubcategoryId": "Plant Subcategory Id",
+      "plantSubcategoryCode": "Plant Subcategory Code",
+      "plantSubcategoryName": "Plant Subcategory Name",
+      "plantSubcategoryDescription": "Plant Subcategory Description",
+      "isAudited": "Is Audited"
+    }
+  }
+}

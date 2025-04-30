@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20250430083152"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "contractDivisionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "contractDivisionNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "buildSmartReference",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shiftStart",
+      "fieldType": "LocalTime"
+    },
+    {
+      "fieldName": "shiftEnd",
+      "fieldType": "LocalTime"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "DivisionType",
+      "fieldValues": "CONTRACT,DIVISION"
+    },
+    {
+      "fieldName": "completed",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "ContractDivision",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

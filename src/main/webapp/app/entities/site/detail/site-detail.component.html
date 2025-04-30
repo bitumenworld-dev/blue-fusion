@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (site(); as siteRef) {
+      <div>
+        <h2 data-cy="siteDetailsHeading"><span jhiTranslate="blueFusionApp.site.detail.title">Site</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ siteRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.siteId">Site Id</span></dt>
+          <dd>
+            <span>{{ siteRef.siteId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.siteName">Site Name</span></dt>
+          <dd>
+            <span>{{ siteRef.siteName }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ siteRef.latitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ siteRef.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ siteRef.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.siteNotes">Site Notes</span></dt>
+          <dd>
+            <span>{{ siteRef.siteNotes }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.siteImageUrl">Site Image Url</span></dt>
+          <dd>
+            <span>{{ siteRef.siteImageUrl }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.site.companyId">Company Id</span></dt>
+          <dd>
+            <span>{{ siteRef.companyId }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/site', siteRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

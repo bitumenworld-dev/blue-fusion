@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20250430083149"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "assetPlantServiceReadingId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "assetPlantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nextServiceSmrReading",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "estimatedUnitsPerDay",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "estimatedNextServiceDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "latestSmrReadings",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "serviceInterval",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "lastServiceDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "latestSmrDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "lastServiceSmr",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "serviceUnit",
+      "fieldType": "ServiceUnit",
+      "fieldValues": "KILOMETER_BASED,HOUR_BASED"
+    }
+  ],
+  "name": "AssetPlantServiceReading",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

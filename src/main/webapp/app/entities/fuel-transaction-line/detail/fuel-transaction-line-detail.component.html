@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (fuelTransactionLine(); as fuelTransactionLineRef) {
+      <div>
+        <h2 data-cy="fuelTransactionLineDetailsHeading">
+          <span jhiTranslate="blueFusionApp.fuelTransactionLine.detail.title">Fuel Transaction Line</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.fuelTransactionLineId">Fuel Transaction Line Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.fuelTransactionLineId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.fuelTransactionHeaderId">Fuel Transaction Header Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.fuelTransactionHeaderId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.assetPlantId">Asset Plant Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.assetPlantId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.contractDivisionId">Contract Division Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.contractDivisionId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.issuanceTypeId">Issuance Type Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.issuanceTypeId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.pumpId">Pump Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.pumpId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.storageUnitId">Storage Unit Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.storageUnitId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.litres">Litres</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.litres }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.meterReadingStart">Meter Reading Start</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.meterReadingStart }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.meterReadingEnd">Meter Reading End</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.meterReadingEnd }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelTransactionLine.multiplier">Multiplier</span></dt>
+          <dd>
+            <span>{{ fuelTransactionLineRef.multiplier }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/fuel-transaction-line', fuelTransactionLineRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

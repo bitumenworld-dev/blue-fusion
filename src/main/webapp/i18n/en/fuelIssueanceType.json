@@ -1,0 +1,25 @@
+{
+  "blueFusionApp": {
+    "fuelIssueanceType": {
+      "home": {
+        "title": "Fuel Issueance Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fuel Issueance Type",
+        "createOrEditLabel": "Create or edit a Fuel Issueance Type",
+        "notFound": "No Fuel Issueance Types found"
+      },
+      "created": "A new Fuel Issueance Type is created with identifier {{ param }}",
+      "updated": "A Fuel Issueance Type is updated with identifier {{ param }}",
+      "deleted": "A Fuel Issueance Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fuel Issueance Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Fuel Issueance Type"
+      },
+      "id": "ID",
+      "fuelIssueTypeId": "Fuel Issue Type Id",
+      "fuelIssueType": "Fuel Issue Type"
+    }
+  }
+}
