@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20250430081626"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "plantCategoryId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "plantCategoryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plantCategoryName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plantCategoryDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isAudited",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "PlantCategory",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

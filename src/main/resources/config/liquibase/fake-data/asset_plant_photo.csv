@@ -1,0 +1,11 @@
+id;asset_plant_photo_id;name;image;image_content_type;asset_plant_id;asset_plant_photo_label
+1;3119;intermarry norm;../fake-data/blob/hipster.png;image/png;4396;PHOTO
+2;7641;around huzzah uncommon;../fake-data/blob/hipster.png;image/png;12905;PHOTO
+3;11828;yowza cumbersome;../fake-data/blob/hipster.png;image/png;2214;REG_BOOK
+4;9523;but mysteriously;../fake-data/blob/hipster.png;image/png;31251;REG_BOOK
+5;22360;allegation kindly;../fake-data/blob/hipster.png;image/png;17664;PHOTO
+6;30674;cow hastily feather;../fake-data/blob/hipster.png;image/png;31229;REG_BOOK
+7;10043;following pricey;../fake-data/blob/hipster.png;image/png;18112;REG_BOOK
+8;14997;um carelessly;../fake-data/blob/hipster.png;image/png;18854;PHOTO
+9;29167;ew;../fake-data/blob/hipster.png;image/png;14053;DATA_PLATE
+10;29665;pish;../fake-data/blob/hipster.png;image/png;2724;DATA_PLATE

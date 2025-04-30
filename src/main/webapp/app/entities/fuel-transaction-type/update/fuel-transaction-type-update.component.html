@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-fuel-transaction-type-heading"
+        data-cy="FuelTransactionTypeCreateUpdateHeading"
+        jhiTranslate="blueFusionApp.fuelTransactionType.home.createOrEditLabel"
+      >
+        Create or edit a Fuel Transaction Type
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.fuelTransactionType.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuelTransactionTypeId" jhiTranslate="blueFusionApp.fuelTransactionType.fuelTransactionTypeId"
+            >Fuel Transaction Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="fuelTransactionTypeId"
+            id="field_fuelTransactionTypeId"
+            data-cy="fuelTransactionTypeId"
+            formControlName="fuelTransactionTypeId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuelTransactionType" jhiTranslate="blueFusionApp.fuelTransactionType.fuelTransactionType"
+            >Fuel Transaction Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fuelTransactionType"
+            id="field_fuelTransactionType"
+            data-cy="fuelTransactionType"
+            formControlName="fuelTransactionType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isActive" jhiTranslate="blueFusionApp.fuelTransactionType.isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

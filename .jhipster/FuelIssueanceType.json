@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20250430081619"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fuelIssueTypeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fuelIssueType",
+      "fieldType": "String"
+    }
+  ],
+  "name": "FuelIssueanceType",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

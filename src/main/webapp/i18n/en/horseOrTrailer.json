@@ -1,0 +1,10 @@
+{
+  "blueFusionApp": {
+    "HorseOrTrailer": {
+      "null": "",
+      "HORSE": "HORSE",
+      "TRAILER": "TRAILER",
+      "NONE": "NONE"
+    }
+  }
+}

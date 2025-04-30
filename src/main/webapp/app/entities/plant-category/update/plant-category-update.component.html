@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-plant-category-heading"
+        data-cy="PlantCategoryCreateUpdateHeading"
+        jhiTranslate="blueFusionApp.plantCategory.home.createOrEditLabel"
+      >
+        Create or edit a Plant Category
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.plantCategory.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plantCategoryId" jhiTranslate="blueFusionApp.plantCategory.plantCategoryId"
+            >Plant Category Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="plantCategoryId"
+            id="field_plantCategoryId"
+            data-cy="plantCategoryId"
+            formControlName="plantCategoryId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plantCategoryCode" jhiTranslate="blueFusionApp.plantCategory.plantCategoryCode"
+            >Plant Category Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="plantCategoryCode"
+            id="field_plantCategoryCode"
+            data-cy="plantCategoryCode"
+            formControlName="plantCategoryCode"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plantCategoryName" jhiTranslate="blueFusionApp.plantCategory.plantCategoryName"
+            >Plant Category Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="plantCategoryName"
+            id="field_plantCategoryName"
+            data-cy="plantCategoryName"
+            formControlName="plantCategoryName"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plantCategoryDescription" jhiTranslate="blueFusionApp.plantCategory.plantCategoryDescription"
+            >Plant Category Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="plantCategoryDescription"
+            id="field_plantCategoryDescription"
+            data-cy="plantCategoryDescription"
+            formControlName="plantCategoryDescription"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isAudited" jhiTranslate="blueFusionApp.plantCategory.isAudited">Is Audited</label>
+          <input type="checkbox" class="form-check" name="isAudited" id="field_isAudited" data-cy="isAudited" formControlName="isAudited" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

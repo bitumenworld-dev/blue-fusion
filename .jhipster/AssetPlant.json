@@ -1,0 +1,183 @@
+{
+  "annotations": {
+    "changelogDate": "20250430081617"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "assetPlantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fleetNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numberPlate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fleetDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "accessibleByCompany",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "driverOrOperator",
+      "fieldType": "DriverOrOperator",
+      "fieldValues": "DRIVER,OPERATOR,NONE"
+    },
+    {
+      "fieldName": "plantCategoryId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "plantSubcategoryId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "manufacturerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "modelId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "yearOfManufacture",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "colour",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horseOrTrailer",
+      "fieldType": "HorseOrTrailer",
+      "fieldValues": "HORSE,TRAILER,NONE"
+    },
+    {
+      "fieldName": "smrReaderType",
+      "fieldType": "SMRReaderType",
+      "fieldValues": "KILOMETER,HOUR,DAY,NONE"
+    },
+    {
+      "fieldName": "currentSmrIndex",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "engineNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "engineCapacityCc",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currentSiteId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "currentContractId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "currentOperatorId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ledgerCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fuelType",
+      "fieldType": "FuelType",
+      "fieldValues": "PETROL,DIESEL,NONE,OTHER"
+    },
+    {
+      "fieldName": "tankCapacityLitres",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "consumptionUnit",
+      "fieldType": "ConsumptionUnit",
+      "fieldValues": "KILOMETERS_PER_LITRE,LITRES_PER_HOUR"
+    },
+    {
+      "fieldName": "plantHoursStatus",
+      "fieldType": "PlantHoursStatus",
+      "fieldValues": "OPERATIONAL,BREAK_DOWN,SERVICE"
+    },
+    {
+      "fieldName": "isPrimeMover",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "capacityTons",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "capacityM3Loose",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "capacityM3Tight",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "maximumConsumption",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "minimumConsumption",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "maximumSmrOnFullTank",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "trackConsumption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "trackSmrReading",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "trackService",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "requestWeeklyMileage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "chassisNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "currentLocation",
+      "fieldType": "String"
+    }
+  ],
+  "name": "AssetPlant",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

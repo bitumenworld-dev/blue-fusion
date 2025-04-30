@@ -1,0 +1,28 @@
+{
+  "blueFusionApp": {
+    "plantCategory": {
+      "home": {
+        "title": "Plant Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Plant Category",
+        "createOrEditLabel": "Create or edit a Plant Category",
+        "notFound": "No Plant Categories found"
+      },
+      "created": "A new Plant Category is created with identifier {{ param }}",
+      "updated": "A Plant Category is updated with identifier {{ param }}",
+      "deleted": "A Plant Category is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plant Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Plant Category"
+      },
+      "id": "ID",
+      "plantCategoryId": "Plant Category Id",
+      "plantCategoryCode": "Plant Category Code",
+      "plantCategoryName": "Plant Category Name",
+      "plantCategoryDescription": "Plant Category Description",
+      "isAudited": "Is Audited"
+    }
+  }
+}

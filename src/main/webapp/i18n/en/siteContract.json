@@ -1,0 +1,26 @@
+{
+  "blueFusionApp": {
+    "siteContract": {
+      "home": {
+        "title": "Site Contracts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Site Contract",
+        "createOrEditLabel": "Create or edit a Site Contract",
+        "notFound": "No Site Contracts found"
+      },
+      "created": "A new Site Contract is created with identifier {{ param }}",
+      "updated": "A Site Contract is updated with identifier {{ param }}",
+      "deleted": "A Site Contract is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Site Contract {{ id }}?"
+      },
+      "detail": {
+        "title": "Site Contract"
+      },
+      "id": "ID",
+      "siteContractId": "Site Contract Id",
+      "siteId": "Site Id",
+      "contractId": "Contract Id"
+    }
+  }
+}

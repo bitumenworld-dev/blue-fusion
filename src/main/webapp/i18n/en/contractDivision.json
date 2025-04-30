@@ -1,0 +1,31 @@
+{
+  "blueFusionApp": {
+    "contractDivision": {
+      "home": {
+        "title": "Contract Divisions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Contract Division",
+        "createOrEditLabel": "Create or edit a Contract Division",
+        "notFound": "No Contract Divisions found"
+      },
+      "created": "A new Contract Division is created with identifier {{ param }}",
+      "updated": "A Contract Division is updated with identifier {{ param }}",
+      "deleted": "A Contract Division is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Contract Division {{ id }}?"
+      },
+      "detail": {
+        "title": "Contract Division"
+      },
+      "id": "ID",
+      "contractDivisionId": "Contract Division Id",
+      "contractDivisionNumber": "Contract Division Number",
+      "companyId": "Company Id",
+      "buildSmartReference": "Build Smart Reference",
+      "shiftStart": "Shift Start",
+      "shiftEnd": "Shift End",
+      "type": "Type",
+      "completed": "Completed"
+    }
+  }
+}

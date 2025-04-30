@@ -1,0 +1,28 @@
+{
+  "blueFusionApp": {
+    "assetPlantPhoto": {
+      "home": {
+        "title": "Asset Plant Photos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Asset Plant Photo",
+        "createOrEditLabel": "Create or edit a Asset Plant Photo",
+        "notFound": "No Asset Plant Photos found"
+      },
+      "created": "A new Asset Plant Photo is created with identifier {{ param }}",
+      "updated": "A Asset Plant Photo is updated with identifier {{ param }}",
+      "deleted": "A Asset Plant Photo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Asset Plant Photo {{ id }}?"
+      },
+      "detail": {
+        "title": "Asset Plant Photo"
+      },
+      "id": "ID",
+      "assetPlantPhotoId": "Asset Plant Photo Id",
+      "name": "Name",
+      "image": "Image",
+      "assetPlantId": "Asset Plant Id",
+      "assetPlantPhotoLabel": "Asset Plant Photo Label"
+    }
+  }
+}
