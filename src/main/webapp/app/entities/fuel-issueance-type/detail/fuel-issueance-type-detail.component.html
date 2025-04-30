@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (fuelIssueanceType(); as fuelIssueanceTypeRef) {
+      <div>
+        <h2 data-cy="fuelIssueanceTypeDetailsHeading">
+          <span jhiTranslate="blueFusionApp.fuelIssueanceType.detail.title">Fuel Issueance Type</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ fuelIssueanceTypeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelIssueanceType.fuelIssueTypeId">Fuel Issue Type Id</span></dt>
+          <dd>
+            <span>{{ fuelIssueanceTypeRef.fuelIssueTypeId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.fuelIssueanceType.fuelIssueType">Fuel Issue Type</span></dt>
+          <dd>
+            <span>{{ fuelIssueanceTypeRef.fuelIssueType }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/fuel-issueance-type', fuelIssueanceTypeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20250430081622"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "siteId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "siteName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "siteNotes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteImageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Site",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

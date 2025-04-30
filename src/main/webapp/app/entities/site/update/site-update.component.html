@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-site-heading" data-cy="SiteCreateUpdateHeading" jhiTranslate="blueFusionApp.site.home.createOrEditLabel">
+        Create or edit a Site
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.site.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_siteId" jhiTranslate="blueFusionApp.site.siteId">Site Id</label>
+          <input type="number" class="form-control" name="siteId" id="field_siteId" data-cy="siteId" formControlName="siteId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_siteName" jhiTranslate="blueFusionApp.site.siteName">Site Name</label>
+          <input type="text" class="form-control" name="siteName" id="field_siteName" data-cy="siteName" formControlName="siteName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latitude" jhiTranslate="blueFusionApp.site.latitude">Latitude</label>
+          <input type="text" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_longitude" jhiTranslate="blueFusionApp.site.longitude">Longitude</label>
+          <input type="text" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isActive" jhiTranslate="blueFusionApp.site.isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_siteNotes" jhiTranslate="blueFusionApp.site.siteNotes">Site Notes</label>
+          <input type="text" class="form-control" name="siteNotes" id="field_siteNotes" data-cy="siteNotes" formControlName="siteNotes" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_siteImageUrl" jhiTranslate="blueFusionApp.site.siteImageUrl">Site Image Url</label>
+          <input
+            type="text"
+            class="form-control"
+            name="siteImageUrl"
+            id="field_siteImageUrl"
+            data-cy="siteImageUrl"
+            formControlName="siteImageUrl"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_companyId" jhiTranslate="blueFusionApp.site.companyId">Company Id</label>
+          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

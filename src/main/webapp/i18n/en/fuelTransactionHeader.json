@@ -1,0 +1,37 @@
+{
+  "blueFusionApp": {
+    "fuelTransactionHeader": {
+      "home": {
+        "title": "Fuel Transaction Headers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fuel Transaction Header",
+        "createOrEditLabel": "Create or edit a Fuel Transaction Header",
+        "notFound": "No Fuel Transaction Headers found"
+      },
+      "created": "A new Fuel Transaction Header is created with identifier {{ param }}",
+      "updated": "A Fuel Transaction Header is updated with identifier {{ param }}",
+      "deleted": "A Fuel Transaction Header is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fuel Transaction Header {{ id }}?"
+      },
+      "detail": {
+        "title": "Fuel Transaction Header"
+      },
+      "id": "ID",
+      "fuelTransactionHeaderId": "Fuel Transaction Header Id",
+      "companyId": "Company Id",
+      "supplierId": "Supplier Id",
+      "transactionTypeId": "Transaction Type Id",
+      "fuelType": "Fuel Type",
+      "orderNumber": "Order Number",
+      "deliveryNote": "Delivery Note",
+      "grvNumber": "Grv Number",
+      "invoiceNumber": "Invoice Number",
+      "pricePerLitre": "Price Per Litre",
+      "note": "Note",
+      "registrationNumber": "Registration Number",
+      "attendeeId": "Attendee Id",
+      "operatorId": "Operator Id"
+    }
+  }
+}

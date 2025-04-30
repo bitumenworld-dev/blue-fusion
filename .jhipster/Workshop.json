@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20250430081628"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "workshopId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "siteId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "workshopName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Workshop",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

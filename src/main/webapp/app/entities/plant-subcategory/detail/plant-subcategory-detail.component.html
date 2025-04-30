@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (plantSubcategory(); as plantSubcategoryRef) {
+      <div>
+        <h2 data-cy="plantSubcategoryDetailsHeading">
+          <span jhiTranslate="blueFusionApp.plantSubcategory.detail.title">Plant Subcategory</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantSubcategory.plantSubcategoryId">Plant Subcategory Id</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.plantSubcategoryId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantSubcategory.plantSubcategoryCode">Plant Subcategory Code</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.plantSubcategoryCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantSubcategory.plantSubcategoryName">Plant Subcategory Name</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.plantSubcategoryName }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantSubcategory.plantSubcategoryDescription">Plant Subcategory Description</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.plantSubcategoryDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantSubcategory.isAudited">Is Audited</span></dt>
+          <dd>
+            <span>{{ plantSubcategoryRef.isAudited }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/plant-subcategory', plantSubcategoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

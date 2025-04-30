@@ -1,0 +1,202 @@
+<div>
+  <h2 id="page-heading" data-cy="AssetPlantServiceReadingHeading">
+    <span jhiTranslate="blueFusionApp.assetPlantServiceReading.home.title">Asset Plant Service Readings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="blueFusionApp.assetPlantServiceReading.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-asset-plant-service-reading"
+        [routerLink]="['/asset-plant-service-reading/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="blueFusionApp.assetPlantServiceReading.home.createLabel">Create a new Asset Plant Service Reading</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (assetPlantServiceReadings().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="blueFusionApp.assetPlantServiceReading.home.notFound">No Asset Plant Service Readings found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="assetPlantServiceReadingId">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantServiceReadingId">Asset Plant Service Reading Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="assetPlantId">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.assetPlantId">Asset Plant Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nextServiceSmrReading">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.nextServiceSmrReading">Next Service Smr Reading</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="estimatedUnitsPerDay">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedUnitsPerDay">Estimated Units Per Day</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="estimatedNextServiceDate">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.estimatedNextServiceDate">Estimated Next Service Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latestSmrReadings">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrReadings">Latest Smr Readings</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="serviceInterval">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceInterval">Service Interval</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastServiceDate">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceDate">Last Service Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latestSmrDate">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.latestSmrDate">Latest Smr Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastServiceSmr">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.lastServiceSmr">Last Service Smr</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="serviceUnit">
+              <div class="d-flex">
+                <span jhiTranslate="blueFusionApp.assetPlantServiceReading.serviceUnit">Service Unit</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (assetPlantServiceReading of assetPlantServiceReadings(); track trackId(assetPlantServiceReading)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/asset-plant-service-reading', assetPlantServiceReading.id, 'view']">{{
+                  assetPlantServiceReading.id
+                }}</a>
+              </td>
+              <td>{{ assetPlantServiceReading.assetPlantServiceReadingId }}</td>
+              <td>{{ assetPlantServiceReading.assetPlantId }}</td>
+              <td>{{ assetPlantServiceReading.nextServiceSmrReading }}</td>
+              <td>{{ assetPlantServiceReading.estimatedUnitsPerDay }}</td>
+              <td>{{ assetPlantServiceReading.estimatedNextServiceDate | formatMediumDate }}</td>
+              <td>{{ assetPlantServiceReading.latestSmrReadings }}</td>
+              <td>{{ assetPlantServiceReading.serviceInterval }}</td>
+              <td>{{ assetPlantServiceReading.lastServiceDate | formatMediumDate }}</td>
+              <td>{{ assetPlantServiceReading.latestSmrDate | formatMediumDate }}</td>
+              <td>{{ assetPlantServiceReading.lastServiceSmr }}</td>
+              <td [jhiTranslate]="'blueFusionApp.ServiceUnit.' + (assetPlantServiceReading.serviceUnit ?? 'null')">
+                {{
+                  { null: '', KILOMETER_BASED: 'KILOMETER_BASED', HOUR_BASED: 'HOUR_BASED' }[assetPlantServiceReading.serviceUnit ?? 'null']
+                }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/asset-plant-service-reading', assetPlantServiceReading.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/asset-plant-service-reading', assetPlantServiceReading.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(assetPlantServiceReading)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (assetPlantServiceReadings().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>
