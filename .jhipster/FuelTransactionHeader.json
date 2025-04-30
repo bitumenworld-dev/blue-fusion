@@ -1,0 +1,70 @@
+{
+  "annotations": {
+    "changelogDate": "20250430083203"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fuelTransactionHeaderId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "companyId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "supplierId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "transactionTypeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fuelType",
+      "fieldType": "FuelType",
+      "fieldValues": "PETROL,DIESEL,NONE,OTHER"
+    },
+    {
+      "fieldName": "orderNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliveryNote",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "grvNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "invoiceNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pricePerLitre",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attendeeId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "operatorId",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "FuelTransactionHeader",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

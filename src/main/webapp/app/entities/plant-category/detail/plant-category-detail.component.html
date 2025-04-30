@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (plantCategory(); as plantCategoryRef) {
+      <div>
+        <h2 data-cy="plantCategoryDetailsHeading"><span jhiTranslate="blueFusionApp.plantCategory.detail.title">Plant Category</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantCategory.plantCategoryId">Plant Category Id</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.plantCategoryId }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantCategory.plantCategoryCode">Plant Category Code</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.plantCategoryCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantCategory.plantCategoryName">Plant Category Name</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.plantCategoryName }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantCategory.plantCategoryDescription">Plant Category Description</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.plantCategoryDescription }}</span>
+          </dd>
+          <dt><span jhiTranslate="blueFusionApp.plantCategory.isAudited">Is Audited</span></dt>
+          <dd>
+            <span>{{ plantCategoryRef.isAudited }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/plant-category', plantCategoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

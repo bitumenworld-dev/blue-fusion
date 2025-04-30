@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-fuel-transaction-line-heading"
+        data-cy="FuelTransactionLineCreateUpdateHeading"
+        jhiTranslate="blueFusionApp.fuelTransactionLine.home.createOrEditLabel"
+      >
+        Create or edit a Fuel Transaction Line
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.fuelTransactionLine.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fuelTransactionLineId" jhiTranslate="blueFusionApp.fuelTransactionLine.fuelTransactionLineId"
+            >Fuel Transaction Line Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="fuelTransactionLineId"
+            id="field_fuelTransactionLineId"
+            data-cy="fuelTransactionLineId"
+            formControlName="fuelTransactionLineId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_fuelTransactionHeaderId"
+            jhiTranslate="blueFusionApp.fuelTransactionLine.fuelTransactionHeaderId"
+            >Fuel Transaction Header Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="fuelTransactionHeaderId"
+            id="field_fuelTransactionHeaderId"
+            data-cy="fuelTransactionHeaderId"
+            formControlName="fuelTransactionHeaderId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assetPlantId" jhiTranslate="blueFusionApp.fuelTransactionLine.assetPlantId"
+            >Asset Plant Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="assetPlantId"
+            id="field_assetPlantId"
+            data-cy="assetPlantId"
+            formControlName="assetPlantId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_contractDivisionId" jhiTranslate="blueFusionApp.fuelTransactionLine.contractDivisionId"
+            >Contract Division Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="contractDivisionId"
+            id="field_contractDivisionId"
+            data-cy="contractDivisionId"
+            formControlName="contractDivisionId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_issuanceTypeId" jhiTranslate="blueFusionApp.fuelTransactionLine.issuanceTypeId"
+            >Issuance Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="issuanceTypeId"
+            id="field_issuanceTypeId"
+            data-cy="issuanceTypeId"
+            formControlName="issuanceTypeId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pumpId" jhiTranslate="blueFusionApp.fuelTransactionLine.pumpId">Pump Id</label>
+          <input type="number" class="form-control" name="pumpId" id="field_pumpId" data-cy="pumpId" formControlName="pumpId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_storageUnitId" jhiTranslate="blueFusionApp.fuelTransactionLine.storageUnitId"
+            >Storage Unit Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="storageUnitId"
+            id="field_storageUnitId"
+            data-cy="storageUnitId"
+            formControlName="storageUnitId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_litres" jhiTranslate="blueFusionApp.fuelTransactionLine.litres">Litres</label>
+          <input type="number" class="form-control" name="litres" id="field_litres" data-cy="litres" formControlName="litres" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meterReadingStart" jhiTranslate="blueFusionApp.fuelTransactionLine.meterReadingStart"
+            >Meter Reading Start</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="meterReadingStart"
+            id="field_meterReadingStart"
+            data-cy="meterReadingStart"
+            formControlName="meterReadingStart"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_meterReadingEnd" jhiTranslate="blueFusionApp.fuelTransactionLine.meterReadingEnd"
+            >Meter Reading End</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="meterReadingEnd"
+            id="field_meterReadingEnd"
+            data-cy="meterReadingEnd"
+            formControlName="meterReadingEnd"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_multiplier" jhiTranslate="blueFusionApp.fuelTransactionLine.multiplier">Multiplier</label>
+          <input
+            type="number"
+            class="form-control"
+            name="multiplier"
+            id="field_multiplier"
+            data-cy="multiplier"
+            formControlName="multiplier"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

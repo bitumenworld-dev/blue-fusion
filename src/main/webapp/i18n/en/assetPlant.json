@@ -1,0 +1,64 @@
+{
+  "blueFusionApp": {
+    "assetPlant": {
+      "home": {
+        "title": "Asset Plants",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Asset Plant",
+        "createOrEditLabel": "Create or edit a Asset Plant",
+        "notFound": "No Asset Plants found"
+      },
+      "created": "A new Asset Plant is created with identifier {{ param }}",
+      "updated": "A Asset Plant is updated with identifier {{ param }}",
+      "deleted": "A Asset Plant is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Asset Plant {{ id }}?"
+      },
+      "detail": {
+        "title": "Asset Plant"
+      },
+      "id": "ID",
+      "assetPlantId": "Asset Plant Id",
+      "fleetNumber": "Fleet Number",
+      "numberPlate": "Number Plate",
+      "fleetDescription": "Fleet Description",
+      "ownerId": "Owner Id",
+      "accessibleByCompany": "Accessible By Company",
+      "driverOrOperator": "Driver Or Operator",
+      "plantCategoryId": "Plant Category Id",
+      "plantSubcategoryId": "Plant Subcategory Id",
+      "manufacturerId": "Manufacturer Id",
+      "modelId": "Model Id",
+      "yearOfManufacture": "Year Of Manufacture",
+      "colour": "Colour",
+      "horseOrTrailer": "Horse Or Trailer",
+      "smrReaderType": "Smr Reader Type",
+      "currentSmrIndex": "Current Smr Index",
+      "engineNumber": "Engine Number",
+      "engineCapacityCc": "Engine Capacity Cc",
+      "currentSiteId": "Current Site Id",
+      "currentContractId": "Current Contract Id",
+      "currentOperatorId": "Current Operator Id",
+      "ledgerCode": "Ledger Code",
+      "fuelType": "Fuel Type",
+      "tankCapacityLitres": "Tank Capacity Litres",
+      "consumptionUnit": "Consumption Unit",
+      "plantHoursStatus": "Plant Hours Status",
+      "isPrimeMover": "Is Prime Mover",
+      "capacityTons": "Capacity Tons",
+      "capacityM3Loose": "Capacity M 3 Loose",
+      "capacityM3Tight": "Capacity M 3 Tight",
+      "maximumConsumption": "Maximum Consumption",
+      "minimumConsumption": "Minimum Consumption",
+      "maximumSmrOnFullTank": "Maximum Smr On Full Tank",
+      "trackConsumption": "Track Consumption",
+      "trackSmrReading": "Track Smr Reading",
+      "trackService": "Track Service",
+      "isDeleted": "Is Deleted",
+      "requestWeeklyMileage": "Request Weekly Mileage",
+      "sent": "Sent",
+      "chassisNumber": "Chassis Number",
+      "currentLocation": "Current Location"
+    }
+  }
+}

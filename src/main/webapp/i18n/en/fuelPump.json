@@ -1,0 +1,26 @@
+{
+  "blueFusionApp": {
+    "fuelPump": {
+      "home": {
+        "title": "Fuel Pumps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Fuel Pump",
+        "createOrEditLabel": "Create or edit a Fuel Pump",
+        "notFound": "No Fuel Pumps found"
+      },
+      "created": "A new Fuel Pump is created with identifier {{ param }}",
+      "updated": "A Fuel Pump is updated with identifier {{ param }}",
+      "deleted": "A Fuel Pump is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fuel Pump {{ id }}?"
+      },
+      "detail": {
+        "title": "Fuel Pump"
+      },
+      "id": "ID",
+      "fuelPumpId": "Fuel Pump Id",
+      "fuelPumpNumber": "Fuel Pump Number",
+      "currentStorageUnitId": "Current Storage Unit Id"
+    }
+  }
+}

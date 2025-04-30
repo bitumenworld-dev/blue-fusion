@@ -1,0 +1,5 @@
+export enum ServiceUnit {
+  KILOMETER_BASED = 'KILOMETER_BASED',
+
+  HOUR_BASED = 'HOUR_BASED',
+}

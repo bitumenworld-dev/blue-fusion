@@ -1,0 +1,201 @@
+{
+  "annotations": {
+    "changelogDate": "20250430083148"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "assetPlantId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fleetNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "numberPlate",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "fleetDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "ownerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "accessibleByCompany",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "driverOrOperator",
+      "fieldType": "DriverOrOperator",
+      "fieldValues": "DRIVER,OPERATOR,NONE"
+    },
+    {
+      "fieldName": "plantCategoryId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "plantSubcategoryId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "manufacturerId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "modelId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "yearOfManufacture",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "colour",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "horseOrTrailer",
+      "fieldType": "HorseOrTrailer",
+      "fieldValues": "HORSE,TRAILER,NONE"
+    },
+    {
+      "fieldName": "smrReaderType",
+      "fieldType": "SMRReaderType",
+      "fieldValues": "KILOMETER,HOUR,DAY,NONE"
+    },
+    {
+      "fieldName": "currentSmrIndex",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "engineNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "engineCapacityCc",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "currentSiteId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "currentContractId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "currentOperatorId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "ledgerCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "fuelType",
+      "fieldType": "FuelType",
+      "fieldValues": "PETROL,DIESEL,NONE,OTHER"
+    },
+    {
+      "fieldName": "tankCapacityLitres",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "consumptionUnit",
+      "fieldType": "ConsumptionUnit",
+      "fieldValues": "KILOMETERS_PER_LITRE,LITRES_PER_HOUR"
+    },
+    {
+      "fieldName": "plantHoursStatus",
+      "fieldType": "PlantHoursStatus",
+      "fieldValues": "OPERATIONAL,BREAK_DOWN,SERVICE"
+    },
+    {
+      "fieldName": "isPrimeMover",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "capacityTons",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "capacityM3Loose",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "capacityM3Tight",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "maximumConsumption",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "minimumConsumption",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "maximumSmrOnFullTank",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "trackConsumption",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "trackSmrReading",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "trackService",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "requestWeeklyMileage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "sent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "chassisNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "currentLocation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    }
+  ],
+  "name": "AssetPlant",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
