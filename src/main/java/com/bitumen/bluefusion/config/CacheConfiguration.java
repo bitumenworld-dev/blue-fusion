@@ -50,6 +50,7 @@ public class CacheConfiguration {
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.Authority.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.bitumen.bluefusion.domain.AssetPlant.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
