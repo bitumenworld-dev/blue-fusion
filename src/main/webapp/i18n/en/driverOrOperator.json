@@ -1,0 +1,10 @@
+{
+  "blueFusionApp": {
+    "DriverOrOperator": {
+      "null": "",
+      "DRIVER": "DRIVER",
+      "OPERATOR": "OPERATOR",
+      "NONE": "NONE"
+    }
+  }
+}

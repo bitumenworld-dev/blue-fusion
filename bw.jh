@@ -1,0 +1,81 @@
+enum DriverOrOperator {
+    DRIVER, OPERATOR, NONE
+}
+
+enum HorseOrTrailer {
+    HORSE, TRAILER, NONE
+}
+
+enum SMRReaderType {
+    KILOMETER, HOUR, DAY, NONE
+}
+
+enum FuelType {
+    PETROL, DIESEL, NONE, OTHER
+}
+
+enum ConsumptionUnit {
+    KILOMETERS_PER_LITRE, LITRES_PER_HOUR
+}
+
+enum PlantHoursStatus {
+    OPERATIONAL, BREAK_DOWN, SERVICE
+}
+
+entity AssetPlant {
+    assetPlantId Long
+    fleetNumber String
+    numberPlate String
+    fleetDescription String
+    ownerId Long
+    accessibleByCompany String
+    driverOrOperator DriverOrOperator
+    plantCategoryId Long
+    plantSubcategoryId String
+    manufacturerId Long
+    modelId Long
+    yearOfManufacture Integer
+    colour String
+    horseOrTrailer HorseOrTrailer
+    smrReaderType SMRReaderType
+    currentSmrIndex Integer
+    engineNumber String
+    engineCapacityCc String
+    currentSiteId Long
+    currentContractId Long
+    currentOperatorId Long
+    ledgerCode String
+    fuelType FuelType
+    tankCapacityLitres Float
+    consumptionUnit ConsumptionUnit
+    plantHoursStatus PlantHoursStatus
+    isPrimeMover Boolean
+    capacityTons Float
+    capacityM3Loose Float
+    capacityM3Tight Float
+    maximumConsumption Float
+    minimumConsumption Float
+    maximumSmrOnFullTank Float
+    trackConsumption Boolean
+    trackSmrReading Boolean
+    trackService Boolean
+    isDeleted Boolean
+    requestWeeklyMileage Boolean
+    sent Boolean
+    chassisNumber String
+    currentLocation String
+}
+
+
+// Set pagination options
+
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -6,6 +6,11 @@ const routes: Routes = [
     data: { pageTitle: 'blueFusionApp.adminAuthority.home.title' },
     loadChildren: () => import('./admin/authority/authority.routes'),
   },
+  {
+    path: 'asset-plant',
+    data: { pageTitle: 'blueFusionApp.assetPlant.home.title' },
+    loadChildren: () => import('./asset-plant/asset-plant.routes'),
+  },
   /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
 ];
 
