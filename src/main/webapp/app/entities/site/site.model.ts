@@ -7,7 +7,7 @@ export interface ISite {
   isActive?: boolean | null;
   siteNotes?: string | null;
   siteImageUrl?: string | null;
-  companyId?: number | null;
+  company?: string | null;
 }
 
 export type NewSite = Omit<ISite, 'id'> & { id: null };

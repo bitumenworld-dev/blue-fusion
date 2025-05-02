@@ -1,6 +1,7 @@
 package com.bitumen.bluefusion.repository;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AssetPlantRepository extends JpaRepository<AssetPlant, Long> {}
+public interface AssetPlantRepository extends JpaRepository<AssetPlant, Long> {
+    Optional<AssetPlant> findByAssetPlantId(Long id);
+}

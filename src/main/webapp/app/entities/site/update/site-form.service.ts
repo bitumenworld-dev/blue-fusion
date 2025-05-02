@@ -25,7 +25,7 @@ type SiteFormGroupContent = {
   isActive: FormControl<ISite['isActive']>;
   siteNotes: FormControl<ISite['siteNotes']>;
   siteImageUrl: FormControl<ISite['siteImageUrl']>;
-  companyId: FormControl<ISite['companyId']>;
+  companyId: FormControl<ISite['company']>;
 };
 
 export type SiteFormGroup = FormGroup<SiteFormGroupContent>;
@@ -52,7 +52,7 @@ export class SiteFormService {
       isActive: new FormControl(siteRawValue.isActive),
       siteNotes: new FormControl(siteRawValue.siteNotes),
       siteImageUrl: new FormControl(siteRawValue.siteImageUrl),
-      companyId: new FormControl(siteRawValue.companyId),
+      companyId: new FormControl(siteRawValue.company),
     });
   }
 

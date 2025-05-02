@@ -1,4 +1,4 @@
-package com.bitumen.bluefusion.service;
+package com.bitumen.bluefusion.service.assetPlant;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
 import java.util.Optional;

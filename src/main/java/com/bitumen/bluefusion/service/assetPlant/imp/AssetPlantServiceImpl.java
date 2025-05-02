@@ -1,8 +1,8 @@
-package com.bitumen.bluefusion.service.impl;
+package com.bitumen.bluefusion.service.assetPlant.imp;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.repository.AssetPlantRepository;
-import com.bitumen.bluefusion.service.AssetPlantService;
+import com.bitumen.bluefusion.service.assetPlant.AssetPlantService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class AssetPlantServiceImpl implements AssetPlantService {
         LOG.debug("Request to partially update AssetPlant : {}", assetPlant);
 
         return assetPlantRepository
-            .findById(assetPlant.getId())
+            .findByAssetPlantId(assetPlant.getAssetPlantId())
             .map(existingAssetPlant -> {
                 if (assetPlant.getAssetPlantId() != null) {
                     existingAssetPlant.setAssetPlantId(assetPlant.getAssetPlantId());
@@ -123,8 +123,8 @@ public class AssetPlantServiceImpl implements AssetPlantService {
                 if (assetPlant.getPlantHoursStatus() != null) {
                     existingAssetPlant.setPlantHoursStatus(assetPlant.getPlantHoursStatus());
                 }
-                if (assetPlant.getIsPrimeMover() != null) {
-                    existingAssetPlant.setIsPrimeMover(assetPlant.getIsPrimeMover());
+                if (assetPlant.getPrimeMover() != null) {
+                    existingAssetPlant.setPrimeMover(assetPlant.getPrimeMover());
                 }
                 if (assetPlant.getCapacityTons() != null) {
                     existingAssetPlant.setCapacityTons(assetPlant.getCapacityTons());
@@ -153,8 +153,8 @@ public class AssetPlantServiceImpl implements AssetPlantService {
                 if (assetPlant.getTrackService() != null) {
                     existingAssetPlant.setTrackService(assetPlant.getTrackService());
                 }
-                if (assetPlant.getIsDeleted() != null) {
-                    existingAssetPlant.setIsDeleted(assetPlant.getIsDeleted());
+                if (assetPlant.getDeleted() != null) {
+                    existingAssetPlant.setDeleted(assetPlant.getDeleted());
                 }
                 if (assetPlant.getRequestWeeklyMileage() != null) {
                     existingAssetPlant.setRequestWeeklyMileage(assetPlant.getRequestWeeklyMileage());

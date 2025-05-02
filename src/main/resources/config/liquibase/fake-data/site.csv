@@ -1,11 +1,11 @@
-id;site_id;site_name;latitude;longitude;is_active;site_notes;site_image_url;company_id
-1;4825;promptly truthfully ew;scorpion from;er limply;true;now alongside;eek;10248
-2;29084;other;ah axe;absentmindedly violin;true;simplistic;ick redevelop clear-cut;22718
-3;22945;deduce;ugh meanwhile aha;paintwork;true;modulo yawningly;wetly the negative;7178
-4;2573;uh-huh outside;during;which beyond boyfriend;false;against swear ugh;meanwhile scowl ugh;9222
-5;12163;bleach qua;incidentally at trained;phew;true;rare;below slip as;24172
-6;1609;investigate regarding;well-worn plait;beyond;true;finer irresponsible;whoa afore swath;23067
-7;6218;overplay rowdy questionably;coaxingly;aha backburn hoot;true;bah quaintly afore;toward;5447
-8;10516;zowie likely;abseil;dash till even;false;what short-term crazy;truthfully;3646
-9;31852;academics;rewarding department uneven;outgoing acknowledge respray;true;doubtfully;how;26232
-10;5807;aw;lay hence;aha orange woot;true;ew;fine;15393
+site_id;site_name;latitude;longitude;is_active;site_notes;site_image;company_id;created_by
+1;promptly truthfully ew;scorpion from;er limply;true;now alongside;eek;1;system
+2;other;ah axe;absentmindedly violin;true;simplistic;ick redevelop clear-cut;2;system
+3;deduce;ugh meanwhile aha;paintwork;true;modulo yawningly;wetly the negative;3;system
+4;uh-huh outside;during;which beyond boyfriend;false;against swear ugh;meanwhile scowl ugh;4;system
+5;bleach qua;incidentally at trained;phew;true;rare;below slip as;5;system
+6;investigate regarding;well-worn plait;beyond;true;finer irresponsible;whoa afore swath;6;system
+7;overplay rowdy questionably;coaxingly;aha backburn hoot;true;bah quaintly afore;toward;7;system
+8;zowie likely;abseil;dash till even;false;what short-term crazy;truthfully;8;system
+9;academics;rewarding department uneven;outgoing acknowledge respray;true;doubtfully;how;9;system
+10;aw;lay hence;aha orange woot;true;ew;fine;10;system

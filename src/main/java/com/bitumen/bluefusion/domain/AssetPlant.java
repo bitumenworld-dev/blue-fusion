@@ -9,25 +9,33 @@ import com.bitumen.bluefusion.domain.enumeration.SMRReaderType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import jdk.jfr.DataAmount;
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A AssetPlant.
  */
+@EqualsAndHashCode(callSuper = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "asset_plant")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
-public class AssetPlant implements Serializable {
+public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    //
+    //    @Id
+    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //    @Column(name = "id")
+    //    private Long id;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "asset_plant_id")
     private Long assetPlantId;
 
@@ -166,28 +174,8 @@ public class AssetPlant implements Serializable {
     @Column(name = "current_location", length = 30)
     private String currentLocation;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public AssetPlant id(Long id) {
-        this.setId(id);
-        return this;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getAssetPlantId() {
-        return this.assetPlantId;
-    }
-
-    public AssetPlant assetPlantId(Long assetPlantId) {
-        this.setAssetPlantId(assetPlantId);
-        return this;
+        return assetPlantId;
     }
 
     public void setAssetPlantId(Long assetPlantId) {
@@ -195,12 +183,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getFleetNumber() {
-        return this.fleetNumber;
-    }
-
-    public AssetPlant fleetNumber(String fleetNumber) {
-        this.setFleetNumber(fleetNumber);
-        return this;
+        return fleetNumber;
     }
 
     public void setFleetNumber(String fleetNumber) {
@@ -208,12 +191,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getNumberPlate() {
-        return this.numberPlate;
-    }
-
-    public AssetPlant numberPlate(String numberPlate) {
-        this.setNumberPlate(numberPlate);
-        return this;
+        return numberPlate;
     }
 
     public void setNumberPlate(String numberPlate) {
@@ -221,12 +199,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getFleetDescription() {
-        return this.fleetDescription;
-    }
-
-    public AssetPlant fleetDescription(String fleetDescription) {
-        this.setFleetDescription(fleetDescription);
-        return this;
+        return fleetDescription;
     }
 
     public void setFleetDescription(String fleetDescription) {
@@ -234,12 +207,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getOwnerId() {
-        return this.ownerId;
-    }
-
-    public AssetPlant ownerId(Long ownerId) {
-        this.setOwnerId(ownerId);
-        return this;
+        return ownerId;
     }
 
     public void setOwnerId(Long ownerId) {
@@ -247,12 +215,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getAccessibleByCompany() {
-        return this.accessibleByCompany;
-    }
-
-    public AssetPlant accessibleByCompany(String accessibleByCompany) {
-        this.setAccessibleByCompany(accessibleByCompany);
-        return this;
+        return accessibleByCompany;
     }
 
     public void setAccessibleByCompany(String accessibleByCompany) {
@@ -260,12 +223,7 @@ public class AssetPlant implements Serializable {
     }
 
     public DriverOrOperator getDriverOrOperator() {
-        return this.driverOrOperator;
-    }
-
-    public AssetPlant driverOrOperator(DriverOrOperator driverOrOperator) {
-        this.setDriverOrOperator(driverOrOperator);
-        return this;
+        return driverOrOperator;
     }
 
     public void setDriverOrOperator(DriverOrOperator driverOrOperator) {
@@ -273,12 +231,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getPlantCategoryId() {
-        return this.plantCategoryId;
-    }
-
-    public AssetPlant plantCategoryId(Long plantCategoryId) {
-        this.setPlantCategoryId(plantCategoryId);
-        return this;
+        return plantCategoryId;
     }
 
     public void setPlantCategoryId(Long plantCategoryId) {
@@ -286,12 +239,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getPlantSubcategoryId() {
-        return this.plantSubcategoryId;
-    }
-
-    public AssetPlant plantSubcategoryId(String plantSubcategoryId) {
-        this.setPlantSubcategoryId(plantSubcategoryId);
-        return this;
+        return plantSubcategoryId;
     }
 
     public void setPlantSubcategoryId(String plantSubcategoryId) {
@@ -299,12 +247,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getManufacturerId() {
-        return this.manufacturerId;
-    }
-
-    public AssetPlant manufacturerId(Long manufacturerId) {
-        this.setManufacturerId(manufacturerId);
-        return this;
+        return manufacturerId;
     }
 
     public void setManufacturerId(Long manufacturerId) {
@@ -312,12 +255,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getModelId() {
-        return this.modelId;
-    }
-
-    public AssetPlant modelId(Long modelId) {
-        this.setModelId(modelId);
-        return this;
+        return modelId;
     }
 
     public void setModelId(Long modelId) {
@@ -325,12 +263,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Integer getYearOfManufacture() {
-        return this.yearOfManufacture;
-    }
-
-    public AssetPlant yearOfManufacture(Integer yearOfManufacture) {
-        this.setYearOfManufacture(yearOfManufacture);
-        return this;
+        return yearOfManufacture;
     }
 
     public void setYearOfManufacture(Integer yearOfManufacture) {
@@ -338,12 +271,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getColour() {
-        return this.colour;
-    }
-
-    public AssetPlant colour(String colour) {
-        this.setColour(colour);
-        return this;
+        return colour;
     }
 
     public void setColour(String colour) {
@@ -351,12 +279,7 @@ public class AssetPlant implements Serializable {
     }
 
     public HorseOrTrailer getHorseOrTrailer() {
-        return this.horseOrTrailer;
-    }
-
-    public AssetPlant horseOrTrailer(HorseOrTrailer horseOrTrailer) {
-        this.setHorseOrTrailer(horseOrTrailer);
-        return this;
+        return horseOrTrailer;
     }
 
     public void setHorseOrTrailer(HorseOrTrailer horseOrTrailer) {
@@ -364,12 +287,7 @@ public class AssetPlant implements Serializable {
     }
 
     public SMRReaderType getSmrReaderType() {
-        return this.smrReaderType;
-    }
-
-    public AssetPlant smrReaderType(SMRReaderType smrReaderType) {
-        this.setSmrReaderType(smrReaderType);
-        return this;
+        return smrReaderType;
     }
 
     public void setSmrReaderType(SMRReaderType smrReaderType) {
@@ -377,12 +295,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Integer getCurrentSmrIndex() {
-        return this.currentSmrIndex;
-    }
-
-    public AssetPlant currentSmrIndex(Integer currentSmrIndex) {
-        this.setCurrentSmrIndex(currentSmrIndex);
-        return this;
+        return currentSmrIndex;
     }
 
     public void setCurrentSmrIndex(Integer currentSmrIndex) {
@@ -390,12 +303,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getEngineNumber() {
-        return this.engineNumber;
-    }
-
-    public AssetPlant engineNumber(String engineNumber) {
-        this.setEngineNumber(engineNumber);
-        return this;
+        return engineNumber;
     }
 
     public void setEngineNumber(String engineNumber) {
@@ -403,12 +311,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getEngineCapacityCc() {
-        return this.engineCapacityCc;
-    }
-
-    public AssetPlant engineCapacityCc(String engineCapacityCc) {
-        this.setEngineCapacityCc(engineCapacityCc);
-        return this;
+        return engineCapacityCc;
     }
 
     public void setEngineCapacityCc(String engineCapacityCc) {
@@ -416,12 +319,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getCurrentSiteId() {
-        return this.currentSiteId;
-    }
-
-    public AssetPlant currentSiteId(Long currentSiteId) {
-        this.setCurrentSiteId(currentSiteId);
-        return this;
+        return currentSiteId;
     }
 
     public void setCurrentSiteId(Long currentSiteId) {
@@ -429,12 +327,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getCurrentContractId() {
-        return this.currentContractId;
-    }
-
-    public AssetPlant currentContractId(Long currentContractId) {
-        this.setCurrentContractId(currentContractId);
-        return this;
+        return currentContractId;
     }
 
     public void setCurrentContractId(Long currentContractId) {
@@ -442,12 +335,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Long getCurrentOperatorId() {
-        return this.currentOperatorId;
-    }
-
-    public AssetPlant currentOperatorId(Long currentOperatorId) {
-        this.setCurrentOperatorId(currentOperatorId);
-        return this;
+        return currentOperatorId;
     }
 
     public void setCurrentOperatorId(Long currentOperatorId) {
@@ -455,12 +343,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getLedgerCode() {
-        return this.ledgerCode;
-    }
-
-    public AssetPlant ledgerCode(String ledgerCode) {
-        this.setLedgerCode(ledgerCode);
-        return this;
+        return ledgerCode;
     }
 
     public void setLedgerCode(String ledgerCode) {
@@ -468,12 +351,7 @@ public class AssetPlant implements Serializable {
     }
 
     public FuelType getFuelType() {
-        return this.fuelType;
-    }
-
-    public AssetPlant fuelType(FuelType fuelType) {
-        this.setFuelType(fuelType);
-        return this;
+        return fuelType;
     }
 
     public void setFuelType(FuelType fuelType) {
@@ -481,12 +359,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getTankCapacityLitres() {
-        return this.tankCapacityLitres;
-    }
-
-    public AssetPlant tankCapacityLitres(Float tankCapacityLitres) {
-        this.setTankCapacityLitres(tankCapacityLitres);
-        return this;
+        return tankCapacityLitres;
     }
 
     public void setTankCapacityLitres(Float tankCapacityLitres) {
@@ -494,12 +367,7 @@ public class AssetPlant implements Serializable {
     }
 
     public ConsumptionUnit getConsumptionUnit() {
-        return this.consumptionUnit;
-    }
-
-    public AssetPlant consumptionUnit(ConsumptionUnit consumptionUnit) {
-        this.setConsumptionUnit(consumptionUnit);
-        return this;
+        return consumptionUnit;
     }
 
     public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
@@ -507,38 +375,23 @@ public class AssetPlant implements Serializable {
     }
 
     public PlantHoursStatus getPlantHoursStatus() {
-        return this.plantHoursStatus;
-    }
-
-    public AssetPlant plantHoursStatus(PlantHoursStatus plantHoursStatus) {
-        this.setPlantHoursStatus(plantHoursStatus);
-        return this;
+        return plantHoursStatus;
     }
 
     public void setPlantHoursStatus(PlantHoursStatus plantHoursStatus) {
         this.plantHoursStatus = plantHoursStatus;
     }
 
-    public Boolean getIsPrimeMover() {
-        return this.isPrimeMover;
+    public Boolean getPrimeMover() {
+        return isPrimeMover;
     }
 
-    public AssetPlant isPrimeMover(Boolean isPrimeMover) {
-        this.setIsPrimeMover(isPrimeMover);
-        return this;
-    }
-
-    public void setIsPrimeMover(Boolean isPrimeMover) {
-        this.isPrimeMover = isPrimeMover;
+    public void setPrimeMover(Boolean primeMover) {
+        isPrimeMover = primeMover;
     }
 
     public Float getCapacityTons() {
-        return this.capacityTons;
-    }
-
-    public AssetPlant capacityTons(Float capacityTons) {
-        this.setCapacityTons(capacityTons);
-        return this;
+        return capacityTons;
     }
 
     public void setCapacityTons(Float capacityTons) {
@@ -546,12 +399,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getCapacityM3Loose() {
-        return this.capacityM3Loose;
-    }
-
-    public AssetPlant capacityM3Loose(Float capacityM3Loose) {
-        this.setCapacityM3Loose(capacityM3Loose);
-        return this;
+        return capacityM3Loose;
     }
 
     public void setCapacityM3Loose(Float capacityM3Loose) {
@@ -559,12 +407,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getCapacityM3Tight() {
-        return this.capacityM3Tight;
-    }
-
-    public AssetPlant capacityM3Tight(Float capacityM3Tight) {
-        this.setCapacityM3Tight(capacityM3Tight);
-        return this;
+        return capacityM3Tight;
     }
 
     public void setCapacityM3Tight(Float capacityM3Tight) {
@@ -572,12 +415,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getMaximumConsumption() {
-        return this.maximumConsumption;
-    }
-
-    public AssetPlant maximumConsumption(Float maximumConsumption) {
-        this.setMaximumConsumption(maximumConsumption);
-        return this;
+        return maximumConsumption;
     }
 
     public void setMaximumConsumption(Float maximumConsumption) {
@@ -585,12 +423,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getMinimumConsumption() {
-        return this.minimumConsumption;
-    }
-
-    public AssetPlant minimumConsumption(Float minimumConsumption) {
-        this.setMinimumConsumption(minimumConsumption);
-        return this;
+        return minimumConsumption;
     }
 
     public void setMinimumConsumption(Float minimumConsumption) {
@@ -598,12 +431,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Float getMaximumSmrOnFullTank() {
-        return this.maximumSmrOnFullTank;
-    }
-
-    public AssetPlant maximumSmrOnFullTank(Float maximumSmrOnFullTank) {
-        this.setMaximumSmrOnFullTank(maximumSmrOnFullTank);
-        return this;
+        return maximumSmrOnFullTank;
     }
 
     public void setMaximumSmrOnFullTank(Float maximumSmrOnFullTank) {
@@ -611,12 +439,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Boolean getTrackConsumption() {
-        return this.trackConsumption;
-    }
-
-    public AssetPlant trackConsumption(Boolean trackConsumption) {
-        this.setTrackConsumption(trackConsumption);
-        return this;
+        return trackConsumption;
     }
 
     public void setTrackConsumption(Boolean trackConsumption) {
@@ -624,12 +447,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Boolean getTrackSmrReading() {
-        return this.trackSmrReading;
-    }
-
-    public AssetPlant trackSmrReading(Boolean trackSmrReading) {
-        this.setTrackSmrReading(trackSmrReading);
-        return this;
+        return trackSmrReading;
     }
 
     public void setTrackSmrReading(Boolean trackSmrReading) {
@@ -637,38 +455,23 @@ public class AssetPlant implements Serializable {
     }
 
     public Boolean getTrackService() {
-        return this.trackService;
-    }
-
-    public AssetPlant trackService(Boolean trackService) {
-        this.setTrackService(trackService);
-        return this;
+        return trackService;
     }
 
     public void setTrackService(Boolean trackService) {
         this.trackService = trackService;
     }
 
-    public Boolean getIsDeleted() {
-        return this.isDeleted;
+    public Boolean getDeleted() {
+        return isDeleted;
     }
 
-    public AssetPlant isDeleted(Boolean isDeleted) {
-        this.setIsDeleted(isDeleted);
-        return this;
-    }
-
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 
     public Boolean getRequestWeeklyMileage() {
-        return this.requestWeeklyMileage;
-    }
-
-    public AssetPlant requestWeeklyMileage(Boolean requestWeeklyMileage) {
-        this.setRequestWeeklyMileage(requestWeeklyMileage);
-        return this;
+        return requestWeeklyMileage;
     }
 
     public void setRequestWeeklyMileage(Boolean requestWeeklyMileage) {
@@ -676,12 +479,7 @@ public class AssetPlant implements Serializable {
     }
 
     public Boolean getSent() {
-        return this.sent;
-    }
-
-    public AssetPlant sent(Boolean sent) {
-        this.setSent(sent);
-        return this;
+        return sent;
     }
 
     public void setSent(Boolean sent) {
@@ -689,12 +487,7 @@ public class AssetPlant implements Serializable {
     }
 
     public String getChassisNumber() {
-        return this.chassisNumber;
-    }
-
-    public AssetPlant chassisNumber(String chassisNumber) {
-        this.setChassisNumber(chassisNumber);
-        return this;
+        return chassisNumber;
     }
 
     public void setChassisNumber(String chassisNumber) {
@@ -702,83 +495,10 @@ public class AssetPlant implements Serializable {
     }
 
     public String getCurrentLocation() {
-        return this.currentLocation;
-    }
-
-    public AssetPlant currentLocation(String currentLocation) {
-        this.setCurrentLocation(currentLocation);
-        return this;
+        return currentLocation;
     }
 
     public void setCurrentLocation(String currentLocation) {
         this.currentLocation = currentLocation;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof AssetPlant)) {
-            return false;
-        }
-        return getId() != null && getId().equals(((AssetPlant) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "AssetPlant{" +
-            "id=" + getId() +
-            ", assetPlantId=" + getAssetPlantId() +
-            ", fleetNumber='" + getFleetNumber() + "'" +
-            ", numberPlate='" + getNumberPlate() + "'" +
-            ", fleetDescription='" + getFleetDescription() + "'" +
-            ", ownerId=" + getOwnerId() +
-            ", accessibleByCompany='" + getAccessibleByCompany() + "'" +
-            ", driverOrOperator='" + getDriverOrOperator() + "'" +
-            ", plantCategoryId=" + getPlantCategoryId() +
-            ", plantSubcategoryId='" + getPlantSubcategoryId() + "'" +
-            ", manufacturerId=" + getManufacturerId() +
-            ", modelId=" + getModelId() +
-            ", yearOfManufacture=" + getYearOfManufacture() +
-            ", colour='" + getColour() + "'" +
-            ", horseOrTrailer='" + getHorseOrTrailer() + "'" +
-            ", smrReaderType='" + getSmrReaderType() + "'" +
-            ", currentSmrIndex=" + getCurrentSmrIndex() +
-            ", engineNumber='" + getEngineNumber() + "'" +
-            ", engineCapacityCc='" + getEngineCapacityCc() + "'" +
-            ", currentSiteId=" + getCurrentSiteId() +
-            ", currentContractId=" + getCurrentContractId() +
-            ", currentOperatorId=" + getCurrentOperatorId() +
-            ", ledgerCode='" + getLedgerCode() + "'" +
-            ", fuelType='" + getFuelType() + "'" +
-            ", tankCapacityLitres=" + getTankCapacityLitres() +
-            ", consumptionUnit='" + getConsumptionUnit() + "'" +
-            ", plantHoursStatus='" + getPlantHoursStatus() + "'" +
-            ", isPrimeMover='" + getIsPrimeMover() + "'" +
-            ", capacityTons=" + getCapacityTons() +
-            ", capacityM3Loose=" + getCapacityM3Loose() +
-            ", capacityM3Tight=" + getCapacityM3Tight() +
-            ", maximumConsumption=" + getMaximumConsumption() +
-            ", minimumConsumption=" + getMinimumConsumption() +
-            ", maximumSmrOnFullTank=" + getMaximumSmrOnFullTank() +
-            ", trackConsumption='" + getTrackConsumption() + "'" +
-            ", trackSmrReading='" + getTrackSmrReading() + "'" +
-            ", trackService='" + getTrackService() + "'" +
-            ", isDeleted='" + getIsDeleted() + "'" +
-            ", requestWeeklyMileage='" + getRequestWeeklyMileage() + "'" +
-            ", sent='" + getSent() + "'" +
-            ", chassisNumber='" + getChassisNumber() + "'" +
-            ", currentLocation='" + getCurrentLocation() + "'" +
-            "}";
     }
 }

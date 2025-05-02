@@ -2,7 +2,7 @@ package com.bitumen.bluefusion.web.rest;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.repository.AssetPlantRepository;
-import com.bitumen.bluefusion.service.AssetPlantService;
+import com.bitumen.bluefusion.service.assetPlant.AssetPlantService;
 import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -57,12 +57,12 @@ public class AssetPlantResource {
     @PostMapping("")
     public ResponseEntity<AssetPlant> createAssetPlant(@Valid @RequestBody AssetPlant assetPlant) throws URISyntaxException {
         LOG.debug("REST request to save AssetPlant : {}", assetPlant);
-        if (assetPlant.getId() != null) {
+        if (assetPlant.getAssetPlantId() != null) {
             throw new BadRequestAlertException("A new assetPlant cannot already have an ID", ENTITY_NAME, "idexists");
         }
         assetPlant = assetPlantService.save(assetPlant);
-        return ResponseEntity.created(new URI("/api/asset-plants/" + assetPlant.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, assetPlant.getId().toString()))
+        return ResponseEntity.created(new URI("/api/asset-plants/" + assetPlant.getAssetPlantId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString()))
             .body(assetPlant);
     }
 
@@ -82,10 +82,10 @@ public class AssetPlantResource {
         @Valid @RequestBody AssetPlant assetPlant
     ) throws URISyntaxException {
         LOG.debug("REST request to update AssetPlant : {}, {}", id, assetPlant);
-        if (assetPlant.getId() == null) {
+        if (assetPlant.getAssetPlantId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, assetPlant.getId())) {
+        if (!Objects.equals(id, assetPlant.getAssetPlantId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -95,7 +95,7 @@ public class AssetPlantResource {
 
         assetPlant = assetPlantService.update(assetPlant);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString()))
             .body(assetPlant);
     }
 
@@ -116,10 +116,10 @@ public class AssetPlantResource {
         @NotNull @RequestBody AssetPlant assetPlant
     ) throws URISyntaxException {
         LOG.debug("REST request to partial update AssetPlant partially : {}, {}", id, assetPlant);
-        if (assetPlant.getId() == null) {
+        if (assetPlant.getAssetPlantId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, assetPlant.getId())) {
+        if (!Objects.equals(id, assetPlant.getAssetPlantId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -131,7 +131,7 @@ public class AssetPlantResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString())
         );
     }
 

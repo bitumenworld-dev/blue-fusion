@@ -1,6 +1,8 @@
 package com.bitumen.bluefusion.repository;
 
 import com.bitumen.bluefusion.domain.Site;
+import com.bitumen.bluefusion.service.site.dto.SiteResponse;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SiteRepository extends JpaRepository<Site, Long> {}
+public interface SiteRepository extends JpaRepository<Site, Long> {
+    Optional<Site> findBySiteId(Long id);
+}

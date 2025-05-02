@@ -1,6 +1,8 @@
-package com.bitumen.bluefusion.service;
+package com.bitumen.bluefusion.service.site;
 
 import com.bitumen.bluefusion.domain.Site;
+import com.bitumen.bluefusion.service.site.dto.SiteRequest;
+import com.bitumen.bluefusion.service.site.dto.SiteResponse;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,7 @@ public interface SiteService {
      * @param site the entity to save.
      * @return the persisted entity.
      */
-    Site save(Site site);
+    SiteResponse save(SiteRequest site);
 
     /**
      * Updates a site.
@@ -23,7 +25,7 @@ public interface SiteService {
      * @param site the entity to update.
      * @return the persisted entity.
      */
-    Site update(Site site);
+    SiteResponse update(Long siteId, SiteRequest site);
 
     /**
      * Partially updates a site.
@@ -31,7 +33,7 @@ public interface SiteService {
      * @param site the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<Site> partialUpdate(Site site);
+    SiteResponse partialUpdate(Long siteId, SiteRequest site);
 
     /**
      * Get all the sites.
@@ -39,7 +41,7 @@ public interface SiteService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<Site> findAll(Pageable pageable);
+    Page<SiteResponse> findAll(Pageable pageable);
 
     /**
      * Get the "id" site.
@@ -47,7 +49,7 @@ public interface SiteService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Site> findOne(Long id);
+    SiteResponse findOne(Long id);
 
     /**
      * Delete the "id" site.
