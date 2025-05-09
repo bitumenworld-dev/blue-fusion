@@ -1,13 +1,10 @@
 package com.bitumen.bluefusion.service.mapper;
 
 import com.bitumen.bluefusion.domain.Authority;
-import com.bitumen.bluefusion.domain.Site;
 import com.bitumen.bluefusion.domain.User;
 import com.bitumen.bluefusion.service.dto.AdminUserDTO;
 import com.bitumen.bluefusion.service.dto.UserDTO;
-import com.bitumen.bluefusion.service.site.dto.SiteResponse;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapping;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * Mapper for the entity {@link User} and its DTO called {@link UserDTO}.
- *
  * Normal mappers are generated using MapStruct, this one is hand-coded as MapStruct
  * support is still in beta, and requires a manual step with an IDE.
  */

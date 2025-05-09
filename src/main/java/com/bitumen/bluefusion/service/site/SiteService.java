@@ -1,9 +1,7 @@
 package com.bitumen.bluefusion.service.site;
 
-import com.bitumen.bluefusion.domain.Site;
 import com.bitumen.bluefusion.service.site.dto.SiteRequest;
 import com.bitumen.bluefusion.service.site.dto.SiteResponse;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
