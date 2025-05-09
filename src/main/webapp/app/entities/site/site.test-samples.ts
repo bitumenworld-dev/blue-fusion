@@ -13,7 +13,6 @@ export const sampleWithPartialData: ISite = {
 
 export const sampleWithFullData: ISite = {
   id: 31836,
-  siteId: 9158,
   siteName: 'jacket disadvantage till',
   latitude: 'flawed boastfully',
   longitude: 'yahoo lovingly creature',

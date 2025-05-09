@@ -5,12 +5,10 @@ import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
-import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { ItemCountComponent } from 'app/shared/pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
+import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
 import { IFuelTransactionHeader } from '../fuel-transaction-header.model';
 import { EntityArrayResponseType, FuelTransactionHeaderService } from '../service/fuel-transaction-header.service';
 import { FuelTransactionHeaderDeleteDialogComponent } from '../delete/fuel-transaction-header-delete-dialog.component';
@@ -18,23 +16,199 @@ import { FuelTransactionHeaderDeleteDialogComponent } from '../delete/fuel-trans
 @Component({
   selector: 'jhi-fuel-transaction-header',
   templateUrl: './fuel-transaction-header.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ItemCountComponent],
+  imports: [RouterModule, FormsModule, SharedModule, ReactiveFormsModule],
 })
 export class FuelTransactionHeaderComponent implements OnInit {
   subscription: Subscription | null = null;
   fuelTransactionHeaders = signal<IFuelTransactionHeader[]>([]);
   isLoading = false;
 
-  sortState = sortStateSignal({});
-
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  selectedFuelType = '';
+  selectedTransactionType = '';
+  userFullName = '';
+  smr = '';
+  fleetNumber = '';
+  receivedFuel = '';
+  issuedFuel = '';
+  unit = '';
+  divisionContract = '';
+  notes = '';
+  date: Date | null = null;
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+  balance = 15000;
+  pump1 = 1233123;
+  pump2 = 123123123;
+
+  // Company array dummy
+  companiesArray = [
+    { id: 1, name: 'BITUMEN' },
+    { id: 2, name: 'RDAVIES' },
+    { id: 3, name: 'TAYANA' },
+  ];
+  companiesSearchTerm = '';
+  filteredCompanies = [...this.companiesArray];
+  showCompaniesDropdown = false;
+
+  // Storage array dummy
+  storageUnitArray = [
+    { id: 1, name: 'LB001' },
+    { id: 2, name: 'LB002' },
+    { id: 3, name: 'LB003' },
+  ];
+  storageUnitSearchTerm = '';
+  filteredStorageUnits = [...this.storageUnitArray];
+  showStorageUnitDropdown = false;
+
+  pumpsArray = [
+    { id: 1, name: 'PUMP01' },
+    { id: 2, name: 'PUMP02' },
+    { id: 3, name: 'ALL' },
+  ];
+  pump = '';
+  showPumpDropdown = false;
+
+  // consumptionsArray dummy
+  fuelTransactionsArray = [
+    {
+      id: '1',
+      date: '2025-05-01',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-02',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-01',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-03',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-04',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-05',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+    {
+      id: '1',
+      date: '2025-05-06',
+      fleetNumber: 'INV-20256475-09',
+      user: 'Lionel Samvura',
+      smr: '1200',
+      unit: 'KILOMETER_BASED',
+      notes: 'issue  to third party',
+      divionContract: 'CB0002',
+      received: '40',
+      issued: '23',
+      balance: '12000',
+      pump: 'Pump01',
+      isFillUp: 'true',
+    },
+  ];
+
+  // consumptionsArray dummy
+  consumptionsArray = [
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+    { date: '2025-05-01', document: 'INV-20256475-09', consumption: '54.6 L' },
+  ];
+
+  // consumptionsArray dummy
+  smrReadingsArray = [
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+    { date: '2025-05-01', issueNo: 'INV-20256475-09', litres: '54.6 L', reading: '10034' },
+  ];
 
   public readonly router = inject(Router);
   protected readonly fuelTransactionHeaderService = inject(FuelTransactionHeaderService);
   protected readonly activatedRoute = inject(ActivatedRoute);
-  protected readonly sortService = inject(SortService);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
@@ -69,18 +243,13 @@ export class FuelTransactionHeaderComponent implements OnInit {
     });
   }
 
-  navigateToWithComponentValues(event: SortState): void {
-    this.handleNavigation(this.page, event);
-  }
-
   navigateToPage(page: number): void {
-    this.handleNavigation(page, this.sortState());
+    this.handleNavigation(page);
   }
 
   protected fillComponentAttributeFromRoute(params: ParamMap, data: Data): void {
     const page = params.get(PAGE_HEADER);
     this.page = +(page ?? 1);
-    this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -105,16 +274,14 @@ export class FuelTransactionHeaderComponent implements OnInit {
     const queryObject: any = {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
-      sort: this.sortService.buildSortParam(this.sortState()),
     };
     return this.fuelTransactionHeaderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
-  protected handleNavigation(page: number, sortState: SortState): void {
+  protected handleNavigation(page: number): void {
     const queryParamsObj = {
       page,
       size: this.itemsPerPage,
-      sort: this.sortService.buildSortParam(sortState),
     };
 
     this.ngZone.run(() => {
@@ -123,5 +290,53 @@ export class FuelTransactionHeaderComponent implements OnInit {
         queryParams: queryParamsObj,
       });
     });
+  }
+
+  // Company Filtering & Selection Logic
+  filterCompanies(): void {
+    const term = this.companiesSearchTerm.toLowerCase();
+    this.filteredCompanies = this.companiesArray.filter(company => company.name.toLowerCase().includes(term));
+  }
+
+  selectCompany(company: { id: number; name: string }): void {
+    this.companiesSearchTerm = company.name;
+    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+    this.showCompaniesDropdown = false;
+  }
+
+  hideCompanyDropdown(): void {
+    setTimeout(() => {
+      this.showCompaniesDropdown = false;
+    }, 200);
+  }
+
+  // Storage Filtering & Selection Logic
+  filterStorageUnits(): void {
+    const term = this.storageUnitSearchTerm.toLowerCase();
+    this.filteredStorageUnits = this.storageUnitArray.filter(storageUnit => storageUnit.name.toLowerCase().includes(term));
+  }
+
+  selectStorageUnit(storageUnit: { id: number; name: string }): void {
+    this.storageUnitSearchTerm = storageUnit.name;
+    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+    this.showStorageUnitDropdown = false;
+  }
+
+  hideStorageUnitDropdown(): void {
+    setTimeout(() => {
+      this.showStorageUnitDropdown = false;
+    }, 200);
+  }
+
+  selectPump(pump: { id: number; name: string }): void {
+    this.pump = pump.name;
+    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+    this.showPumpDropdown = false;
+  }
+
+  hidePumpDropdown(): void {
+    setTimeout(() => {
+      this.showPumpDropdown = false;
+    }, 200);
   }
 }

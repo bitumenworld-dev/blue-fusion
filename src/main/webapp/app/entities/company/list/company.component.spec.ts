@@ -25,13 +25,13 @@ describe('Company Management Component', () => {
           provide: ActivatedRoute,
           useValue: {
             data: of({
-              defaultSort: 'id,asc',
+              defaultSort: 'company_id,desc',
             }),
             queryParamMap: of(
               jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'company_id,desc',
               }),
             ),
             snapshot: {
@@ -39,7 +39,7 @@ describe('Company Management Component', () => {
               queryParamMap: jest.requireActual('@angular/router').convertToParamMap({
                 page: '1',
                 size: '1',
-                sort: 'id,desc',
+                sort: 'company_id,desc',
               }),
             },
           },

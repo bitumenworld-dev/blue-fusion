@@ -1,11 +1,11 @@
-id;company_id;name;description
-1;21542;charlatan kissingly;seemingly disadvantage book
-2;30871;enfold;nephew madly
-3;27528;within below;angrily dense or
-4;7006;thigh yuck;ugh that
-5;5314;dereference;taut except
-6;29291;now up;during
-7;12419;geez furthermore zowie;oh
-8;14237;as;aw
-9;23005;emulsify huzzah oh;expensive joyous sharply
-10;674;soliloquy voluntarily;indeed nauseate shoulder
+company_id;name;description;address;is_active;uses_fuel_system;created_by
+1;BW;Bitumen World;Buluwayo;true;true;SYSTEM
+2;BW Mining;Bitumen World Mining;Buluwayo;true;true;SYSTEM
+3;TY;Tayyan;Buluwayo;true;true;SYSTEM
+4;RDavies;RDavies;Buluwayo;true;true;SYSTEM
+5;JR Gorrard;JR Gorrard;Buluwayo;true;true;SYSTEM
+6;Frampol;Frampol;Harare;true;false;SYSTEM
+7;Clair Obscur;Clair Obscur Expedition 33;ONLINE Service;false;false;SYSTEM
+8;Croco Motors;Vehicle Supplier;Harare;true;false;SYSTEM
+9;Redan;fuel supplier;Harare;true;true;SYSTEM
+10;transerve;vehicle spares supplier;Harare;true;true;SYSTEM

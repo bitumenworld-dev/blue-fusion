@@ -41,9 +41,7 @@
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.driverOrOperator">Driver Or Operator</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.DriverOrOperator.' + (assetPlantRef.driverOrOperator ?? 'null')">{{
-              { null: '', DRIVER: 'DRIVER', OPERATOR: 'OPERATOR', NONE: 'NONE' }[assetPlantRef.driverOrOperator ?? 'null']
-            }}</span>
+            <span>{{ { null: '', DRIVER: 'DRIVER', OPERATOR: 'OPERATOR', NONE: 'NONE' }[assetPlantRef.driverOrOperator ?? 'null'] }} </span>
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.plantCategoryId">Plant Category Id</span></dt>
           <dd>
@@ -71,13 +69,11 @@
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.horseOrTrailer">Horse Or Trailer</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.HorseOrTrailer.' + (assetPlantRef.horseOrTrailer ?? 'null')">{{
-              { null: '', HORSE: 'HORSE', TRAILER: 'TRAILER', NONE: 'NONE' }[assetPlantRef.horseOrTrailer ?? 'null']
-            }}</span>
+            <span>{{ { null: '', HORSE: 'HORSE', TRAILER: 'TRAILER', NONE: 'NONE' }[assetPlantRef.horseOrTrailer ?? 'null'] }}</span>
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.smrReaderType">Smr Reader Type</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.SMRReaderType.' + (assetPlantRef.smrReaderType ?? 'null')">{{
+            <span>{{
               { null: '', KILOMETER: 'KILOMETER', HOUR: 'HOUR', DAY: 'DAY', NONE: 'NONE' }[assetPlantRef.smrReaderType ?? 'null']
             }}</span>
           </dd>
@@ -111,7 +107,7 @@
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.fuelType">Fuel Type</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.FuelType.' + (assetPlantRef.fuelType ?? 'null')">{{
+            <span>{{
               { null: '', PETROL: 'PETROL', DIESEL: 'DIESEL', NONE: 'NONE', OTHER: 'OTHER' }[assetPlantRef.fuelType ?? 'null']
             }}</span>
           </dd>
@@ -121,7 +117,7 @@
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.consumptionUnit">Consumption Unit</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.ConsumptionUnit.' + (assetPlantRef.consumptionUnit ?? 'null')">{{
+            <span>{{
               { null: '', KILOMETERS_PER_LITRE: 'KILOMETERS_PER_LITRE', LITRES_PER_HOUR: 'LITRES_PER_HOUR' }[
                 assetPlantRef.consumptionUnit ?? 'null'
               ]
@@ -129,7 +125,7 @@
           </dd>
           <dt><span jhiTranslate="blueFusionApp.assetPlant.plantHoursStatus">Plant Hours Status</span></dt>
           <dd>
-            <span [jhiTranslate]="'blueFusionApp.PlantHoursStatus.' + (assetPlantRef.plantHoursStatus ?? 'null')">{{
+            <span>{{
               { null: '', OPERATIONAL: 'OPERATIONAL', BREAK_DOWN: 'BREAK_DOWN', SERVICE: 'SERVICE' }[
                 assetPlantRef.plantHoursStatus ?? 'null'
               ]

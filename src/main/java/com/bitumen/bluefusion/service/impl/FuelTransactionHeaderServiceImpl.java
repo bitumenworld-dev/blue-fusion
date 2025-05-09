@@ -43,7 +43,7 @@ public class FuelTransactionHeaderServiceImpl implements FuelTransactionHeaderSe
         LOG.debug("Request to partially update FuelTransactionHeader : {}", fuelTransactionHeader);
 
         return fuelTransactionHeaderRepository
-            .findById(fuelTransactionHeader.getId())
+            .findById(fuelTransactionHeader.getFuelTransactionHeaderId())
             .map(existingFuelTransactionHeader -> {
                 if (fuelTransactionHeader.getFuelTransactionHeaderId() != null) {
                     existingFuelTransactionHeader.setFuelTransactionHeaderId(fuelTransactionHeader.getFuelTransactionHeaderId());

@@ -1,6 +1,6 @@
 export interface ISite {
   id: number;
-  siteId?: number | null;
+  companyId?: number | null;
   siteName?: string | null;
   latitude?: string | null;
   longitude?: string | null;

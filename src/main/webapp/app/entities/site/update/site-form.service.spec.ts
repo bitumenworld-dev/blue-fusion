@@ -20,7 +20,6 @@ describe('Site Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            siteId: expect.any(Object),
             siteName: expect.any(Object),
             latitude: expect.any(Object),
             longitude: expect.any(Object),
@@ -38,7 +37,6 @@ describe('Site Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            siteId: expect.any(Object),
             siteName: expect.any(Object),
             latitude: expect.any(Object),
             longitude: expect.any(Object),

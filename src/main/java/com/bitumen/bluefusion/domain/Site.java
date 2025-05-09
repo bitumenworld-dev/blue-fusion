@@ -41,6 +41,7 @@ public class Site extends AbstractAuditingEntity<Site> implements Serializable {
     private byte[] siteImage;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
     private Company company;
 
     public Long getId() {

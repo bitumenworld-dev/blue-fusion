@@ -14,7 +14,7 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083148_added_entity_AssetPlant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083149_added_entity_AssetPlantServiceReading.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083150_added_entity_FuelIssueanceType.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/20250430083150_added_entity_FuelIssuanceType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083151_added_entity_AssetPlantPhoto.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083152_added_entity_ContractDivision.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083153_added_entity_Site.xml" relativeToChangelogFile="false"/>
@@ -30,6 +30,7 @@
     <include file="config/liquibase/changelog/20250430083203_added_entity_FuelTransactionHeader.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083204_added_entity_FuelTransactionLine.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083205_added_entity_FuelPump.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250430083206_added_entity_SmrReading.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->

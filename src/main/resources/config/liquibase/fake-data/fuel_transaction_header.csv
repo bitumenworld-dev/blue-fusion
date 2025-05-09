@@ -1,11 +1,13 @@
-id;fuel_transaction_header_id;company_id;supplier_id;transaction_type_id;fuel_type;order_number;delivery_note;grv_number;invoice_number;price_per_litre;note;registration_number;attendee_id;operator_id
-1;8547;20061;21481;12302;OTHER;order;outlying scent doubtfully;pfft when motivate;navigate dial unnecessarily;11634.7;proliferate;yet cow;2689;12827
-2;21261;5232;29202;9383;OTHER;reach aw;mmm brook instead;er dream amazing;delirious;13290.03;frankly task;enraged operating suddenly;29624;3311
-3;13719;30353;1496;24904;DIESEL;zowie;advanced;seagull fiercely;caption;17131.8;finished;vice athletic;5761;29364
-4;28308;31361;12316;19551;DIESEL;gee;but ick indeed;boohoo slow;along;20858.65;ouch upon;better surprise courageously;17851;29261
-5;14825;17803;1050;119;NONE;modulo;bah;left;finally jiggle;27905.28;pfft mask;rebuke whether bathrobe;26621;6727
-6;14282;7978;14720;4302;OTHER;while waterspout;honesty behind;underneath supposing;fatally;23557.3;efface ick;deer about for;30631;28298
-7;2534;27196;4912;28052;NONE;tomatillo blowgun partially;cavernous amid;meanwhile quadruple;geez;575.63;circa whoever inquisitively;yowza;23698;2226
-8;25025;8723;25990;13424;DIESEL;coil hm;mousse;that till;though fully;8139.85;battle including;alongside siege beside;31993;7069
-9;8727;6853;29684;3525;NONE;in shiny;metallic evil;even apud insert;enthusiastically;2079.69;pointed;incidentally;6741;30121
-10;27262;26627;15222;32386;OTHER;unabashedly yuck;um;eek oof requite;decide;8104.54;rural cow;why trolley including;21246;23863
+fuel_transaction_header_id;company_id;supplier_id;transaction_type_id;fuel_type;order_number;delivery_note;grv_number;invoice_number;price_per_litre;note;registration_number;attendee_id;operator_id;created_by;is_fill_up
+1;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;true
+2;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;true
+3;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;true
+4;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;true
+5;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;false
+6;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;true
+7;1;null;1;PETROL;null;null;null;null;null;null;null;1;2;SYSTEM;false
+8;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;false
+9;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;false
+10;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;false
+11;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;false
+12;1;null;1;PETROL;null;null;null;null;null;null;null;1;3;SYSTEM;true

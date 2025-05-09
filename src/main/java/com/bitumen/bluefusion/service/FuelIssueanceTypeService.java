@@ -1,37 +1,37 @@
 package com.bitumen.bluefusion.service;
 
-import com.bitumen.bluefusion.domain.FuelIssueanceType;
+import com.bitumen.bluefusion.domain.FuelIssuanceType;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing {@link com.bitumen.bluefusion.domain.FuelIssueanceType}.
+ * Service Interface for managing {@link FuelIssuanceType}.
  */
 public interface FuelIssueanceTypeService {
     /**
-     * Save a fuelIssueanceType.
+     * Save a fuelIssuanceType.
      *
-     * @param fuelIssueanceType the entity to save.
+     * @param fuelIssuanceType the entity to save.
      * @return the persisted entity.
      */
-    FuelIssueanceType save(FuelIssueanceType fuelIssueanceType);
+    FuelIssuanceType save(FuelIssuanceType fuelIssuanceType);
 
     /**
-     * Updates a fuelIssueanceType.
+     * Updates a fuelIssuanceType.
      *
-     * @param fuelIssueanceType the entity to update.
+     * @param fuelIssuanceType the entity to update.
      * @return the persisted entity.
      */
-    FuelIssueanceType update(FuelIssueanceType fuelIssueanceType);
+    FuelIssuanceType update(FuelIssuanceType fuelIssuanceType);
 
     /**
-     * Partially updates a fuelIssueanceType.
+     * Partially updates a fuelIssuanceType.
      *
-     * @param fuelIssueanceType the entity to update partially.
+     * @param fuelIssuanceType the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<FuelIssueanceType> partialUpdate(FuelIssueanceType fuelIssueanceType);
+    Optional<FuelIssuanceType> partialUpdate(FuelIssuanceType fuelIssuanceType);
 
     /**
      * Get all the fuelIssueanceTypes.
@@ -39,7 +39,7 @@ public interface FuelIssueanceTypeService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<FuelIssueanceType> findAll(Pageable pageable);
+    Page<FuelIssuanceType> findAll(Pageable pageable);
 
     /**
      * Get the "id" fuelIssueanceType.
@@ -47,7 +47,7 @@ public interface FuelIssueanceTypeService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<FuelIssueanceType> findOne(Long id);
+    Optional<FuelIssuanceType> findOne(Long id);
 
     /**
      * Delete the "id" fuelIssueanceType.

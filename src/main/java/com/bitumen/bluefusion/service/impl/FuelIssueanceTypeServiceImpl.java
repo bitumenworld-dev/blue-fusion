@@ -1,6 +1,6 @@
 package com.bitumen.bluefusion.service.impl;
 
-import com.bitumen.bluefusion.domain.FuelIssueanceType;
+import com.bitumen.bluefusion.domain.FuelIssuanceType;
 import com.bitumen.bluefusion.repository.FuelIssueanceTypeRepository;
 import com.bitumen.bluefusion.service.FuelIssueanceTypeService;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Implementation for managing {@link com.bitumen.bluefusion.domain.FuelIssueanceType}.
+ * Service Implementation for managing {@link FuelIssuanceType}.
  */
 @Service
 @Transactional
@@ -27,29 +27,29 @@ public class FuelIssueanceTypeServiceImpl implements FuelIssueanceTypeService {
     }
 
     @Override
-    public FuelIssueanceType save(FuelIssueanceType fuelIssueanceType) {
-        LOG.debug("Request to save FuelIssueanceType : {}", fuelIssueanceType);
-        return fuelIssueanceTypeRepository.save(fuelIssueanceType);
+    public FuelIssuanceType save(FuelIssuanceType fuelIssuanceType) {
+        LOG.debug("Request to save FuelIssuanceType : {}", fuelIssuanceType);
+        return fuelIssueanceTypeRepository.save(fuelIssuanceType);
     }
 
     @Override
-    public FuelIssueanceType update(FuelIssueanceType fuelIssueanceType) {
-        LOG.debug("Request to update FuelIssueanceType : {}", fuelIssueanceType);
-        return fuelIssueanceTypeRepository.save(fuelIssueanceType);
+    public FuelIssuanceType update(FuelIssuanceType fuelIssuanceType) {
+        LOG.debug("Request to update FuelIssuanceType : {}", fuelIssuanceType);
+        return fuelIssueanceTypeRepository.save(fuelIssuanceType);
     }
 
     @Override
-    public Optional<FuelIssueanceType> partialUpdate(FuelIssueanceType fuelIssueanceType) {
-        LOG.debug("Request to partially update FuelIssueanceType : {}", fuelIssueanceType);
+    public Optional<FuelIssuanceType> partialUpdate(FuelIssuanceType fuelIssuanceType) {
+        LOG.debug("Request to partially update FuelIssuanceType : {}", fuelIssuanceType);
 
         return fuelIssueanceTypeRepository
-            .findById(fuelIssueanceType.getId())
+            .findById(fuelIssuanceType.getId())
             .map(existingFuelIssueanceType -> {
-                if (fuelIssueanceType.getFuelIssueTypeId() != null) {
-                    existingFuelIssueanceType.setFuelIssueTypeId(fuelIssueanceType.getFuelIssueTypeId());
+                if (fuelIssuanceType.getFuelIssueTypeId() != null) {
+                    existingFuelIssueanceType.setFuelIssueTypeId(fuelIssuanceType.getFuelIssueTypeId());
                 }
-                if (fuelIssueanceType.getFuelIssueType() != null) {
-                    existingFuelIssueanceType.setFuelIssueType(fuelIssueanceType.getFuelIssueType());
+                if (fuelIssuanceType.getFuelIssueType() != null) {
+                    existingFuelIssueanceType.setFuelIssueType(fuelIssuanceType.getFuelIssueType());
                 }
 
                 return existingFuelIssueanceType;
@@ -59,21 +59,21 @@ public class FuelIssueanceTypeServiceImpl implements FuelIssueanceTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<FuelIssueanceType> findAll(Pageable pageable) {
+    public Page<FuelIssuanceType> findAll(Pageable pageable) {
         LOG.debug("Request to get all FuelIssueanceTypes");
         return fuelIssueanceTypeRepository.findAll(pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<FuelIssueanceType> findOne(Long id) {
-        LOG.debug("Request to get FuelIssueanceType : {}", id);
+    public Optional<FuelIssuanceType> findOne(Long id) {
+        LOG.debug("Request to get FuelIssuanceType : {}", id);
         return fuelIssueanceTypeRepository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
-        LOG.debug("Request to delete FuelIssueanceType : {}", id);
+        LOG.debug("Request to delete FuelIssuanceType : {}", id);
         fuelIssueanceTypeRepository.deleteById(id);
     }
 }

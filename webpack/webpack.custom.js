@@ -23,6 +23,7 @@ module.exports = async (config, options, targetOptions) => {
     config.plugins.push(
       new WebpackNotifierPlugin({
         title: 'Blue Fusion',
+        appID: 'blue-fusion',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
       }),
     );

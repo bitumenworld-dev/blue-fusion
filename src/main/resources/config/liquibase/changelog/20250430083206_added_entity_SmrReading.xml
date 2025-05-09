@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity FuelPump.
+    -->
+    <changeSet id="20250430083206-1" author="jhipster">
+        <createTable tableName="smr_reading">
+            <column name="smr_reading_id" type="bigint" autoIncrement="true" startWith="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="asset_plant_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fuel_transaction_header_id" type="bigint">
+              <constraints nullable="true" />
+            </column>
+
+            <column name="plant_hours_id" type="bigint">
+              <constraints nullable="true" />
+            </column>
+
+            <column name="whatsapp_number" type="varchar(5)"/>
+
+            <column name="smr_reading" type="numeric"/>
+
+            <column name="unit" type="varchar(20)"/>
+
+            <column name="created_by" type="varchar(50)"/>
+
+            <column name="created_date" type="timestamp"/>
+
+            <column name="last_modified_by" type="varchar(50)"/>
+
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="20250430083206-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/smr_reading.csv"
+                  separator=";"
+                  tableName="smr_reading"
+                  usePreparedStatements="true">
+            <column name="smr_reading_id" type="numeric"/>
+            <column name="asset_plant_id" type="numeric"/>
+            <column name="fuel_transaction_header_id" type="numeric"/>
+            <column name="plant_hours_id" type="numeric"/>
+            <column name="whatsapp_number" type="varchar(5)"/>
+            <column name="smr_reading" type="numeric"/>
+            <column name="unit" type="varchar(20)"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

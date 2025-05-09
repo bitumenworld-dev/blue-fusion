@@ -10,7 +10,6 @@ import com.bitumen.bluefusion.service.site.dto.SiteRequest;
 import com.bitumen.bluefusion.service.site.dto.SiteResponse;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -26,52 +25,58 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SiteServiceImpl implements SiteService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SiteServiceImpl.class);
-
     private final SiteRepository siteRepository;
     private final CompanyRepository companyRepository;
 
     @Override
     public SiteResponse save(SiteRequest siteRequest) {
-        Company company = companyRepository
-            .findById(siteRequest.companyId())
-            .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", siteRequest.companyId())));
-
         Site site = Site.builder()
             .siteName(siteRequest.siteName())
             .latitude(siteRequest.latitude())
             .longitude(siteRequest.longitude())
             .siteNotes(siteRequest.siteNotes())
             .siteImage(siteRequest.image())
-            .company(company)
             .build();
+
+        if (siteRequest.companyId() != null) {
+            Company company = companyRepository
+                .findById(siteRequest.companyId())
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", siteRequest.companyId())));
+            site.setCompany(company);
+        }
+
         Site savedSite = siteRepository.save(site);
         return SiteResponseMapper.map.apply(savedSite);
     }
 
     @Override
     public SiteResponse update(Long siteId, SiteRequest siteRequest) {
+        // Find the site or throw exception
         Site site = siteRepository
             .findById(siteId)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Site with id %s not found", siteId)));
-        Company company = companyRepository
-            .findById(siteRequest.companyId())
-            .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", siteRequest.companyId())));
+
+        // Only update company if companyId is provided
+        if (siteRequest.companyId() != null) {
+            Company company = companyRepository
+                .findById(siteRequest.companyId())
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", siteRequest.companyId())));
+            site.setCompany(company);
+        }
+
+        // Update other site properties
         site.setSiteName(siteRequest.siteName());
         site.setLatitude(siteRequest.latitude());
         site.setLongitude(siteRequest.longitude());
         site.setSiteNotes(siteRequest.siteNotes());
         site.setSiteImage(siteRequest.image());
-        site.setCompany(company);
-        LOG.debug("Request to update Site : {}", site);
+
         Site savedSite = siteRepository.save(site);
         return SiteResponseMapper.map.apply(savedSite);
     }
 
     @Override
     public SiteResponse partialUpdate(Long siteId, SiteRequest siteRequest) {
-        LOG.debug("Request to partially update Site : {}", siteRequest);
-
         Company company;
         if (!Objects.isNull(siteRequest.companyId()) && siteRequest.companyId() > 0L) {
             company = companyRepository
@@ -101,14 +106,12 @@ public class SiteServiceImpl implements SiteService {
     @Override
     @Transactional(readOnly = true)
     public Page<SiteResponse> findAll(Pageable pageable) {
-        LOG.debug("Request to get all Sites");
         return siteRepository.findAll(pageable).map(SiteResponseMapper.map);
     }
 
     @Override
     @Transactional(readOnly = true)
     public SiteResponse findOne(Long id) {
-        LOG.debug("Request to get Site : {}", id);
         Site site = siteRepository
             .findBySiteId(id)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Site with id %s not found", id)));
@@ -117,24 +120,10 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     public void delete(Long id) {
-        LOG.debug("Request to delete Site : {}", id);
         siteRepository
             .findBySiteId(id)
             .ifPresentOrElse(siteRepository::delete, () -> {
                 throw new RecordNotFoundException(String.format("Site with id %s not found", id));
             });
     }
-}
-
-interface SiteResponseMapper {
-    Function<Site, SiteResponse> map = site ->
-        new SiteResponse(
-            site.getSiteId(),
-            site.getSiteName(),
-            site.getLatitude(),
-            site.getLongitude(),
-            site.getSiteNotes(),
-            site.getCompany().getName(),
-            site.getSiteImage()
-        );
 }

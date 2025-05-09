@@ -18,9 +18,11 @@ type CompanyFormDefaults = Pick<NewCompany, 'id'>;
 
 type CompanyFormGroupContent = {
   id: FormControl<ICompany['id'] | NewCompany['id']>;
-  companyId: FormControl<ICompany['companyId']>;
   name: FormControl<ICompany['name']>;
   description: FormControl<ICompany['description']>;
+  address: FormControl<ICompany['address']>;
+  isActive: FormControl<ICompany['isActive']>;
+  usesFuelSystem: FormControl<ICompany['usesFuelSystem']>;
 };
 
 export type CompanyFormGroup = FormGroup<CompanyFormGroupContent>;
@@ -40,9 +42,11 @@ export class CompanyFormService {
           validators: [Validators.required],
         },
       ),
-      companyId: new FormControl(companyRawValue.companyId),
       name: new FormControl(companyRawValue.name),
       description: new FormControl(companyRawValue.description),
+      address: new FormControl(companyRawValue.address),
+      isActive: new FormControl(companyRawValue.isActive),
+      usesFuelSystem: new FormControl(companyRawValue.usesFuelSystem),
     });
   }
 

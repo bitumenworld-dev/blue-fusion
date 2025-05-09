@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { ItemCountComponent } from 'app/shared/pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
@@ -18,7 +18,7 @@ import { SiteDeleteDialogComponent } from '../delete/site-delete-dialog.componen
 @Component({
   selector: 'jhi-site',
   templateUrl: './site.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ItemCountComponent],
+  imports: [RouterModule, FormsModule, SharedModule, ReactiveFormsModule],
 })
 export class SiteComponent implements OnInit {
   subscription: Subscription | null = null;
@@ -105,7 +105,7 @@ export class SiteComponent implements OnInit {
     const queryObject: any = {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
-      sort: this.sortService.buildSortParam(this.sortState()),
+      sort: 'siteId',
     };
     return this.siteService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
@@ -124,4 +124,6 @@ export class SiteComponent implements OnInit {
       });
     });
   }
+
+  protected readonly Math = Math;
 }

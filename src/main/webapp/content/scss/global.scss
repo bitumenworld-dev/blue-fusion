@@ -1,7 +1,11 @@
 @import 'bootstrap-variables';
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+// Your existing global styles below
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
@@ -67,8 +71,7 @@ Generic styles
 /* other generic styles */
 
 .jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
+  margin-top: 5px;
   border: none;
 }
 

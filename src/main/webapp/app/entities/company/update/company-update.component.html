@@ -1,32 +1,30 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-company-heading" data-cy="CompanyCreateUpdateHeading" jhiTranslate="blueFusionApp.company.home.createOrEditLabel">
-        Create or edit a Company
-      </h2>
+      <h2>Create or edit a Company</h2>
 
       <div>
         <jhi-alert-error />
 
         @if (editForm.controls.id.value !== null) {
           <div class="mb-3">
-            <label class="form-label" for="field_id" jhiTranslate="blueFusionApp.company.id">ID</label>
+            <label class="form-label" for="field_id">ID</label>
             <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
           </div>
         }
 
         <div class="mb-3">
-          <label class="form-label" for="field_companyId" jhiTranslate="blueFusionApp.company.companyId">Company Id</label>
-          <input type="number" class="form-control" name="companyId" id="field_companyId" data-cy="companyId" formControlName="companyId" />
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="field_name" jhiTranslate="blueFusionApp.company.name">Name</label>
+          <label class="form-label" for="field_name">Name</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
         </div>
 
         <div class="mb-3">
-          <label class="form-label" for="field_description" jhiTranslate="blueFusionApp.company.description">Description</label>
+          <label class="form-label" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
           <input
             type="text"
             class="form-control"
@@ -36,11 +34,28 @@
             formControlName="description"
           />
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_isActive">Is Active</label>
+          <input type="checkbox" class="form-check" name="isActive" id="field_isActive" data-cy="isActive" formControlName="isActive" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_usesFuelSystem">Uses Fuel System</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="usesFuelSystem"
+            id="field_usesFuelSystem"
+            data-cy="usesFuelSystem"
+            formControlName="usesFuelSystem"
+          />
+        </div>
       </div>
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
         </button>
 
         <button
@@ -50,7 +65,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
       </div>
     </form>

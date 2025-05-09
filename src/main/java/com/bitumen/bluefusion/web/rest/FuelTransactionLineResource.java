@@ -59,12 +59,19 @@ public class FuelTransactionLineResource {
     public ResponseEntity<FuelTransactionLine> createFuelTransactionLine(@RequestBody FuelTransactionLine fuelTransactionLine)
         throws URISyntaxException {
         LOG.debug("REST request to save FuelTransactionLine : {}", fuelTransactionLine);
-        if (fuelTransactionLine.getId() != null) {
+        if (fuelTransactionLine.getFuelTransactionLineId() != null) {
             throw new BadRequestAlertException("A new fuelTransactionLine cannot already have an ID", ENTITY_NAME, "idexists");
         }
         fuelTransactionLine = fuelTransactionLineService.save(fuelTransactionLine);
-        return ResponseEntity.created(new URI("/api/fuel-transaction-lines/" + fuelTransactionLine.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fuelTransactionLine.getId().toString()))
+        return ResponseEntity.created(new URI("/api/fuel-transaction-lines/" + fuelTransactionLine.getFuelTransactionLineId()))
+            .headers(
+                HeaderUtil.createEntityCreationAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    fuelTransactionLine.getFuelTransactionLineId().toString()
+                )
+            )
             .body(fuelTransactionLine);
     }
 
@@ -84,10 +91,10 @@ public class FuelTransactionLineResource {
         @RequestBody FuelTransactionLine fuelTransactionLine
     ) throws URISyntaxException {
         LOG.debug("REST request to update FuelTransactionLine : {}, {}", id, fuelTransactionLine);
-        if (fuelTransactionLine.getId() == null) {
+        if (fuelTransactionLine.getFuelTransactionLineId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, fuelTransactionLine.getId())) {
+        if (!Objects.equals(id, fuelTransactionLine.getFuelTransactionLineId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -97,7 +104,14 @@ public class FuelTransactionLineResource {
 
         fuelTransactionLine = fuelTransactionLineService.update(fuelTransactionLine);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fuelTransactionLine.getId().toString()))
+            .headers(
+                HeaderUtil.createEntityUpdateAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    fuelTransactionLine.getFuelTransactionLineId().toString()
+                )
+            )
             .body(fuelTransactionLine);
     }
 
@@ -118,10 +132,10 @@ public class FuelTransactionLineResource {
         @RequestBody FuelTransactionLine fuelTransactionLine
     ) throws URISyntaxException {
         LOG.debug("REST request to partial update FuelTransactionLine partially : {}, {}", id, fuelTransactionLine);
-        if (fuelTransactionLine.getId() == null) {
+        if (fuelTransactionLine.getFuelTransactionLineId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, fuelTransactionLine.getId())) {
+        if (!Objects.equals(id, fuelTransactionLine.getFuelTransactionLineId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -133,7 +147,12 @@ public class FuelTransactionLineResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fuelTransactionLine.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(
+                applicationName,
+                true,
+                ENTITY_NAME,
+                fuelTransactionLine.getFuelTransactionLineId().toString()
+            )
         );
     }
 

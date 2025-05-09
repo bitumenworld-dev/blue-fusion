@@ -1,5 +1,6 @@
 package com.bitumen.bluefusion.config;
 
+import com.bitumen.bluefusion.domain.FuelIssuanceType;
 import java.time.Duration;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
@@ -52,7 +53,7 @@ public class CacheConfiguration {
             createCache(cm, com.bitumen.bluefusion.domain.User.class.getName() + ".authorities");
             createCache(cm, com.bitumen.bluefusion.domain.AssetPlant.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.AssetPlantServiceReading.class.getName());
-            createCache(cm, com.bitumen.bluefusion.domain.FuelIssueanceType.class.getName());
+            createCache(cm, FuelIssuanceType.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.AssetPlantPhoto.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.ContractDivision.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.Site.class.getName());

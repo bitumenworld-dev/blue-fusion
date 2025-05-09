@@ -105,7 +105,7 @@ export class CompanyComponent implements OnInit {
     const queryObject: any = {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
-      sort: this.sortService.buildSortParam(this.sortState()),
+      sort: 'companyId',
     };
     return this.companyService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }

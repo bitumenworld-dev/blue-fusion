@@ -59,12 +59,19 @@ public class FuelTransactionHeaderResource {
     public ResponseEntity<FuelTransactionHeader> createFuelTransactionHeader(@RequestBody FuelTransactionHeader fuelTransactionHeader)
         throws URISyntaxException {
         LOG.debug("REST request to save FuelTransactionHeader : {}", fuelTransactionHeader);
-        if (fuelTransactionHeader.getId() != null) {
+        if (fuelTransactionHeader.getFuelTransactionHeaderId() != null) {
             throw new BadRequestAlertException("A new fuelTransactionHeader cannot already have an ID", ENTITY_NAME, "idexists");
         }
         fuelTransactionHeader = fuelTransactionHeaderService.save(fuelTransactionHeader);
-        return ResponseEntity.created(new URI("/api/fuel-transaction-headers/" + fuelTransactionHeader.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fuelTransactionHeader.getId().toString()))
+        return ResponseEntity.created(new URI("/api/fuel-transaction-headers/" + fuelTransactionHeader.getFuelTransactionHeaderId()))
+            .headers(
+                HeaderUtil.createEntityCreationAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    fuelTransactionHeader.getFuelTransactionHeaderId().toString()
+                )
+            )
             .body(fuelTransactionHeader);
     }
 
@@ -84,20 +91,27 @@ public class FuelTransactionHeaderResource {
         @RequestBody FuelTransactionHeader fuelTransactionHeader
     ) throws URISyntaxException {
         LOG.debug("REST request to update FuelTransactionHeader : {}, {}", id, fuelTransactionHeader);
-        if (fuelTransactionHeader.getId() == null) {
+        if (fuelTransactionHeader.getFuelTransactionHeaderId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, fuelTransactionHeader.getId())) {
+        if (!Objects.equals(id, fuelTransactionHeader.getFuelTransactionHeaderId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
         if (!fuelTransactionHeaderRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "id not found");
         }
 
         fuelTransactionHeader = fuelTransactionHeaderService.update(fuelTransactionHeader);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fuelTransactionHeader.getId().toString()))
+            .headers(
+                HeaderUtil.createEntityUpdateAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    fuelTransactionHeader.getFuelTransactionHeaderId().toString()
+                )
+            )
             .body(fuelTransactionHeader);
     }
 
@@ -118,10 +132,10 @@ public class FuelTransactionHeaderResource {
         @RequestBody FuelTransactionHeader fuelTransactionHeader
     ) throws URISyntaxException {
         LOG.debug("REST request to partial update FuelTransactionHeader partially : {}, {}", id, fuelTransactionHeader);
-        if (fuelTransactionHeader.getId() == null) {
+        if (fuelTransactionHeader.getFuelTransactionHeaderId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (!Objects.equals(id, fuelTransactionHeader.getId())) {
+        if (!Objects.equals(id, fuelTransactionHeader.getFuelTransactionHeaderId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
 
@@ -133,7 +147,12 @@ public class FuelTransactionHeaderResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fuelTransactionHeader.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(
+                applicationName,
+                true,
+                ENTITY_NAME,
+                fuelTransactionHeader.getFuelTransactionHeaderId().toString()
+            )
         );
     }
 

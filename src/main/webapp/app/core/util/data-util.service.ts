@@ -1,4 +1,3 @@
-import { Buffer } from 'buffer';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
@@ -31,7 +30,8 @@ export class DataUtils {
   openFile(data: string, contentType: string | null | undefined): void {
     contentType = contentType ?? '';
 
-    const byteCharacters = Buffer.from(data, 'base64').toString('binary');
+    // Replace Buffer usage with browser-native atob
+    const byteCharacters = atob(data);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);

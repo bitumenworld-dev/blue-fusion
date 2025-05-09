@@ -18,14 +18,13 @@ type SiteFormDefaults = Pick<NewSite, 'id' | 'isActive'>;
 
 type SiteFormGroupContent = {
   id: FormControl<ISite['id'] | NewSite['id']>;
-  siteId: FormControl<ISite['siteId']>;
   siteName: FormControl<ISite['siteName']>;
   latitude: FormControl<ISite['latitude']>;
   longitude: FormControl<ISite['longitude']>;
   isActive: FormControl<ISite['isActive']>;
   siteNotes: FormControl<ISite['siteNotes']>;
   siteImageUrl: FormControl<ISite['siteImageUrl']>;
-  companyId: FormControl<ISite['company']>;
+  companyId: FormControl<number | null>;
 };
 
 export type SiteFormGroup = FormGroup<SiteFormGroupContent>;
@@ -45,14 +44,13 @@ export class SiteFormService {
           validators: [Validators.required],
         },
       ),
-      siteId: new FormControl(siteRawValue.siteId),
       siteName: new FormControl(siteRawValue.siteName),
       latitude: new FormControl(siteRawValue.latitude),
       longitude: new FormControl(siteRawValue.longitude),
       isActive: new FormControl(siteRawValue.isActive),
       siteNotes: new FormControl(siteRawValue.siteNotes),
       siteImageUrl: new FormControl(siteRawValue.siteImageUrl),
-      companyId: new FormControl(siteRawValue.company),
+      companyId: new FormControl(siteRawValue.companyId ?? null),
     });
   }
 

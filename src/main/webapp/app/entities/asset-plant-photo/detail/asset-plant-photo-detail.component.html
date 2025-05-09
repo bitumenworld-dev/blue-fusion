@@ -29,14 +29,14 @@
           <dd>
             @if (assetPlantPhotoRef.image) {
               <div>
-                <a (click)="openFile(assetPlantPhotoRef.image ?? '', assetPlantPhotoRef.imageContentType)">
-                  <img
-                    [src]="'data:' + assetPlantPhotoRef.imageContentType + ';base64,' + assetPlantPhotoRef.image"
-                    style="max-width: 100%"
-                    alt="assetPlantPhoto"
-                  />
-                </a>
-                {{ assetPlantPhotoRef.imageContentType }}, {{ byteSize(assetPlantPhotoRef.image ?? '') }}
+                <!--                <a (click)="openFile(assetPlantPhotoRef.image ?? '', assetPlantPhotoRef.imageContentType)">-->
+                <!--                  <img-->
+                <!--                    [src]="'data:' + assetPlantPhotoRef.imageContentType + ';base64,' + assetPlantPhotoRef.image"-->
+                <!--                    style="max-width: 100%"-->
+                <!--                    alt="assetPlantPhoto"-->
+                <!--                  />-->
+                <!--                </a>-->
+                <!--                {{ assetPlantPhotoRef.imageContentType }}, {{ byteSize(assetPlantPhotoRef.image ?? '') }}-->
               </div>
             }
           </dd>

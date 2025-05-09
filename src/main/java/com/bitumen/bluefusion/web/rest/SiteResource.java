@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,8 +46,8 @@ public class SiteResource {
     @PostMapping("")
     public ResponseEntity<SiteResponse> createSite(@RequestBody SiteRequest siteRequest) throws URISyntaxException {
         SiteResponse siteResponse = siteService.save(siteRequest);
-        return ResponseEntity.created(new URI("/api/sites/" + siteResponse.siteId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, siteResponse.siteId().toString()))
+        return ResponseEntity.created(new URI("/api/sites/" + siteResponse.id()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, siteResponse.id().toString()))
             .body(siteResponse);
     }
 
@@ -63,13 +61,10 @@ public class SiteResource {
      * or with status {@code 500 (Internal Server Error)} if the site couldn't be updated.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<SiteResponse> updateSite(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody SiteRequest siteRequest
-    ) {
+    public ResponseEntity<SiteResponse> updateSite(@PathVariable(value = "id") final Long id, @RequestBody SiteRequest siteRequest) {
         SiteResponse siteResponse = siteService.update(id, siteRequest);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, siteResponse.siteId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, siteResponse.id().toString()))
             .body(siteResponse);
     }
 
@@ -91,7 +86,7 @@ public class SiteResource {
         SiteResponse result = siteService.partialUpdate(id, siteRequest);
         return ResponseUtil.wrapOrNotFound(
             Optional.of(result),
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.siteId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.id().toString())
         );
     }
 
@@ -102,7 +97,7 @@ public class SiteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sites in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<SiteResponse>> getAllSites(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<SiteResponse>> getAllSites(Pageable pageable) {
         Page<SiteResponse> page = siteService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

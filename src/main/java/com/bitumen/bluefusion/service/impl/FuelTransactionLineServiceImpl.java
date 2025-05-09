@@ -43,7 +43,7 @@ public class FuelTransactionLineServiceImpl implements FuelTransactionLineServic
         LOG.debug("Request to partially update FuelTransactionLine : {}", fuelTransactionLine);
 
         return fuelTransactionLineRepository
-            .findById(fuelTransactionLine.getId())
+            .findById(fuelTransactionLine.getFuelTransactionLineId())
             .map(existingFuelTransactionLine -> {
                 if (fuelTransactionLine.getFuelTransactionLineId() != null) {
                     existingFuelTransactionLine.setFuelTransactionLineId(fuelTransactionLine.getFuelTransactionLineId());

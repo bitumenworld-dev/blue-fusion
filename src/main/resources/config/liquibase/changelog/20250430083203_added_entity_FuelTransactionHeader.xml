@@ -11,72 +11,87 @@
     -->
     <changeSet id="20250430083203-1" author="jhipster">
         <createTable tableName="fuel_transaction_header">
-            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="fuel_transaction_header_id" type="bigint" autoIncrement="true" startWith="1">
+              <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fuel_transaction_header_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
+
             <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
             <column name="supplier_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
             <column name="transaction_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
             <column name="fuel_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="order_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="delivery_note" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="grv_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="invoice_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="price_per_litre" type="${floatType}">
                 <constraints nullable="true" />
             </column>
+
             <column name="note" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="registration_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="attendee_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
             <column name="operator_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+
+          <column name="is_fill_up" type="boolean">
+            <constraints nullable="true" />
+          </column>
+
+          <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+          </column>
+
+          <column name="created_date" type="timestamp"/>
+
+          <column name="last_modified_by" type="varchar(50)"/>
+
+          <column name="last_modified_date" type="timestamp"/>
+
         </createTable>
     </changeSet>
 
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
-    <!--
-        Load sample data generated with Faker.js
-        - This data can be easily edited using a CSV editor (or even MS Excel) and
-          is located in the 'src/main/resources/config/liquibase/fake-data' directory
-        - By default this data is applied when running with the JHipster 'dev' profile.
-          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
-          Spring Boot configuration key.
-    -->
+
     <changeSet id="20250430083203-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/fuel_transaction_header.csv"
                   separator=";"
                   tableName="fuel_transaction_header"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
             <column name="fuel_transaction_header_id" type="numeric"/>
             <column name="company_id" type="numeric"/>
             <column name="supplier_id" type="numeric"/>
@@ -91,7 +106,11 @@
             <column name="registration_number" type="string"/>
             <column name="attendee_id" type="numeric"/>
             <column name="operator_id" type="numeric"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+            <column name="is_fill_up" type="boolean"/>
+            <column name="created_by" type="varchar(50)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(50)"/>
+            <column name="last_modified_date" type="timestamp"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

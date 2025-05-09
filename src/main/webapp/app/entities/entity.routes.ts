@@ -17,9 +17,9 @@ const routes: Routes = [
     loadChildren: () => import('./asset-plant-service-reading/asset-plant-service-reading.routes'),
   },
   {
-    path: 'fuel-issueance-type',
-    data: { pageTitle: 'blueFusionApp.fuelIssueanceType.home.title' },
-    loadChildren: () => import('./fuel-issueance-type/fuel-issueance-type.routes'),
+    path: 'fuel-issuance-type',
+    data: { pageTitle: 'blueFusionApp.fuelIssuanceType.home.title' },
+    loadChildren: () => import('./fuel-issuance-type/fuel-issuance-type.routes'),
   },
   {
     path: 'asset-plant-photo',

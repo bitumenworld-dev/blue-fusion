@@ -1,16 +1,13 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.domain.Company;
-import com.bitumen.bluefusion.repository.CompanyRepository;
-import com.bitumen.bluefusion.service.CompanyService;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
+import com.bitumen.bluefusion.service.companyService.CompanyService;
+import com.bitumen.bluefusion.service.companyService.dto.CompanyRequest;
+import com.bitumen.bluefusion.service.companyService.dto.CompanyResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +22,10 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.bitumen.bluefusion.domain.Company}.
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/companies")
 public class CompanyResource {
-
-    private static final Logger LOG = LoggerFactory.getLogger(CompanyResource.class);
 
     private static final String ENTITY_NAME = "company";
 
@@ -38,29 +34,22 @@ public class CompanyResource {
 
     private final CompanyService companyService;
 
-    private final CompanyRepository companyRepository;
-
-    public CompanyResource(CompanyService companyService, CompanyRepository companyRepository) {
+    public CompanyResource(CompanyService companyService) {
         this.companyService = companyService;
-        this.companyRepository = companyRepository;
     }
 
     /**
      * {@code POST  /companies} : Create a new company.
      *
-     * @param company the company to create.
+     * @param companyRequest the company to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new company, or with status {@code 400 (Bad Request)} if the company has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Company> createCompany(@RequestBody Company company) throws URISyntaxException {
-        LOG.debug("REST request to save Company : {}", company);
-        if (company.getId() != null) {
-            throw new BadRequestAlertException("A new company cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        company = companyService.save(company);
-        return ResponseEntity.created(new URI("/api/companies/" + company.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, company.getId().toString()))
+    public ResponseEntity<CompanyResponse> createCompany(@RequestBody CompanyRequest companyRequest) throws URISyntaxException {
+        CompanyResponse company = companyService.save(companyRequest);
+        return ResponseEntity.created(new URI("/api/companies/" + company.id()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, company.id().toString()))
             .body(company);
     }
 
@@ -68,30 +57,20 @@ public class CompanyResource {
      * {@code PUT  /companies/:id} : Updates an existing company.
      *
      * @param id the id of the company to save.
-     * @param company the company to update.
+     * @param companyRequest the company to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated company,
      * or with status {@code 400 (Bad Request)} if the company is not valid,
      * or with status {@code 500 (Internal Server Error)} if the company couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     *
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Company> updateCompany(@PathVariable(value = "id", required = false) final Long id, @RequestBody Company company)
-        throws URISyntaxException {
-        LOG.debug("REST request to update Company : {}, {}", id, company);
-        if (company.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, company.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!companyRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        company = companyService.update(company);
+    public ResponseEntity<CompanyResponse> updateCompany(
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody CompanyRequest companyRequest
+    ) {
+        CompanyResponse company = companyService.update(id, companyRequest);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, company.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, company.id().toString()))
             .body(company);
     }
 
@@ -99,35 +78,22 @@ public class CompanyResource {
      * {@code PATCH  /companies/:id} : Partial updates given fields of an existing company, field will ignore if it is null
      *
      * @param id the id of the company to save.
-     * @param company the company to update.
+     * @param companyRequest the company to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated company,
      * or with status {@code 400 (Bad Request)} if the company is not valid,
      * or with status {@code 404 (Not Found)} if the company is not found,
      * or with status {@code 500 (Internal Server Error)} if the company couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     *
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Company> partialUpdateCompany(
+    public ResponseEntity<CompanyResponse> partialUpdateCompany(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Company company
-    ) throws URISyntaxException {
-        LOG.debug("REST request to partial update Company partially : {}, {}", id, company);
-        if (company.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, company.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!companyRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<Company> result = companyService.partialUpdate(company);
-
+        @RequestBody CompanyRequest companyRequest
+    ) {
+        CompanyResponse company = companyService.partialUpdate(id, companyRequest);
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, company.getId().toString())
+            Optional.of(company),
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, company.id().toString())
         );
     }
 
@@ -138,11 +104,17 @@ public class CompanyResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of companies in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Company>> getAllCompanies(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-        LOG.debug("REST request to get a page of Companies");
-        Page<Company> page = companyService.findAll(pageable);
+    public ResponseEntity<List<CompanyResponse>> getAllCompanies(
+        Pageable pageable,
+        @RequestParam(value = "companyName", required = false) String companyName,
+        @RequestParam(value = "usesFuelSystem", required = false) Boolean usesFuelSystem,
+        @RequestParam(value = "isActive", required = false) Boolean isActive
+    ) {
+        Page<CompanyResponse> page = companyService.findAll(pageable, companyName, usesFuelSystem, isActive);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        ResponseEntity<List<CompanyResponse>> body = ResponseEntity.ok().headers(headers).body(page.getContent());
+        log.info("company response : {}", body);
+        return body;
     }
 
     /**
@@ -152,10 +124,9 @@ public class CompanyResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the company, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompany(@PathVariable("id") Long id) {
-        LOG.debug("REST request to get Company : {}", id);
-        Optional<Company> company = companyService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(company);
+    public ResponseEntity<CompanyResponse> getCompany(@PathVariable("id") Long id) {
+        CompanyResponse company = companyService.findByCompanyId(id);
+        return ResponseUtil.wrapOrNotFound(Optional.of(company));
     }
 
     /**
@@ -166,7 +137,7 @@ public class CompanyResource {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCompany(@PathVariable("id") Long id) {
-        LOG.debug("REST request to delete Company : {}", id);
+        log.debug("REST request to delete Company : {}", id);
         companyService.delete(id);
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

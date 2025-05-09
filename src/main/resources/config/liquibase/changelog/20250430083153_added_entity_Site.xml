@@ -14,33 +14,45 @@
             <column name="site_id" type="bigint" autoIncrement="true" startWith="1500">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+
             <column name="site_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="latitude" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="longitude" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="is_active" type="boolean">
                 <constraints nullable="true" />
             </column>
+
             <column name="site_notes" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="site_image" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="company_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-          <column name="created_by" type="varchar(50)">
-            <constraints nullable="false"/>
-          </column>
-          <column name="created_date" type="timestamp"/>
-          <column name="last_modified_by" type="varchar(50)"/>
-          <column name="last_modified_date" type="timestamp"/>
+
+            <column name="created_by" type="varchar(50)">
+              <constraints nullable="false"/>
+            </column>
+
+            <column name="created_date" type="timestamp"/>
+
+            <column name="last_modified_by" type="varchar(50)"/>
+
+            <column name="last_modified_date" type="timestamp"/>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
