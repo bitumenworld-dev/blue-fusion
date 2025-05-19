@@ -5,7 +5,7 @@ import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
-import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
+import { SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { CompanyDeleteDialogComponent } from '../delete/company-delete-dialog.co
 @Component({
   selector: 'jhi-company',
   templateUrl: './company.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ItemCountComponent],
+  imports: [RouterModule, FormsModule, SharedModule, ItemCountComponent],
 })
 export class CompanyComponent implements OnInit {
   subscription: Subscription | null = null;

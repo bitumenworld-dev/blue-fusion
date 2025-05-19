@@ -1,9 +1,9 @@
 package com.bitumen.bluefusion.domain.enumeration;
 
 /**
- * The DivisionType enumeration.
+ * The ContractDivisionType enumeration.
  */
-public enum DivisionType {
+public enum ContractDivisionType {
     CONTRACT,
     DIVISION,
 }

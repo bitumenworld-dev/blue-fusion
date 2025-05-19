@@ -30,9 +30,10 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponse save(CompanyRequest companyRequest) {
         Company company = Company.builder()
             .name(companyRequest.name())
-            .description(companyRequest.description())
+            .access_key(companyRequest.access_key())
             .address(companyRequest.address())
             .isActive(companyRequest.isActive())
+            .isIAC(companyRequest.isIAC())
             .usesFuelSystem(companyRequest.usesFuelSystem())
             .build();
 
@@ -47,9 +48,10 @@ public class CompanyServiceImpl implements CompanyService {
             .findById(companyId)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", companyId)));
         company.setName(companyRequest.name());
-        company.setDescription(companyRequest.description());
+        company.setAccess_key(companyRequest.access_key());
         company.setAddress(companyRequest.address());
         company.setIsActive(companyRequest.isActive());
+        company.setIsIAC(companyRequest.isIAC());
         company.setUsesFuelSystem(companyRequest.usesFuelSystem());
 
         return CompanyResponseMapper.map.apply(companyRepository.save(company));
@@ -63,9 +65,10 @@ public class CompanyServiceImpl implements CompanyService {
             .findById(companyId)
             .map(existingCompany -> {
                 Optional.ofNullable(existingCompany.getName()).ifPresent(existingCompany::setName);
-                Optional.ofNullable(existingCompany.getDescription()).ifPresent(existingCompany::setDescription);
+                Optional.ofNullable(existingCompany.getAccess_key()).ifPresent(existingCompany::setAccess_key);
                 Optional.ofNullable(existingCompany.getAddress()).ifPresent(existingCompany::setAddress);
                 Optional.ofNullable(existingCompany.getIsActive()).ifPresent(existingCompany::setIsActive);
+                Optional.ofNullable(existingCompany.getIsIAC()).ifPresent(existingCompany::setIsIAC);
                 Optional.ofNullable(existingCompany.getUsesFuelSystem()).ifPresent(existingCompany::setUsesFuelSystem);
                 return existingCompany;
             })
@@ -79,6 +82,7 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<CompanyResponse> findAll(Pageable pageable, String companyName, Boolean usesFuelSystem, Boolean isActive) {
         Specification<Company> specification = CompanySpec.withCompanyNameLike(companyName)
             .and(CompanySpec.isActive(isActive))
+            .and(CompanySpec.isIAC(isActive))
             .and(CompanySpec.usesFuelSystem(usesFuelSystem));
 
         return companyRepository.findAll(specification, pageable).map(CompanyResponseMapper.map);

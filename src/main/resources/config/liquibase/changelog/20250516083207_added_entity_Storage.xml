@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <!--
+      Added the entity FuelPump.
+  -->
+  <changeSet id="20250430083207-1" author="jhipster">
+    <createTable tableName="storage">
+
+      <column name="storage_id" type="bigint" autoIncrement="true" startWith="1">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="storage_code" type="varchar(20)"/>
+
+      <column name="build_smart_code" type="varchar(20)"/>
+
+      <column name="company_id" type="bigint"/>
+
+      <column name="site_id" type="bigint"/>
+
+      <column name="name" type="varchar(100)"/>
+
+      <column name="access_key" type="varchar(20)"/>
+
+      <column name="storage_content" type="varchar(50)"/>
+
+      <column name="capacity" type="numeric"/>
+
+      <column name="is_fixed" type="boolean"/>
+
+      <column name="is_active" type="boolean"/>
+
+      <column name="created_by" type="varchar(50)"/>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
+    </createTable>
+  </changeSet>
+
+
+  <changeSet id="20250430083207-1-data" author="jhipster" context="faker">
+    <loadData
+      file="config/liquibase/fake-data/storage.csv"
+      separator=";"
+      tableName="storage"
+      usePreparedStatements="true">
+      <column name="storage_id" type="bigint" />
+      <column name="storage_code" type="varchar"/>
+      <column name="build_smart_code" type="varchar"/>
+      <column name="company_id" type="bigint"/>
+      <column name="name" type="varchar"/>
+      <column name="site_id" type="bigint"/>
+      <column name="is_fixed" type="boolean"/>
+      <column name="capacity" type="numeric"/>
+      <column name="access_key" type="varchar"/>
+      <column name="storage_content" type="varchar"/>
+      <column name="is_active" type="boolean"/>
+      <column name="created_by" type="varchar"/>
+    </loadData>
+  </changeSet>
+</databaseChangeLog>

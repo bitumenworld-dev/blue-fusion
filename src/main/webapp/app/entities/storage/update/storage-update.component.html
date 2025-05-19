@@ -1,0 +1,177 @@
+<div class="bg-gray-50 min-h-screen p-6">
+  <div class="mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+      <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm" class="divide-y divide-gray-200">
+        <!-- Header with site name and edit button -->
+        <div class="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center">
+          <h2 class="text-3xl font-bold text-white mb-4 md:mb-0">
+            @if (editForm.controls.id.value !== null) {
+              <h2 class="text-2xl font-bold text-gray-800">Edit Storage</h2>
+              <input type="hidden" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            } @else {
+              <h2 class="text-2xl font-bold text-gray-800">CREATE SITE</h2>
+            }
+          </h2>
+          <div class="flex space-x-2">
+            <button
+              type="submit"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="flex items-center px-4 py-2 bg-white text-blue rounded-md hover:bg-blue-50 transition-colors shadow-sm"
+            >
+              <fa-icon icon="save" class="mr-2"></fa-icon>
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+
+        <hr />
+        <div class="px-6 py-4">
+          <jhi-alert-error />
+
+          <div class="bg-white rounded-lg border border-gray-200">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Name</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="name"
+                    id="field_name"
+                    data-cy="name"
+                    formControlName="name"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Storage Code</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="storageCode"
+                    id="field_storageCode"
+                    data-cy="storageCode"
+                    formControlName="storageCode"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Build Smart Code</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="buildSmartCode"
+                    id="field_buildSmartCode"
+                    data-cy="buildSmartCode"
+                    formControlName="buildSmartCode"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Company</dt>
+                <input
+                  type="text"
+                  id="field_company"
+                  placeholder="Search company"
+                  name="companySearchTerm"
+                  [(ngModel)]="companySearchTerm"
+                  [ngModelOptions]="{ standalone: true }"
+                  (input)="filterCompanies()"
+                  (focus)="showCompaniesDropdown = true"
+                  (blur)="hideCompanyDropdown()"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+
+                <ul
+                  *ngIf="showCompaniesDropdown && filteredCompanies.length > 0"
+                  class="absolute z-10 bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+                >
+                  <li
+                    *ngFor="let company of filteredCompanies"
+                    (mousedown)="selectCompany(company)"
+                    class="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                  >
+                    {{ company.name }}
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Site</dt>
+                <input
+                  type="text"
+                  id="field_site"
+                  placeholder="Search site"
+                  name="siteSearchTerm"
+                  [(ngModel)]="siteSearchTerm"
+                  [ngModelOptions]="{ standalone: true }"
+                  (input)="filterSites()"
+                  (focus)="showSitesDropdown = true"
+                  (blur)="hideSiteDropdown()"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+
+                <ul
+                  *ngIf="showSitesDropdown && filteredSites.length > 0"
+                  class="absolute z-10 bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+                >
+                  <li *ngFor="let site of filteredSites" (mousedown)="selectSite(site)" class="px-4 py-2 hover:bg-blue-100 cursor-pointer">
+                    {{ site.name }}
+                  </li>
+                </ul>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Storage Content</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="storageContent"
+                    id="field_storageContent"
+                    data-cy="storageContent"
+                    formControlName="storageContent"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Capacity</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="capacity"
+                    id="field_capacity"
+                    data-cy="capacity"
+                    formControlName="capacity"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+
+              <div class="space-y-1">
+                <dt class="text-sm font-medium text-gray-500">Access Key</dt>
+                <dd class="text-base font-semibold text-gray-900 flex items-center">
+                  <input
+                    type="text"
+                    name="accessKey"
+                    id="field_accessKey"
+                    data-cy="accessKey"
+                    formControlName="accessKey"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </dd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

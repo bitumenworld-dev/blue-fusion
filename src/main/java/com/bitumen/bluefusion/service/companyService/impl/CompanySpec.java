@@ -19,6 +19,10 @@ interface CompanySpec {
         );
     }
 
+    static Specification<Company> isIAC(final Boolean isActive) {
+        return ((root, query, builder) -> (Objects.isNull(isActive)) ? builder.conjunction() : builder.equal(root.get("isIAC"), isActive));
+    }
+
     static Specification<Company> usesFuelSystem(final Boolean usesFuelSystem) {
         return (
             (root, query, builder) ->

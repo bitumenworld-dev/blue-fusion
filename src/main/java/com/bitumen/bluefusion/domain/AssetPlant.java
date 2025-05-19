@@ -9,6 +9,7 @@ import com.bitumen.bluefusion.domain.enumeration.SMRReaderType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 import jdk.jfr.DataAmount;
 import lombok.*;
 import org.hibernate.annotations.Cache;
@@ -17,22 +18,14 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  * A AssetPlant.
  */
+@Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "asset_plant")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    //
-    //    @Id
-    //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //    @Column(name = "id")
-    //    private Long id;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,27 +44,37 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
     @Column(name = "fleet_description", length = 200)
     private String fleetDescription;
 
-    @Column(name = "owner_id")
-    private Long ownerId;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Company ownerId;
 
-    @Column(name = "accessible_by_company")
-    private String accessibleByCompany;
+    @ManyToMany
+    @JoinTable(
+        name = "asset_plant_company_access",
+        joinColumns = @JoinColumn(name = "asset_plant_id"),
+        inverseJoinColumns = @JoinColumn(name = "company_id")
+    )
+    private List<Company> accessibleByCompany;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "driver_or_operator")
     private DriverOrOperator driverOrOperator;
 
-    @Column(name = "plant_category_id")
-    private Long plantCategoryId;
+    @ManyToOne
+    @JoinColumn(name = "plant_category_id")
+    private PlantCategory plantCategoryId;
 
-    @Column(name = "plant_subcategory_id")
-    private String plantSubcategoryId;
+    @ManyToOne
+    @JoinColumn(name = "plant_subcategory_id")
+    private PlantSubcategory plantSubcategoryId;
 
-    @Column(name = "manufacturer_id")
-    private Long manufacturerId;
+    @ManyToOne
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturerId;
 
-    @Column(name = "model_id")
-    private Long modelId;
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    private ManufacturerModel modelId;
 
     @Column(name = "year_of_manufacture")
     private Integer yearOfManufacture;
@@ -99,14 +102,17 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
     @Column(name = "engine_capacity_cc", length = 30)
     private String engineCapacityCc;
 
-    @Column(name = "current_site_id")
-    private Long currentSiteId;
+    @ManyToOne
+    @JoinColumn(name = "current_site_id")
+    private Site currentSiteId;
 
-    @Column(name = "current_contract_id")
-    private Long currentContractId;
+    @ManyToOne
+    @JoinColumn(name = "current_contract_id")
+    private ContractDivision currentContractId;
 
-    @Column(name = "current_operator_id")
-    private Long currentOperatorId;
+    @ManyToOne
+    @JoinColumn(name = "current_operator_id")
+    private Employee currentOperatorId;
 
     @Size(max = 30)
     @Column(name = "ledger_code", length = 30)
@@ -173,332 +179,4 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
     @Size(max = 30)
     @Column(name = "current_location", length = 30)
     private String currentLocation;
-
-    public Long getAssetPlantId() {
-        return assetPlantId;
-    }
-
-    public void setAssetPlantId(Long assetPlantId) {
-        this.assetPlantId = assetPlantId;
-    }
-
-    public String getFleetNumber() {
-        return fleetNumber;
-    }
-
-    public void setFleetNumber(String fleetNumber) {
-        this.fleetNumber = fleetNumber;
-    }
-
-    public String getNumberPlate() {
-        return numberPlate;
-    }
-
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
-    }
-
-    public String getFleetDescription() {
-        return fleetDescription;
-    }
-
-    public void setFleetDescription(String fleetDescription) {
-        this.fleetDescription = fleetDescription;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getAccessibleByCompany() {
-        return accessibleByCompany;
-    }
-
-    public void setAccessibleByCompany(String accessibleByCompany) {
-        this.accessibleByCompany = accessibleByCompany;
-    }
-
-    public DriverOrOperator getDriverOrOperator() {
-        return driverOrOperator;
-    }
-
-    public void setDriverOrOperator(DriverOrOperator driverOrOperator) {
-        this.driverOrOperator = driverOrOperator;
-    }
-
-    public Long getPlantCategoryId() {
-        return plantCategoryId;
-    }
-
-    public void setPlantCategoryId(Long plantCategoryId) {
-        this.plantCategoryId = plantCategoryId;
-    }
-
-    public String getPlantSubcategoryId() {
-        return plantSubcategoryId;
-    }
-
-    public void setPlantSubcategoryId(String plantSubcategoryId) {
-        this.plantSubcategoryId = plantSubcategoryId;
-    }
-
-    public Long getManufacturerId() {
-        return manufacturerId;
-    }
-
-    public void setManufacturerId(Long manufacturerId) {
-        this.manufacturerId = manufacturerId;
-    }
-
-    public Long getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(Long modelId) {
-        this.modelId = modelId;
-    }
-
-    public Integer getYearOfManufacture() {
-        return yearOfManufacture;
-    }
-
-    public void setYearOfManufacture(Integer yearOfManufacture) {
-        this.yearOfManufacture = yearOfManufacture;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    public HorseOrTrailer getHorseOrTrailer() {
-        return horseOrTrailer;
-    }
-
-    public void setHorseOrTrailer(HorseOrTrailer horseOrTrailer) {
-        this.horseOrTrailer = horseOrTrailer;
-    }
-
-    public SMRReaderType getSmrReaderType() {
-        return smrReaderType;
-    }
-
-    public void setSmrReaderType(SMRReaderType smrReaderType) {
-        this.smrReaderType = smrReaderType;
-    }
-
-    public Integer getCurrentSmrIndex() {
-        return currentSmrIndex;
-    }
-
-    public void setCurrentSmrIndex(Integer currentSmrIndex) {
-        this.currentSmrIndex = currentSmrIndex;
-    }
-
-    public String getEngineNumber() {
-        return engineNumber;
-    }
-
-    public void setEngineNumber(String engineNumber) {
-        this.engineNumber = engineNumber;
-    }
-
-    public String getEngineCapacityCc() {
-        return engineCapacityCc;
-    }
-
-    public void setEngineCapacityCc(String engineCapacityCc) {
-        this.engineCapacityCc = engineCapacityCc;
-    }
-
-    public Long getCurrentSiteId() {
-        return currentSiteId;
-    }
-
-    public void setCurrentSiteId(Long currentSiteId) {
-        this.currentSiteId = currentSiteId;
-    }
-
-    public Long getCurrentContractId() {
-        return currentContractId;
-    }
-
-    public void setCurrentContractId(Long currentContractId) {
-        this.currentContractId = currentContractId;
-    }
-
-    public Long getCurrentOperatorId() {
-        return currentOperatorId;
-    }
-
-    public void setCurrentOperatorId(Long currentOperatorId) {
-        this.currentOperatorId = currentOperatorId;
-    }
-
-    public String getLedgerCode() {
-        return ledgerCode;
-    }
-
-    public void setLedgerCode(String ledgerCode) {
-        this.ledgerCode = ledgerCode;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
-    public Float getTankCapacityLitres() {
-        return tankCapacityLitres;
-    }
-
-    public void setTankCapacityLitres(Float tankCapacityLitres) {
-        this.tankCapacityLitres = tankCapacityLitres;
-    }
-
-    public ConsumptionUnit getConsumptionUnit() {
-        return consumptionUnit;
-    }
-
-    public void setConsumptionUnit(ConsumptionUnit consumptionUnit) {
-        this.consumptionUnit = consumptionUnit;
-    }
-
-    public PlantHoursStatus getPlantHoursStatus() {
-        return plantHoursStatus;
-    }
-
-    public void setPlantHoursStatus(PlantHoursStatus plantHoursStatus) {
-        this.plantHoursStatus = plantHoursStatus;
-    }
-
-    public Boolean getPrimeMover() {
-        return isPrimeMover;
-    }
-
-    public void setPrimeMover(Boolean primeMover) {
-        isPrimeMover = primeMover;
-    }
-
-    public Float getCapacityTons() {
-        return capacityTons;
-    }
-
-    public void setCapacityTons(Float capacityTons) {
-        this.capacityTons = capacityTons;
-    }
-
-    public Float getCapacityM3Loose() {
-        return capacityM3Loose;
-    }
-
-    public void setCapacityM3Loose(Float capacityM3Loose) {
-        this.capacityM3Loose = capacityM3Loose;
-    }
-
-    public Float getCapacityM3Tight() {
-        return capacityM3Tight;
-    }
-
-    public void setCapacityM3Tight(Float capacityM3Tight) {
-        this.capacityM3Tight = capacityM3Tight;
-    }
-
-    public Float getMaximumConsumption() {
-        return maximumConsumption;
-    }
-
-    public void setMaximumConsumption(Float maximumConsumption) {
-        this.maximumConsumption = maximumConsumption;
-    }
-
-    public Float getMinimumConsumption() {
-        return minimumConsumption;
-    }
-
-    public void setMinimumConsumption(Float minimumConsumption) {
-        this.minimumConsumption = minimumConsumption;
-    }
-
-    public Float getMaximumSmrOnFullTank() {
-        return maximumSmrOnFullTank;
-    }
-
-    public void setMaximumSmrOnFullTank(Float maximumSmrOnFullTank) {
-        this.maximumSmrOnFullTank = maximumSmrOnFullTank;
-    }
-
-    public Boolean getTrackConsumption() {
-        return trackConsumption;
-    }
-
-    public void setTrackConsumption(Boolean trackConsumption) {
-        this.trackConsumption = trackConsumption;
-    }
-
-    public Boolean getTrackSmrReading() {
-        return trackSmrReading;
-    }
-
-    public void setTrackSmrReading(Boolean trackSmrReading) {
-        this.trackSmrReading = trackSmrReading;
-    }
-
-    public Boolean getTrackService() {
-        return trackService;
-    }
-
-    public void setTrackService(Boolean trackService) {
-        this.trackService = trackService;
-    }
-
-    public Boolean getDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Boolean getRequestWeeklyMileage() {
-        return requestWeeklyMileage;
-    }
-
-    public void setRequestWeeklyMileage(Boolean requestWeeklyMileage) {
-        this.requestWeeklyMileage = requestWeeklyMileage;
-    }
-
-    public Boolean getSent() {
-        return sent;
-    }
-
-    public void setSent(Boolean sent) {
-        this.sent = sent;
-    }
-
-    public String getChassisNumber() {
-        return chassisNumber;
-    }
-
-    public void setChassisNumber(String chassisNumber) {
-        this.chassisNumber = chassisNumber;
-    }
-
-    public String getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
-    }
 }

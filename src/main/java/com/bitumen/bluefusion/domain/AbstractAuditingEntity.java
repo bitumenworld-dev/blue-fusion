@@ -28,8 +28,6 @@ public abstract class AbstractAuditingEntity<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //    public abstract Long getId();
-
     @CreatedBy
     @Column(name = "created_by", nullable = false, length = 50, updatable = false)
     private String createdBy;

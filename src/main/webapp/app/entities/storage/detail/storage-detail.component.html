@@ -1,0 +1,93 @@
+<div class="bg-gray-50 min-h-screen p-6">
+  <div class="mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+      @if (storage(); as storageRef) {
+        <form name="viewForm" class="divide-y divide-gray-200">
+          <div
+            class="p-6 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center"
+          >
+            <h2 class="text-3xl font-bold text-white mb-4 md:mb-0">
+              <span>{{ storageRef.name }}</span>
+            </h2>
+            <div class="flex space-x-2">
+              <button
+                [routerLink]="['/storage', storageRef.id, 'edit']"
+                class="flex items-center px-4 py-2 bg-white text-blue rounded-md hover:bg-blue-50 transition-colors shadow-sm"
+              >
+                <fa-icon icon="pencil-alt" class="mr-2"></fa-icon>
+                <span>Edit Storage</span>
+              </button>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="px-6 py-4">
+            <jhi-alert-error />
+            <jhi-alert />
+
+            <div class="bg-white rounded-lg border border-gray-200">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                <!-- ID field -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Id</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono">{{ storageRef.id }}</span>
+                  </dd>
+                </div>
+
+                <!-- Storage Code -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Storage Code</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span>{{ storageRef.storageCode }}</span>
+                  </dd>
+                </div>
+
+                <!-- Build Smart Code -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Build Smart Code</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span>{{ storageRef.buildSmartCode }}</span>
+                  </dd>
+                </div>
+
+                <!-- Company -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Company</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-mono">{{ storageRef.company }}</span>
+                  </dd>
+                </div>
+
+                <!-- Site -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Site</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span>{{ storageRef.site }}</span>
+                  </dd>
+                </div>
+
+                <!-- Capacity -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Capacity</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span>{{ storageRef.capacity }}</span>
+                  </dd>
+                </div>
+
+                <!-- Storage Content -->
+                <div class="space-y-1">
+                  <dt class="text-sm font-medium text-gray-500">Storage Content</dt>
+                  <dd class="text-base font-semibold text-gray-900 flex items-center">
+                    <span>{{ storageRef.storageContent }}</span>
+                  </dd>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

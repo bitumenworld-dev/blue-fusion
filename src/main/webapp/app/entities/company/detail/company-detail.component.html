@@ -22,9 +22,9 @@
               <span>{{ companyRef.name }}</span>
             </dd>
 
-            <dt><span>Description</span></dt>
+            <dt><span>Is Under IAC Group</span></dt>
             <dd>
-              <span>{{ companyRef.description }}</span>
+              <span>{{ companyRef.isIAC }}</span>
             </dd>
 
             <dt><span>Is Active</span></dt>
@@ -39,11 +39,11 @@
           </dl>
 
           <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
           </button>
 
           <button type="button" [routerLink]="['/company', companyRef.id, 'edit']" class="btn btn-primary">
-            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
           </button>
         </div>
       </form>

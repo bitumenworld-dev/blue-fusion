@@ -31,6 +31,7 @@
     <include file="config/liquibase/changelog/20250430083204_added_entity_FuelTransactionLine.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083205_added_entity_FuelPump.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083206_added_entity_SmrReading.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250516083207_added_entity_Storage.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->

@@ -1,11 +1,60 @@
 site_id;site_name;latitude;longitude;is_active;site_notes;site_image;company_id;created_by
-1;promptly truthfully ew;scorpion from;er limply;true;now alongside;eek;1;system
-2;other;ah axe;absentmindedly violin;true;simplistic;ick redevelop clear-cut;2;system
-3;deduce;ugh meanwhile aha;paintwork;true;modulo yawningly;wetly the negative;3;system
-4;uh-huh outside;during;which beyond boyfriend;false;against swear ugh;meanwhile scowl ugh;4;system
-5;bleach qua;incidentally at trained;phew;true;rare;below slip as;5;system
-6;investigate regarding;well-worn plait;beyond;true;finer irresponsible;whoa afore swath;6;system
-7;overplay rowdy questionably;coaxingly;aha backburn hoot;true;bah quaintly afore;toward;7;system
-8;zowie likely;abseil;dash till even;false;what short-term crazy;truthfully;8;system
-9;academics;rewarding department uneven;outgoing acknowledge respray;true;doubtfully;how;9;system
-10;aw;lay hence;aha orange woot;true;ew;fine;10;system
+1;Harare Workshop;-17.841496;31.118949;TRUE;NULL;NULL;1;MIGRATION
+2;Bulawayo Workshop;-20.187164;28.564364;TRUE;NULL;NULL;1;MIGRATION
+3;MOBE;-21.808127;30.428274;TRUE;NULL;NULL;1;MIGRATION
+4;Beitbridge Urban;-22.202934;29.99082922;TRUE;NULL;NULL;1;MIGRATION
+5;Makuti;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+6;Kwe Kwe;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+7;Stone Hill;-20.521912;28.106141;TRUE;NULL;NULL;1;MIGRATION
+8;Hwange;-18.343453;26.52646;TRUE;NULL;NULL;1;MIGRATION
+9;Sandawana;-20.923597;29.934755;TRUE;NULL;NULL;1;MIGRATION
+10;Machesu;-17.844863;27.595685;TRUE;NULL;NULL;1;MIGRATION
+11;Blanket Mine;-20.85951211;28.91161981;TRUE;NULL;NULL;1;MIGRATION
+12;(AMC) Asset Management Centre;-20.50788;28.082616;TRUE;NULL;NULL;1;MIGRATION
+13;Finance Offices - Pevensey Road;-17.791784;31.099909;TRUE;NULL;NULL;1;MIGRATION
+14;Makhado;-21.458956;29.733102;TRUE;NULL;NULL;1;MIGRATION
+15;Insuza;-19.502654;28.334062;TRUE;NULL;NULL;1;MIGRATION
+16;Gwaai River Farms;-18.611803;27.189152;TRUE;NULL;NULL;1;MIGRATION
+17;Harare Head Office;-17.841496;31.118949;TRUE;NULL;NULL;1;MIGRATION
+18;Pomona;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+19;Chirundu;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+20;Karo Mine;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+21;Luna Road Harare;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+22;Cyber City;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+23;Chispite Astro Turf;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+24;Mount Hampden (New Parliament);NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+25;Manyame Airbase;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+26;Buffalo Range;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+27;Cyclone Idai Restoration;NULL;NULL;FALSE;NULL;NULL;1;MIGRATION
+28;Beitbridge Road Exodus;NULL;NULL;FALSE;NULL;NULL;1;MIGRATION
+29;Crusher Plant - Beitbridge;NULL;NULL;FALSE;NULL;NULL;1;MIGRATION
+30;DAP;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+31;Chimanimani Skyline - Mubaira;NULL;NULL;FALSE;NULL;NULL;1;MIGRATION
+32;Harare - Bindura A/C Overlay;NULL;NULL;FALSE;NULL;NULL;1;MIGRATION
+33;Chimanimani Cyclone Idai Restoration;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+34;Mberengwa;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+35;Tsomboli;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+36;Lutumba;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+37;Glenlussa;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+38;Harare Asphalt Plant;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+39;Fura Mine Site - Mozambique;NULL;NULL;TRUE;NULL;NULL;7;MIGRATION
+40;Harare Drive Dualisation;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+41;Harare Chirundu Early Works;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+42;Rushinga;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+43;Mboe River Chokoza;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+44;MMP Manica;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+45;High Glen;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+46;Kwadzana;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+47;Old Mazowe Road;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+48;Harare South Logistics;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+49;Latter Day Saints;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+50;Metcalf and Stewart Roads Overlay;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+51;Prospect One Development ;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+53;R Davis General Expenses - Freda;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+54;Falcon College;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+55;Cut Rag Asphalt Site;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+56;Tantallon Housing;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+57;Chivi Site;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+58;Gecko Gardens;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+59;NSCL JICA Section;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION
+60;National Foods - Aspindale;NULL;NULL;TRUE;NULL;NULL;1;MIGRATION

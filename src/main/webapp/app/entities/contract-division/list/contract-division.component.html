@@ -111,7 +111,7 @@
               <td>{{ contractDivision.buildSmartReference }}</td>
               <td>{{ contractDivision.shiftStart }}</td>
               <td>{{ contractDivision.shiftEnd }}</td>
-              <td [jhiTranslate]="'blueFusionApp.DivisionType.' + (contractDivision.type ?? 'null')">
+              <td [jhiTranslate]="'blueFusionApp.ContractDivisionType.' + (contractDivision.type ?? 'null')">
                 {{ { null: '', CONTRACT: 'CONTRACT', DIVISION: 'DIVISION' }[contractDivision.type ?? 'null'] }}
               </td>
               <td>{{ contractDivision.completed }}</td>

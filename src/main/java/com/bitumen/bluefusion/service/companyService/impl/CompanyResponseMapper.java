@@ -10,8 +10,9 @@ interface CompanyResponseMapper {
             company.getCompanyId(),
             company.getName(),
             company.getAddress(),
-            company.getDescription(),
+            company.getAccess_key(),
             company.getUsesFuelSystem(),
-            company.getIsActive()
+            company.getIsActive(),
+            company.getIsIAC()
         );
 }

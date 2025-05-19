@@ -1,9 +1,10 @@
 export interface ICompany {
   id: number;
   name?: string | null;
-  description?: string | null;
+  accessKey?: string | null;
   address?: string | null;
   isActive?: boolean | null;
+  isIAC?: boolean | null;
   usesFuelSystem?: boolean | null;
 }
 

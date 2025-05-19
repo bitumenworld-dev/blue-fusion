@@ -1,11 +1,11 @@
 <div>
   <h2 id="page-heading" data-cy="CompanyHeading">
-    <span jhiTranslate="blueFusionApp.company.home.title">Companies</span>
+    <span>Companies</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
-        <span jhiTranslate="blueFusionApp.company.home.refreshListLabel">Refresh list</span>
+        <span>Refresh list</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/company/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="blueFusionApp.company.home.createLabel">Create a new Company</span>
+        <span>Create a new Company</span>
       </button>
     </div>
   </h2>
@@ -26,22 +26,17 @@
 
   @if (companies().length === 0) {
     <div class="alert alert-warning" id="no-result">
-      <span jhiTranslate="blueFusionApp.company.home.notFound">No Companies found</span>
+      <span>No Companies found</span>
     </div>
   } @else {
     <div class="table-responsive table-entities" id="entities">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
-            <th scope="col" jhiSortBy="name">
-              <div class="d-flex">
-                <span jhiTranslate="blueFusionApp.company.name">Name</span>
-                <fa-icon class="p-1" icon="sort"></fa-icon>
-              </div>
-            </th>
+          <tr>
             <th scope="col">
               <div class="d-flex">
-                <span>Description</span>
+                <span>Name</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
             <th scope="col">
@@ -54,6 +49,11 @@
                 <span>Uses Fuel System</span>
               </div>
             </th>
+            <th scope="col">
+              <div class="d-flex">
+                <span>Under IAC Group</span>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -61,24 +61,24 @@
           @for (company of companies(); track trackId(company)) {
             <tr data-cy="entityTable">
               <td>{{ company.name }}</td>
-              <td>{{ company.description }}</td>
               <td>{{ company.address }}</td>
               <td>{{ company.usesFuelSystem }}</td>
+              <td>{{ company.isIAC }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/company', company.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                     <fa-icon icon="eye"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                    <span class="d-none d-md-inline">View</span>
                   </a>
 
                   <a [routerLink]="['/company', company.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                     <fa-icon icon="pencil-alt"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    <span class="d-none d-md-inline">Edit</span>
                   </a>
 
                   <button type="submit" (click)="delete(company)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                     <fa-icon icon="times"></fa-icon>
-                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    <span class="d-none d-md-inline">Delete</span>
                   </button>
                 </div>
               </td>

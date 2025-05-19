@@ -14,8 +14,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "company")
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Company extends AbstractAuditingEntity<Company> implements Serializable {
 
     @Id
@@ -29,8 +27,11 @@ public class Company extends AbstractAuditingEntity<Company> implements Serializ
     @Column(name = "address")
     private String address;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "is_iac")
+    private Boolean isIAC;
+
+    @Column(name = "access_key")
+    private String access_key;
 
     @Column(name = "uses_fuel_system")
     private Boolean usesFuelSystem;

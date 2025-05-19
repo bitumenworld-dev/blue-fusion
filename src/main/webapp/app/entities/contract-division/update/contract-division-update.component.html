@@ -86,9 +86,9 @@
         <div class="mb-3">
           <label class="form-label" for="field_type" jhiTranslate="blueFusionApp.contractDivision.type">Type</label>
           <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
-            <option [ngValue]="null">{{ 'blueFusionApp.DivisionType.null' | translate }}</option>
+            <option [ngValue]="null">{{ 'blueFusionApp.ContractDivisionType.null' | translate }}</option>
             @for (divisionType of divisionTypeValues; track $index) {
-              <option [value]="divisionType">{{ 'blueFusionApp.DivisionType.' + divisionType | translate }}</option>
+              <option [value]="divisionType">{{ 'blueFusionApp.ContractDivisionType.' + divisionType | translate }}</option>
             }
           </select>
         </div>

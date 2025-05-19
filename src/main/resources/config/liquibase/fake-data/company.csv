@@ -1,11 +1,8 @@
-company_id;name;description;address;is_active;uses_fuel_system;created_by
-1;BW;Bitumen World;Buluwayo;true;true;SYSTEM
-2;BW Mining;Bitumen World Mining;Buluwayo;true;true;SYSTEM
-3;TY;Tayyan;Buluwayo;true;true;SYSTEM
-4;RDavies;RDavies;Buluwayo;true;true;SYSTEM
-5;JR Gorrard;JR Gorrard;Buluwayo;true;true;SYSTEM
-6;Frampol;Frampol;Harare;true;false;SYSTEM
-7;Clair Obscur;Clair Obscur Expedition 33;ONLINE Service;false;false;SYSTEM
-8;Croco Motors;Vehicle Supplier;Harare;true;false;SYSTEM
-9;Redan;fuel supplier;Harare;true;true;SYSTEM
-10;transerve;vehicle spares supplier;Harare;true;true;SYSTEM
+company_id;name;address;uses_fuel_system;is_iac;access_key;is_active;created_by
+1;Bitumen World;"30 George Avenue;Msasa;Harare;Zimbabwe";TRUE;TRUE;COM001;TRUE;MIGRATION
+2;R.Davis;NULL;TRUE;TRUE;COM002;TRUE;MIGRATION
+3;Frontier Earth;Harare;FALSE;FALSE;COM003;FALSE;MIGRATION
+4;Zietol (Pvt) Ltd;"30 George Avenue; Msasa; Harare";TRUE;TRUE;COM004;TRUE;MIGRATION
+5;Deep Sea Systems;NULL;FALSE;FALSE;COM005;FALSE;MIGRATION
+6;External Fuel Suppliers;NULL;FALSE;FALSE;COM006;FALSE;MIGRATION
+7;Tayanna Mozambique;NULL;TRUE;TRUE;COM007;TRUE;MIGRATION

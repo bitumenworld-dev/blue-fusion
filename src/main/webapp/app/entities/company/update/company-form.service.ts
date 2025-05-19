@@ -19,8 +19,9 @@ type CompanyFormDefaults = Pick<NewCompany, 'id'>;
 type CompanyFormGroupContent = {
   id: FormControl<ICompany['id'] | NewCompany['id']>;
   name: FormControl<ICompany['name']>;
-  description: FormControl<ICompany['description']>;
+  isIAC: FormControl<ICompany['isIAC']>;
   address: FormControl<ICompany['address']>;
+  accessKey: FormControl<ICompany['accessKey']>;
   isActive: FormControl<ICompany['isActive']>;
   usesFuelSystem: FormControl<ICompany['usesFuelSystem']>;
 };
@@ -43,8 +44,9 @@ export class CompanyFormService {
         },
       ),
       name: new FormControl(companyRawValue.name),
-      description: new FormControl(companyRawValue.description),
+      isIAC: new FormControl(companyRawValue.isIAC),
       address: new FormControl(companyRawValue.address),
+      accessKey: new FormControl(companyRawValue.accessKey),
       isActive: new FormControl(companyRawValue.isActive),
       usesFuelSystem: new FormControl(companyRawValue.usesFuelSystem),
     });

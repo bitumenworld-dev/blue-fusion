@@ -27,7 +27,7 @@ export class SiteUpdateComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: SiteFormGroup = this.siteFormService.createSiteFormGroup();
 
-  // Company aaray dummy
+  // Company array dummy
   companiesArray = [
     { id: 1, name: 'Acme Corp' },
     { id: 2, name: 'Globex Inc' },
@@ -37,7 +37,6 @@ export class SiteUpdateComponent implements OnInit {
   searchTerm = '';
   filteredCompanies = [...this.companiesArray];
   showDropdown = false;
-  // Company aaray dummy
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ site }) => {

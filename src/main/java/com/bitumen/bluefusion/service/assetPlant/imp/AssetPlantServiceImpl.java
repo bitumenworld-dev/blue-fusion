@@ -42,136 +42,138 @@ public class AssetPlantServiceImpl implements AssetPlantService {
     public Optional<AssetPlant> partialUpdate(AssetPlant assetPlant) {
         LOG.debug("Request to partially update AssetPlant : {}", assetPlant);
 
-        return assetPlantRepository
-            .findByAssetPlantId(assetPlant.getAssetPlantId())
-            .map(existingAssetPlant -> {
-                if (assetPlant.getAssetPlantId() != null) {
-                    existingAssetPlant.setAssetPlantId(assetPlant.getAssetPlantId());
-                }
-                if (assetPlant.getFleetNumber() != null) {
-                    existingAssetPlant.setFleetNumber(assetPlant.getFleetNumber());
-                }
-                if (assetPlant.getNumberPlate() != null) {
-                    existingAssetPlant.setNumberPlate(assetPlant.getNumberPlate());
-                }
-                if (assetPlant.getFleetDescription() != null) {
-                    existingAssetPlant.setFleetDescription(assetPlant.getFleetDescription());
-                }
-                if (assetPlant.getOwnerId() != null) {
-                    existingAssetPlant.setOwnerId(assetPlant.getOwnerId());
-                }
-                if (assetPlant.getAccessibleByCompany() != null) {
-                    existingAssetPlant.setAccessibleByCompany(assetPlant.getAccessibleByCompany());
-                }
-                if (assetPlant.getDriverOrOperator() != null) {
-                    existingAssetPlant.setDriverOrOperator(assetPlant.getDriverOrOperator());
-                }
-                if (assetPlant.getPlantCategoryId() != null) {
-                    existingAssetPlant.setPlantCategoryId(assetPlant.getPlantCategoryId());
-                }
-                if (assetPlant.getPlantSubcategoryId() != null) {
-                    existingAssetPlant.setPlantSubcategoryId(assetPlant.getPlantSubcategoryId());
-                }
-                if (assetPlant.getManufacturerId() != null) {
-                    existingAssetPlant.setManufacturerId(assetPlant.getManufacturerId());
-                }
-                if (assetPlant.getModelId() != null) {
-                    existingAssetPlant.setModelId(assetPlant.getModelId());
-                }
-                if (assetPlant.getYearOfManufacture() != null) {
-                    existingAssetPlant.setYearOfManufacture(assetPlant.getYearOfManufacture());
-                }
-                if (assetPlant.getColour() != null) {
-                    existingAssetPlant.setColour(assetPlant.getColour());
-                }
-                if (assetPlant.getHorseOrTrailer() != null) {
-                    existingAssetPlant.setHorseOrTrailer(assetPlant.getHorseOrTrailer());
-                }
-                if (assetPlant.getSmrReaderType() != null) {
-                    existingAssetPlant.setSmrReaderType(assetPlant.getSmrReaderType());
-                }
-                if (assetPlant.getCurrentSmrIndex() != null) {
-                    existingAssetPlant.setCurrentSmrIndex(assetPlant.getCurrentSmrIndex());
-                }
-                if (assetPlant.getEngineNumber() != null) {
-                    existingAssetPlant.setEngineNumber(assetPlant.getEngineNumber());
-                }
-                if (assetPlant.getEngineCapacityCc() != null) {
-                    existingAssetPlant.setEngineCapacityCc(assetPlant.getEngineCapacityCc());
-                }
-                if (assetPlant.getCurrentSiteId() != null) {
-                    existingAssetPlant.setCurrentSiteId(assetPlant.getCurrentSiteId());
-                }
-                if (assetPlant.getCurrentContractId() != null) {
-                    existingAssetPlant.setCurrentContractId(assetPlant.getCurrentContractId());
-                }
-                if (assetPlant.getCurrentOperatorId() != null) {
-                    existingAssetPlant.setCurrentOperatorId(assetPlant.getCurrentOperatorId());
-                }
-                if (assetPlant.getLedgerCode() != null) {
-                    existingAssetPlant.setLedgerCode(assetPlant.getLedgerCode());
-                }
-                if (assetPlant.getFuelType() != null) {
-                    existingAssetPlant.setFuelType(assetPlant.getFuelType());
-                }
-                if (assetPlant.getTankCapacityLitres() != null) {
-                    existingAssetPlant.setTankCapacityLitres(assetPlant.getTankCapacityLitres());
-                }
-                if (assetPlant.getConsumptionUnit() != null) {
-                    existingAssetPlant.setConsumptionUnit(assetPlant.getConsumptionUnit());
-                }
-                if (assetPlant.getPlantHoursStatus() != null) {
-                    existingAssetPlant.setPlantHoursStatus(assetPlant.getPlantHoursStatus());
-                }
-                if (assetPlant.getPrimeMover() != null) {
-                    existingAssetPlant.setPrimeMover(assetPlant.getPrimeMover());
-                }
-                if (assetPlant.getCapacityTons() != null) {
-                    existingAssetPlant.setCapacityTons(assetPlant.getCapacityTons());
-                }
-                if (assetPlant.getCapacityM3Loose() != null) {
-                    existingAssetPlant.setCapacityM3Loose(assetPlant.getCapacityM3Loose());
-                }
-                if (assetPlant.getCapacityM3Tight() != null) {
-                    existingAssetPlant.setCapacityM3Tight(assetPlant.getCapacityM3Tight());
-                }
-                if (assetPlant.getMaximumConsumption() != null) {
-                    existingAssetPlant.setMaximumConsumption(assetPlant.getMaximumConsumption());
-                }
-                if (assetPlant.getMinimumConsumption() != null) {
-                    existingAssetPlant.setMinimumConsumption(assetPlant.getMinimumConsumption());
-                }
-                if (assetPlant.getMaximumSmrOnFullTank() != null) {
-                    existingAssetPlant.setMaximumSmrOnFullTank(assetPlant.getMaximumSmrOnFullTank());
-                }
-                if (assetPlant.getTrackConsumption() != null) {
-                    existingAssetPlant.setTrackConsumption(assetPlant.getTrackConsumption());
-                }
-                if (assetPlant.getTrackSmrReading() != null) {
-                    existingAssetPlant.setTrackSmrReading(assetPlant.getTrackSmrReading());
-                }
-                if (assetPlant.getTrackService() != null) {
-                    existingAssetPlant.setTrackService(assetPlant.getTrackService());
-                }
-                if (assetPlant.getDeleted() != null) {
-                    existingAssetPlant.setDeleted(assetPlant.getDeleted());
-                }
-                if (assetPlant.getRequestWeeklyMileage() != null) {
-                    existingAssetPlant.setRequestWeeklyMileage(assetPlant.getRequestWeeklyMileage());
-                }
-                if (assetPlant.getSent() != null) {
-                    existingAssetPlant.setSent(assetPlant.getSent());
-                }
-                if (assetPlant.getChassisNumber() != null) {
-                    existingAssetPlant.setChassisNumber(assetPlant.getChassisNumber());
-                }
-                if (assetPlant.getCurrentLocation() != null) {
-                    existingAssetPlant.setCurrentLocation(assetPlant.getCurrentLocation());
-                }
+        //        return assetPlantRepository
+        //            .findByAssetPlantId(assetPlant.getAssetPlantId())
+        //            .map(existingAssetPlant -> {
+        //                if (assetPlant.getAssetPlantId() != null) {
+        //                    existingAssetPlant.setAssetPlantId(assetPlant.getAssetPlantId());
+        //                }
+        //                if (assetPlant.getFleetNumber() != null) {
+        //                    existingAssetPlant.setFleetNumber(assetPlant.getFleetNumber());
+        //                }
+        //                if (assetPlant.getNumberPlate() != null) {
+        //                    existingAssetPlant.setNumberPlate(assetPlant.getNumberPlate());
+        //                }
+        //                if (assetPlant.getFleetDescription() != null) {
+        //                    existingAssetPlant.setFleetDescription(assetPlant.getFleetDescription());
+        //                }
+        //                if (assetPlant.getOwnerId() != null) {
+        //                    existingAssetPlant.setOwnerId(assetPlant.getOwnerId());
+        //                }
+        //                if (assetPlant.getAccessibleByCompany() != null) {
+        //                    existingAssetPlant.setAccessibleByCompany(assetPlant.getAccessibleByCompany());
+        //                }
+        //                if (assetPlant.getDriverOrOperator() != null) {
+        //                    existingAssetPlant.setDriverOrOperator(assetPlant.getDriverOrOperator());
+        //                }
+        //                if (assetPlant.getPlantCategoryId() != null) {
+        //                    existingAssetPlant.setPlantCategoryId(assetPlant.getPlantCategoryId());
+        //                }
+        //                if (assetPlant.getPlantSubcategoryId() != null) {
+        //                    existingAssetPlant.setPlantSubcategoryId(assetPlant.getPlantSubcategoryId());
+        //                }
+        //                if (assetPlant.getManufacturerId() != null) {
+        //                    existingAssetPlant.setManufacturerId(assetPlant.getManufacturerId());
+        //                }
+        //                if (assetPlant.getModelId() != null) {
+        //                    existingAssetPlant.setModelId(assetPlant.getModelId());
+        //                }
+        //                if (assetPlant.getYearOfManufacture() != null) {
+        //                    existingAssetPlant.setYearOfManufacture(assetPlant.getYearOfManufacture());
+        //                }
+        //                if (assetPlant.getColour() != null) {
+        //                    existingAssetPlant.setColour(assetPlant.getColour());
+        //                }
+        //                if (assetPlant.getHorseOrTrailer() != null) {
+        //                    existingAssetPlant.setHorseOrTrailer(assetPlant.getHorseOrTrailer());
+        //                }
+        //                if (assetPlant.getSmrReaderType() != null) {
+        //                    existingAssetPlant.setSmrReaderType(assetPlant.getSmrReaderType());
+        //                }
+        //                if (assetPlant.getCurrentSmrIndex() != null) {
+        //                    existingAssetPlant.setCurrentSmrIndex(assetPlant.getCurrentSmrIndex());
+        //                }
+        //                if (assetPlant.getEngineNumber() != null) {
+        //                    existingAssetPlant.setEngineNumber(assetPlant.getEngineNumber());
+        //                }
+        //                if (assetPlant.getEngineCapacityCc() != null) {
+        //                    existingAssetPlant.setEngineCapacityCc(assetPlant.getEngineCapacityCc());
+        //                }
+        //                if (assetPlant.getCurrentSiteId() != null) {
+        //                    existingAssetPlant.setCurrentSiteId(assetPlant.getCurrentSiteId());
+        //                }
+        //                if (assetPlant.getCurrentContractId() != null) {
+        //                    existingAssetPlant.setCurrentContractId(assetPlant.getCurrentContractId());
+        //                }
+        //                if (assetPlant.getCurrentOperatorId() != null) {
+        //                    existingAssetPlant.setCurrentOperatorId(assetPlant.getCurrentOperatorId());
+        //                }
+        //                if (assetPlant.getLedgerCode() != null) {
+        //                    existingAssetPlant.setLedgerCode(assetPlant.getLedgerCode());
+        //                }
+        //                if (assetPlant.getFuelType() != null) {
+        //                    existingAssetPlant.setFuelType(assetPlant.getFuelType());
+        //                }
+        //                if (assetPlant.getTankCapacityLitres() != null) {
+        //                    existingAssetPlant.setTankCapacityLitres(assetPlant.getTankCapacityLitres());
+        //                }
+        //                if (assetPlant.getConsumptionUnit() != null) {
+        //                    existingAssetPlant.setConsumptionUnit(assetPlant.getConsumptionUnit());
+        //                }
+        //                if (assetPlant.getPlantHoursStatus() != null) {
+        //                    existingAssetPlant.setPlantHoursStatus(assetPlant.getPlantHoursStatus());
+        //                }
+        //                if (assetPlant.getPrimeMover() != null) {
+        //                    existingAssetPlant.setPrimeMover(assetPlant.getPrimeMover());
+        //                }
+        //                if (assetPlant.getCapacityTons() != null) {
+        //                    existingAssetPlant.setCapacityTons(assetPlant.getCapacityTons());
+        //                }
+        //                if (assetPlant.getCapacityM3Loose() != null) {
+        //                    existingAssetPlant.setCapacityM3Loose(assetPlant.getCapacityM3Loose());
+        //                }
+        //                if (assetPlant.getCapacityM3Tight() != null) {
+        //                    existingAssetPlant.setCapacityM3Tight(assetPlant.getCapacityM3Tight());
+        //                }
+        //                if (assetPlant.getMaximumConsumption() != null) {
+        //                    existingAssetPlant.setMaximumConsumption(assetPlant.getMaximumConsumption());
+        //                }
+        //                if (assetPlant.getMinimumConsumption() != null) {
+        //                    existingAssetPlant.setMinimumConsumption(assetPlant.getMinimumConsumption());
+        //                }
+        //                if (assetPlant.getMaximumSmrOnFullTank() != null) {
+        //                    existingAssetPlant.setMaximumSmrOnFullTank(assetPlant.getMaximumSmrOnFullTank());
+        //                }
+        //                if (assetPlant.getTrackConsumption() != null) {
+        //                    existingAssetPlant.setTrackConsumption(assetPlant.getTrackConsumption());
+        //                }
+        //                if (assetPlant.getTrackSmrReading() != null) {
+        //                    existingAssetPlant.setTrackSmrReading(assetPlant.getTrackSmrReading());
+        //                }
+        //                if (assetPlant.getTrackService() != null) {
+        //                    existingAssetPlant.setTrackService(assetPlant.getTrackService());
+        //                }
+        //                if (assetPlant.getDeleted() != null) {
+        //                    existingAssetPlant.setDeleted(assetPlant.getDeleted());
+        //                }
+        //                if (assetPlant.getRequestWeeklyMileage() != null) {
+        //                    existingAssetPlant.setRequestWeeklyMileage(assetPlant.getRequestWeeklyMileage());
+        //                }
+        //                if (assetPlant.getSent() != null) {
+        //                    existingAssetPlant.setSent(assetPlant.getSent());
+        //                }
+        //                if (assetPlant.getChassisNumber() != null) {
+        //                    existingAssetPlant.setChassisNumber(assetPlant.getChassisNumber());
+        //                }
+        //                if (assetPlant.getCurrentLocation() != null) {
+        //                    existingAssetPlant.setCurrentLocation(assetPlant.getCurrentLocation());
+        //                }
+        //
+        //                return existingAssetPlant;
+        //            })
+        //            .map(assetPlantRepository::save);
 
-                return existingAssetPlant;
-            })
-            .map(assetPlantRepository::save);
+        return Optional.of(new AssetPlant());
     }
 
     @Override

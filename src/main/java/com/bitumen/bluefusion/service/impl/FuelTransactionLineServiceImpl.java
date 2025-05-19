@@ -42,46 +42,47 @@ public class FuelTransactionLineServiceImpl implements FuelTransactionLineServic
     public Optional<FuelTransactionLine> partialUpdate(FuelTransactionLine fuelTransactionLine) {
         LOG.debug("Request to partially update FuelTransactionLine : {}", fuelTransactionLine);
 
-        return fuelTransactionLineRepository
-            .findById(fuelTransactionLine.getFuelTransactionLineId())
-            .map(existingFuelTransactionLine -> {
-                if (fuelTransactionLine.getFuelTransactionLineId() != null) {
-                    existingFuelTransactionLine.setFuelTransactionLineId(fuelTransactionLine.getFuelTransactionLineId());
-                }
-                if (fuelTransactionLine.getFuelTransactionHeaderId() != null) {
-                    existingFuelTransactionLine.setFuelTransactionHeaderId(fuelTransactionLine.getFuelTransactionHeaderId());
-                }
-                if (fuelTransactionLine.getAssetPlantId() != null) {
-                    existingFuelTransactionLine.setAssetPlantId(fuelTransactionLine.getAssetPlantId());
-                }
-                if (fuelTransactionLine.getContractDivisionId() != null) {
-                    existingFuelTransactionLine.setContractDivisionId(fuelTransactionLine.getContractDivisionId());
-                }
-                if (fuelTransactionLine.getIssuanceTypeId() != null) {
-                    existingFuelTransactionLine.setIssuanceTypeId(fuelTransactionLine.getIssuanceTypeId());
-                }
-                if (fuelTransactionLine.getPumpId() != null) {
-                    existingFuelTransactionLine.setPumpId(fuelTransactionLine.getPumpId());
-                }
-                if (fuelTransactionLine.getStorageUnitId() != null) {
-                    existingFuelTransactionLine.setStorageUnitId(fuelTransactionLine.getStorageUnitId());
-                }
-                if (fuelTransactionLine.getLitres() != null) {
-                    existingFuelTransactionLine.setLitres(fuelTransactionLine.getLitres());
-                }
-                if (fuelTransactionLine.getMeterReadingStart() != null) {
-                    existingFuelTransactionLine.setMeterReadingStart(fuelTransactionLine.getMeterReadingStart());
-                }
-                if (fuelTransactionLine.getMeterReadingEnd() != null) {
-                    existingFuelTransactionLine.setMeterReadingEnd(fuelTransactionLine.getMeterReadingEnd());
-                }
-                if (fuelTransactionLine.getMultiplier() != null) {
-                    existingFuelTransactionLine.setMultiplier(fuelTransactionLine.getMultiplier());
-                }
-
-                return existingFuelTransactionLine;
-            })
-            .map(fuelTransactionLineRepository::save);
+        //        return fuelTransactionLineRepository
+        //            .findById(fuelTransactionLine.getFuelTransactionLineId())
+        //            .map(existingFuelTransactionLine -> {
+        //                if (fuelTransactionLine.getFuelTransactionLineId() != null) {
+        //                    existingFuelTransactionLine.setFuelTransactionLineId(fuelTransactionLine.getFuelTransactionLineId());
+        //                }
+        //                if (fuelTransactionLine.getFuelTransactionHeaderId() != null) {
+        //                    existingFuelTransactionLine.setFuelTransactionHeaderId(fuelTransactionLine.getFuelTransactionHeaderId());
+        //                }
+        //                if (fuelTransactionLine.getAssetPlantId() != null) {
+        //                    existingFuelTransactionLine.setAssetPlantId(fuelTransactionLine.getAssetPlantId());
+        //                }
+        //                if (fuelTransactionLine.getContractDivisionId() != null) {
+        //                    existingFuelTransactionLine.setContractDivisionId(fuelTransactionLine.getContractDivisionId());
+        //                }
+        //                if (fuelTransactionLine.getIssuanceTypeId() != null) {
+        //                    existingFuelTransactionLine.setIssuanceTypeId(fuelTransactionLine.getIssuanceTypeId());
+        //                }
+        //                if (fuelTransactionLine.getPumpId() != null) {
+        //                    existingFuelTransactionLine.setPumpId(fuelTransactionLine.getPumpId());
+        //                }
+        //                if (fuelTransactionLine.getStorageUnitId() != null) {
+        //                    existingFuelTransactionLine.setStorageUnitId(fuelTransactionLine.getStorageUnitId());
+        //                }
+        //                if (fuelTransactionLine.getLitres() != null) {
+        //                    existingFuelTransactionLine.setLitres(fuelTransactionLine.getLitres());
+        //                }
+        //                if (fuelTransactionLine.getMeterReadingStart() != null) {
+        //                    existingFuelTransactionLine.setMeterReadingStart(fuelTransactionLine.getMeterReadingStart());
+        //                }
+        //                if (fuelTransactionLine.getMeterReadingEnd() != null) {
+        //                    existingFuelTransactionLine.setMeterReadingEnd(fuelTransactionLine.getMeterReadingEnd());
+        //                }
+        //                if (fuelTransactionLine.getMultiplier() != null) {
+        //                    existingFuelTransactionLine.setMultiplier(fuelTransactionLine.getMultiplier());
+        //                }
+        //
+        //                return existingFuelTransactionLine;
+        //            })
+        //            .map(fuelTransactionLineRepository::save);
+        return Optional.of(new FuelTransactionLine());
     }
 
     @Override
