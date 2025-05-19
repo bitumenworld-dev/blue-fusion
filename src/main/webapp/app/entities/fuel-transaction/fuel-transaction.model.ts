@@ -1,8 +1,8 @@
 import { FuelType } from 'app/entities/enumerations/fuel-type.model';
 
-export interface IFuelTransactionHeader {
+export interface FuelTransaction {
   id: number;
-  fuelTransactionHeaderId?: number | null;
+  fuelTransactionId?: number | null;
   companyId?: number | null;
   supplierId?: number | null;
   transactionTypeId?: number | null;
@@ -16,6 +16,16 @@ export interface IFuelTransactionHeader {
   registrationNumber?: string | null;
   attendeeId?: number | null;
   operatorId?: number | null;
+  fuelTransactionLineId?: number | null;
+  assetPlantId?: number | null;
+  contractDivisionId?: number | null;
+  issuanceTypeId?: number | null;
+  pumpId?: number | null;
+  storageUnitId?: number | null;
+  litres?: number | null;
+  meterReadingStart?: number | null;
+  meterReadingEnd?: number | null;
+  multiplier?: number | null;
 }
 
-export type NewFuelTransactionHeader = Omit<IFuelTransactionHeader, 'id'> & { id: null };
+export type NewFuelTransaction = Omit<FuelTransaction, 'id'> & { id: null };

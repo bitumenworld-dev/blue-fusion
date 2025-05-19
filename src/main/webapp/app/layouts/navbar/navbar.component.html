@@ -23,7 +23,7 @@
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
               <fa-icon icon="home"></fa-icon>
-              <span jhiTranslate="global.menu.home">Home</span>
+              <span>Home</span>
             </span>
           </a>
         </li>
@@ -39,7 +39,7 @@
             <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
               <span>
                 <fa-icon icon="th-list"></fa-icon>
-                <span jhiTranslate="global.menu.entities.main">Entities</span>
+                <span>Entities</span>
               </span>
             </a>
             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
@@ -238,25 +238,13 @@
               <li>
                 <a
                   class="dropdown-item"
-                  routerLink="/fuel-transaction-header"
+                  routerLink="/fuel-transaction"
                   routerLinkActive="active"
                   [routerLinkActiveOptions]="{ exact: true }"
                   (click)="collapseNavbar()"
                 >
                   <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                  <span>Fuel Transaction Header</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="dropdown-item"
-                  routerLink="/fuel-transaction-line"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  (click)="collapseNavbar()"
-                >
-                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                  <span>Fuel Transaction Line</span>
+                  <span>Fuel Transactions</span>
                 </a>
               </li>
               <li>

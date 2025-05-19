@@ -8,22 +8,21 @@ import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FuelType } from 'app/entities/enumerations/fuel-type.model';
-import { IFuelTransactionHeader } from '../fuel-transaction-header.model';
-import { FuelTransactionHeaderService } from '../service/fuel-transaction-header.service';
-import { FuelTransactionHeaderFormGroup, FuelTransactionHeaderFormService } from './fuel-transaction-header-form.service';
+import { FuelTransaction } from '../fuel-transaction.model';
+import { FuelTransactionService } from '../service/fuel-transaction.service';
+import { FuelTransactionHeaderFormGroup, FuelTransactionFormService } from './fuel-transaction-form.service';
 
 @Component({
-  selector: 'jhi-fuel-transaction-header-update',
-  templateUrl: './fuel-transaction-header-update.component.html',
+  templateUrl: './fuel-transaction-update.component.html',
   imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class FuelTransactionHeaderUpdateComponent implements OnInit {
+export class FuelTransactionUpdateComponent implements OnInit {
   isSaving = false;
-  fuelTransactionHeader: IFuelTransactionHeader | null = null;
+  fuelTransactionHeader: FuelTransaction | null = null;
   fuelTypeValues = Object.keys(FuelType);
 
-  protected fuelTransactionHeaderService = inject(FuelTransactionHeaderService);
-  protected fuelTransactionHeaderFormService = inject(FuelTransactionHeaderFormService);
+  protected fuelTransactionHeaderService = inject(FuelTransactionService);
+  protected fuelTransactionHeaderFormService = inject(FuelTransactionFormService);
   protected activatedRoute = inject(ActivatedRoute);
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -52,7 +51,7 @@ export class FuelTransactionHeaderUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFuelTransactionHeader>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<FuelTransaction>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -71,7 +70,7 @@ export class FuelTransactionHeaderUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(fuelTransactionHeader: IFuelTransactionHeader): void {
+  protected updateForm(fuelTransactionHeader: FuelTransaction): void {
     this.fuelTransactionHeader = fuelTransactionHeader;
     this.fuelTransactionHeaderFormService.resetForm(this.editForm, fuelTransactionHeader);
   }

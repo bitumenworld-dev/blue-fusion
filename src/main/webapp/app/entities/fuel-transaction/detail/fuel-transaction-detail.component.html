@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (fuelTransaction(); as fuelTransactionRef) {
+      <div>
+        <h2>
+          <span>Fuel Transaction</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.id }}</span>
+          </dd>
+          <dt><span>Company Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.companyId }}</span>
+          </dd>
+          <dt><span>Supplier Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.supplierId }}</span>
+          </dd>
+          <dt><span>Transaction Type Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.transactionTypeId }}</span>
+          </dd>
+          <dt><span>Fuel Type</span></dt>
+          <dd>
+            <span>{{
+              { null: '', PETROL: 'PETROL', DIESEL: 'DIESEL', NONE: 'NONE', OTHER: 'OTHER' }[fuelTransactionRef.fuelType ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Order Number</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.orderNumber }}</span>
+          </dd>
+          <dt><span>Delivery Note</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.deliveryNote }}</span>
+          </dd>
+          <dt><span>Grv Number</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.grvNumber }}</span>
+          </dd>
+          <dt><span>Invoice Number</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.invoiceNumber }}</span>
+          </dd>
+          <dt><span>Price Per Litre</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.pricePerLitre }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.note }}</span>
+          </dd>
+          <dt><span>Registration Number</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.registrationNumber }}</span>
+          </dd>
+          <dt><span>Attendee Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.attendeeId }}</span>
+          </dd>
+          <dt><span>Operator Id</span></dt>
+          <dd>
+            <span>{{ fuelTransactionRef.operatorId }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/fuel-transaction-header', fuelTransactionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

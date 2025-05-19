@@ -1,7 +1,7 @@
-import { Component, NgZone, OnInit, inject, signal } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { Component, inject, NgZone, OnInit, signal } from '@angular/core';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
+import { combineLatest, filter, Observable, Subscription, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
@@ -9,18 +9,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IFuelTransactionHeader } from '../fuel-transaction-header.model';
-import { EntityArrayResponseType, FuelTransactionHeaderService } from '../service/fuel-transaction-header.service';
-import { FuelTransactionHeaderDeleteDialogComponent } from '../delete/fuel-transaction-header-delete-dialog.component';
+import { FuelTransaction } from '../fuel-transaction.model';
+import { FuelTransactionFormGroup, FuelTransactionFormService } from './fuel-transaction-form.service';
+import { EntityArrayResponseType, FuelTransactionService } from '../service/fuel-transaction.service';
+// import {
+//   FuelTransactionHeaderDeleteDialogComponent
+// } from '../delete/fuel-transaction-header-delete-dialog.component';
+import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
+import { ICompany } from '../../company/company.model';
 
 @Component({
-  selector: 'jhi-fuel-transaction-header',
-  templateUrl: './fuel-transaction-header.component.html',
+  templateUrl: './fuel-transaction.component.html',
   imports: [RouterModule, FormsModule, SharedModule, ReactiveFormsModule],
 })
-export class FuelTransactionHeaderComponent implements OnInit {
+export class FuelTransactionComponent implements OnInit {
   subscription: Subscription | null = null;
-  fuelTransactionHeaders = signal<IFuelTransactionHeader[]>([]);
+  fuelTransactions = signal<FuelTransaction[]>([]);
   isLoading = false;
 
   itemsPerPage = ITEMS_PER_PAGE;
@@ -44,12 +48,9 @@ export class FuelTransactionHeaderComponent implements OnInit {
   pump2 = 123123123;
 
   // Company array dummy
-  companiesArray = [
-    { id: 1, name: 'BITUMEN' },
-    { id: 2, name: 'RDAVIES' },
-    { id: 3, name: 'TAYANA' },
-  ];
+  companiesArray: ICompany[] | null = [];
   companiesSearchTerm = '';
+  // @ts-ignore
   filteredCompanies = [...this.companiesArray];
   showCompaniesDropdown = false;
 
@@ -207,12 +208,15 @@ export class FuelTransactionHeaderComponent implements OnInit {
   ];
 
   public readonly router = inject(Router);
-  protected readonly fuelTransactionHeaderService = inject(FuelTransactionHeaderService);
+  protected readonly fuelTransactionHeaderService = inject(FuelTransactionService);
+  protected fuelTransactionFormService = inject(FuelTransactionFormService);
+  protected readonly companyService = inject(CompanyService);
   protected readonly activatedRoute = inject(ActivatedRoute);
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (item: IFuelTransactionHeader): number => this.fuelTransactionHeaderService.getFuelTransactionHeaderIdentifier(item);
+  trackId = (item: FuelTransaction): number => this.fuelTransactionHeaderService.getFuelTransactionHeaderIdentifier(item);
+  editForm: FuelTransactionFormGroup = this.fuelTransactionFormService.createFuelTransactionFormGroup();
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
@@ -223,16 +227,19 @@ export class FuelTransactionHeaderComponent implements OnInit {
       .subscribe();
   }
 
-  delete(fuelTransactionHeader: IFuelTransactionHeader): void {
-    const modalRef = this.modalService.open(FuelTransactionHeaderDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.fuelTransactionHeader = fuelTransactionHeader;
-    // unsubscribe not needed because closed completes on modal close
-    modalRef.closed
-      .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
-        tap(() => this.load()),
-      )
-      .subscribe();
+  delete(fuelTransactionHeader: FuelTransaction): void {
+    // const modalRef = this.modalService.open(FuelTransactionHeaderDeleteDialogComponent, {
+    //   size: 'lg',
+    //   backdrop: 'static'
+    // });
+    // modalRef.componentInstance.fuelTransactionHeader = fuelTransactionHeader;
+    // // unsubscribe not needed because closed completes on modal close
+    // modalRef.closed
+    //   .pipe(
+    //     filter(reason => reason === ITEM_DELETED_EVENT),
+    //     tap(() => this.load())
+    //   )
+    //   .subscribe();
   }
 
   load(): void {
@@ -255,10 +262,10 @@ export class FuelTransactionHeaderComponent implements OnInit {
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
-    this.fuelTransactionHeaders.set(dataFromBody);
+    this.fuelTransactions.set(dataFromBody);
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IFuelTransactionHeader[] | null): IFuelTransactionHeader[] {
+  protected fillComponentAttributesFromResponseBody(data: FuelTransaction[] | null): FuelTransaction[] {
     return data ?? [];
   }
 
@@ -275,6 +282,12 @@ export class FuelTransactionHeaderComponent implements OnInit {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
     };
+
+    this.companyService.query().subscribe({
+      next: (res: CompanyEntityArrayResponseType) => {
+        this.companiesArray = res.body;
+      },
+    });
     return this.fuelTransactionHeaderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -295,12 +308,13 @@ export class FuelTransactionHeaderComponent implements OnInit {
   // Company Filtering & Selection Logic
   filterCompanies(): void {
     const term = this.companiesSearchTerm.toLowerCase();
-    this.filteredCompanies = this.companiesArray.filter(company => company.name.toLowerCase().includes(term));
+    // @ts-ignore
+    this.filteredCompanies = this.companiesArray?.filter(company => company.name?.toLowerCase().includes(term));
   }
 
   selectCompany(company: { id: number; name: string }): void {
     this.companiesSearchTerm = company.name;
-    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+    this.editForm.get('companyId')?.setValue(company.id);
     this.showCompaniesDropdown = false;
   }
 
@@ -318,7 +332,7 @@ export class FuelTransactionHeaderComponent implements OnInit {
 
   selectStorageUnit(storageUnit: { id: number; name: string }): void {
     this.storageUnitSearchTerm = storageUnit.name;
-    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+    this.editForm.get('storageUnitId')?.setValue(storageUnit.id);
     this.showStorageUnitDropdown = false;
   }
 

@@ -11,6 +11,7 @@ export type PartialUpdateCompany = Partial<ICompany> & Pick<ICompany, 'id'>;
 
 export type EntityResponseType = HttpResponse<ICompany>;
 export type EntityArrayResponseType = HttpResponse<ICompany[]>;
+export type CompanyEntityArrayResponseType = HttpResponse<ICompany[]>;
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService {

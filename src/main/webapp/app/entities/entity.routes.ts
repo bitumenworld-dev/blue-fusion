@@ -87,14 +87,9 @@ const routes: Routes = [
     loadChildren: () => import('./fuel-transaction-type/fuel-transaction-type.routes'),
   },
   {
-    path: 'fuel-transaction-header',
-    data: { pageTitle: 'blueFusionApp.fuelTransactionHeader.home.title' },
-    loadChildren: () => import('./fuel-transaction-header/fuel-transaction-header.routes'),
-  },
-  {
-    path: 'fuel-transaction-line',
-    data: { pageTitle: 'blueFusionApp.fuelTransactionLine.home.title' },
-    loadChildren: () => import('./fuel-transaction-line/fuel-transaction-line.routes'),
+    path: 'fuel-transaction',
+    data: { pageTitle: 'Fuel Transaction' },
+    loadChildren: () => import('./fuel-transaction/fuel-transaction.routes'),
   },
   {
     path: 'fuel-pump',

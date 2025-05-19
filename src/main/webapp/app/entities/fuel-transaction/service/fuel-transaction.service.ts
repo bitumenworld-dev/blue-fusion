@@ -5,26 +5,26 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IFuelTransactionHeader, NewFuelTransactionHeader } from '../fuel-transaction-header.model';
+import { FuelTransaction, NewFuelTransaction } from '../fuel-transaction.model';
 
-export type PartialUpdateFuelTransactionHeader = Partial<IFuelTransactionHeader> & Pick<IFuelTransactionHeader, 'id'>;
+export type PartialUpdateFuelTransactionHeader = Partial<FuelTransaction> & Pick<FuelTransaction, 'id'>;
 
-export type EntityResponseType = HttpResponse<IFuelTransactionHeader>;
-export type EntityArrayResponseType = HttpResponse<IFuelTransactionHeader[]>;
+export type EntityResponseType = HttpResponse<FuelTransaction>;
+export type EntityArrayResponseType = HttpResponse<FuelTransaction[]>;
 
 @Injectable({ providedIn: 'root' })
-export class FuelTransactionHeaderService {
+export class FuelTransactionService {
   protected readonly http = inject(HttpClient);
   protected readonly applicationConfigService = inject(ApplicationConfigService);
 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/fuel-transaction-headers');
 
-  create(fuelTransactionHeader: NewFuelTransactionHeader): Observable<EntityResponseType> {
-    return this.http.post<IFuelTransactionHeader>(this.resourceUrl, fuelTransactionHeader, { observe: 'response' });
+  create(fuelTransactionHeader: NewFuelTransaction): Observable<EntityResponseType> {
+    return this.http.post<FuelTransaction>(this.resourceUrl, fuelTransactionHeader, { observe: 'response' });
   }
 
-  update(fuelTransactionHeader: IFuelTransactionHeader): Observable<EntityResponseType> {
-    return this.http.put<IFuelTransactionHeader>(
+  update(fuelTransactionHeader: FuelTransaction): Observable<EntityResponseType> {
+    return this.http.put<FuelTransaction>(
       `${this.resourceUrl}/${this.getFuelTransactionHeaderIdentifier(fuelTransactionHeader)}`,
       fuelTransactionHeader,
       { observe: 'response' },
@@ -32,7 +32,7 @@ export class FuelTransactionHeaderService {
   }
 
   partialUpdate(fuelTransactionHeader: PartialUpdateFuelTransactionHeader): Observable<EntityResponseType> {
-    return this.http.patch<IFuelTransactionHeader>(
+    return this.http.patch<FuelTransaction>(
       `${this.resourceUrl}/${this.getFuelTransactionHeaderIdentifier(fuelTransactionHeader)}`,
       fuelTransactionHeader,
       { observe: 'response' },
@@ -40,27 +40,27 @@ export class FuelTransactionHeaderService {
   }
 
   find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IFuelTransactionHeader>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.get<FuelTransaction>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IFuelTransactionHeader[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<FuelTransaction[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getFuelTransactionHeaderIdentifier(fuelTransactionHeader: Pick<IFuelTransactionHeader, 'id'>): number {
+  getFuelTransactionHeaderIdentifier(fuelTransactionHeader: Pick<FuelTransaction, 'id'>): number {
     return fuelTransactionHeader.id;
   }
 
-  compareFuelTransactionHeader(o1: Pick<IFuelTransactionHeader, 'id'> | null, o2: Pick<IFuelTransactionHeader, 'id'> | null): boolean {
+  compareFuelTransactionHeader(o1: Pick<FuelTransaction, 'id'> | null, o2: Pick<FuelTransaction, 'id'> | null): boolean {
     return o1 && o2 ? this.getFuelTransactionHeaderIdentifier(o1) === this.getFuelTransactionHeaderIdentifier(o2) : o1 === o2;
   }
 
-  addFuelTransactionHeaderToCollectionIfMissing<Type extends Pick<IFuelTransactionHeader, 'id'>>(
+  addFuelTransactionHeaderToCollectionIfMissing<Type extends Pick<FuelTransaction, 'id'>>(
     fuelTransactionHeaderCollection: Type[],
     ...fuelTransactionHeadersToCheck: (Type | null | undefined)[]
   ): Type[] {

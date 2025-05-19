@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IFuelTransactionHeader, NewFuelTransactionHeader } from '../fuel-transaction-header.model';
+import { FuelTransaction, NewFuelTransaction } from '../fuel-transaction.model';
 
 /**
  * A partial Type with required key is used as form input.
@@ -10,34 +10,34 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
 
 /**
  * Type for createFormGroup and resetForm argument.
- * It accepts IFuelTransactionHeader for edit and NewFuelTransactionHeaderFormGroupInput for create.
+ * It accepts FuelTransaction for edit and NewFuelTransactionFormGroupInput for create.
  */
-type FuelTransactionHeaderFormGroupInput = IFuelTransactionHeader | PartialWithRequiredKeyOf<NewFuelTransactionHeader>;
+type FuelTransactionHeaderFormGroupInput = FuelTransaction | PartialWithRequiredKeyOf<NewFuelTransaction>;
 
-type FuelTransactionHeaderFormDefaults = Pick<NewFuelTransactionHeader, 'id'>;
+type FuelTransactionHeaderFormDefaults = Pick<NewFuelTransaction, 'id'>;
 
 type FuelTransactionHeaderFormGroupContent = {
-  id: FormControl<IFuelTransactionHeader['id'] | NewFuelTransactionHeader['id']>;
-  fuelTransactionHeaderId: FormControl<IFuelTransactionHeader['fuelTransactionHeaderId']>;
-  companyId: FormControl<IFuelTransactionHeader['companyId']>;
-  supplierId: FormControl<IFuelTransactionHeader['supplierId']>;
-  transactionTypeId: FormControl<IFuelTransactionHeader['transactionTypeId']>;
-  fuelType: FormControl<IFuelTransactionHeader['fuelType']>;
-  orderNumber: FormControl<IFuelTransactionHeader['orderNumber']>;
-  deliveryNote: FormControl<IFuelTransactionHeader['deliveryNote']>;
-  grvNumber: FormControl<IFuelTransactionHeader['grvNumber']>;
-  invoiceNumber: FormControl<IFuelTransactionHeader['invoiceNumber']>;
-  pricePerLitre: FormControl<IFuelTransactionHeader['pricePerLitre']>;
-  note: FormControl<IFuelTransactionHeader['note']>;
-  registrationNumber: FormControl<IFuelTransactionHeader['registrationNumber']>;
-  attendeeId: FormControl<IFuelTransactionHeader['attendeeId']>;
-  operatorId: FormControl<IFuelTransactionHeader['operatorId']>;
+  id: FormControl<FuelTransaction['id'] | NewFuelTransaction['id']>;
+  fuelTransactionHeaderId: FormControl<FuelTransaction['fuelTransactionId']>;
+  companyId: FormControl<FuelTransaction['companyId']>;
+  supplierId: FormControl<FuelTransaction['supplierId']>;
+  transactionTypeId: FormControl<FuelTransaction['transactionTypeId']>;
+  fuelType: FormControl<FuelTransaction['fuelType']>;
+  orderNumber: FormControl<FuelTransaction['orderNumber']>;
+  deliveryNote: FormControl<FuelTransaction['deliveryNote']>;
+  grvNumber: FormControl<FuelTransaction['grvNumber']>;
+  invoiceNumber: FormControl<FuelTransaction['invoiceNumber']>;
+  pricePerLitre: FormControl<FuelTransaction['pricePerLitre']>;
+  note: FormControl<FuelTransaction['note']>;
+  registrationNumber: FormControl<FuelTransaction['registrationNumber']>;
+  attendeeId: FormControl<FuelTransaction['attendeeId']>;
+  operatorId: FormControl<FuelTransaction['operatorId']>;
 };
 
 export type FuelTransactionHeaderFormGroup = FormGroup<FuelTransactionHeaderFormGroupContent>;
 
 @Injectable({ providedIn: 'root' })
-export class FuelTransactionHeaderFormService {
+export class FuelTransactionFormService {
   createFuelTransactionHeaderFormGroup(
     fuelTransactionHeader: FuelTransactionHeaderFormGroupInput = { id: null },
   ): FuelTransactionHeaderFormGroup {
@@ -53,7 +53,7 @@ export class FuelTransactionHeaderFormService {
           validators: [Validators.required],
         },
       ),
-      fuelTransactionHeaderId: new FormControl(fuelTransactionHeaderRawValue.fuelTransactionHeaderId),
+      fuelTransactionHeaderId: new FormControl(fuelTransactionHeaderRawValue.fuelTransactionId),
       companyId: new FormControl(fuelTransactionHeaderRawValue.companyId),
       supplierId: new FormControl(fuelTransactionHeaderRawValue.supplierId),
       transactionTypeId: new FormControl(fuelTransactionHeaderRawValue.transactionTypeId),
@@ -70,18 +70,16 @@ export class FuelTransactionHeaderFormService {
     });
   }
 
-  getFuelTransactionHeader(form: FuelTransactionHeaderFormGroup): IFuelTransactionHeader | NewFuelTransactionHeader {
-    return form.getRawValue() as IFuelTransactionHeader | NewFuelTransactionHeader;
+  getFuelTransactionHeader(form: FuelTransactionHeaderFormGroup): FuelTransaction | NewFuelTransaction {
+    return form.getRawValue() as FuelTransaction | NewFuelTransaction;
   }
 
   resetForm(form: FuelTransactionHeaderFormGroup, fuelTransactionHeader: FuelTransactionHeaderFormGroupInput): void {
     const fuelTransactionHeaderRawValue = { ...this.getFormDefaults(), ...fuelTransactionHeader };
-    form.reset(
-      {
-        ...fuelTransactionHeaderRawValue,
-        id: { value: fuelTransactionHeaderRawValue.id, disabled: true },
-      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
-    );
+    form.reset({
+      ...fuelTransactionHeaderRawValue,
+      id: { value: fuelTransactionHeaderRawValue.id, disabled: true },
+    } as any);
   }
 
   private getFormDefaults(): FuelTransactionHeaderFormDefaults {
