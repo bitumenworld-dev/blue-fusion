@@ -17,6 +17,8 @@ import { EntityArrayResponseType, FuelTransactionService } from '../service/fuel
 // } from '../delete/fuel-transaction-header-delete-dialog.component';
 import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
 import { ICompany } from '../../company/company.model';
+import { Storage } from '../../storage/storage.model';
+import { StorageService, StorageEntityArrayResponseType } from '../../storage/service/storage.service';
 
 @Component({
   templateUrl: './fuel-transaction.component.html',
@@ -47,20 +49,16 @@ export class FuelTransactionComponent implements OnInit {
   pump1 = 1233123;
   pump2 = 123123123;
 
-  // Company array dummy
   companiesArray: ICompany[] | null = [];
+
   companiesSearchTerm = '';
   // @ts-ignore
   filteredCompanies = [...this.companiesArray];
   showCompaniesDropdown = false;
 
-  // Storage array dummy
-  storageUnitArray = [
-    { id: 1, name: 'LB001' },
-    { id: 2, name: 'LB002' },
-    { id: 3, name: 'LB003' },
-  ];
+  storageUnitArray: Storage[] | null = [];
   storageUnitSearchTerm = '';
+  // @ts-ignore
   filteredStorageUnits = [...this.storageUnitArray];
   showStorageUnitDropdown = false;
 
@@ -209,6 +207,7 @@ export class FuelTransactionComponent implements OnInit {
 
   public readonly router = inject(Router);
   protected readonly fuelTransactionHeaderService = inject(FuelTransactionService);
+  protected readonly storageService = inject(StorageService);
   protected fuelTransactionFormService = inject(FuelTransactionFormService);
   protected readonly companyService = inject(CompanyService);
   protected readonly activatedRoute = inject(ActivatedRoute);
@@ -288,6 +287,7 @@ export class FuelTransactionComponent implements OnInit {
         this.companiesArray = res.body;
       },
     });
+
     return this.fuelTransactionHeaderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -316,6 +316,16 @@ export class FuelTransactionComponent implements OnInit {
     this.companiesSearchTerm = company.name;
     this.editForm.get('companyId')?.setValue(company.id);
     this.showCompaniesDropdown = false;
+
+    const queryObject: any = {
+      companyId: company.id,
+    };
+
+    this.storageService.query(queryObject).subscribe({
+      next: (res: StorageEntityArrayResponseType) => {
+        this.storageUnitArray = res.body;
+      },
+    });
   }
 
   hideCompanyDropdown(): void {
@@ -327,6 +337,7 @@ export class FuelTransactionComponent implements OnInit {
   // Storage Filtering & Selection Logic
   filterStorageUnits(): void {
     const term = this.storageUnitSearchTerm.toLowerCase();
+    // @ts-ignore
     this.filteredStorageUnits = this.storageUnitArray.filter(storageUnit => storageUnit.name.toLowerCase().includes(term));
   }
 

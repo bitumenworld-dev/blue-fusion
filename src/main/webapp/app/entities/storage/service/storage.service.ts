@@ -8,6 +8,7 @@ import { Storage, NewStorage } from '../storage.model';
 
 export type EntityResponseType = HttpResponse<Storage>;
 export type EntityArrayResponseType = HttpResponse<Storage[]>;
+export type StorageEntityArrayResponseType = HttpResponse<Storage[]>;
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
