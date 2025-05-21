@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
-import { IFuelPump } from '../fuel-pump.model';
-import { EntityArrayResponseType, FuelPumpService } from '../service/fuel-pump.service';
+import { FuelPump } from '../fuel-pump.model';
+import { FuelPumpArrayResponseType, FuelPumpService } from '../service/fuel-pump.service';
 import { FuelPumpDeleteDialogComponent } from '../delete/fuel-pump-delete-dialog.component';
 
 @Component({
@@ -22,7 +22,7 @@ import { FuelPumpDeleteDialogComponent } from '../delete/fuel-pump-delete-dialog
 })
 export class FuelPumpComponent implements OnInit {
   subscription: Subscription | null = null;
-  fuelPumps = signal<IFuelPump[]>([]);
+  fuelPumps = signal<FuelPump[]>([]);
   isLoading = false;
 
   sortState = sortStateSignal({});
@@ -38,7 +38,7 @@ export class FuelPumpComponent implements OnInit {
   protected modalService = inject(NgbModal);
   protected ngZone = inject(NgZone);
 
-  trackId = (item: IFuelPump): number => this.fuelPumpService.getFuelPumpIdentifier(item);
+  trackId = (item: FuelPump): number => this.fuelPumpService.getFuelPumpIdentifier(item);
 
   ngOnInit(): void {
     this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
@@ -49,7 +49,7 @@ export class FuelPumpComponent implements OnInit {
       .subscribe();
   }
 
-  delete(fuelPump: IFuelPump): void {
+  delete(fuelPump: FuelPump): void {
     const modalRef = this.modalService.open(FuelPumpDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.fuelPump = fuelPump;
     // unsubscribe not needed because closed completes on modal close
@@ -63,7 +63,7 @@ export class FuelPumpComponent implements OnInit {
 
   load(): void {
     this.queryBackend().subscribe({
-      next: (res: EntityArrayResponseType) => {
+      next: (res: FuelPumpArrayResponseType) => {
         this.onResponseSuccess(res);
       },
     });
@@ -83,13 +83,13 @@ export class FuelPumpComponent implements OnInit {
     this.sortState.set(this.sortService.parseSortParam(params.get(SORT) ?? data[DEFAULT_SORT_DATA]));
   }
 
-  protected onResponseSuccess(response: EntityArrayResponseType): void {
+  protected onResponseSuccess(response: FuelPumpArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.fuelPumps.set(dataFromBody);
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IFuelPump[] | null): IFuelPump[] {
+  protected fillComponentAttributesFromResponseBody(data: FuelPump[] | null): FuelPump[] {
     return data ?? [];
   }
 
@@ -97,7 +97,7 @@ export class FuelPumpComponent implements OnInit {
     this.totalItems = Number(headers.get(TOTAL_COUNT_RESPONSE_HEADER));
   }
 
-  protected queryBackend(): Observable<EntityArrayResponseType> {
+  protected queryBackend(): Observable<FuelPumpArrayResponseType> {
     const { page } = this;
 
     this.isLoading = true;

@@ -19,6 +19,8 @@ import { CompanyEntityArrayResponseType, CompanyService } from '../../company/se
 import { ICompany } from '../../company/company.model';
 import { Storage } from '../../storage/storage.model';
 import { StorageService, StorageEntityArrayResponseType } from '../../storage/service/storage.service';
+import { FuelPumpArrayResponseType, FuelPumpService } from '../../fuel-pump/service/fuel-pump.service';
+import { FuelPump } from '../../fuel-pump/fuel-pump.model';
 
 @Component({
   templateUrl: './fuel-transaction.component.html',
@@ -49,25 +51,25 @@ export class FuelTransactionComponent implements OnInit {
   pump1 = 1233123;
   pump2 = 123123123;
 
+  //Company variables
   companiesArray: ICompany[] | null = [];
-
   companiesSearchTerm = '';
   // @ts-ignore
   filteredCompanies = [...this.companiesArray];
   showCompaniesDropdown = false;
 
+  //Storage variables
   storageUnitArray: Storage[] | null = [];
-  storageUnitSearchTerm = '';
+  storageUnitSearchTerm: string | null | undefined = '';
   // @ts-ignore
   filteredStorageUnits = [...this.storageUnitArray];
   showStorageUnitDropdown = false;
 
-  pumpsArray = [
-    { id: 1, name: 'PUMP01' },
-    { id: 2, name: 'PUMP02' },
-    { id: 3, name: 'ALL' },
-  ];
-  pump = '';
+  //Pump variable
+  pumpsArray: FuelPump[] | null = [];
+  pumpSearchTerm: string | null | undefined = '';
+  // @ts-ignore
+  filteredPumps = [...this.pumpsArray];
   showPumpDropdown = false;
 
   // consumptionsArray dummy
@@ -207,6 +209,7 @@ export class FuelTransactionComponent implements OnInit {
 
   public readonly router = inject(Router);
   protected readonly fuelTransactionHeaderService = inject(FuelTransactionService);
+  protected readonly fuelPumpService = inject(FuelPumpService);
   protected readonly storageService = inject(StorageService);
   protected fuelTransactionFormService = inject(FuelTransactionFormService);
   protected readonly companyService = inject(CompanyService);
@@ -218,12 +221,17 @@ export class FuelTransactionComponent implements OnInit {
   editForm: FuelTransactionFormGroup = this.fuelTransactionFormService.createFuelTransactionFormGroup();
 
   ngOnInit(): void {
-    this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
-      .pipe(
-        tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-        tap(() => this.load()),
-      )
-      .subscribe();
+    // this.subscription = combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data])
+    //   .pipe(
+    //     tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
+    //     tap(() => this.load()),
+    //   )
+    //   .subscribe();
+    this.companyService.query().subscribe({
+      next: (res: CompanyEntityArrayResponseType) => {
+        this.companiesArray = res.body;
+      },
+    });
   }
 
   delete(fuelTransactionHeader: FuelTransaction): void {
@@ -282,12 +290,6 @@ export class FuelTransactionComponent implements OnInit {
       size: this.itemsPerPage,
     };
 
-    this.companyService.query().subscribe({
-      next: (res: CompanyEntityArrayResponseType) => {
-        this.companiesArray = res.body;
-      },
-    });
-
     return this.fuelTransactionHeaderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -324,8 +326,12 @@ export class FuelTransactionComponent implements OnInit {
     this.storageService.query(queryObject).subscribe({
       next: (res: StorageEntityArrayResponseType) => {
         this.storageUnitArray = res.body;
+        this.filteredStorageUnits = [...this.storageUnitArray];
       },
     });
+
+    this.pumpSearchTerm = '';
+    this.storageUnitSearchTerm = '';
   }
 
   hideCompanyDropdown(): void {
@@ -334,17 +340,44 @@ export class FuelTransactionComponent implements OnInit {
     }, 200);
   }
 
-  // Storage Filtering & Selection Logic
   filterStorageUnits(): void {
-    const term = this.storageUnitSearchTerm.toLowerCase();
-    // @ts-ignore
-    this.filteredStorageUnits = this.storageUnitArray.filter(storageUnit => storageUnit.name.toLowerCase().includes(term));
+    if (!this.storageUnitSearchTerm) {
+      this.filteredStorageUnits = [...this.storageUnitArray];
+      return;
+    }
+
+    const term = this.storageUnitSearchTerm.toLowerCase().trim();
+    if (this.storageUnitArray) {
+      this.filteredStorageUnits = this.storageUnitArray.filter(storageUnit => storageUnit.name?.toLowerCase().includes(term));
+    }
   }
 
-  selectStorageUnit(storageUnit: { id: number; name: string }): void {
+  filterPumps(): void {
+    if (!this.pumpSearchTerm) {
+      this.filteredPumps = [...this.pumpsArray];
+      return;
+    }
+    const term = this.pumpSearchTerm.toLowerCase().trim();
+    if (this.pumpsArray) {
+      this.filteredPumps = this.pumpsArray.filter(pump => pump.fuelPumpCode?.toLowerCase().includes(term));
+    }
+  }
+
+  selectStorageUnit(storageUnit: Storage): void {
     this.storageUnitSearchTerm = storageUnit.name;
-    this.editForm.get('storageUnitId')?.setValue(storageUnit.id);
+    this.editForm.get('storageId')?.setValue(storageUnit.id);
     this.showStorageUnitDropdown = false;
+
+    const queryObject: any = {
+      storageId: storageUnit.id,
+    };
+    this.fuelPumpService.query(queryObject).subscribe({
+      next: (response: FuelPumpArrayResponseType) => {
+        this.pumpsArray = response.body;
+        this.filteredPumps = [...this.pumpsArray];
+      },
+    });
+    this.pumpSearchTerm = '';
   }
 
   hideStorageUnitDropdown(): void {
@@ -353,9 +386,9 @@ export class FuelTransactionComponent implements OnInit {
     }, 200);
   }
 
-  selectPump(pump: { id: number; name: string }): void {
-    this.pump = pump.name;
-    // this.fuelTransactionForm.get('companyId')?.setValue(company.id);
+  selectPump(pump: FuelPump): void {
+    this.pumpSearchTerm = pump.description;
+    this.editForm.get('pumpId')?.setValue(pump.id);
     this.showPumpDropdown = false;
   }
 

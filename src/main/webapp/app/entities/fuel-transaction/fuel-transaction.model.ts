@@ -21,7 +21,7 @@ export interface FuelTransaction {
   contractDivisionId?: number | null;
   issuanceTypeId?: number | null;
   pumpId?: number | null;
-  storageUnitId?: number | null;
+  storageId?: number | null;
   litres?: number | null;
   meterReadingStart?: number | null;
   meterReadingEnd?: number | null;

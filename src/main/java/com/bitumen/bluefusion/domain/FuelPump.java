@@ -2,6 +2,7 @@ package com.bitumen.bluefusion.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,29 +17,25 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @AllArgsConstructor
 @Entity
 @Table(name = "fuel_pump")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@SuppressWarnings("common-java:DuplicatedBlocks")
-public class FuelPump extends AbstractAuditingEntity<AssetPlant> implements Serializable {
+public class FuelPump extends AbstractAuditingEntity<FuelPump> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fuel_pump_id")
     private Long fuelPumpId;
 
-    @Column(name = "fuel_pump_number")
-    private String fuelPumpNumber;
+    @Column(name = "fuel_pump_code")
+    private String fuelPumpCode;
+
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "current_storage_unit_id")
-    private AssetPlant currentStorageUnitId;
+    @JoinColumn(name = "current_storage_id")
+    private Storage currentStorageUnit;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    @Column(name = "is_active")
+    private Boolean isActive;
 
-    public Long getId() {
-        return this.fuelPumpId;
-    }
-
-    public void setId(Long id) {
-        this.fuelPumpId = id;
-    }
+    @Column(name = "valid_from")
+    private LocalDate validFrom;
 }

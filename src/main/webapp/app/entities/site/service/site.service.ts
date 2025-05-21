@@ -27,6 +27,13 @@ export class SiteService {
     return this.http.put<ISite>(`${this.resourceUrl}/${this.getSiteIdentifier(site)}`, site, { observe: 'response' });
   }
 
+  uploadImage(site: ISite): Observable<EntityResponseType> {
+    const formData = new FormData();
+    // @ts-ignore
+    formData.append('image', site.siteImage);
+    return this.http.put<ISite>(`${this.resourceUrl}/${this.getSiteIdentifier(site)}`, formData, { observe: 'response' });
+  }
+
   partialUpdate(site: PartialUpdateSite): Observable<EntityResponseType> {
     return this.http.patch<ISite>(`${this.resourceUrl}/${this.getSiteIdentifier(site)}`, site, { observe: 'response' });
   }
@@ -46,6 +53,10 @@ export class SiteService {
 
   getSiteIdentifier(site: Pick<ISite, 'id'>): number {
     return site.id;
+  }
+
+  getSiteImage(site: Pick<ISite, 'siteImage'>): File | null | undefined {
+    return site.siteImage;
   }
 
   compareSite(o1: Pick<ISite, 'id'> | null, o2: Pick<ISite, 'id'> | null): boolean {

@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { IFuelPump } from '../fuel-pump.model';
+import { FuelPump } from '../fuel-pump.model';
 
 @Component({
   selector: 'jhi-fuel-pump-detail',
@@ -10,7 +10,7 @@ import { IFuelPump } from '../fuel-pump.model';
   imports: [SharedModule, RouterModule],
 })
 export class FuelPumpDetailComponent {
-  fuelPump = input<IFuelPump | null>(null);
+  fuelPump = input<FuelPump | null>(null);
 
   previousState(): void {
     window.history.back();

@@ -2,7 +2,7 @@ package com.bitumen.bluefusion.web.rest;
 
 import com.bitumen.bluefusion.domain.PlantSubcategory;
 import com.bitumen.bluefusion.repository.PlantSubcategoryRepository;
-import com.bitumen.bluefusion.service.PlantSubcategoryService;
+import com.bitumen.bluefusion.service.plantSubcategoryService.PlantSubcategoryService;
 import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;

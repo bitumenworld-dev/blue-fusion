@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ISite } from '../site.model';
 import { SiteService } from '../service/site.service';
 import { SiteFormGroup, SiteFormService } from './site-form.service';
+import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
+import { ICompany } from '../../company/company.model';
 
 @Component({
   selector: 'jhi-site-update',
@@ -23,24 +25,21 @@ export class SiteUpdateComponent implements OnInit {
   protected siteService = inject(SiteService);
   protected siteFormService = inject(SiteFormService);
   protected activatedRoute = inject(ActivatedRoute);
+  protected readonly companyService = inject(CompanyService);
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   editForm: SiteFormGroup = this.siteFormService.createSiteFormGroup();
 
   // Company array dummy
-  companiesArray = [
-    { id: 1, name: 'Acme Corp' },
-    { id: 2, name: 'Globex Inc' },
-    { id: 3, name: 'Initech' },
-  ];
-
+  companiesArray: ICompany[] | null = [];
   searchTerm = '';
+  // @ts-ignore
   filteredCompanies = [...this.companiesArray];
   showDropdown = false;
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ site }) => {
       this.site = site;
+      this.loadCompanies();
       if (site) {
         this.updateForm(site);
       }
@@ -63,12 +62,18 @@ export class SiteUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISite>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: (response: HttpResponse<ISite>) => {
+        const savedSite: ISite | null = response.body;
+        this.onSaveSuccess(savedSite);
+      },
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
+  protected onSaveSuccess(result: ISite | null): void {
+    if (result) {
+      this.siteService.uploadImage(result);
+    }
     this.previousState();
   }
 
@@ -79,19 +84,30 @@ export class SiteUpdateComponent implements OnInit {
   protected onSaveFinalize(): void {
     this.isSaving = false;
   }
+
   protected updateForm(site: ISite): void {
     this.site = site;
     this.siteFormService.resetForm(this.editForm, site);
 
-    // Set the searchTerm for displaying selected company name in input
     const selectedCompanyId = site.companyId ?? site.company;
-    const selectedCompany = this.companiesArray.find(c => c.id === selectedCompanyId);
-    this.searchTerm = this.companiesArray.find(c => c.id === site.companyId)?.name ?? '';
+    if (site.company) {
+      this.editForm.get('companyId')?.setValue(site.companyId);
+      this.searchTerm = site.company;
+    }
   }
 
   // Company Filtering & Selection Logic
+  loadCompanies(): void {
+    this.companyService.query().subscribe({
+      next: (res: CompanyEntityArrayResponseType) => {
+        this.companiesArray = res.body;
+      },
+    });
+  }
+
   filterCompanies(): void {
     const term = this.searchTerm.toLowerCase();
+    // @ts-ignore
     this.filteredCompanies = this.companiesArray.filter(company => company.name.toLowerCase().includes(term));
   }
 

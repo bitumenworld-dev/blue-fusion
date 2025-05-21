@@ -51,7 +51,7 @@ public class StorageResource {
     @GetMapping("")
     public ResponseEntity<List<StorageResponseDTO>> getAll(
         @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-        @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
+        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
         @RequestParam(value = "storageCode", required = false) String storageCode,
         @RequestParam(value = "buildSmartCode", required = false) String buildSmartCode,
         @RequestParam(value = "companyId", required = false) Long companyId,

@@ -1,37 +1,39 @@
-package com.bitumen.bluefusion.service;
+package com.bitumen.bluefusion.service.fuelPump;
 
 import com.bitumen.bluefusion.domain.FuelPump;
+import com.bitumen.bluefusion.service.fuelPump.dto.FuelPumpRequest;
+import com.bitumen.bluefusion.service.fuelPump.dto.FuelPumpResponse;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * Service Interface for managing {@link com.bitumen.bluefusion.domain.FuelPump}.
+ * Service Interface for managing {@link FuelPump}.
  */
 public interface FuelPumpService {
     /**
      * Save a fuelPump.
      *
-     * @param fuelPump the entity to save.
+     * @param fuelPumpRequest the entity to save.
      * @return the persisted entity.
      */
-    FuelPump save(FuelPump fuelPump);
+    FuelPumpResponse save(FuelPumpRequest fuelPumpRequest);
 
     /**
      * Updates a fuelPump.
      *
-     * @param fuelPump the entity to update.
+     * @param fuelPumpRequest the entity to update.
      * @return the persisted entity.
      */
-    FuelPump update(FuelPump fuelPump);
+    FuelPumpResponse update(Long id, FuelPumpRequest fuelPumpRequest);
 
     /**
      * Partially updates a fuelPump.
      *
-     * @param fuelPump the entity to update partially.
+     * @param fuelPumpRequest the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<FuelPump> partialUpdate(FuelPump fuelPump);
+    FuelPumpResponse partialUpdate(Long id, FuelPumpRequest fuelPumpRequest);
 
     /**
      * Get all the fuelPumps.
@@ -39,7 +41,7 @@ public interface FuelPumpService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<FuelPump> findAll(Pageable pageable);
+    Page<FuelPumpResponse> findAll(Pageable pageable, Long storageUnitId, Boolean isActive, String fuelPumpCode);
 
     /**
      * Get the "id" fuelPump.
@@ -47,7 +49,7 @@ public interface FuelPumpService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<FuelPump> findOne(Long id);
+    FuelPumpResponse findOne(Long id);
 
     /**
      * Delete the "id" fuelPump.

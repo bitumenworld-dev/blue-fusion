@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IFuelPump } from '../fuel-pump.model';
+import { FuelPump } from '../fuel-pump.model';
 import { FuelPumpService } from '../service/fuel-pump.service';
 import { FuelPumpFormGroup, FuelPumpFormService } from './fuel-pump-form.service';
 
@@ -18,7 +18,7 @@ import { FuelPumpFormGroup, FuelPumpFormService } from './fuel-pump-form.service
 })
 export class FuelPumpUpdateComponent implements OnInit {
   isSaving = false;
-  fuelPump: IFuelPump | null = null;
+  fuelPump: FuelPump | null = null;
 
   protected fuelPumpService = inject(FuelPumpService);
   protected fuelPumpFormService = inject(FuelPumpFormService);
@@ -50,7 +50,7 @@ export class FuelPumpUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFuelPump>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<FuelPump>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -69,7 +69,7 @@ export class FuelPumpUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(fuelPump: IFuelPump): void {
+  protected updateForm(fuelPump: FuelPump): void {
     this.fuelPump = fuelPump;
     this.fuelPumpFormService.resetForm(this.editForm, fuelPump);
   }

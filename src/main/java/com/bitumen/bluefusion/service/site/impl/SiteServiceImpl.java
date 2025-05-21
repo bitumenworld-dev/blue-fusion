@@ -8,16 +8,16 @@ import com.bitumen.bluefusion.service.exceptions.RecordNotFoundException;
 import com.bitumen.bluefusion.service.site.SiteService;
 import com.bitumen.bluefusion.service.site.dto.SiteRequest;
 import com.bitumen.bluefusion.service.site.dto.SiteResponse;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
@@ -29,13 +29,12 @@ public class SiteServiceImpl implements SiteService {
     private final CompanyRepository companyRepository;
 
     @Override
-    public SiteResponse save(SiteRequest siteRequest) {
+    public SiteResponse save(SiteRequest siteRequest) throws IOException {
         Site site = Site.builder()
             .siteName(siteRequest.siteName())
             .latitude(siteRequest.latitude())
             .longitude(siteRequest.longitude())
             .siteNotes(siteRequest.siteNotes())
-            .siteImage(siteRequest.image())
             .build();
 
         if (siteRequest.companyId() != null) {
@@ -50,13 +49,21 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    public SiteResponse update(Long siteId, SiteRequest siteRequest) {
-        // Find the site or throw exception
+    public SiteResponse uploadSiteImage(Long siteId, MultipartFile file) throws IOException {
         Site site = siteRepository
             .findById(siteId)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Site with id %s not found", siteId)));
 
-        // Only update company if companyId is provided
+        site.setSiteImage(file.getBytes());
+        return SiteResponseMapper.map.apply(siteRepository.save(site));
+    }
+
+    @Override
+    public SiteResponse update(Long siteId, SiteRequest siteRequest) throws IOException {
+        Site site = siteRepository
+            .findById(siteId)
+            .orElseThrow(() -> new RecordNotFoundException(String.format("Site with id %s not found", siteId)));
+
         if (siteRequest.companyId() != null) {
             Company company = companyRepository
                 .findById(siteRequest.companyId())
@@ -64,12 +71,10 @@ public class SiteServiceImpl implements SiteService {
             site.setCompany(company);
         }
 
-        // Update other site properties
         site.setSiteName(siteRequest.siteName());
         site.setLatitude(siteRequest.latitude());
         site.setLongitude(siteRequest.longitude());
         site.setSiteNotes(siteRequest.siteNotes());
-        site.setSiteImage(siteRequest.image());
 
         Site savedSite = siteRepository.save(site);
         return SiteResponseMapper.map.apply(savedSite);
@@ -94,7 +99,6 @@ public class SiteServiceImpl implements SiteService {
                 Optional.ofNullable(siteRequest.latitude()).ifPresent(existingSite::setLatitude);
                 Optional.ofNullable(siteRequest.longitude()).ifPresent(existingSite::setLongitude);
                 Optional.ofNullable(siteRequest.siteNotes()).ifPresent(existingSite::setSiteNotes);
-                Optional.ofNullable(siteRequest.image()).ifPresent(existingSite::setSiteImage);
                 Optional.ofNullable(company).ifPresent(existingSite::setCompany);
                 return existingSite;
             })

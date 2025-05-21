@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IFuelPump, NewFuelPump } from '../fuel-pump.model';
+import { FuelPump, NewFuelPump } from '../fuel-pump.model';
 
 /**
  * A partial Type with required key is used as form input.
@@ -12,15 +12,18 @@ type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>
  * Type for createFormGroup and resetForm argument.
  * It accepts IFuelPump for edit and NewFuelPumpFormGroupInput for create.
  */
-type FuelPumpFormGroupInput = IFuelPump | PartialWithRequiredKeyOf<NewFuelPump>;
+type FuelPumpFormGroupInput = FuelPump | PartialWithRequiredKeyOf<NewFuelPump>;
 
 type FuelPumpFormDefaults = Pick<NewFuelPump, 'id'>;
 
 type FuelPumpFormGroupContent = {
-  id: FormControl<IFuelPump['id'] | NewFuelPump['id']>;
-  fuelPumpId: FormControl<IFuelPump['fuelPumpId']>;
-  fuelPumpNumber: FormControl<IFuelPump['fuelPumpNumber']>;
-  currentStorageUnitId: FormControl<IFuelPump['currentStorageUnitId']>;
+  id: FormControl<FuelPump['id'] | NewFuelPump['id']>;
+  fuelPumpCode: FormControl<FuelPump['fuelPumpCode']>;
+  storageId: FormControl<FuelPump['storageId']>;
+  storage: FormControl<FuelPump['storage']>;
+  description: FormControl<FuelPump['description']>;
+  validFrom: FormControl<FuelPump['validFrom']>;
+  isActive: FormControl<FuelPump['isActive']>;
 };
 
 export type FuelPumpFormGroup = FormGroup<FuelPumpFormGroupContent>;
@@ -40,14 +43,17 @@ export class FuelPumpFormService {
           validators: [Validators.required],
         },
       ),
-      fuelPumpId: new FormControl(fuelPumpRawValue.fuelPumpId),
-      fuelPumpNumber: new FormControl(fuelPumpRawValue.fuelPumpNumber),
-      currentStorageUnitId: new FormControl(fuelPumpRawValue.currentStorageUnitId),
+      fuelPumpCode: new FormControl(fuelPumpRawValue.fuelPumpCode),
+      storageId: new FormControl(fuelPumpRawValue.storageId),
+      storage: new FormControl(fuelPumpRawValue.storage),
+      description: new FormControl(fuelPumpRawValue.description),
+      validFrom: new FormControl(fuelPumpRawValue.validFrom),
+      isActive: new FormControl(fuelPumpRawValue.isActive),
     });
   }
 
-  getFuelPump(form: FuelPumpFormGroup): IFuelPump | NewFuelPump {
-    return form.getRawValue() as IFuelPump | NewFuelPump;
+  getFuelPump(form: FuelPumpFormGroup): FuelPump | NewFuelPump {
+    return form.getRawValue() as FuelPump | NewFuelPump;
   }
 
   resetForm(form: FuelPumpFormGroup, fuelPump: FuelPumpFormGroupInput): void {

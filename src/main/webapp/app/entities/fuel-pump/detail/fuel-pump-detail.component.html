@@ -2,39 +2,33 @@
   <div class="col-8">
     @if (fuelPump(); as fuelPumpRef) {
       <div>
-        <h2 data-cy="fuelPumpDetailsHeading"><span jhiTranslate="blueFusionApp.fuelPump.detail.title">Fuel Pump</span></h2>
+        <h2 data-cy="fuelPumpDetailsHeading"><span>Fuel Pump</span></h2>
 
         <hr />
-
         <jhi-alert-error />
-
         <jhi-alert />
 
         <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dt><span>ID</span></dt>
           <dd>
             <span>{{ fuelPumpRef.id }}</span>
           </dd>
-          <dt><span jhiTranslate="blueFusionApp.fuelPump.fuelPumpId">Fuel Pump Id</span></dt>
+          <dt><span>Fuel Pump Number</span></dt>
           <dd>
-            <span>{{ fuelPumpRef.fuelPumpId }}</span>
+            <span>{{ fuelPumpRef.fuelPumpCode }}</span>
           </dd>
-          <dt><span jhiTranslate="blueFusionApp.fuelPump.fuelPumpNumber">Fuel Pump Number</span></dt>
+          <dt><span>Current Storage</span></dt>
           <dd>
-            <span>{{ fuelPumpRef.fuelPumpNumber }}</span>
-          </dd>
-          <dt><span jhiTranslate="blueFusionApp.fuelPump.currentStorageUnitId">Current Storage Unit Id</span></dt>
-          <dd>
-            <span>{{ fuelPumpRef.currentStorageUnitId }}</span>
+            <span>{{ fuelPumpRef.storage }}</span>
           </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
         </button>
 
         <button type="button" [routerLink]="['/fuel-pump', fuelPumpRef.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
         </button>
       </div>
     }

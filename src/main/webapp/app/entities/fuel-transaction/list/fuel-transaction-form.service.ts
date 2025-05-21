@@ -35,7 +35,7 @@ type FuelTransactionFormGroupContent = {
   contractDivisionId: FormControl<FuelTransaction['contractDivisionId']>;
   issuanceTypeId: FormControl<FuelTransaction['issuanceTypeId']>;
   pumpId: FormControl<FuelTransaction['pumpId']>;
-  storageUnitId: FormControl<FuelTransaction['storageUnitId']>;
+  storageId: FormControl<FuelTransaction['storageId']>;
   litres: FormControl<FuelTransaction['litres']>;
   meterReadingStart: FormControl<FuelTransaction['meterReadingStart']>;
   meterReadingEnd: FormControl<FuelTransaction['meterReadingEnd']>;
@@ -78,7 +78,7 @@ export class FuelTransactionFormService {
       contractDivisionId: new FormControl(fuelTransactionRawValue.contractDivisionId),
       issuanceTypeId: new FormControl(fuelTransactionRawValue.issuanceTypeId),
       pumpId: new FormControl(fuelTransactionRawValue.pumpId),
-      storageUnitId: new FormControl(fuelTransactionRawValue.storageUnitId),
+      storageId: new FormControl(fuelTransactionRawValue.storageId),
       litres: new FormControl(fuelTransactionRawValue.litres),
       meterReadingStart: new FormControl(fuelTransactionRawValue.meterReadingStart),
       meterReadingEnd: new FormControl(fuelTransactionRawValue.meterReadingEnd),

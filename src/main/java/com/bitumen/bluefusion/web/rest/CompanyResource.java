@@ -112,9 +112,7 @@ public class CompanyResource {
     ) {
         Page<CompanyResponse> page = companyService.findAll(pageable, companyName, usesFuelSystem, isActive);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        ResponseEntity<List<CompanyResponse>> body = ResponseEntity.ok().headers(headers).body(page.getContent());
-        log.info("company response : {}", body);
-        return body;
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

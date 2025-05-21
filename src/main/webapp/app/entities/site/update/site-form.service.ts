@@ -3,15 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ISite, NewSite } from '../site.model';
 
-/**
- * A partial Type with required key is used as form input.
- */
 type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
 
-/**
- * Type for createFormGroup and resetForm argument.
- * It accepts ISite for edit and NewSiteFormGroupInput for create.
- */
 type SiteFormGroupInput = ISite | PartialWithRequiredKeyOf<NewSite>;
 
 type SiteFormDefaults = Pick<NewSite, 'id' | 'isActive'>;
@@ -23,8 +16,8 @@ type SiteFormGroupContent = {
   longitude: FormControl<ISite['longitude']>;
   isActive: FormControl<ISite['isActive']>;
   siteNotes: FormControl<ISite['siteNotes']>;
-  siteImageUrl: FormControl<ISite['siteImageUrl']>;
-  companyId: FormControl<number | null>;
+  siteImage: FormControl<ISite['siteImage']>;
+  companyId: FormControl<ISite['companyId']>;
 };
 
 export type SiteFormGroup = FormGroup<SiteFormGroupContent>;
@@ -49,7 +42,7 @@ export class SiteFormService {
       longitude: new FormControl(siteRawValue.longitude),
       isActive: new FormControl(siteRawValue.isActive),
       siteNotes: new FormControl(siteRawValue.siteNotes),
-      siteImageUrl: new FormControl(siteRawValue.siteImageUrl),
+      siteImage: new FormControl(siteRawValue.siteImage),
       companyId: new FormControl(siteRawValue.companyId ?? null),
     });
   }
@@ -60,12 +53,10 @@ export class SiteFormService {
 
   resetForm(form: SiteFormGroup, site: SiteFormGroupInput): void {
     const siteRawValue = { ...this.getFormDefaults(), ...site };
-    form.reset(
-      {
-        ...siteRawValue,
-        id: { value: siteRawValue.id, disabled: true },
-      } as any /* cast to workaround https://github.com/angular/angular/issues/46458 */,
-    );
+    form.reset({
+      ...siteRawValue,
+      id: { value: siteRawValue.id, disabled: true },
+    } as any);
   }
 
   private getFormDefaults(): SiteFormDefaults {

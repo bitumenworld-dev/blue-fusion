@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IFuelPump, NewFuelPump } from '../fuel-pump.model';
+import { FuelPump, NewFuelPump } from '../fuel-pump.model';
 
-export type PartialUpdateFuelPump = Partial<IFuelPump> & Pick<IFuelPump, 'id'>;
+export type PartialUpdateFuelPump = Partial<FuelPump> & Pick<FuelPump, 'id'>;
 
-export type EntityResponseType = HttpResponse<IFuelPump>;
-export type EntityArrayResponseType = HttpResponse<IFuelPump[]>;
+export type FuelPumpResponseType = HttpResponse<FuelPump>;
+export type FuelPumpArrayResponseType = HttpResponse<FuelPump[]>;
 
 @Injectable({ providedIn: 'root' })
 export class FuelPumpService {
@@ -19,40 +19,40 @@ export class FuelPumpService {
 
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/fuel-pumps');
 
-  create(fuelPump: NewFuelPump): Observable<EntityResponseType> {
-    return this.http.post<IFuelPump>(this.resourceUrl, fuelPump, { observe: 'response' });
+  create(fuelPump: NewFuelPump): Observable<FuelPumpResponseType> {
+    return this.http.post<FuelPump>(this.resourceUrl, fuelPump, { observe: 'response' });
   }
 
-  update(fuelPump: IFuelPump): Observable<EntityResponseType> {
-    return this.http.put<IFuelPump>(`${this.resourceUrl}/${this.getFuelPumpIdentifier(fuelPump)}`, fuelPump, { observe: 'response' });
+  update(fuelPump: FuelPump): Observable<FuelPumpResponseType> {
+    return this.http.put<FuelPump>(`${this.resourceUrl}/${this.getFuelPumpIdentifier(fuelPump)}`, fuelPump, { observe: 'response' });
   }
 
-  partialUpdate(fuelPump: PartialUpdateFuelPump): Observable<EntityResponseType> {
-    return this.http.patch<IFuelPump>(`${this.resourceUrl}/${this.getFuelPumpIdentifier(fuelPump)}`, fuelPump, { observe: 'response' });
+  partialUpdate(fuelPump: PartialUpdateFuelPump): Observable<FuelPumpResponseType> {
+    return this.http.patch<FuelPump>(`${this.resourceUrl}/${this.getFuelPumpIdentifier(fuelPump)}`, fuelPump, { observe: 'response' });
   }
 
-  find(id: number): Observable<EntityResponseType> {
-    return this.http.get<IFuelPump>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  find(id: number): Observable<FuelPumpResponseType> {
+    return this.http.get<FuelPump>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(req?: any): Observable<FuelPumpArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IFuelPump[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<FuelPump[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getFuelPumpIdentifier(fuelPump: Pick<IFuelPump, 'id'>): number {
+  getFuelPumpIdentifier(fuelPump: Pick<FuelPump, 'id'>): number {
     return fuelPump.id;
   }
 
-  compareFuelPump(o1: Pick<IFuelPump, 'id'> | null, o2: Pick<IFuelPump, 'id'> | null): boolean {
+  compareFuelPump(o1: Pick<FuelPump, 'id'> | null, o2: Pick<FuelPump, 'id'> | null): boolean {
     return o1 && o2 ? this.getFuelPumpIdentifier(o1) === this.getFuelPumpIdentifier(o2) : o1 === o2;
   }
 
-  addFuelPumpToCollectionIfMissing<Type extends Pick<IFuelPump, 'id'>>(
+  addFuelPumpToCollectionIfMissing<Type extends Pick<FuelPump, 'id'>>(
     fuelPumpCollection: Type[],
     ...fuelPumpsToCheck: (Type | null | undefined)[]
   ): Type[] {

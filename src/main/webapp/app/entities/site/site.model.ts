@@ -6,7 +6,7 @@ export interface ISite {
   longitude?: string | null;
   isActive?: boolean | null;
   siteNotes?: string | null;
-  siteImageUrl?: string | null;
+  siteImage?: File | null;
   company?: string | null;
 }
 

@@ -1,8 +1,13 @@
-export interface IFuelPump {
+import dayjs from 'dayjs/esm';
+
+export interface FuelPump {
   id: number;
-  fuelPumpId?: number | null;
-  fuelPumpNumber?: string | null;
-  currentStorageUnitId?: number | null;
+  fuelPumpCode?: string | null;
+  storageId?: number | null;
+  storage?: string | null;
+  description?: string | null;
+  validFrom?: dayjs.Dayjs | null;
+  isActive?: boolean | null;
 }
 
-export type NewFuelPump = Omit<IFuelPump, 'id'> & { id: null };
+export type NewFuelPump = Omit<FuelPump, 'id'> & { id: null };

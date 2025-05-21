@@ -1,6 +1,7 @@
 package com.bitumen.bluefusion.repository;
 
 import com.bitumen.bluefusion.domain.FuelPump;
+import com.bitumen.bluefusion.domain.Site;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface FuelPumpRepository extends JpaRepository<FuelPump, Long> {}
+public interface FuelPumpRepository extends JpaRepository<FuelPump, Long>, JpaSpecificationExecutor<FuelPump> {}

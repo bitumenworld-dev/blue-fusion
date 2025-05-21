@@ -1,6 +1,8 @@
-package com.bitumen.bluefusion.service;
+package com.bitumen.bluefusion.service.plantSubcategoryService;
 
 import com.bitumen.bluefusion.domain.PlantSubcategory;
+import com.bitumen.bluefusion.service.plantSubcategoryService.dto.PlantSubcategoryRequest;
+import com.bitumen.bluefusion.service.plantSubcategoryService.dto.PlantSubcategoryResponse;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,7 @@ public interface PlantSubcategoryService {
      * @param plantSubcategory the entity to save.
      * @return the persisted entity.
      */
-    PlantSubcategory save(PlantSubcategory plantSubcategory);
+    PlantSubcategoryResponse save(PlantSubcategoryRequest plantSubcategory);
 
     /**
      * Updates a plantSubcategory.
@@ -23,7 +25,7 @@ public interface PlantSubcategoryService {
      * @param plantSubcategory the entity to update.
      * @return the persisted entity.
      */
-    PlantSubcategory update(PlantSubcategory plantSubcategory);
+    PlantSubcategoryResponse update(Long subcategoryId, PlantSubcategoryRequest plantSubcategory);
 
     /**
      * Partially updates a plantSubcategory.
@@ -31,7 +33,7 @@ public interface PlantSubcategoryService {
      * @param plantSubcategory the entity to update partially.
      * @return the persisted entity.
      */
-    Optional<PlantSubcategory> partialUpdate(PlantSubcategory plantSubcategory);
+    PlantSubcategoryResponse partialUpdate(Long subcategoryId, PlantSubcategoryRequest plantSubcategory);
 
     /**
      * Get all the plantSubcategories.
@@ -39,7 +41,7 @@ public interface PlantSubcategoryService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<PlantSubcategory> findAll(Pageable pageable);
+    Page<PlantSubcategoryResponse> findAll(Pageable pageable, String plantSubcategoryCode, String planSubcategoryDescription);
 
     /**
      * Get the "id" plantSubcategory.
@@ -47,7 +49,7 @@ public interface PlantSubcategoryService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<PlantSubcategory> findOne(Long id);
+    PlantSubcategoryResponse findOne(Long id);
 
     /**
      * Delete the "id" plantSubcategory.

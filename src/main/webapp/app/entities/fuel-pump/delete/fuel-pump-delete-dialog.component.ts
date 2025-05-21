@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IFuelPump } from '../fuel-pump.model';
+import { FuelPump } from '../fuel-pump.model';
 import { FuelPumpService } from '../service/fuel-pump.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { FuelPumpService } from '../service/fuel-pump.service';
   imports: [SharedModule, FormsModule],
 })
 export class FuelPumpDeleteDialogComponent {
-  fuelPump?: IFuelPump;
+  fuelPump?: FuelPump;
 
   protected fuelPumpService = inject(FuelPumpService);
   protected activeModal = inject(NgbActiveModal);
