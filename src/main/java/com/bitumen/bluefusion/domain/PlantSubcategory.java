@@ -3,8 +3,6 @@ package com.bitumen.bluefusion.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import lombok.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -13,7 +11,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @AllArgsConstructor
 @Entity
 @Table(name = "plant_subcategory")
-public class PlantSubcategory extends AbstractAuditingEntity<FuelPump> implements Serializable {
+public class PlantSubcategory extends AbstractAuditingEntity<PlantSubcategory> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

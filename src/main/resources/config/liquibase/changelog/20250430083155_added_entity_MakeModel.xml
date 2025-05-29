@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 
-  <changeSet id="20250430083157-1" author="jhipster">
-    <createTable tableName="plant_category">
-      <column name="plant_category_id" type="bigint" autoIncrement="true" startWith="1">
+  <changeSet id="20250430083155-1" author="jhipster">
+    <createTable tableName="make_model">
+      <column name="model_id" type="bigint" autoIncrement="true" startWith="1">
         <constraints primaryKey="true" nullable="false"/>
       </column>
 
-      <column name="plant_category_code" type="varchar(255)">
-        <constraints nullable="true"/>
-      </column>
-
-      <column name="plant_category_description" type="varchar(255)">
+      <column name="model" type="varchar(100)">
         <constraints nullable="true"/>
       </column>
 
@@ -31,15 +29,15 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="20250430083157-1-data" author="jhipster" context="faker">
+
+  <changeSet id="20250430083155-1-data" author="jhipster" context="faker">
     <loadData
-      file="config/liquibase/fake-data/plant_category.csv"
+      file="config/liquibase/fake-data/make_model.csv"
       separator=","
-      tableName="plant_category"
+      tableName="make_model"
       usePreparedStatements="true">
-      <column name="plant_category_id" type="numeric"/>
-      <column name="plant_category_code" type="string"/>
-      <column name="plant_category_description" type="string"/>
+      <column name="model_id" type="numeric"/>
+      <column name="model" type="string"/>
       <column name="created_by" type="varchar(50)"/>
       <column name="created_date" type="timestamp"/>
       <column name="last_modified_by" type="varchar(50)"/>

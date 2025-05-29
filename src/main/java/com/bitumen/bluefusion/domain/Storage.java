@@ -42,6 +42,9 @@ public class Storage extends AbstractAuditingEntity<Storage> implements Serializ
 
     private Double capacity;
 
+    @Transient
+    private Double fuelBalance;
+
     private String accessKey;
 
     @Column(name = "storage_content")
@@ -57,7 +60,7 @@ public class Storage extends AbstractAuditingEntity<Storage> implements Serializ
         if (storageContent != null && !storageContent.isEmpty()) {
             storageContents = Arrays.stream(storageContent.split(","))
                 .map(String::trim)
-                .map(StorageContent::findStorageContentByCode)
+                .map(StorageContent::valueOf)
                 .collect(Collectors.toList());
         } else {
             storageContents = new ArrayList<>();
@@ -68,7 +71,7 @@ public class Storage extends AbstractAuditingEntity<Storage> implements Serializ
     @PreUpdate
     private void onSave() {
         if (storageContents != null && !storageContents.isEmpty()) {
-            storageContent = storageContents.stream().map(StorageContent::getCode).collect(Collectors.joining(","));
+            storageContent = storageContents.stream().map(StorageContent::name).collect(Collectors.joining(","));
         }
     }
 }

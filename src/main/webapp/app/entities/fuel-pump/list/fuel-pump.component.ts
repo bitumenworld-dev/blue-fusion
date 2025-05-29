@@ -5,8 +5,7 @@ import { Observable, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
-import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
-import { ItemCountComponent } from 'app/shared/pagination';
+import { SortByDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
@@ -16,9 +15,8 @@ import { FuelPumpArrayResponseType, FuelPumpService } from '../service/fuel-pump
 import { FuelPumpDeleteDialogComponent } from '../delete/fuel-pump-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-fuel-pump',
   templateUrl: './fuel-pump.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, ItemCountComponent],
+  imports: [RouterModule, FormsModule, SharedModule, SortByDirective],
 })
 export class FuelPumpComponent implements OnInit {
   subscription: Subscription | null = null;

@@ -42,16 +42,6 @@ const routes: Routes = [
     loadChildren: () => import('./site/site.routes'),
   },
   {
-    path: 'manufacturer',
-    data: { pageTitle: 'blueFusionApp.manufacturer.home.title' },
-    loadChildren: () => import('./manufacturer/manufacturer.routes'),
-  },
-  {
-    path: 'manufacturer-model',
-    data: { pageTitle: 'blueFusionApp.manufacturerModel.home.title' },
-    loadChildren: () => import('./manufacturer-model/manufacturer-model.routes'),
-  },
-  {
     path: 'company',
     data: { pageTitle: 'blueFusionApp.company.home.title' },
     loadChildren: () => import('./company/company.routes'),

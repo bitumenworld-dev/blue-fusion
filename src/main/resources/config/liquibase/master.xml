@@ -18,8 +18,8 @@
     <include file="config/liquibase/changelog/20250430083151_added_entity_AssetPlantPhoto.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083152_added_entity_ContractDivision.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083153_added_entity_Site.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083154_added_entity_Manufacturer.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083155_added_entity_ManufacturerModel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250430083154_added_entity_Make.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250430083155_added_entity_MakeModel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083156_added_entity_Company.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083157_added_entity_PlantCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250430083158_added_entity_PlantSubcategory.xml" relativeToChangelogFile="false"/>

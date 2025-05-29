@@ -11,5 +11,6 @@ public record StorageResponseDTO(
     Double capacity,
     String accessKey,
     String storageContent,
+    Double fuelBalance,
     Boolean isActive
 ) {}

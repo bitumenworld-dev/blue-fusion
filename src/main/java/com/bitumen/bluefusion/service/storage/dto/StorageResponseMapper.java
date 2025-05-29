@@ -19,6 +19,7 @@ public interface StorageResponseMapper {
             storage.getCapacity(),
             storage.getAccessKey(),
             storage.getStorageContent(),
+            storage.getFuelBalance(),
             storage.getIsActive()
         );
 }

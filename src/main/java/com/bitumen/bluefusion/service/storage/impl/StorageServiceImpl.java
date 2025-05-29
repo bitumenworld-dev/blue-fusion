@@ -46,8 +46,8 @@ public class StorageServiceImpl implements StorageService {
             .storageContent(storageRequestDTO.storageContent())
             .isActive(true)
             .build();
-        Storage storageUnit = storageRepository.save(storage);
 
+        Storage storageUnit = storageRepository.save(storage);
         return StorageResponseMapper.map.apply(storageUnit);
     }
 
@@ -104,10 +104,11 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void delete(Long storageId) {
-        Storage storage = storageRepository
+        storageRepository
             .findById(storageId)
-            .orElseThrow(() -> new RecordNotFoundException(String.format("Storage with id %s does not exist", storageId)));
-        storageRepository.delete(storage);
+            .ifPresentOrElse(storageRepository::delete, () -> {
+                throw new RecordNotFoundException(String.format("storage with id %s was not found", storageId));
+            });
     }
 
     @Override
@@ -132,14 +133,6 @@ public class StorageServiceImpl implements StorageService {
             specification.and(StorageSpec.withStorageContent(StorageContent.valueOf(storageSearchDTO.warehouseContent())));
         }
 
-        Page<StorageResponseDTO> response = storageRepository.findAll(specification, pageable).map(StorageResponseMapper.map);
-
-        log.info(
-            "response with: {} ,pages {}, and data {}",
-            response.getTotalElements(),
-            response.getTotalPages(),
-            response.get().collect(Collectors.toSet())
-        );
-        return response;
+        return storageRepository.findAll(specification, pageable).map(StorageResponseMapper.map);
     }
 }

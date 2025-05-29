@@ -1,11 +1,138 @@
-id;plant_subcategory_id;plant_subcategory_code;plant_subcategory_name;plant_subcategory_description;is_audited
-1;14563;as unwelcome;sadly nearly;ack fantastic;false
-2;27689;along like;term along whole;mozzarella biodegradable;true
-3;12832;abaft;fit ice-cream mummify;gee;true
-4;30553;aha following;oof so vastly;via hope;false
-5;15115;exactly fooey;supportive structure who;wherever gah;true
-6;29551;gently given;hoot;pulse anxiously unto;false
-7;13087;oh beyond hmph;commemorate;merrily qua offensively;false
-8;26893;regularly secrecy and;design light;although fooey;false
-9;17189;as;delete potable;seafood cemetery;false
-10;20010;gosh pro;quit minus collectivization;gracefully inside to;true
+plant_subcategory_id,plant_subcategory_code,plant_subcategory_description,created_by
+1,"AFW01 "," Aircraft Fixed-wing Light",MIGRATION
+2,"ASA01 "," Light Vehicle - Motorcycle",MIGRATION
+3,"ASB01 "," Light Vehicle - Sedan",MIGRATION
+4,"ASC01 "," Sports Utility Vehicle < 2,5 Ltr",MIGRATION
+5,"ASC02 "," Sports Utility Vehicle > 2,5 Ltr",MIGRATION
+6,"ASD01 "," Light Utility Vehicle - Double Cab",MIGRATION
+7,"ASK01 "," Light Utility Vehicle - King Cab",MIGRATION
+8,"ASS01 "," Light Utility Vehicle - Single Cab",MIGRATION
+9,"ASV01 "," Light Utility Vehicle - Bus or Van",MIGRATION
+10,"BHS01 "," Bitumen Hand Spray Trolley",MIGRATION
+11,"BKM01 "," Block Making Machine",MIGRATION
+12,"BLF01 "," Leaf Blowers",MIGRATION
+13,"CEP01 "," Mobile Concrete Batch Plant",MIGRATION
+14,"CEP02 "," Concrete Mixer Truck",MIGRATION
+15,"CEP03 "," Concrete Mixer",MIGRATION
+16,"CEP04 "," Concrete Saw Cutter",MIGRATION
+17,"CEP05 "," Concrete Poker Vibrator - 50mm",MIGRATION
+18,"CEP06 "," Concrete Power Trowel",MIGRATION
+19,"CHS01 "," Chainsaw",MIGRATION
+20,"CMP01 "," Air Compressor - Small , up to 200 cfm",MIGRATION
+21,"CMP02 "," Air Compressor - Medium , 200 to 700 cfm",MIGRATION
+22,CNT0,CNT0,MIGRATION
+23,"CNT01 "," Container Shipping 20 ft",MIGRATION
+24,"CNT02 "," Container Shipping 40 ft",MIGRATION
+25,"CNT03 "," Container Prefab Unit",MIGRATION
+26,"CRN02 "," Mobile Crane 20 to 80 ton",MIGRATION
+27,"CRS01 "," Mobile Jaw Crusher",MIGRATION
+28,"CRS02 "," Mobile Cone Crusher",MIGRATION
+29,"CRS03 "," Mobile Screen",MIGRATION
+30,"CRS04 "," Mobile VSI Crusher",MIGRATION
+31,"CRS05 "," Wheel Stacker ( 32 x 50 inch )",MIGRATION
+32,"CSP01 "," Chipspreader Self Propelled",MIGRATION
+33,"CSP02 "," Chipspreader Tailgate",MIGRATION
+34,"DRG01 "," Crawler Drill Rig - 70 to 120  mm bore",MIGRATION
+35,"DZR01 "," Dozer D6 ( 14t , 100kw )",MIGRATION
+36,"DZR04 "," Dozer D7 ( 25t , 200kw )",MIGRATION
+37,"EAG01 "," Earth Auger - Hand Held",MIGRATION
+38,"EXC01 "," Excavator (Tracked) - 6 ton",MIGRATION
+39,"EXC03 "," Excavator (Tracked) - 20 ton",MIGRATION
+40,"EXC04 "," Excavator (Tracked) - 30 ton",MIGRATION
+41,"EXC05 "," Excavator (Tracked) - 40 ton",MIGRATION
+42,"FBR01 "," Fuel Bowser Mobile Tank - 1 000 Ltr Tank",MIGRATION
+43,"FBR02 "," Fuel Bowser Light Truck - 2 000 Ltr Tank",MIGRATION
+44,"FBR03 "," Fuel Bowser Medium Truck - 10 000 Ltr Tank",MIGRATION
+45,"FBR04 "," Fuel Bowser Tanker Trailer - 45 000 Ltr Tank",MIGRATION
+46,"FLP01 "," Fuel Storage Tank (above ground 50kl)",MIGRATION
+47,"FLP02 "," Forecourt Fuel Pump",MIGRATION
+48,"FLP03 "," Fuel Pump - >1,0 kl/min",MIGRATION
+49,"GEN01 "," Generator - < 10 kVa",MIGRATION
+50,"GEN02 "," Generator - 10 to 30 kVa",MIGRATION
+51,"GEN03 "," Generator - 30 to 100 kVa",MIGRATION
+52,"GEN04 "," Generator - > 100 kVa",MIGRATION
+53,"GLP01 "," Lighting Plant  [ LTP01 ]",MIGRATION
+54,"GTM01 "," Grass Trimmer",MIGRATION
+55,HAP01," Asphalt Plant - 70 ton/hr",MIGRATION
+56,"HAP02 "," Beltweigher",MIGRATION
+57,"HAP04 "," Bitumen Decanter",MIGRATION
+58,"HAP05 "," Bitumen Pump",MIGRATION
+59,HAP06,HAP06,MIGRATION
+60,"HAP06 b "," Mobile AP , Drum Mixer",MIGRATION
+61,"HAP07 "," Bitumen Storage Tank",MIGRATION
+62,"HAP08 "," 140 ton/hr",MIGRATION
+63,"HAP09 "," Asphalt Plant Mobile Trailer",MIGRATION
+64,"HHB02 "," Hydraulic Hammer - Medium Class",MIGRATION
+65,"JJK01 "," Tamper - 70 kg",MIGRATION
+66,"JKH01 "," Jack Hammer - Electrical",MIGRATION
+67,"LAT01 "," Mech Horse ( < 400 hp )",MIGRATION
+68,"LAT02 "," Mech Horse ( > 400 hp )",MIGRATION
+69,"LAT03 "," Mech Horse - Lowbed",MIGRATION
+70,"LBS02 "," Bitumen Distributor - 12000 Ltr",MIGRATION
+71,"LNM01 "," Lawn Mower",MIGRATION
+72,"LNM02 "," Lawn Mower - Pushed",MIGRATION
+73,"LSV02 "," Stabilization Vehicle Mounted 16m3",MIGRATION
+74,"LTF01 "," Flat Truck : 1 to 5 ton",MIGRATION
+75,"LTF02 "," Flat Truck : 5 to 12 ton",MIGRATION
+76,"LTF03 "," Flat Truck : 12 to 20 ton",MIGRATION
+77,"LTP01 "," Tip Truck 6 m3",MIGRATION
+78,"LTP02 "," Tip Truck 10 m3",MIGRATION
+79,"LTP03 "," Tip Truck 20 m3",MIGRATION
+80,"LTP05 "," Mining Dump Truck 20 m3",MIGRATION
+81,"LVS01 "," Service Truck < 5,0 ton",MIGRATION
+82,"MGR01 "," Motor Grader ( 17t , 200hp ) eg. 140K",MIGRATION
+83,"MGR02 "," Motor Grader ( 18t , 220hp ) eg. 160K",MIGRATION
+84,"PCM01 "," Plate Compactor",MIGRATION
+85,"PGH02 "," Construction Mixing Plough",MIGRATION
+86,"PRW01 "," Pressure Washer",MIGRATION
+87,"PVR01 "," Asphalt Paver - 300 tons/hr",MIGRATION
+88,"PVR02 "," Asphalt Paver - 600 tons/hr",MIGRATION
+89,"PVR05 "," Asphalt Power Feeder - 1200 tons/hr",MIGRATION
+90,"RBM01 "," Rotary Broom - Towed & Chain Driven",MIGRATION
+91,"RBM02 "," Rotary Broom - Towed & Engine Driven",MIGRATION
+92,"RBM03 "," Rotary Broom - Self Propelled",MIGRATION
+93,"RCL01 "," Recycler - 2,4m  480hp",MIGRATION
+94,"RCL02 "," Recycler - 2,6m  590hp",MIGRATION
+95,"RLP01 "," Roller Pneumatic - 20 ton",MIGRATION
+96,"RLP02 "," Roller Pneumatic - 27 ton",MIGRATION
+97,"RLV01 "," Roller Pedestrian - 1,0 ton",MIGRATION
+98,"RLV02 "," Roller Pedestrian - 1,5 ton",MIGRATION
+99,"RLV03 "," Roller Single Drum - 12 ton",MIGRATION
+100,"RLV04 "," Roller Single Drum - 20 ton",MIGRATION
+101,"RMK01 "," Road Marking Machine - Self Propelled Stand-on",MIGRATION
+102,"RVL05 "," Roller Double Drum - 3 ton",MIGRATION
+103,"RVL06 "," Roller Double Drum - 10 ton",MIGRATION
+104,"SJK01 "," Mechanical Lift - 0 to 30 ft",MIGRATION
+105,"STP02 "," Static Tank Plastic Jojo -   5 000 Ltr",MIGRATION
+106,"STP03 "," Static Tank Plastic Jojo - 10 000 Ltr",MIGRATION
+107,"SUR01 "," Survey - GPS System",MIGRATION
+108,"SUR02 "," Survey - Robotic Total Station",MIGRATION
+109,"SUR03 "," Survey - Mechanical Total Station",MIGRATION
+110,"SUR04 "," Survey - Automatic Level",MIGRATION
+111,"SWE01 "," Specialist Workshop Equipment",MIGRATION
+112,"TBT01 "," Bitumen Tanker Trailer - 30 000 Ltr",MIGRATION
+113,"TBT02 "," Bitumen Tanker Trailer - 18 000 Ltr",MIGRATION
+114,"TRG01 "," Trailer General Purpose - Small",MIGRATION
+115,"TRG02 "," Trailer General Purpose Flat Deck",MIGRATION
+116,"TRL01 "," Trailer Lowbed Step-deck - 20 ton",MIGRATION
+117,"TRL02 "," Trailer Lowbed Step-deck - 30 ton",MIGRATION
+118,"TST01 "," Interlink Side Tipper - 25 m3",MIGRATION
+119,"WAP01 "," Water Pump - 2 inch",MIGRATION
+120,"WAP02 "," Water Pump - 4 inch",MIGRATION
+121,"WAP03 "," Water Pump - 6 inch",MIGRATION
+122,"WBD01 "," Weighbridge - up to 12m long",MIGRATION
+123,"WBD02 "," Weighbridge - 12m to 22m long",MIGRATION
+124,"WBR01 "," Water Bowser : 10 to 20 kl",MIGRATION
+125,"WLB01 "," TLB ( 7,8 t , 1,1 m3 bucket )",MIGRATION
+126,"WLB02 "," TLB ( 8,7 t , 1,3 m3 bucket )",MIGRATION
+127,"WLD02 "," Wheeled Loader ( 5 ton , bucket = 1,0 m3 )",MIGRATION
+128,"WLD03 "," Wheeled Loader ( 12 ton , bucket = 1,8 m3 )",MIGRATION
+129,"WLD04 "," Wheeled Loader ( 14 ton , bucket = 2,4 m3 )",MIGRATION
+130,"WLD05 "," Wheeled Loader ( 17 ton , bucket = 3,1 m3 )",MIGRATION
+131,"WLD06 "," Wheeled Loader ( 24 ton , bucket = 4,5 m3 )",MIGRATION
+132,"WLF01 "," Loader Forklift ( 1,0 to 3,5 ton )",MIGRATION
+133,"WLM01 "," Welding Machine",MIGRATION
+134,"WLS02 "," Loader Skid-Steer (up to 2,5 t , 0,4m3 bucket)",MIGRATION
+135,"WTC01 "," Tractor - < 50 hp , 2wd",MIGRATION
+136,"WTC02 "," Tractor - < 100 hp , 2wd",MIGRATION
+137,"WTC03 "," Tractor - < 150 hp , 4wd",MIGRATION

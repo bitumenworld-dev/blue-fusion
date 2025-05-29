@@ -72,8 +72,8 @@ public class AssetPlantServiceImpl implements AssetPlantService {
         //                if (assetPlant.getPlantSubcategoryId() != null) {
         //                    existingAssetPlant.setPlantSubcategoryId(assetPlant.getPlantSubcategoryId());
         //                }
-        //                if (assetPlant.getManufacturerId() != null) {
-        //                    existingAssetPlant.setManufacturerId(assetPlant.getManufacturerId());
+        //                if (assetPlant.getMakeId() != null) {
+        //                    existingAssetPlant.setMakeId(assetPlant.getMakeId());
         //                }
         //                if (assetPlant.getModelId() != null) {
         //                    existingAssetPlant.setModelId(assetPlant.getModelId());
