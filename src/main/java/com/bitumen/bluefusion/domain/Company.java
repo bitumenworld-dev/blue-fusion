@@ -31,7 +31,7 @@ public class Company extends AbstractAuditingEntity<Company> implements Serializ
     private Boolean isIAC;
 
     @Column(name = "access_key")
-    private String access_key;
+    private String accessKey;
 
     @Column(name = "uses_fuel_system")
     private Boolean usesFuelSystem;

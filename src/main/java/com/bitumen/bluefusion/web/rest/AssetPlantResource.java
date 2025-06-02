@@ -1,22 +1,24 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.domain.AssetPlant;
-import com.bitumen.bluefusion.repository.AssetPlantRepository;
 import com.bitumen.bluefusion.service.assetPlant.AssetPlantService;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantFilterCriteria;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantRequest;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantResponse;
+import jakarta.mail.MethodNotSupportedException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,11 +29,10 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.bitumen.bluefusion.domain.AssetPlant}.
  */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/asset-plants")
 public class AssetPlantResource {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AssetPlantResource.class);
 
     private static final String ENTITY_NAME = "assetPlant";
 
@@ -40,140 +41,112 @@ public class AssetPlantResource {
 
     private final AssetPlantService assetPlantService;
 
-    private final AssetPlantRepository assetPlantRepository;
-
-    public AssetPlantResource(AssetPlantService assetPlantService, AssetPlantRepository assetPlantRepository) {
-        this.assetPlantService = assetPlantService;
-        this.assetPlantRepository = assetPlantRepository;
-    }
-
-    /**
-     * {@code POST  /asset-plants} : Create a new assetPlant.
-     *
-     * @param assetPlant the assetPlant to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new assetPlant, or with status {@code 400 (Bad Request)} if the assetPlant has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("")
-    public ResponseEntity<AssetPlant> createAssetPlant(@Valid @RequestBody AssetPlant assetPlant) throws URISyntaxException {
-        LOG.debug("REST request to save AssetPlant : {}", assetPlant);
-        if (assetPlant.getAssetPlantId() != null) {
-            throw new BadRequestAlertException("A new assetPlant cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        assetPlant = assetPlantService.save(assetPlant);
-        return ResponseEntity.created(new URI("/api/asset-plants/" + assetPlant.getAssetPlantId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString()))
-            .body(assetPlant);
+    public ResponseEntity<AssetPlantResponse> createAssetPlant(@Valid @RequestBody AssetPlantRequest assetPlantRequest)
+        throws URISyntaxException {
+        AssetPlantResponse assetPlantResponse = assetPlantService.save(assetPlantRequest);
+        return ResponseEntity.created(new URI("/api/asset-plants/" + assetPlantResponse.assetPlantId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, assetPlantResponse.assetPlantId().toString()))
+            .body(assetPlantResponse);
     }
 
-    /**
-     * {@code PUT  /asset-plants/:id} : Updates an existing assetPlant.
-     *
-     * @param id the id of the assetPlant to save.
-     * @param assetPlant the assetPlant to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated assetPlant,
-     * or with status {@code 400 (Bad Request)} if the assetPlant is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the assetPlant couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/{id}")
-    public ResponseEntity<AssetPlant> updateAssetPlant(
+    public ResponseEntity<AssetPlantResponse> updateAssetPlant(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody AssetPlant assetPlant
-    ) throws URISyntaxException {
-        LOG.debug("REST request to update AssetPlant : {}, {}", id, assetPlant);
-        if (assetPlant.getAssetPlantId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, assetPlant.getAssetPlantId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!assetPlantRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        assetPlant = assetPlantService.update(assetPlant);
+        @Valid @RequestBody AssetPlantRequest assetPlantRequest
+    ) {
+        AssetPlantResponse assetPlant = assetPlantService.update(id, assetPlantRequest);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.assetPlantId().toString()))
             .body(assetPlant);
     }
 
-    /**
-     * {@code PATCH  /asset-plants/:id} : Partial updates given fields of an existing assetPlant, field will ignore if it is null
-     *
-     * @param id the id of the assetPlant to save.
-     * @param assetPlant the assetPlant to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated assetPlant,
-     * or with status {@code 400 (Bad Request)} if the assetPlant is not valid,
-     * or with status {@code 404 (Not Found)} if the assetPlant is not found,
-     * or with status {@code 500 (Internal Server Error)} if the assetPlant couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<AssetPlant> partialUpdateAssetPlant(
+    public ResponseEntity<AssetPlantResponse> partialUpdateAssetPlant(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody AssetPlant assetPlant
-    ) throws URISyntaxException {
-        LOG.debug("REST request to partial update AssetPlant partially : {}, {}", id, assetPlant);
-        if (assetPlant.getAssetPlantId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, assetPlant.getAssetPlantId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!assetPlantRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<AssetPlant> result = assetPlantService.partialUpdate(assetPlant);
+        @NotNull @RequestBody AssetPlantRequest assetPlantRequest
+    ) throws MethodNotSupportedException {
+        AssetPlantResponse result = assetPlantService.partialUpdate(id, assetPlantRequest);
 
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, assetPlant.getAssetPlantId().toString())
+            Optional.of(result),
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())
         );
     }
 
-    /**
-     * {@code GET  /asset-plants} : get all the assetPlants.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of assetPlants in body.
-     */
     @GetMapping("")
-    public ResponseEntity<List<AssetPlant>> getAllAssetPlants(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-        LOG.debug("REST request to get a page of AssetPlants");
-        Page<AssetPlant> page = assetPlantService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    public ResponseEntity<List<AssetPlantResponse>> getAllAssetPlants(
+        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
+        @RequestParam(value = "fleetNumber", required = false) String fleetNumber,
+        @RequestParam(value = "make", required = false) Long make,
+        @RequestParam(value = "model", required = false) Long model,
+        @RequestParam(value = "company", required = false) Long company,
+        @RequestParam(value = "category", required = false) Long category,
+        @RequestParam(value = "subcategory", required = false) Long subcategory,
+        @RequestParam(value = "trackConsumption", required = false) Boolean trackConsumption,
+        @RequestParam(value = "trackSmrReading", required = false) Boolean trackSmrReading
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("fuelPumpId").descending());
+        AssetPlantFilterCriteria criteria = new AssetPlantFilterCriteria(
+            fleetNumber,
+            company,
+            make,
+            model,
+            category,
+            subcategory,
+            trackConsumption,
+            trackSmrReading
+        );
+
+        Page<AssetPlantResponse> assetPlantResponsePage = assetPlantService.findAll(pageable, criteria);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
+            ServletUriComponentsBuilder.fromCurrentRequest(),
+            assetPlantResponsePage
+        );
+
+        return ResponseEntity.ok().headers(headers).body(assetPlantResponsePage.getContent());
     }
 
-    /**
-     * {@code GET  /asset-plants/:id} : get the "id" assetPlant.
-     *
-     * @param id the id of the assetPlant to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the assetPlant, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/{id}")
-    public ResponseEntity<AssetPlant> getAssetPlant(@PathVariable("id") Long id) {
-        LOG.debug("REST request to get AssetPlant : {}", id);
-        Optional<AssetPlant> assetPlant = assetPlantService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(assetPlant);
+    public ResponseEntity<AssetPlantResponse> getAssetPlant(@PathVariable("id") Long id) {
+        AssetPlantResponse assetPlant = assetPlantService.findOne(id);
+        return new ResponseEntity<>(assetPlant, HttpStatus.OK);
     }
 
-    /**
-     * {@code DELETE  /asset-plants/:id} : delete the "id" assetPlant.
-     *
-     * @param id the id of the assetPlant to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAssetPlant(@PathVariable("id") Long id) {
-        LOG.debug("REST request to delete AssetPlant : {}", id);
         assetPlantService.delete(id);
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PutMapping("/set-operator/{assetPlantId}/{operatorId}")
+    ResponseEntity<AssetPlantResponse> setCurrentOperator(
+        @PathVariable("assetPlantId") Long assetPlantId,
+        @PathVariable("operatorId") Long operatorId
+    ) {
+        AssetPlantResponse assetPlantResponse = assetPlantService.setCurrentOperator(assetPlantId, operatorId);
+        return new ResponseEntity<>(assetPlantResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("/set-accessible-company/{assetPlantId}/{accessibleByCompanyId}")
+    ResponseEntity<AssetPlantResponse> setAccessibleByCompany(
+        @PathVariable("assetPlantId") Long assetPlantId,
+        @PathVariable("accessibleByCompanyId") Long accessibleByCompanyId
+    ) {
+        AssetPlantResponse assetPlantResponse = assetPlantService.setAccessibleByCompany(assetPlantId, accessibleByCompanyId);
+        return new ResponseEntity<>(assetPlantResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("/set-current-contract-division/{assetPlantId}/{contractDivisionId}")
+    ResponseEntity<AssetPlantResponse> setCurrentContractDivision(
+        @PathVariable("assetPlantId") Long assetPlantId,
+        @PathVariable("contractDivisionId") Long contractDivisionId
+    ) {
+        AssetPlantResponse assetPlantResponse = assetPlantService.setCurrentContractDivision(assetPlantId, contractDivisionId);
+        return new ResponseEntity<>(assetPlantResponse, HttpStatus.OK);
     }
 }

@@ -1,3 +1,41 @@
 package com.bitumen.bluefusion.service.assetPlant.dto;
 
-public class AssetPlantRequest {}
+import com.bitumen.bluefusion.domain.enumeration.DriverOrOperator;
+import com.bitumen.bluefusion.domain.enumeration.FuelType;
+import com.bitumen.bluefusion.domain.enumeration.HorseOrTrailer;
+import com.bitumen.bluefusion.domain.enumeration.SMRReaderType;
+
+public record AssetPlantRequest(
+    String fleetNumber,
+    String numberPlate,
+    String fleetDescription,
+    Long ownerId,
+    String chassisNumber,
+    Integer yearOfManufacture,
+    String colour,
+    Integer currentSmrIndex,
+    String engineNumber,
+    String engineCapacityCC,
+    String ledgerCode,
+    Float tankCapacityLitres,
+    Float capacityTons,
+    Float capacityM3Loose,
+    Float capacityM3Tight,
+    Float maximumConsumption,
+    Float minimumConsumption,
+    Float maximumSmrOnFullTank,
+    Boolean trackConsumption,
+    Boolean trackSmrReading,
+    Boolean requestWeeklyMileage,
+    Boolean sent,
+    Long plantCategoryId,
+    Long plantSubcategoryId,
+    Long makeId,
+    Long modelId,
+    HorseOrTrailer horseOrTrailer,
+    DriverOrOperator driverOrOperator,
+    SMRReaderType smrReaderType,
+    FuelType fuelType,
+    Boolean isPrimeMover,
+    Boolean isActive
+) {}

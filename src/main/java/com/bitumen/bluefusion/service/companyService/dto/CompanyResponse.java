@@ -4,7 +4,7 @@ public record CompanyResponse(
     Long id,
     String name,
     String address,
-    String access_key,
+    String accessKey,
     Boolean usesFuelSystem,
     Boolean isActive,
     Boolean isIAC

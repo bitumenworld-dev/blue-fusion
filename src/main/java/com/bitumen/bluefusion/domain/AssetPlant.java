@@ -1,13 +1,11 @@
 package com.bitumen.bluefusion.domain;
 
-import com.bitumen.bluefusion.domain.enumeration.ConsumptionUnit;
 import com.bitumen.bluefusion.domain.enumeration.DriverOrOperator;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
 import com.bitumen.bluefusion.domain.enumeration.HorseOrTrailer;
-import com.bitumen.bluefusion.domain.enumeration.PlantHoursStatus;
 import com.bitumen.bluefusion.domain.enumeration.SMRReaderType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import lombok.*;
@@ -25,7 +23,7 @@ import lombok.*;
 public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "asset_plant_id")
     private Long assetPlantId;
 
@@ -43,7 +41,7 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private Company ownerId;
+    private Company owner;
 
     @Size(max = 30)
     @Column(name = "chassis_number", length = 30)
@@ -81,7 +79,7 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @ManyToOne
     @JoinColumn(name = "current_contract_id")
-    private ContractDivision currentContractId;
+    private ContractDivision currentContract;
 
     @Size(max = 30)
     @Column(name = "ledger_code", length = 30)
@@ -126,11 +124,11 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @ManyToOne
     @JoinColumn(name = "plant_category_id")
-    private PlantCategory plantCategoryId;
+    private PlantCategory plantCategory;
 
     @ManyToOne
     @JoinColumn(name = "plant_subcategory_id")
-    private PlantSubcategory plantSubcategoryId;
+    private PlantSubcategory plantSubcategory;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "driver_or_operator")
@@ -138,11 +136,11 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @ManyToOne
     @JoinColumn(name = "make_id")
-    private Make makeId;
+    private Make make;
 
     @ManyToOne
     @JoinColumn(name = "model_id")
-    private MakeModel modelId;
+    private MakeModel model;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "horse_or_trailer")
@@ -154,7 +152,7 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @ManyToOne
     @JoinColumn(name = "current_operator_id")
-    private Employee currentOperatorId;
+    private Employee currentOperator;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type")

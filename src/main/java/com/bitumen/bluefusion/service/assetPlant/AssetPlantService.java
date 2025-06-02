@@ -1,58 +1,28 @@
 package com.bitumen.bluefusion.service.assetPlant;
 
-import com.bitumen.bluefusion.domain.AssetPlant;
-import java.util.Optional;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantFilterCriteria;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantRequest;
+import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantResponse;
+import jakarta.mail.MethodNotSupportedException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-/**
- * Service Interface for managing {@link com.bitumen.bluefusion.domain.AssetPlant}.
- */
 public interface AssetPlantService {
-    /**
-     * Save a assetPlant.
-     *
-     * @param assetPlant the entity to save.
-     * @return the persisted entity.
-     */
-    AssetPlant save(AssetPlant assetPlant);
+    AssetPlantResponse save(AssetPlantRequest assetPlantRequest);
 
-    /**
-     * Updates a assetPlant.
-     *
-     * @param assetPlant the entity to update.
-     * @return the persisted entity.
-     */
-    AssetPlant update(AssetPlant assetPlant);
+    AssetPlantResponse update(Long assetPlantId, AssetPlantRequest assetPlantRequest);
 
-    /**
-     * Partially updates a assetPlant.
-     *
-     * @param assetPlant the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<AssetPlant> partialUpdate(AssetPlant assetPlant);
+    AssetPlantResponse partialUpdate(Long id, AssetPlantRequest assetPlantRequest) throws MethodNotSupportedException;
 
-    /**
-     * Get all the assetPlants.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Page<AssetPlant> findAll(Pageable pageable);
+    Page<AssetPlantResponse> findAll(Pageable pageable, AssetPlantFilterCriteria criteria);
 
-    /**
-     * Get the "id" assetPlant.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Optional<AssetPlant> findOne(Long id);
+    AssetPlantResponse findOne(Long id);
 
-    /**
-     * Delete the "id" assetPlant.
-     *
-     * @param id the id of the entity.
-     */
+    AssetPlantResponse setCurrentOperator(Long assetPlantId, Long operatorId);
+
+    AssetPlantResponse setAccessibleByCompany(Long assetPlantId, Long accessibleByCompanyId);
+
+    AssetPlantResponse setCurrentContractDivision(Long assetPlantId, Long contractDivisionId);
+
     void delete(Long id);
 }

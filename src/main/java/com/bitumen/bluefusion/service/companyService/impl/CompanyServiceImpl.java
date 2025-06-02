@@ -30,7 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponse save(CompanyRequest companyRequest) {
         Company company = Company.builder()
             .name(companyRequest.name())
-            .access_key(companyRequest.access_key())
+            .accessKey(companyRequest.accessKey())
             .address(companyRequest.address())
             .isActive(companyRequest.isActive())
             .isIAC(companyRequest.isIAC())
@@ -48,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
             .findById(companyId)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", companyId)));
         company.setName(companyRequest.name());
-        company.setAccess_key(companyRequest.access_key());
+        company.setAccessKey(companyRequest.accessKey());
         company.setAddress(companyRequest.address());
         company.setIsActive(companyRequest.isActive());
         company.setIsIAC(companyRequest.isIAC());
@@ -64,8 +64,8 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository
             .findById(companyId)
             .map(existingCompany -> {
-                Optional.ofNullable(existingCompany.getName()).ifPresent(existingCompany::setName);
-                Optional.ofNullable(existingCompany.getAccess_key()).ifPresent(existingCompany::setAccess_key);
+                Optional.ofNullable(companyRequest.name()).ifPresent(existingCompany::setName);
+                Optional.ofNullable(companyRequest.accessKey()).ifPresent(existingCompany::setAccessKey);
                 Optional.ofNullable(existingCompany.getAddress()).ifPresent(existingCompany::setAddress);
                 Optional.ofNullable(existingCompany.getIsActive()).ifPresent(existingCompany::setIsActive);
                 Optional.ofNullable(existingCompany.getIsIAC()).ifPresent(existingCompany::setIsIAC);
