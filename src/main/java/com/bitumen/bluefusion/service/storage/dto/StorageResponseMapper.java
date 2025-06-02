@@ -1,10 +1,8 @@
 package com.bitumen.bluefusion.service.storage.dto;
 
 import com.bitumen.bluefusion.domain.Storage;
-import com.bitumen.bluefusion.domain.enumeration.StorageContent;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public interface StorageResponseMapper {
     Function<Storage, StorageResponseDTO> map = storage ->

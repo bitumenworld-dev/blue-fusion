@@ -1,9 +1,7 @@
 package com.bitumen.bluefusion.service.plantCategoryService;
 
-import com.bitumen.bluefusion.domain.PlantCategory;
 import com.bitumen.bluefusion.service.plantCategoryService.dto.PlantCategoryRequest;
 import com.bitumen.bluefusion.service.plantCategoryService.dto.PlantCategoryResponse;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

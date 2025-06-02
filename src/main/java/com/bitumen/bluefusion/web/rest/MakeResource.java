@@ -1,19 +1,14 @@
 package com.bitumen.bluefusion.web.rest;
 
 import com.bitumen.bluefusion.domain.Make;
-import com.bitumen.bluefusion.repository.MakeRepository;
 import com.bitumen.bluefusion.service.makeService.MakeService;
 import com.bitumen.bluefusion.service.makeService.dto.MakeRequest;
 import com.bitumen.bluefusion.service.makeService.dto.MakeResponse;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,8 +30,6 @@ import tech.jhipster.web.util.ResponseUtil;
 @RestController
 @RequestMapping("/api/make")
 public class MakeResource {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MakeResource.class);
 
     private static final String ENTITY_NAME = "manufacturer";
 
@@ -68,12 +61,12 @@ public class MakeResource {
     public ResponseEntity<MakeResponse> partialUpdateManufacturer(
         @PathVariable(value = "id") final Long id,
         @RequestBody MakeRequest makeRequest
-    ) throws URISyntaxException {
+    ) {
         MakeResponse result = makeService.partialUpdate(id, makeRequest);
 
         return ResponseUtil.wrapOrNotFound(
             Optional.ofNullable(result),
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.id().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())
         );
     }
 

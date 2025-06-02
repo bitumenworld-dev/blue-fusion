@@ -60,7 +60,7 @@ public class MakeModelResource {
     public ResponseEntity<MakeModelResponse> partialUpdateManufacturerModel(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody MakeModelRequest makeModelRequest
-    ) throws URISyntaxException {
+    ) {
         MakeModelResponse result = makeModelService.partialUpdate(id, makeModelRequest);
 
         return ResponseUtil.wrapOrNotFound(

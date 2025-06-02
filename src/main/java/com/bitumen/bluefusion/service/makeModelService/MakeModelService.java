@@ -1,9 +1,7 @@
 package com.bitumen.bluefusion.service.makeModelService;
 
-import com.bitumen.bluefusion.domain.MakeModel;
 import com.bitumen.bluefusion.service.makeModelService.dto.MakeModelRequest;
 import com.bitumen.bluefusion.service.makeModelService.dto.MakeModelResponse;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

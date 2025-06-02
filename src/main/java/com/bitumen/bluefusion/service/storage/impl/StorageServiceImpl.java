@@ -15,7 +15,6 @@ import com.bitumen.bluefusion.service.storage.dto.StorageResponseMapper;
 import com.bitumen.bluefusion.service.storage.dto.StorageSearchDTO;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

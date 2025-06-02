@@ -1,19 +1,13 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.domain.PlantCategory;
-import com.bitumen.bluefusion.repository.PlantCategoryRepository;
 import com.bitumen.bluefusion.service.plantCategoryService.PlantCategoryService;
 import com.bitumen.bluefusion.service.plantCategoryService.dto.PlantCategoryRequest;
 import com.bitumen.bluefusion.service.plantCategoryService.dto.PlantCategoryResponse;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -69,7 +63,7 @@ public class PlantCategoryResource {
 
         return ResponseUtil.wrapOrNotFound(
             Optional.ofNullable(result),
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.id().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())
         );
     }
 
