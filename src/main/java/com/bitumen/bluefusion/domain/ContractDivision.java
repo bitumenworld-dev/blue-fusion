@@ -4,21 +4,23 @@ import com.bitumen.bluefusion.domain.enumeration.ContractDivisionType;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A ContractDivision.
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "contract_division")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class ContractDivision implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class ContractDivision extends AbstractAuditingEntity<ContractDivision> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +30,12 @@ public class ContractDivision implements Serializable {
     @Column(name = "contract_division_number")
     private String contractDivisionNumber;
 
-    @Column(name = "company_id")
-    private Long companyId;
+    @JoinColumn(name = "company_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Company company;
+
+    @Column(name = "contract_division_name")
+    private String contractDivisionName;
 
     @Column(name = "build_smart_reference")
     private String buildSmartReference;
@@ -42,25 +48,20 @@ public class ContractDivision implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private ContractDivisionType type;
+    private ContractDivisionType contractDivisionType;
 
     @Column(name = "completed")
     private Boolean completed;
 
-    //TODO: adds to bd diagram and liquibase
-    //    monday_to_thursday_working_hours float
-    //    friday_working_hours float
-    //    add_hours_monday_to_friday float
-    //    add_hours_weekend float
-    //    contractDivisionName
+    @Column(name = "hr_hours_monday_thursday")
+    private Double hrHoursMondayThursday;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    @Column(name = "hr_hours_friday")
+    private Double hrHoursFriday;
 
-    public Long getId() {
-        return this.contractDivisionId;
-    }
+    @Column(name = "add_hours_monday_friday")
+    private Double addHoursMondayFriday;
 
-    public void setId(Long id) {
-        this.contractDivisionId = id;
-    }
+    @Column(name = "add_hours_weekend")
+    private Double addHoursWeekend;
 }

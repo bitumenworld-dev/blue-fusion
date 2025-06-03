@@ -30,6 +30,7 @@ local.properties
 .settings/
 .loadpath
 .factorypath
+database-schema.dbml
 
 # External tool builders
 .externalToolBuilders/**
