@@ -21,6 +21,8 @@ import { Storage } from '../../storage/storage.model';
 import { StorageService, StorageEntityArrayResponseType } from '../../storage/service/storage.service';
 import { FuelPumpArrayResponseType, FuelPumpService } from '../../fuel-pump/service/fuel-pump.service';
 import { FuelPump } from '../../fuel-pump/fuel-pump.model';
+import { AssetPlantService, AssetPlantArrayResponseType } from '../../asset-plant/service/asset-plant.service';
+import { AssetPlant } from '../../asset-plant/asset-plant.model';
 
 @Component({
   templateUrl: './fuel-transaction.component.html',
@@ -36,9 +38,8 @@ export class FuelTransactionComponent implements OnInit {
   page = 1;
   selectedFuelType = '';
   selectedTransactionType = '';
-  userFullName = '';
+  userFullName: string | null | undefined = '';
   smr = '';
-  fleetNumber = '';
   receivedFuel = '';
   issuedFuel = '';
   unit = '';
@@ -51,7 +52,15 @@ export class FuelTransactionComponent implements OnInit {
   pump1 = 1233123;
   pump2 = 123123123;
 
+  //Fleet
+  fleetArray: AssetPlant[] | null = [];
+  fleetNumber: string | null | undefined = '';
+  // @ts-ignore
+  filteredFleet = [...this.fleetArray];
+  showFleetDropdown = false;
+
   //Company variables
+  companyId: number | null | undefined = 0;
   companiesArray: ICompany[] | null = [];
   companiesSearchTerm = '';
   // @ts-ignore
@@ -211,6 +220,7 @@ export class FuelTransactionComponent implements OnInit {
   protected readonly fuelTransactionHeaderService = inject(FuelTransactionService);
   protected readonly fuelPumpService = inject(FuelPumpService);
   protected readonly storageService = inject(StorageService);
+  protected readonly assetPlantService = inject(AssetPlantService);
   protected fuelTransactionFormService = inject(FuelTransactionFormService);
   protected readonly companyService = inject(CompanyService);
   protected readonly activatedRoute = inject(ActivatedRoute);
@@ -330,6 +340,7 @@ export class FuelTransactionComponent implements OnInit {
       },
     });
 
+    this.companyId = company.id;
     this.pumpSearchTerm = '';
     this.storageUnitSearchTerm = '';
   }
@@ -396,5 +407,42 @@ export class FuelTransactionComponent implements OnInit {
     setTimeout(() => {
       this.showPumpDropdown = false;
     }, 200);
+  }
+
+  searchFleet(): void {
+    if (!this.fleetNumber) {
+      return;
+    }
+
+    if (this.fleetNumber.length > 3) {
+      const queryObject: any = {
+        company: this.companyId,
+        fleetNumber: this.fleetNumber,
+      };
+
+      this.assetPlantService.query(queryObject).subscribe({
+        next: (res: AssetPlantArrayResponseType) => {
+          this.fleetArray = res.body;
+          this.filteredFleet = [...this.fleetArray];
+          this.showFleetDropdown = true;
+        },
+      });
+    } else {
+      //
+    }
+    console.log('filtered Fleet ' + this.filteredFleet);
+    console.log('Show Fleet Dropdown' + this.showFleetDropdown);
+  }
+
+  hideFleetDropdown(): void {
+    setTimeout(() => {
+      this.showFleetDropdown = false;
+    }, 200);
+  }
+
+  selectFleet(fleet: AssetPlant): void {
+    this.fleetNumber = fleet.fleetNumber;
+    this.hideFleetDropdown();
+    this.userFullName = fleet.currentOperator;
   }
 }

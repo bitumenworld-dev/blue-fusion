@@ -36,5 +36,10 @@ public record AssetPlantResponse(
     SMRReaderType smrReaderType,
     FuelType fuelType,
     Boolean isPrimeMover,
+    Boolean trackService,
+    String currentContract,
+    String currentLocation,
+    String currentSite,
+    String currentOperator,
     Boolean isActive
 ) {}

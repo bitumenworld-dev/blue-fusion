@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.util.List;
 import lombok.*;
 
-/**
- * A AssetPlant.
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
@@ -108,6 +105,9 @@ public class AssetPlant extends AbstractAuditingEntity<AssetPlant> implements Se
 
     @Column(name = "track_consumption")
     private Boolean trackConsumption;
+
+    @Column(name = "track_service")
+    private Boolean trackService;
 
     @Column(name = "track_smr_reading")
     private Boolean trackSmrReading;

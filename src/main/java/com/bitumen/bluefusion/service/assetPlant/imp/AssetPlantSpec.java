@@ -30,14 +30,14 @@ public interface AssetPlantSpec {
     static Specification<AssetPlant> withPlantCategory(final PlantCategory plantCategory) {
         return (
             (root, query, builder) ->
-                (Objects.isNull(plantCategory)) ? builder.conjunction() : builder.equal(root.get("model"), plantCategory)
+                (Objects.isNull(plantCategory)) ? builder.conjunction() : builder.equal(root.get("plantCategory"), plantCategory)
         );
     }
 
     static Specification<AssetPlant> withPlantSubCategory(final PlantSubcategory plantSubcategory) {
         return (
             (root, query, builder) ->
-                (Objects.isNull(plantSubcategory)) ? builder.conjunction() : builder.equal(root.get("model"), plantSubcategory)
+                (Objects.isNull(plantSubcategory)) ? builder.conjunction() : builder.equal(root.get("plantSubcategory"), plantSubcategory)
         );
     }
 

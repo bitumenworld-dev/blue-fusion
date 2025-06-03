@@ -67,7 +67,6 @@ public class AssetPlantResource {
         @NotNull @RequestBody AssetPlantRequest assetPlantRequest
     ) throws MethodNotSupportedException {
         AssetPlantResponse result = assetPlantService.partialUpdate(id, assetPlantRequest);
-
         return ResponseUtil.wrapOrNotFound(
             Optional.of(result),
             HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())
@@ -87,7 +86,7 @@ public class AssetPlantResource {
         @RequestParam(value = "trackConsumption", required = false) Boolean trackConsumption,
         @RequestParam(value = "trackSmrReading", required = false) Boolean trackSmrReading
     ) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("fuelPumpId").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("assetPlantId").descending());
         AssetPlantFilterCriteria criteria = new AssetPlantFilterCriteria(
             fleetNumber,
             company,

@@ -95,11 +95,16 @@
         <constraints nullable="true"/>
       </column>
 
+
+      <column name="track_service" type="boolean">
+        <constraints nullable="true"/>
+      </column>
+
       <column name="track_consumption" type="boolean">
         <constraints nullable="true"/>
       </column>
 
-      <column name="track_smr_readings" type="boolean">
+      <column name="track_smr_reading" type="boolean">
         <constraints nullable="true"/>
       </column>
 
@@ -205,8 +210,9 @@
       <column name="minimum_consumption" type="${floatType}"/>
       <column name="maximum_smr_on_full_tank" type="${floatType}"/>
       <column name="track_consumption" type="boolean"/>
-      <column name="track_smr_readings" type="boolean"/>
+      <column name="track_smr_reading" type="boolean"/>
       <column name="request_weekly_mileage" type="boolean"/>
+      <column name="track_service" type="boolean"/>
       <column name="sent" type="boolean"/>
       <column name="current_location" type="varchar(30)"/>
       <column name="plant_category_id" type="bigint"/>

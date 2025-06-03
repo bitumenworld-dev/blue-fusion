@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'asset-plant',
-    data: { pageTitle: 'blueFusionApp.assetPlant.home.title' },
+    data: { pageTitle: 'asset-plant' },
     loadChildren: () => import('./asset-plant/asset-plant.routes'),
   },
   {

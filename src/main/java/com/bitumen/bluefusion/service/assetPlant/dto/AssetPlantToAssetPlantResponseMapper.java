@@ -11,5 +11,8 @@ public interface AssetPlantToAssetPlantResponseMapper {
     @Mapping(source = "assetPlant.plantCategory.plantCategoryDescription", target = "plantCategory")
     @Mapping(source = "assetPlant.plantSubcategory.plantSubcategoryDescription", target = "plantSubcategory")
     @Mapping(source = "assetPlant.owner.name", target = "owner")
+    @Mapping(source = "assetPlant.currentSite.siteName", target = "currentSite")
+    @Mapping(source = "assetPlant.currentContract.contractDivisionNumber", target = "currentContract")
+    @Mapping(source = "assetPlant.currentOperator.fullName", target = "currentOperator")
     AssetPlantResponse map(AssetPlant assetPlant);
 }
