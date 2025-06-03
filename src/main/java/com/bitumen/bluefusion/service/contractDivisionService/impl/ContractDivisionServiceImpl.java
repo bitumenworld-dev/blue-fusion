@@ -4,7 +4,7 @@ import com.bitumen.bluefusion.domain.Company;
 import com.bitumen.bluefusion.domain.ContractDivision;
 import com.bitumen.bluefusion.repository.CompanyRepository;
 import com.bitumen.bluefusion.repository.ContractDivisionRepository;
-import com.bitumen.bluefusion.service.ContractDivisionService;
+import com.bitumen.bluefusion.service.contractDivisionService.ContractDivisionService;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionRequest;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponse;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponseMapper;
