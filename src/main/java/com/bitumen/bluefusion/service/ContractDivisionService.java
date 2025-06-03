@@ -1,9 +1,7 @@
 package com.bitumen.bluefusion.service;
 
-import com.bitumen.bluefusion.domain.ContractDivision;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionRequest;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponse;
-import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +25,7 @@ public interface ContractDivisionService {
     );
 
     @Transactional(readOnly = true)
-    ContractDivisionResponse findOne(Long contractDivisionId, ContractDivisionRequest contractDivision);
+    ContractDivisionResponse findOne(Long companyId, ContractDivisionRequest contractDivision);
 
     void delete(Long contractDivisionId, ContractDivisionRequest contractDivision);
 }

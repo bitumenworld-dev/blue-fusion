@@ -2,7 +2,6 @@ package com.bitumen.bluefusion.service.contractDivisionService.impl;
 
 import com.bitumen.bluefusion.domain.ContractDivision;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.StringUtils;
 
 public interface ContractDivisionSpec {
     static Specification<ContractDivision> withcompanyId(final Long companyId) {

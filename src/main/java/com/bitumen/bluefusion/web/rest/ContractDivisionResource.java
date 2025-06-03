@@ -3,17 +3,22 @@ package com.bitumen.bluefusion.web.rest;
 import com.bitumen.bluefusion.domain.ContractDivision;
 import com.bitumen.bluefusion.repository.ContractDivisionRepository;
 import com.bitumen.bluefusion.service.ContractDivisionService;
+import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionRequest;
+import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponse;
 import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +30,10 @@ import tech.jhipster.web.util.ResponseUtil;
 /**
  * REST controller for managing {@link com.bitumen.bluefusion.domain.ContractDivision}.
  */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/contract-divisions")
 public class ContractDivisionResource {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ContractDivisionResource.class);
 
     private static final String ENTITY_NAME = "contractDivision";
 
@@ -40,144 +44,89 @@ public class ContractDivisionResource {
 
     private final ContractDivisionRepository contractDivisionRepository;
 
-    public ContractDivisionResource(
-        ContractDivisionService contractDivisionService,
-        ContractDivisionRepository contractDivisionRepository
-    ) {
-        this.contractDivisionService = contractDivisionService;
-        this.contractDivisionRepository = contractDivisionRepository;
-    }
-
-    /**
-     * {@code POST  /contract-divisions} : Create a new contractDivision.
-     *
-     * @param contractDivision the contractDivision to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new contractDivision, or with status {@code 400 (Bad Request)} if the contractDivision has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("")
-    public ResponseEntity<ContractDivision> createContractDivision(@RequestBody ContractDivision contractDivision)
+    public ResponseEntity<ContractDivisionResponse> createContractDivision(@RequestBody ContractDivisionRequest contractDivisionRequest)
         throws URISyntaxException {
-        LOG.debug("REST request to save ContractDivision : {}", contractDivision);
-        if (contractDivision.getId() != null) {
-            throw new BadRequestAlertException("A new contractDivision cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        contractDivision = contractDivisionService.save(contractDivision);
-        return ResponseEntity.created(new URI("/api/contract-divisions/" + contractDivision.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contractDivision.getId().toString()))
+        ContractDivisionResponse contractDivision = contractDivisionService.save(contractDivisionRequest);
+        return ResponseEntity.created(new URI("/api/contract-divisions/" + contractDivision.contractDivisionId()))
+            .headers(
+                HeaderUtil.createEntityCreationAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    String.valueOf(contractDivision.contractDivisionId())
+                )
+            )
             .body(contractDivision);
     }
 
-    /**
-     * {@code PUT  /contract-divisions/:id} : Updates an existing contractDivision.
-     *
-     * @param id the id of the contractDivision to save.
-     * @param contractDivision the contractDivision to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contractDivision,
-     * or with status {@code 400 (Bad Request)} if the contractDivision is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the contractDivision couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/{id}")
-    public ResponseEntity<ContractDivision> updateContractDivision(
+    public ResponseEntity<ContractDivisionResponse> updateContractDivision(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody ContractDivision contractDivision
+        @RequestBody ContractDivisionRequest contractDivisionRequest
     ) throws URISyntaxException {
-        LOG.debug("REST request to update ContractDivision : {}, {}", id, contractDivision);
-        if (contractDivision.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, contractDivision.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!contractDivisionRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        contractDivision = contractDivisionService.update(contractDivision);
+        ContractDivisionResponse contractDivision = contractDivisionService.update(id, contractDivisionRequest);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractDivision.getId().toString()))
+            .headers(
+                HeaderUtil.createEntityUpdateAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    String.valueOf(contractDivision.contractDivisionId())
+                )
+            )
             .body(contractDivision);
     }
 
-    /**
-     * {@code PATCH  /contract-divisions/:id} : Partial updates given fields of an existing contractDivision, field will ignore if it is null
-     *
-     * @param id the id of the contractDivision to save.
-     * @param contractDivision the contractDivision to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated contractDivision,
-     * or with status {@code 400 (Bad Request)} if the contractDivision is not valid,
-     * or with status {@code 404 (Not Found)} if the contractDivision is not found,
-     * or with status {@code 500 (Internal Server Error)} if the contractDivision couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<ContractDivision> partialUpdateContractDivision(
+    public ResponseEntity<ContractDivisionResponse> partialUpdateContractDivision(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody ContractDivision contractDivision
+        @RequestBody ContractDivisionRequest contractDivisionRequest
     ) throws URISyntaxException {
-        LOG.debug("REST request to partial update ContractDivision partially : {}, {}", id, contractDivision);
-        if (contractDivision.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, contractDivision.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!contractDivisionRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<ContractDivision> result = contractDivisionService.partialUpdate(contractDivision);
+        ContractDivisionResponse contractDivision = contractDivisionService.partialupdate(id, contractDivisionRequest);
 
         return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractDivision.getId().toString())
+            Optional.of(contractDivision),
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(contractDivision.contractDivisionId()))
         );
     }
 
-    /**
-     * {@code GET  /contract-divisions} : get all the contractDivisions.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contractDivisions in body.
-     */
     @GetMapping("")
-    public ResponseEntity<List<ContractDivision>> getAllContractDivisions(
-        @org.springdoc.core.annotations.ParameterObject Pageable pageable
+    public ResponseEntity<List<ContractDivisionResponse>> getAllContractDivisions(
+        @RequestParam(required = false) Long contractDivisionId,
+        @RequestParam(required = false) String contractDivisionNumber,
+        @RequestParam(required = false) String contractDivisionName
     ) {
-        LOG.debug("REST request to get a page of ContractDivisions");
-        Page<ContractDivision> page = contractDivisionService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        Pageable pageable = PageRequest.of(0, 100, Sort.by("contractDivisionNumber").descending());
+        Page<ContractDivisionResponse> contractDivisions = contractDivisionService.findAll(
+            pageable,
+            contractDivisionId,
+            contractDivisionNumber,
+            contractDivisionName
+        );
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
+            ServletUriComponentsBuilder.fromCurrentRequest(),
+            contractDivisions
+        );
+        return ResponseEntity.ok().headers(headers).body(contractDivisions.getContent());
     }
 
-    /**
-     * {@code GET  /contract-divisions/:id} : get the "id" contractDivision.
-     *
-     * @param id the id of the contractDivision to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contractDivision, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/{id}")
-    public ResponseEntity<ContractDivision> getContractDivision(@PathVariable("id") Long id) {
-        LOG.debug("REST request to get ContractDivision : {}", id);
-        Optional<ContractDivision> contractDivision = contractDivisionService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(contractDivision);
+    public ResponseEntity<ContractDivisionResponse> getContractDivision(
+        @PathVariable("id") Long ContractDivisionId,
+        @RequestBody ContractDivisionRequest contractDivisionRequest
+    ) {
+        return ResponseEntity.ok().body(contractDivisionService.findOne(ContractDivisionId, contractDivisionRequest));
     }
 
-    /**
-     * {@code DELETE  /contract-divisions/:id} : delete the "id" contractDivision.
-     *
-     * @param id the id of the contractDivision to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteContractDivision(@PathVariable("id") Long id) {
-        LOG.debug("REST request to delete ContractDivision : {}", id);
-        contractDivisionService.delete(id);
+    public ResponseEntity<Void> deleteContractDivision(
+        @PathVariable("id") Long ContractDivisionId,
+        @RequestBody ContractDivisionRequest contractDivisionRequest
+    ) {
+        contractDivisionService.delete(ContractDivisionId, contractDivisionRequest);
         return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, String.valueOf(ContractDivisionId)))
             .build();
     }
 }
