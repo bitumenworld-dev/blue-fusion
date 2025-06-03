@@ -1,5 +1,6 @@
 package com.bitumen.bluefusion.domain;
 
+import com.bitumen.bluefusion.domain.enumeration.FuelType;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;

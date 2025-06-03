@@ -1,19 +1,14 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.domain.ContractDivision;
 import com.bitumen.bluefusion.repository.ContractDivisionRepository;
-import com.bitumen.bluefusion.service.ContractDivisionService;
+import com.bitumen.bluefusion.service.contractDivisionService.ContractDivisionService;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionRequest;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponse;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +35,7 @@ public class ContractDivisionResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final ContractDivisionService contractDivisionService;
+    private final ContractDivisionService.ContractDivisionService contractDivisionService;
 
     private final ContractDivisionRepository contractDivisionRepository;
 
