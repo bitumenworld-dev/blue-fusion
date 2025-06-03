@@ -93,11 +93,13 @@ public class ContractDivisionResource {
 
     @GetMapping("")
     public ResponseEntity<List<ContractDivisionResponse>> getAllContractDivisions(
+        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
         @RequestParam(required = false) Long contractDivisionId,
         @RequestParam(required = false) String contractDivisionNumber,
         @RequestParam(required = false) String contractDivisionName
     ) {
-        Pageable pageable = PageRequest.of(0, 100, Sort.by("contractDivisionNumber").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("contractDivisionNumber").descending());
         Page<ContractDivisionResponse> contractDivisions = contractDivisionService.findAll(
             pageable,
             contractDivisionId,
