@@ -112,11 +112,6 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
             );
     }
 
-    @Override
-    public AssetPlantServiceReadingResponse partialUpdate(Long assetPlantServiceReadingId) {
-        throw new UnsupportedOperationException("Not implemented");
-    }
-
     @Transactional(readOnly = true)
     @Override
     public Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlantId, Boolean isActive, String serviceUnit) {

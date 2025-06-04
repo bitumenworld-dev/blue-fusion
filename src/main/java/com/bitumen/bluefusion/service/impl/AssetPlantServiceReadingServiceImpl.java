@@ -88,7 +88,7 @@ public class AssetPlantServiceReadingServiceImpl implements AssetPlantServiceRea
 
     @Override
     @Transactional(readOnly = true)
-    public Page<AssetPlantServiceReading> findAll(Pageable pageable) {
+    public Page<AssetPlantServiceReading> findAll(Pageable pageable, Long assetPlantServiceReadingId, Long assetPlantId, Boolean isActive) {
         LOG.debug("Request to get all AssetPlantServiceReadings");
         return assetPlantServiceReadingRepository.findAll(pageable);
     }

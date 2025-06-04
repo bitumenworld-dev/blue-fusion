@@ -36,10 +36,13 @@ public interface AssetPlantServiceReadingService {
     /**
      * Get all the assetPlantServiceReadings.
      *
-     * @param pageable the pagination information.
+     * @param pageable                   the pagination information.
+     * @param assetPlantServiceReadingId
+     * @param assetPlantId
+     * @param isActive
      * @return the list of entities.
      */
-    Page<AssetPlantServiceReading> findAll(Pageable pageable);
+    Page<AssetPlantServiceReading> findAll(Pageable pageable, Long assetPlantServiceReadingId, Long assetPlantId, Boolean isActive);
 
     /**
      * Get the "id" assetPlantServiceReading.
