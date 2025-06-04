@@ -9,7 +9,6 @@ public record ContractDivisionRequest(
     String contractDivisionName,
     String buildSmartReference,
     LocalTime shiftStart,
-    LocalTime shiftEnd,
     ContractDivisionType contractDivisionType,
     Boolean completed,
     Double hrHoursMondayThursday,

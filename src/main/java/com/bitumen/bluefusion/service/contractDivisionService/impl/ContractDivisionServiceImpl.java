@@ -44,7 +44,6 @@ public class ContractDivisionServiceImpl implements ContractDivisionService {
             .company(company)
             .buildSmartReference(contractDivisionRequest.buildSmartReference())
             .shiftStart(contractDivisionRequest.shiftStart())
-            .shiftEnd(contractDivisionRequest.shiftEnd())
             .contractDivisionType(contractDivisionRequest.contractDivisionType())
             .completed(contractDivisionRequest.completed())
             .build();
@@ -65,7 +64,6 @@ public class ContractDivisionServiceImpl implements ContractDivisionService {
         contractDivision.setContractDivisionName(contractDivisionRequest.contractDivisionName());
         contractDivision.setBuildSmartReference(contractDivisionRequest.buildSmartReference());
         contractDivision.setShiftStart(contractDivisionRequest.shiftStart());
-        contractDivision.setShiftEnd(contractDivisionRequest.shiftEnd());
         contractDivision.setContractDivisionType(contractDivisionRequest.contractDivisionType());
         contractDivision.setCompleted(contractDivisionRequest.completed());
         contractDivision = contractDivisionRepository.save(contractDivision);
@@ -89,7 +87,6 @@ public class ContractDivisionServiceImpl implements ContractDivisionService {
                 Optional.ofNullable(contractDivision.contractDivisionName()).ifPresent(existingContractDivision::setContractDivisionName);
                 Optional.ofNullable(contractDivision.buildSmartReference()).ifPresent(existingContractDivision::setBuildSmartReference);
                 Optional.ofNullable(contractDivision.shiftStart()).ifPresent(existingContractDivision::setShiftStart);
-                Optional.ofNullable(contractDivision.shiftEnd()).ifPresent(existingContractDivision::setShiftEnd);
                 Optional.ofNullable(contractDivision.contractDivisionType()).ifPresent(existingContractDivision::setContractDivisionType);
                 Optional.ofNullable(contractDivision.completed()).ifPresent(existingContractDivision::setCompleted);
                 return existingContractDivision;
