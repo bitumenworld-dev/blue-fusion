@@ -15,17 +15,13 @@ public interface AssetPlantServiceReadingService {
         AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     );
 
-    AssetPlantServiceReadingResponse partialUpdate(Long assetPlantServiceReadingId);
-
     AssetPlantServiceReadingResponse partialUpdate(
         Long assetPlantServiceReadingId,
         AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     );
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlantId, Boolean isActive, String serviceUnit);
 
-    @Transactional(readOnly = true)
     AssetPlantServiceReading findOne(Long assetPlantServiceReadingId);
 
     void delete(Long assetPlantServiceReadingId);

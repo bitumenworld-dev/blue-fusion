@@ -43,7 +43,7 @@ public class AssetPlantServiceReadingServiceImpl implements AssetPlantServiceRea
         LOG.debug("Request to partially update AssetPlantServiceReading : {}", assetPlantServiceReading);
 
         return assetPlantServiceReadingRepository
-            .findById(assetPlantServiceReading.getId())
+            .findById(assetPlantServiceReading.getAssetPlantServiceReadingId())
             .map(existingAssetPlantServiceReading -> {
                 if (assetPlantServiceReading.getAssetPlantServiceReadingId() != null) {
                     existingAssetPlantServiceReading.setAssetPlantServiceReadingId(
