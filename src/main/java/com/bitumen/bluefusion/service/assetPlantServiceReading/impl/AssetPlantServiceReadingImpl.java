@@ -2,6 +2,7 @@ package com.bitumen.bluefusion.service.assetPlantServiceReading.impl;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
+import com.bitumen.bluefusion.repository.AssetPlantRepository;
 import com.bitumen.bluefusion.repository.AssetPlantServiceReadingRepository;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.AssetPlantServiceReadingService;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingMapper;
@@ -22,11 +23,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingService {
 
     private final AssetPlantServiceReadingRepository assetPlantServiceReadingRepository;
+    private final AssetPlantRepository assetPlantRepository;
 
     @Override
     public AssetPlantServiceReadingResponse save(AssetPlantServiceReadingRequest assetPlantServiceReadingRequest) {
+        Long assetPlantId = assetPlantServiceReadingRequest.assetPlantId();
+        AssetPlant assetPlant = assetPlantRepository
+            .findById(assetPlantId)
+            .orElseThrow(() -> new RecordNotFoundException("AssetPlant not found with id: " + assetPlantId));
+
         AssetPlantServiceReading assetPlantServiceReading = AssetPlantServiceReading.builder()
-            .assetPlant(assetPlantServiceReadingRequest.assetPlantId())
+            .assetPlant(assetPlant)
             .nextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading())
             .estimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay())
             .latestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings())
@@ -52,7 +59,11 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );
 
-        assetPlantServiceReading.setAssetPlant(assetPlantServiceReadingRequest.assetPlantId());
+        Long assetPlantId = assetPlantServiceReadingRequest.assetPlantId();
+        AssetPlant assetPlant = assetPlantRepository
+            .findById(assetPlantId)
+            .orElseThrow(() -> new RecordNotFoundException("AssetPlant not found with id: " + assetPlantId));
+        assetPlantServiceReading.setAssetPlant(assetPlant);
         assetPlantServiceReading.setNextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading());
         assetPlantServiceReading.setEstimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay());
         assetPlantServiceReading.setLatestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings());
@@ -74,9 +85,13 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
         return assetPlantServiceReadingRepository
             .findById(assetPlantServiceReadingId)
             .map(existingAssetPlantServiceReading -> {
-                Optional.ofNullable(assetPlantServiceReadingRequest.assetPlantId()).ifPresent(
-                    existingAssetPlantServiceReading::setAssetPlant
-                );
+                if (assetPlantServiceReadingRequest.assetPlantId() != null) {
+                    Long assetPlantId = assetPlantServiceReadingRequest.assetPlantId();
+                    AssetPlant assetPlant = assetPlantRepository
+                        .findById(assetPlantId)
+                        .orElseThrow(() -> new RecordNotFoundException("AssetPlant not found with id: " + assetPlantId));
+                    existingAssetPlantServiceReading.setAssetPlant(assetPlant);
+                }
                 Optional.ofNullable(assetPlantServiceReadingRequest.nextServiceSmrReading()).ifPresent(
                     existingAssetPlantServiceReading::setNextServiceSmrReading
                 );
@@ -141,10 +156,5 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );
         assetPlantServiceReadingRepository.delete(assetPlantServiceReading);
-    }
-
-    @Override
-    public boolean existsById(Long assetPlantServiceReadingId) {
-        return assetPlantServiceReadingRepository.existsById(assetPlantServiceReadingId);
     }
 }

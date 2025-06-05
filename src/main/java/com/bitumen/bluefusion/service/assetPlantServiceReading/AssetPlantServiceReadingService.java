@@ -24,6 +24,4 @@ public interface AssetPlantServiceReadingService {
     AssetPlantServiceReading findOne(Long assetPlantServiceReadingId);
 
     void delete(Long assetPlantServiceReadingId);
-
-    boolean existsById(Long assetPlantServiceReadingId);
 }

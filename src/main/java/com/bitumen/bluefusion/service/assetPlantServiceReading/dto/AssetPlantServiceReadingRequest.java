@@ -5,10 +5,9 @@ import com.bitumen.bluefusion.domain.enumeration.ServiceUnit;
 import java.time.LocalDate;
 
 public record AssetPlantServiceReadingRequest(
-    AssetPlant assetPlantId,
+    Long assetPlantId,
     Float nextServiceSmrReading,
     Float estimatedUnitsPerDay,
-
     Float latestSmrReadings,
     Float serviceInterval,
     LocalDate lastServiceDate,

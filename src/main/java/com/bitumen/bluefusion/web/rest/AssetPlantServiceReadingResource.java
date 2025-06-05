@@ -60,10 +60,6 @@ public class AssetPlantServiceReadingResource {
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) throws URISyntaxException {
-        if (!assetPlantServiceReadingService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
         AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.update(
             id,
             assetPlantServiceReadingRequest
@@ -85,10 +81,6 @@ public class AssetPlantServiceReadingResource {
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) throws URISyntaxException {
-        if (!assetPlantServiceReadingService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
         AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.partialUpdate(
             id,
             assetPlantServiceReadingRequest
@@ -117,7 +109,7 @@ public class AssetPlantServiceReadingResource {
         Pageable pageable = PageRequest.of(page, size, Sort.by("assetPlantServiceReadingId").descending());
         Page<AssetPlantServiceReadingResponse> assetPlantServiceReadings = assetPlantServiceReadingService.findAll(
             pageable,
-            assetPlantServiceReadingId,
+            assetPlantId,
             isActive,
             serviceUnit
         );
