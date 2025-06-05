@@ -37,7 +37,6 @@ public class AssetPlantServiceReadingResource {
     private String applicationName;
 
     private final AssetPlantServiceReadingService assetPlantServiceReadingService;
-    private final AssetPlantServiceReadingRepository assetPlantServiceReadingRepository;
 
     @PostMapping("")
     public ResponseEntity<AssetPlantServiceReadingResponse> createAssetPlantServiceReading(
@@ -61,7 +60,7 @@ public class AssetPlantServiceReadingResource {
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) throws URISyntaxException {
-        if (!assetPlantServiceReadingRepository.existsById(id)) {
+        if (!assetPlantServiceReadingService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
@@ -86,7 +85,7 @@ public class AssetPlantServiceReadingResource {
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) throws URISyntaxException {
-        if (!assetPlantServiceReadingRepository.existsById(id)) {
+        if (!assetPlantServiceReadingService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
@@ -111,6 +110,7 @@ public class AssetPlantServiceReadingResource {
         @RequestParam(value = "page", defaultValue = "0") Integer page,
         @RequestParam(value = "size", defaultValue = "100") Integer size,
         @RequestParam(value = "assetPlantServiceReadingId", required = false) Long assetPlantServiceReadingId,
+        @RequestParam(value = "assetPlantId", required = false) Long assetPlantId,
         @RequestParam(value = "isActive", required = false) Boolean isActive,
         @RequestParam(value = "serviceUnit", required = false) String serviceUnit
     ) {

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public record AssetPlantServiceReadingResponse(
     Long assetPlantServiceReadingId,
-    AssetPlant assetPlant,
+    AssetPlant assetPlantFleetNumber,
     Float nextServiceSmrReading,
     Float estimatedUnitsPerDay,
     LocalDate estimatedNextServiceDate,

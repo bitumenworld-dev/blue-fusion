@@ -26,7 +26,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
     @Override
     public AssetPlantServiceReadingResponse save(AssetPlantServiceReadingRequest assetPlantServiceReadingRequest) {
         AssetPlantServiceReading assetPlantServiceReading = AssetPlantServiceReading.builder()
-            .assetPlant(assetPlantServiceReadingRequest.assetPlant())
+            .assetPlant(assetPlantServiceReadingRequest.assetPlantId())
             .nextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading())
             .estimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay())
             .latestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings())
@@ -52,7 +52,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );
 
-        assetPlantServiceReading.setAssetPlant(assetPlantServiceReadingRequest.assetPlant());
+        assetPlantServiceReading.setAssetPlant(assetPlantServiceReadingRequest.assetPlantId());
         assetPlantServiceReading.setNextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading());
         assetPlantServiceReading.setEstimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay());
         assetPlantServiceReading.setLatestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings());
@@ -74,7 +74,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
         return assetPlantServiceReadingRepository
             .findById(assetPlantServiceReadingId)
             .map(existingAssetPlantServiceReading -> {
-                Optional.ofNullable(assetPlantServiceReadingRequest.assetPlant()).ifPresent(
+                Optional.ofNullable(assetPlantServiceReadingRequest.assetPlantId()).ifPresent(
                     existingAssetPlantServiceReading::setAssetPlant
                 );
                 Optional.ofNullable(assetPlantServiceReadingRequest.nextServiceSmrReading()).ifPresent(
@@ -141,5 +141,10 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );
         assetPlantServiceReadingRepository.delete(assetPlantServiceReading);
+    }
+
+    @Override
+    public boolean existsById(Long assetPlantServiceReadingId) {
+        return assetPlantServiceReadingRepository.existsById(assetPlantServiceReadingId);
     }
 }
