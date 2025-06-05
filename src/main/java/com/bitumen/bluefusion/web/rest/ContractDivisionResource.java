@@ -34,6 +34,7 @@ public class ContractDivisionResource {
 
     private final ContractDivisionService contractDivisionService;
 
+
     @PostMapping("")
     public ResponseEntity<ContractDivisionResponse> createContractDivision(@RequestBody ContractDivisionRequest contractDivisionRequest)
         throws URISyntaxException {

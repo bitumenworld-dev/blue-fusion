@@ -8,6 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @SuppressWarnings("unused")
 @Repository
-public interface AssetPlantRepository extends JpaRepository<AssetPlant, Long>, JpaSpecificationExecutor<AssetPlant> {
-    Optional<AssetPlant> findByAssetPlantId(Long id);
-}
+public interface AssetPlantRepository extends JpaRepository<AssetPlant, Long>, JpaSpecificationExecutor<AssetPlant> {}
