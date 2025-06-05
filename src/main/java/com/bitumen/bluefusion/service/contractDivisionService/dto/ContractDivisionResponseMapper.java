@@ -12,7 +12,6 @@ public interface ContractDivisionResponseMapper {
             contractDivision.getCompany() != null ? contractDivision.getCompany().getCompanyId() : null,
             contractDivision.getBuildSmartReference(),
             contractDivision.getShiftStart(),
-            contractDivision.getShiftEnd(),
             contractDivision.getContractDivisionType(),
             contractDivision.getCompleted(),
             contractDivision.getHrHoursMondayThursday(),

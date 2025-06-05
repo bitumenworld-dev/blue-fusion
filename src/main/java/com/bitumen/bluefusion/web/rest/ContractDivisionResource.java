@@ -35,7 +35,7 @@ public class ContractDivisionResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final ContractDivisionService.ContractDivisionService contractDivisionService;
+    private final ContractDivisionService contractDivisionService;
 
     private final ContractDivisionRepository contractDivisionRepository;
 

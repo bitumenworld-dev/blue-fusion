@@ -10,7 +10,6 @@ public record ContractDivisionResponse(
     Long contractId,
     String buildSmartReference,
     LocalTime shiftStart,
-    LocalTime shiftEnd,
     ContractDivisionType contractDivisionType,
     boolean completed,
     double hrHoursMondayThursday,
