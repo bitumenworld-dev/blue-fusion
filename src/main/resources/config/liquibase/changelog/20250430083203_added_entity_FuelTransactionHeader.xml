@@ -1,116 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <!--
-        Added the entity FuelTransactionHeader.
-    -->
-    <changeSet id="20250430083203-1" author="jhipster">
-        <createTable tableName="fuel_transaction_header">
-            <column name="fuel_transaction_header_id" type="bigint" autoIncrement="true" startWith="1">
-              <constraints primaryKey="true" nullable="false"/>
-            </column>
+  <!--
+      Added the entity FuelTransactionHeader.
+  -->
+  <changeSet id="20250430083203-1" author="jhipster">
+    <createTable tableName="fuel_transaction_header">
+      <column name="fuel_transaction_header_id" type="bigint" autoIncrement="true" startWith="1">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
 
-            <column name="company_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
+      <column name="company_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="supplier_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
+      <column name="supplier_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="transaction_type_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
+      <column name="fuel_transaction_type" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="fuel_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="issuance_transaction_type" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="order_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="storage_unit_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="delivery_note" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="fuel_type" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="grv_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="order_number" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="invoice_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="delivery_note" type="varchar(100)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="price_per_litre" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
+      <column name="grv_number" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="note" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="invoice_number" type="varchar(50)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="registration_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="price_per_litre" type="${floatType}">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="attendee_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="operator_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-          <column name="is_fill_up" type="boolean">
-            <constraints nullable="true" />
-          </column>
-
-          <column name="created_by" type="varchar(50)">
-            <constraints nullable="false"/>
-          </column>
-
-          <column name="created_date" type="timestamp"/>
-
-          <column name="last_modified_by" type="varchar(50)"/>
-
-          <column name="last_modified_date" type="timestamp"/>
-
-        </createTable>
-    </changeSet>
+      <column name="note" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
 
+      <column name="attendee_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
 
-    <changeSet id="20250430083203-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/fake-data/fuel_transaction_header.csv"
-                  separator=";"
-                  tableName="fuel_transaction_header"
-                  usePreparedStatements="true">
-            <column name="fuel_transaction_header_id" type="numeric"/>
-            <column name="company_id" type="numeric"/>
-            <column name="supplier_id" type="numeric"/>
-            <column name="transaction_type_id" type="numeric"/>
-            <column name="fuel_type" type="string"/>
-            <column name="order_number" type="string"/>
-            <column name="delivery_note" type="string"/>
-            <column name="grv_number" type="string"/>
-            <column name="invoice_number" type="string"/>
-            <column name="price_per_litre" type="numeric"/>
-            <column name="note" type="string"/>
-            <column name="registration_number" type="string"/>
-            <column name="attendee_id" type="numeric"/>
-            <column name="operator_id" type="numeric"/>
-            <column name="is_fill_up" type="boolean"/>
-            <column name="created_by" type="varchar(50)"/>
-            <column name="created_date" type="timestamp"/>
-            <column name="last_modified_by" type="varchar(50)"/>
-            <column name="last_modified_date" type="timestamp"/>
-        </loadData>
-    </changeSet>
+      <column name="operator_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="is_fill_up" type="boolean">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="created_by" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
+
+    </createTable>
+  </changeSet>
+
+
+<!--  <changeSet id="20250430083203-1-data" author="jhipster" context="faker">-->
+<!--    <loadData-->
+<!--      file="config/liquibase/fake-data/fuel_transaction_header.csv"-->
+<!--      separator=";"-->
+<!--      tableName="fuel_transaction_header"-->
+<!--      usePreparedStatements="true">-->
+<!--      <column name="fuel_transaction_header_id" type="numeric"/>-->
+<!--      <column name="company_id" type="bigint"/>-->
+<!--      <column name="supplier_id" type="bigint"/>-->
+<!--      <column name="fuel_transaction_type" type="varchar(50)"/>-->
+<!--      <column name="issuance_transaction_type" type="varchar(50)"/>-->
+<!--      <column name="storage_unit_id" type="bigint"/>-->
+<!--      <column name="fuel_type" type="varchar(50)"/>-->
+<!--      <column name="order_number" type="varchar(50)"/>-->
+<!--      <column name="delivery_note" type="varchar(100)"/>-->
+<!--      <column name="grv_number" type="varchar(50)"/>-->
+<!--      <column name="invoice_number" type="varchar(50)"/>-->
+<!--      <column name="price_per_litre" type="${floatType}"/>-->
+<!--      <column name="note" type="varchar(255)"/>-->
+<!--      <column name="attendee_id" type="bigint"/>-->
+<!--      <column name="operator_id" type="bigint"/>-->
+<!--      <column name="is_fill_up" type="boolean"/>-->
+<!--      <column name="created_by" type="varchar(50)"/>-->
+<!--      <column name="created_date" type="timestamp"/>-->
+<!--      <column name="last_modified_by" type="varchar(50)"/>-->
+<!--      <column name="last_modified_date" type="timestamp"/>-->
+<!--    </loadData>-->
+<!--  </changeSet>-->
 </databaseChangeLog>

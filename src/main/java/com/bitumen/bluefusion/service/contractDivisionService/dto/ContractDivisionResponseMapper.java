@@ -9,7 +9,7 @@ public interface ContractDivisionResponseMapper {
             contractDivision.getContractDivisionId(),
             contractDivision.getContractDivisionNumber(),
             contractDivision.getContractDivisionName(),
-            contractDivision.getCompany() != null ? contractDivision.getCompany().getCompanyId() : null,
+            contractDivision.getCompany() != null ? contractDivision.getCompany().getName() : null,
             contractDivision.getBuildSmartReference(),
             contractDivision.getShiftStart(),
             contractDivision.getContractDivisionType(),

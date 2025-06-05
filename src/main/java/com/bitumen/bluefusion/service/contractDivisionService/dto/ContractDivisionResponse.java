@@ -7,7 +7,7 @@ public record ContractDivisionResponse(
     Long contractDivisionId,
     String contractDivisionNumber,
     String contractDivisionName,
-    Long contractId,
+    String company,
     String buildSmartReference,
     LocalTime shiftStart,
     ContractDivisionType contractDivisionType,

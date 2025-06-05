@@ -20,18 +20,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Service Implementation for managing {@link com.bitumen.bluefusion.domain.ContractDivision}.
- */
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ContractDivisionServiceImpl implements ContractDivisionService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ContractDivisionServiceImpl.class);
-
     private final ContractDivisionRepository contractDivisionRepository;
-
     private final CompanyRepository companyRepository;
 
     @Override
@@ -71,7 +65,7 @@ public class ContractDivisionServiceImpl implements ContractDivisionService {
     }
 
     @Override
-    public ContractDivisionResponse partialupdate(Long contractDivisionId, ContractDivisionRequest contractDivision) {
+    public ContractDivisionResponse partialUpdate(Long contractDivisionId, ContractDivisionRequest contractDivision) {
         return contractDivisionRepository
             .findById(contractDivisionId)
             .map(existingContractDivision -> {
@@ -104,22 +98,18 @@ public class ContractDivisionServiceImpl implements ContractDivisionService {
         String contractDivisionNumber,
         String contractDivisionName
     ) {
-        ContractDivision contractDivision = null;
-        if (!Objects.isNull(companyId)) {
-            contractDivision = contractDivisionRepository
+        Company company = null;
+        if (Objects.nonNull(companyId)) {
+            company = companyRepository
                 .findById(companyId)
-                .orElseThrow(() -> new RecordNotFoundException(String.format("Contract Division not found: %s", companyId)));
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Company not found: %s", companyId)));
         }
 
-        Specification<ContractDivision> specification = ContractDivisionSpec.withcompanyId(companyId)
+        Specification<ContractDivision> specification = ContractDivisionSpec.withCompany(company)
             .and(ContractDivisionSpec.withContractDivisionNumber(contractDivisionNumber))
             .and(ContractDivisionSpec.withContractDivisionName(contractDivisionName));
 
-        Page<ContractDivisionResponse> contractDivisions = contractDivisionRepository
-            .findAll(specification, pageable)
-            .map(ContractDivisionResponseMapper.map);
-        LOG.info("Find all ContractDivisions with specification {}", contractDivisions);
-        return contractDivisions;
+        return contractDivisionRepository.findAll(specification, pageable).map(ContractDivisionResponseMapper.map);
     }
 
     @Transactional(readOnly = true)

@@ -22,9 +22,6 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
-/**
- * REST controller for managing {@link com.bitumen.bluefusion.domain.ContractDivision}.
- */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/contract-divisions")
@@ -37,7 +34,6 @@ public class ContractDivisionResource {
 
     private final ContractDivisionService contractDivisionService;
 
-    private final ContractDivisionRepository contractDivisionRepository;
 
     @PostMapping("")
     public ResponseEntity<ContractDivisionResponse> createContractDivision(@RequestBody ContractDivisionRequest contractDivisionRequest)
@@ -59,7 +55,7 @@ public class ContractDivisionResource {
     public ResponseEntity<ContractDivisionResponse> updateContractDivision(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody ContractDivisionRequest contractDivisionRequest
-    ) throws URISyntaxException {
+    ) {
         ContractDivisionResponse contractDivision = contractDivisionService.update(id, contractDivisionRequest);
         return ResponseEntity.ok()
             .headers(
@@ -77,8 +73,8 @@ public class ContractDivisionResource {
     public ResponseEntity<ContractDivisionResponse> partialUpdateContractDivision(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody ContractDivisionRequest contractDivisionRequest
-    ) throws URISyntaxException {
-        ContractDivisionResponse contractDivision = contractDivisionService.partialupdate(id, contractDivisionRequest);
+    ) {
+        ContractDivisionResponse contractDivision = contractDivisionService.partialUpdate(id, contractDivisionRequest);
 
         return ResponseUtil.wrapOrNotFound(
             Optional.of(contractDivision),

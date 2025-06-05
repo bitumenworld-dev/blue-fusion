@@ -1,15 +1,15 @@
-package com.bitumen.bluefusion.service.assetPlant.dto;
+package com.bitumen.bluefusion.service.assetPlant.payload;
 
+import com.bitumen.bluefusion.domain.enumeration.DriverOrOperator;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
 import com.bitumen.bluefusion.domain.enumeration.HorseOrTrailer;
 import com.bitumen.bluefusion.domain.enumeration.SMRReaderType;
 
-public record AssetPlantResponse(
-    Long assetPlantId,
+public record AssetPlantRequest(
     String fleetNumber,
     String numberPlate,
     String fleetDescription,
-    String owner,
+    Long ownerId,
     String chassisNumber,
     Integer yearOfManufacture,
     String colour,
@@ -28,18 +28,14 @@ public record AssetPlantResponse(
     Boolean trackSmrReading,
     Boolean requestWeeklyMileage,
     Boolean sent,
-    String plantCategory,
-    String plantSubcategory,
-    String make,
-    String model,
+    Long plantCategoryId,
+    Long plantSubcategoryId,
+    Long makeId,
+    Long modelId,
     HorseOrTrailer horseOrTrailer,
+    DriverOrOperator driverOrOperator,
     SMRReaderType smrReaderType,
     FuelType fuelType,
     Boolean isPrimeMover,
-    Boolean trackService,
-    String currentContract,
-    String currentLocation,
-    String currentSite,
-    String currentOperator,
     Boolean isActive
 ) {}

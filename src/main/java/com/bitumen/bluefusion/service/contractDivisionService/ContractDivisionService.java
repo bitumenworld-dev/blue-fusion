@@ -10,7 +10,7 @@ public interface ContractDivisionService {
 
     ContractDivisionResponse update(Long contractDivisionId, ContractDivisionRequest contractDivisionRequest);
 
-    ContractDivisionResponse partialupdate(Long contractDivisionId, ContractDivisionRequest contractDivision);
+    ContractDivisionResponse partialUpdate(Long contractDivisionId, ContractDivisionRequest contractDivision);
 
     Page<ContractDivisionResponse> findAll(
         Pageable pageable,

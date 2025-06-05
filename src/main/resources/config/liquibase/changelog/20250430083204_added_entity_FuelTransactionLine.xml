@@ -1,95 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <!--
-        Added the entity FuelTransactionLine.
-    -->
-    <changeSet id="20250430083204-1" author="jhipster">
-        <createTable tableName="fuel_transaction_line">
-            <column name="fuel_transaction_line_id" type="bigint" autoIncrement="true" startWith="1">
-              <constraints primaryKey="true" nullable="false"/>
-            </column>
+
+  <changeSet id="20250430083204-1" author="jhipster">
+    <createTable tableName="fuel_transaction_line">
+
+      <column name="fuel_transaction_line_id" type="bigint" autoIncrement="true" startWith="1">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="fuel_transaction_header_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="asset_plant_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="contract_division_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="pump_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="registration_number" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="litres" type="${floatType}">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="meter_reading_start" type="${floatType}">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="meter_reading_end" type="${floatType}">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="multiplier" type="integer">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="created_by" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
+    </createTable>
+  </changeSet>
 
 
-            <column name="fuel_transaction_header_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="asset_plant_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="contract_division_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="issuance_type_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="pump_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="storage_unit_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="litres" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="meter_reading_start" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="meter_reading_end" type="${floatType}">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="multiplier" type="integer">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="created_by" type="varchar(50)">
-              <constraints nullable="false"/>
-            </column>
-
-            <column name="created_date" type="timestamp"/>
-
-            <column name="last_modified_by" type="varchar(50)"/>
-
-            <column name="last_modified_date" type="timestamp"/>
-        </createTable>
-    </changeSet>
-
-
-    <changeSet id="20250430083204-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/fake-data/fuel_transaction_line.csv"
-                  separator=";"
-                  tableName="fuel_transaction_line"
-                  usePreparedStatements="true">
-            <column name="fuel_transaction_line_id" type="numeric"/>
-            <column name="fuel_transaction_header_id" type="numeric"/>
-            <column name="asset_plant_id" type="numeric"/>
-            <column name="contract_division_id" type="numeric"/>
-            <column name="issuance_type_id" type="numeric"/>
-            <column name="pump_id" type="numeric"/>
-            <column name="storage_unit_id" type="numeric"/>
-            <column name="litres" type="numeric"/>
-            <column name="meter_reading_start" type="numeric"/>
-            <column name="meter_reading_end" type="numeric"/>
-            <column name="multiplier" type="numeric"/>
-            <column name="created_by" type="varchar(50)"/>
-            <column name="created_date" type="timestamp"/>
-            <column name="last_modified_by" type="varchar(50)"/>
-            <column name="last_modified_date" type="timestamp"/>
-        </loadData>
-    </changeSet>
+<!--  <changeSet id="20250430083204-1-data" author="jhipster" context="faker">-->
+<!--    <loadData-->
+<!--      file="config/liquibase/fake-data/fuel_transaction_line.csv"-->
+<!--      separator=";"-->
+<!--      tableName="fuel_transaction_line"-->
+<!--      usePreparedStatements="true">-->
+<!--      <column name="fuel_transaction_line_id" type="numeric"/>-->
+<!--      <column name="fuel_transaction_header_id" type="numeric"/>-->
+<!--      <column name="asset_plant_id" type="bigint"/>-->
+<!--      <column name="contract_division_id" type="bigint"/>-->
+<!--      <column name="pump_id" type="bigint"/>-->
+<!--      <column name="registration_number" type="varchar(255)"/>-->
+<!--      <column name="litres" type="${floatType}"/>-->
+<!--      <column name="meter_reading_start" type="${floatType}"/>-->
+<!--      <column name="meter_reading_end" type="${floatType}"/>-->
+<!--      <column name="multiplier" type="integer"/>-->
+<!--      <column name="created_by" type="varchar(50)"/>-->
+<!--      <column name="created_date" type="timestamp"/>-->
+<!--      <column name="last_modified_by" type="varchar(50)"/>-->
+<!--      <column name="last_modified_date" type="timestamp"/>-->
+<!--    </loadData>-->
+<!--  </changeSet>-->
 </databaseChangeLog>
