@@ -7,7 +7,7 @@ public interface AssetPlantServiceReadingMapper {
     Function<AssetPlantServiceReading, AssetPlantServiceReadingResponse> map = assetPlantServiceReading ->
         new AssetPlantServiceReadingResponse(
             assetPlantServiceReading.getAssetPlantServiceReadingId(),
-            assetPlantServiceReading.getAssetPlantId(),
+            assetPlantServiceReading.getAssetPlant(),
             assetPlantServiceReading.getNextServiceSmrReading(),
             assetPlantServiceReading.getEstimatedUnitsPerDay(),
             assetPlantServiceReading.getEstimatedNextServiceDate(),

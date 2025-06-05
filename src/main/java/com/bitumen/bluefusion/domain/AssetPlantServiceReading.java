@@ -29,8 +29,9 @@ public class AssetPlantServiceReading extends AbstractAuditingEntity<AssetPlantS
     @Column(name = "asset_plant_service_reading_id")
     private Long assetPlantServiceReadingId;
 
-    @Column(name = "asset_plant_id")
-    private Long assetPlantId;
+    @ManyToOne
+    @JoinColumn(name = "asset_plant_id")
+    private AssetPlant assetPlant;
 
     @Column(name = "next_service_smr_reading")
     private Float nextServiceSmrReading;

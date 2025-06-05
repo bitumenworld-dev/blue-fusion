@@ -1,15 +1,14 @@
 package com.bitumen.bluefusion.web.rest;
 
 import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
-import com.bitumen.bluefusion.service.AssetPlantServiceReadingService;
+import com.bitumen.bluefusion.repository.AssetPlantServiceReadingRepository;
+import com.bitumen.bluefusion.service.assetPlantServiceReading.AssetPlantServiceReadingService;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingMapper;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingRequest;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingResponse;
-import com.bitumen.bluefusion.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,9 +29,7 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/asset-plant-service-readings")
-public final class AssetPlantServiceReadingResource {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AssetPlantServiceReadingResource.class);
+public class AssetPlantServiceReadingResource {
 
     private static final String ENTITY_NAME = "assetPlantServiceReading";
 
@@ -40,121 +37,112 @@ public final class AssetPlantServiceReadingResource {
     private String applicationName;
 
     private final AssetPlantServiceReadingService assetPlantServiceReadingService;
+    private final AssetPlantServiceReadingRepository assetPlantServiceReadingRepository;
 
     @PostMapping("")
     public ResponseEntity<AssetPlantServiceReadingResponse> createAssetPlantServiceReading(
-        @RequestBody AssetPlantServiceReadingRequest req
+        @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) throws URISyntaxException {
-        AssetPlantServiceReading entity = AssetPlantServiceReading.builder()
-            .assetPlantId(req.assetPlantId())
-            .nextServiceSmrReading(req.nextServiceSmrReading())
-            .estimatedUnitsPerDay(req.estimatedUnitsPerDay())
-            .latestSmrReadings(req.latestSmrReadings())
-            .serviceInterval(req.serviceInterval())
-            .lastServiceDate(req.lastServiceDate())
-            .latestSmrDate(req.latestSmrDate())
-            .lastServiceSmr(req.lastServiceSmr())
-            .serviceUnit(req.serviceUnit())
-            .estimatedNextServiceDate(req.estimatedNextServiceDate())
-            .build();
-        AssetPlantServiceReading saved = assetPlantServiceReadingService.save(entity);
-        AssetPlantServiceReadingResponse response = AssetPlantServiceReadingMapper.map.apply(saved);
-        return ResponseEntity.created(new URI("/api/asset-plant-service-readings/" + response.assetPlantServiceReadingId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, String.valueOf(response.assetPlantId())))
-            .body(response);
+        AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.save(assetPlantServiceReadingRequest);
+        return ResponseEntity.created(new URI("/api/asset-plant-service-readings/" + assetPlantServiceReading.assetPlantServiceReadingId()))
+            .headers(
+                HeaderUtil.createEntityCreationAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    String.valueOf(assetPlantServiceReading.assetPlantServiceReadingId())
+                )
+            )
+            .body(assetPlantServiceReading);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AssetPlantServiceReadingResponse> updateAssetPlantServiceReading(
-        @RequestBody AssetPlantServiceReadingRequest req
-    ) {
-        AssetPlantServiceReading entity = AssetPlantServiceReading.builder()
-            .assetPlantId(req.assetPlantId())
-            .nextServiceSmrReading(req.nextServiceSmrReading())
-            .estimatedUnitsPerDay(req.estimatedUnitsPerDay())
-            .latestSmrReadings(req.latestSmrReadings())
-            .serviceInterval(req.serviceInterval())
-            .lastServiceDate(req.lastServiceDate())
-            .latestSmrDate(req.latestSmrDate())
-            .lastServiceSmr(req.lastServiceSmr())
-            .serviceUnit(req.serviceUnit())
-            .estimatedNextServiceDate(req.estimatedNextServiceDate())
-            .build();
-        AssetPlantServiceReading updated = assetPlantServiceReadingService.update(entity);
-        AssetPlantServiceReadingResponse response = AssetPlantServiceReadingMapper.map.apply(updated);
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
+    ) throws URISyntaxException {
+        if (!assetPlantServiceReadingRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.update(
+            id,
+            assetPlantServiceReadingRequest
+        );
         return ResponseEntity.ok()
             .headers(
                 HeaderUtil.createEntityUpdateAlert(
                     applicationName,
                     true,
                     ENTITY_NAME,
-                    String.valueOf(response.assetPlantServiceReadingId())
+                    String.valueOf(assetPlantServiceReading.assetPlantServiceReadingId())
                 )
             )
-            .body(response);
+            .body(assetPlantServiceReading);
     }
 
-    @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping("/{id}")
     public ResponseEntity<AssetPlantServiceReadingResponse> partialUpdateAssetPlantServiceReading(
-        @RequestBody AssetPlantServiceReadingRequest req
-    ) {
-        AssetPlantServiceReading entity = AssetPlantServiceReading.builder()
-            .assetPlantId(req.assetPlantId())
-            .nextServiceSmrReading(req.nextServiceSmrReading())
-            .estimatedUnitsPerDay(req.estimatedUnitsPerDay())
-            .latestSmrReadings(req.latestSmrReadings())
-            .serviceInterval(req.serviceInterval())
-            .lastServiceDate(req.lastServiceDate())
-            .latestSmrDate(req.latestSmrDate())
-            .lastServiceSmr(req.lastServiceSmr())
-            .serviceUnit(req.serviceUnit())
-            .estimatedNextServiceDate(req.estimatedNextServiceDate())
-            .build();
-        Optional<AssetPlantServiceReading> updated = assetPlantServiceReadingService.partialUpdate(entity);
-        AssetPlantServiceReadingResponse response = updated.map(AssetPlantServiceReadingMapper.map).orElse(null);
-        return ResponseUtil.wrapOrNotFound(
-            Optional.ofNullable(response),
-            HeaderUtil.createEntityUpdateAlert(
-                applicationName,
-                true,
-                ENTITY_NAME,
-                response != null ? String.valueOf(response.assetPlantServiceReadingId()) : null
-            )
+        @PathVariable(value = "id", required = false) final Long id,
+        @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
+    ) throws URISyntaxException {
+        if (!assetPlantServiceReadingRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.partialUpdate(
+            id,
+            assetPlantServiceReadingRequest
         );
+        return ResponseEntity.ok()
+            .headers(
+                HeaderUtil.createEntityUpdateAlert(
+                    applicationName,
+                    true,
+                    ENTITY_NAME,
+                    String.valueOf(assetPlantServiceReading.assetPlantServiceReadingId())
+                )
+            )
+            .body(assetPlantServiceReading);
     }
 
     @GetMapping("")
     public ResponseEntity<List<AssetPlantServiceReadingResponse>> getAllAssetPlantServiceReadings(
-        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
-        @RequestParam(required = false) Long assetPlantServiceReadingId,
-        @RequestParam(required = false) Long assetPlantId,
-        @RequestParam(required = false) Boolean isActive
+        @RequestParam(value = "page", defaultValue = "0") Integer page,
+        @RequestParam(value = "size", defaultValue = "100") Integer size,
+        @RequestParam(value = "assetPlantServiceReadingId", required = false) Long assetPlantServiceReadingId,
+        @RequestParam(value = "isActive", required = false) Boolean isActive,
+        @RequestParam(value = "serviceUnit", required = false) String serviceUnit
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("assetPlantServiceReadingId").descending());
-        Page<AssetPlantServiceReadingResponse> pageAssetPlantServiceReadings = assetPlantServiceReadingService
-            .findAll(pageable, assetPlantServiceReadingId, assetPlantId, isActive)
-            .map(AssetPlantServiceReadingMapper.map);
+        Page<AssetPlantServiceReadingResponse> assetPlantServiceReadings = assetPlantServiceReadingService.findAll(
+            pageable,
+            assetPlantServiceReadingId,
+            isActive,
+            serviceUnit
+        );
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
             ServletUriComponentsBuilder.fromCurrentRequest(),
-            pageAssetPlantServiceReadings
+            assetPlantServiceReadings
         );
-        return ResponseEntity.ok().headers(headers).body(pageAssetPlantServiceReadings.getContent());
+
+        return ResponseEntity.ok().headers(headers).body(assetPlantServiceReadings.getContent());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AssetPlantServiceReadingResponse> getAssetPlantServiceReading(
-        @PathVariable("id") Long assetPlantServiceReadingId
+        @PathVariable("id") Long assetPlantServiceReadingId,
+        AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) {
-        Optional<AssetPlantServiceReadingResponse> response = assetPlantServiceReadingService
-            .findOne(assetPlantServiceReadingId)
-            .map(AssetPlantServiceReadingMapper.map);
-        return ResponseUtil.wrapOrNotFound(response);
+        AssetPlantServiceReadingResponse response = AssetPlantServiceReadingMapper.map.apply(
+            assetPlantServiceReadingService.findOne(assetPlantServiceReadingId)
+        );
+        return ResponseEntity.ok().body(response);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAssetPlantServiceReading(@PathVariable("id") Long assetPlantServiceReadingId) {
-        LOG.debug("REST request to delete AssetPlantServiceReading : {}", assetPlantServiceReadingId);
         assetPlantServiceReadingService.delete(assetPlantServiceReadingId);
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, String.valueOf(assetPlantServiceReadingId)))

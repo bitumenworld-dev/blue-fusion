@@ -1,5 +1,6 @@
 package com.bitumen.bluefusion.service.assetPlantServiceReading.impl;
 
+import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
 import com.bitumen.bluefusion.repository.AssetPlantServiceReadingRepository;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.AssetPlantServiceReadingService;
@@ -25,7 +26,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
     @Override
     public AssetPlantServiceReadingResponse save(AssetPlantServiceReadingRequest assetPlantServiceReadingRequest) {
         AssetPlantServiceReading assetPlantServiceReading = AssetPlantServiceReading.builder()
-            .assetPlantId(assetPlantServiceReadingRequest.assetPlantId())
+            .assetPlant(assetPlantServiceReadingRequest.assetPlant())
             .nextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading())
             .estimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay())
             .latestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings())
@@ -51,7 +52,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );
 
-        assetPlantServiceReading.setAssetPlantId(assetPlantServiceReadingRequest.assetPlantId());
+        assetPlantServiceReading.setAssetPlant(assetPlantServiceReadingRequest.assetPlant());
         assetPlantServiceReading.setNextServiceSmrReading(assetPlantServiceReadingRequest.nextServiceSmrReading());
         assetPlantServiceReading.setEstimatedUnitsPerDay(assetPlantServiceReadingRequest.estimatedUnitsPerDay());
         assetPlantServiceReading.setLatestSmrReadings(assetPlantServiceReadingRequest.latestSmrReadings());
@@ -73,8 +74,8 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
         return assetPlantServiceReadingRepository
             .findById(assetPlantServiceReadingId)
             .map(existingAssetPlantServiceReading -> {
-                Optional.ofNullable(assetPlantServiceReadingRequest.assetPlantId()).ifPresent(
-                    existingAssetPlantServiceReading::setAssetPlantId
+                Optional.ofNullable(assetPlantServiceReadingRequest.assetPlant()).ifPresent(
+                    existingAssetPlantServiceReading::setAssetPlant
                 );
                 Optional.ofNullable(assetPlantServiceReadingRequest.nextServiceSmrReading()).ifPresent(
                     existingAssetPlantServiceReading::setNextServiceSmrReading
@@ -113,9 +114,10 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
     }
 
     @Transactional(readOnly = true)
-    @Override
-    public Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlantId, Boolean isActive, String serviceUnit) {
-        Specification<AssetPlantServiceReading> specification = AssetPlantServiceReadingSpec.withAssetPlantId(assetPlantId)
+    public Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlant, Boolean isActive, String serviceUnit) {
+        Specification<AssetPlantServiceReading> specification = AssetPlantServiceReadingSpec.withAssetPlantId(
+            AssetPlant.builder().assetPlantId(assetPlant).build()
+        )
             .and(AssetPlantServiceReadingSpec.withIsActive(isActive))
             .and(AssetPlantServiceReadingSpec.withServiceUnit(serviceUnit));
         return assetPlantServiceReadingRepository.findAll(specification, pageable).map(AssetPlantServiceReadingMapper.map);

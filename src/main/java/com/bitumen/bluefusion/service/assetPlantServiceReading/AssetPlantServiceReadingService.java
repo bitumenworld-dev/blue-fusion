@@ -5,7 +5,6 @@ import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantSer
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface AssetPlantServiceReadingService {
     AssetPlantServiceReadingResponse save(AssetPlantServiceReadingRequest assetPlantServiceReadingRequest);
@@ -20,7 +19,7 @@ public interface AssetPlantServiceReadingService {
         AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     );
 
-    Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlantId, Boolean isActive, String serviceUnit);
+    Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlant, Boolean isActive, String serviceUnit);
 
     AssetPlantServiceReading findOne(Long assetPlantServiceReadingId);
 
