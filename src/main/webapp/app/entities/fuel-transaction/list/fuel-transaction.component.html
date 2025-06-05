@@ -1,168 +1,126 @@
-<div class="bg-gray-100 min-h-screen p-6">
-  <!--  <div class="mx-auto bg-white rounded-xl shadow-md overflow-hidden">-->
-  <!--    <div class="bg-white rounded-xl shadow-lg overflow-hidden">-->
-  <div class="h-full w-full bg-white rounded-lg shadow p-4">
-    <div class="flex flex-col md:flex-row gap-4">
-      <!--smr reading card-->
-      <div class="h-full w-full bg-white rounded-lg shadow flex-1">
-        <div class="divide-y divide-gray-200">
-          <div
-            class="p-1 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center"
-          >
-            <h2 class="text-xs font-bold text-white mb-2 md:mb-0">SMR Readings</h2>
-            <div class="flex space-x-2">
-              <h4 class="text-xs font-bold text-white">Overview</h4>
+<div class="bg-gray-100 min-h-screen p-1">
+  <section class="bg-white rounded-lg shadow-md p-2 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- SMR Readings Card -->
+      <article class="bg-white rounded-lg shadow border border-gray-200">
+        <header class="bg-gradient-to-r from-blue-500 to-indigo-600 p-1 rounded-t-lg">
+          <h2 class="text-sm font-bold text-white">SMR Readings</h2>
+          <span class="text-xs text-blue-100">Overview</span>
+        </header>
+        <div class="p-3">
+          <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-sm">
+                <thead class="sticky top-0 bg-gray-300">
+                  <tr class="border-b border-gray-200">
+                    <th class="text-left py-1 px-3 font-semibold text-gray-700">Date</th>
+                    <th class="text-left py-1 px-3 font-semibold text-gray-700">ISSUE N#</th>
+                    <th class="text-left py-1 px-3 font-semibold text-gray-700">LITRES</th>
+                    <th class="text-left py-1 px-3 font-semibold text-gray-700">SMR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let smr of smrReadingsArray" class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="py-1 px-3">{{ smr.date }}</td>
+                    <td class="py-1 px-3">{{ smr.issueNo }}</td>
+                    <td class="py-1 px-3">{{ smr.litres }}</td>
+                    <td class="py-1 px-3">{{ smr.reading }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <!-- First Card -->
-        <div class="h-full w-full bg-white rounded-lg shadow p-2 flex-1">
-          <!-- Header section -->
-          <div class="flex flex-col h-full">
-            <!-- Table section with fixed height and scrolling -->
-            <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
-              <div class="overflow-x-auto">
-                <table class="min-w-full text-sm">
-                  <thead class="sticky top-0 bg-gray-300">
-                    <tr class="border-b border-gray-200">
-                      <th class="text-left py-1 px-3 font-semibold text-gray-700">Date</th>
-                      <th class="text-left py-1 px-3 font-semibold text-gray-700">ISSUE N#</th>
-                      <th class="text-left py-1 px-3 font-semibold text-gray-700">LITRES</th>
-                      <th class="text-left py-1 px-3 font-semibold text-gray-700">SMR</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let smr of smrReadingsArray" class="border-b border-gray-100 hover:bg-gray-50">
-                      <td class="py-1 px-3">{{ smr.date }}</td>
-                      <td class="py-1 px-3">{{ smr.issueNo }}</td>
-                      <td class="py-1 px-3">{{ smr.litres }}</td>
-                      <td class="py-1 px-3">{{ smr.reading }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Second Card - Fuel Consumption with Table -->
-      <div class="h-full w-full bg-white rounded-lg shadow flex-1">
-        <div class="divide-y divide-gray-200">
-          <div
-            class="p-1 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center"
-          >
-            <h2 class="text-xs font-bold text-white mb-2 md:mb-0">Fuel Consumption</h2>
-            <div class="flex space-x-2">
-              <h4 class="text-xs font-bold text-white">Overview</h4>
-            </div>
-          </div>
-        </div>
-        <div class="h-full w-full bg-white rounded-lg shadow p-2 flex-1">
-          <div class="flex flex-col h-full">
-            <!-- Table section with fixed height and scrolling -->
-            <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
-              <div class="overflow-x-auto">
-                <table class="min-w-full text-sm">
-                  <thead class="sticky top-0 bg-gray-300">
-                    <tr class="border-b border-gray-200">
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">Date</th>
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">Document</th>
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">Consumption</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let consumption of consumptionsArray" class="border-b border-gray-100 hover:bg-gray-50">
-                      <td class="py-1 px-3">{{ consumption.date }}</td>
-                      <td class="py-1 px-3">{{ consumption.document }}</td>
-                      <td class="py-1 px-3">{{ consumption.consumption }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <div class="h-full w-full bg-white rounded-lg shadow flex-1">
-        <div class="divide-y divide-gray-200">
-          <div
-            class="p-1 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center"
-          >
-            <h2 class="text-xs font-bold text-white mb-2 md:mb-0">Balances</h2>
-            <div class="flex space-x-2">
-              <h4 class="text-xs font-bold text-white">Overview</h4>
+      <!-- Fuel Consumption Card -->
+      <article class="bg-white rounded-lg shadow border border-gray-200">
+        <header class="bg-gradient-to-r from-blue-500 to-indigo-600 p-1 rounded-t-lg">
+          <h2 class="text-sm font-bold text-white">Fuel Consumption</h2>
+          <span class="text-xs text-blue-100">Overview</span>
+        </header>
+        <div class="p-3">
+          <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-sm">
+                <thead class="sticky top-0 bg-gray-300">
+                  <tr class="border-b border-gray-200">
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Date</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Document</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Consumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let consumption of consumptionsArray" class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="py-1 px-3">{{ consumption.date }}</td>
+                    <td class="py-1 px-3">{{ consumption.document }}</td>
+                    <td class="py-1 px-3">{{ consumption.consumption }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="h-full w-full bg-white rounded-lg shadow p-2 flex-1">
-          <div class="flex flex-col h-full">
-            <!-- Table section with fixed height and scrolling -->
-            <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
-              <div class="overflow-x-auto">
-                <table class="min-w-full text-sm">
-                  <thead class="sticky top-0 bg-gray-300">
-                    <tr class="border-b border-gray-200">
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">Balance</th>
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
-                      <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                      <td class="py-1 px-3">{{ balance }}</td>
-                      <td class="py-1 px-3">{{ pump1 }}</td>
-                      <td class="py-1 px-3">{{ pump2 }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </article>
 
-      <div class="h-full w-full bg-white rounded-lg shadow flex-1">
-        <div class="divide-y divide-gray-200">
-          <div
-            class="p-1 bg-gradient-to-r from-blue-500 to-indigo-600 flex flex-col md:flex-row justify-between items-start md:items-center"
-          >
-            <h2 class="text-xs font-bold text-white mb-2 md:mb-0">Issues</h2>
-            <div class="flex space-x-2">
-              <h4 class="text-xs font-bold text-white">Overview</h4>
+      <!-- Balances Card -->
+      <article class="bg-white rounded-lg shadow border border-gray-200">
+        <header class="bg-gradient-to-r from-blue-500 to-indigo-600 p-1 rounded-t-lg">
+          <h2 class="text-sm font-bold text-white">Balances</h2>
+          <span class="text-xs text-blue-100">Overview</span>
+        </header>
+        <div class="p-3">
+          <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
+            <div class="overflow-x-auto">
+              <table class="min-w-full text-sm">
+                <thead class="sticky top-0 bg-gray-300">
+                  <tr class="border-b border-gray-200">
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Balance</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="py-1 px-3">{{ balance }}</td>
+                    <td class="py-1 px-3">{{ pump1 }}</td>
+                    <td class="py-1 px-3">{{ pump2 }}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="h-full w-full bg-white rounded-lg shadow p-2 flex-1">
-          <div class="flex flex-col h-full">
-            <!-- Table section with fixed height and scrolling -->
-            <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
-              <div class="overflow-x-auto">
-                <table class="min-w-full text-sm">
-                  <tbody>
-                    <tr *ngFor="let consumption of consumptionsArray" class="border-b border-gray-100 hover:bg-gray-50">
-                      <td class="py-1 px-3">{{ consumption.document }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      </article>
+
+      <!-- Issues Card -->
+      <article class="bg-white rounded-lg shadow border border-gray-200">
+        <header class="bg-gradient-to-r from-blue-500 to-indigo-600 p-1 rounded-t-lg">
+          <h2 class="text-sm font-bold text-white">Issues</h2>
+          <span class="text-xs text-blue-100">Overview</span>
+        </header>
+        <div class="p-3">
+          <div class="overflow-y-auto max-h-40 rounded border border-gray-100">
+            <table class="w-full text-sm">
+              <tbody id="issues-tbody">
+                <!-- Dynamic content will be inserted here -->
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-2 px-3">Issue-001</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 
-  <p>&nbsp;</p>
-
-  <!--      <jhi-alert-error />-->
-  <!--      <jhi-alert />-->
-  <div class="h-full w-full bg-white rounded-lg shadow p-2">
-    <div class="flex flex-col md:flex-row gap-6">
-      <form name="fuelTransactionForm" novalidate class="divide-y divide-gray-200 w-full" autocomplete="off">
-        <div class="flex space-x-4 mb-6">
+  <section class="bg-white rounded-lg shadow-md p-1 mb-6">
+    <form id="fuel-transaction-form" class="space-y-1" novalidate autocomplete="off" (ngSubmit)="saveFuelTransaction()">
+      <fieldset class="border border-gray-200 rounded-lg p-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <!-- Company Field -->
-          <div class="relative w-1/2">
+          <div class="relative">
             <label class="block text-sm font-medium text-gray-700 mb-1" for="field_company">Company</label>
             <input
               type="text"
@@ -191,7 +149,7 @@
           </div>
 
           <!-- Storage Unit Field -->
-          <div class="relative w-1/2">
+          <div class="relative">
             <label class="block text-sm font-medium text-gray-700 mb-1" for="field_storage_unit">Storage Unit</label>
             <input
               type="text"
@@ -219,8 +177,8 @@
             </ul>
           </div>
 
-          <!--    Pump          -->
-          <div class="relative w-1/2">
+          <!-- Pump Field -->
+          <div class="relative">
             <label class="block text-sm font-medium text-gray-700 mb-1">Pump</label>
             <input
               type="text"
@@ -244,8 +202,9 @@
             </ul>
           </div>
 
-          <div class="relative w-1/2">
-            <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Commodity</label>
+          <!-- Commodity Field -->
+          <div>
+            <label for="fuel_type" class="block text-sm font-medium text-gray-700 mb-1">Commodity</label>
             <select
               id="fuel_type"
               name="fuel_type"
@@ -253,15 +212,15 @@
               [ngModelOptions]="{ standalone: true }"
               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
-              <option value="" disabled selected>Select Commodity ...</option>
-              <option value="petrol">Petrol</option>
-              <option value="diesel">Diesel</option>
+              <option value="" disabled>Select a commodity</option>
+              <option *ngFor="let fuelType of fuelTypes" [value]="fuelType">
+                {{ fuelType }}
+              </option>
             </select>
           </div>
 
-          <!--    Date Range          -->
-          <div class="relative w-1/2">
-            <!-- Start Date -->
+          <!-- Start Date -->
+          <div>
             <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
             <input
               type="date"
@@ -273,8 +232,8 @@
             />
           </div>
 
-          <div class="relative w-1/2">
-            <!-- End Date -->
+          <!-- End Date -->
+          <div>
             <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
             <input
               type="date"
@@ -286,45 +245,63 @@
             />
           </div>
         </div>
+      </fieldset>
 
+      <fieldset class="border border-gray-200 rounded-lg">
         <div class="flex space-x-4 mb-6">
-          <!-- Company Field -->
-          <div class="relative w-1/2">
-            <!-- End Date -->
-            <label for="end_date" class="block text-xs text-gray-700 mb-1">Date</label>
+          <!-- Date -->
+          <div>
+            <label for="transaction_date" class="block text-xs font-medium text-gray-700 mb-1">Date</label>
             <input
               type="date"
-              id="date"
-              [(ngModel)]="date"
+              id="transaction-date"
+              [(ngModel)]="transactionDate"
+              required
               name="date"
               [ngModelOptions]="{ standalone: true }"
               class="w-full px-3 py-2 border text-xs border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <!--    Pump          -->
-          <div class="relative w-1/2">
-            <label for="end_date" class="block text-xs text-gray-700 mb-1">Transaction Type</label>
+          <!-- Transaction Type -->
+          <div>
+            <label for="transaction_type" class="block text-xs font-medium text-gray-700 mb-1">Transaction type</label>
             <select
               id="transaction_type"
               name="transaction_type"
               [(ngModel)]="selectedTransactionType"
+              (ngModelChange)="selectTransactionType($event)"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border text-xs border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
-              <option value="" disabled selected>Transaction Type ...</option>
-              <option value="petrol">Issuance</option>
-              <option value="diesel">Calibration</option>
-              <option value="diesel">Drum</option>
-              <option value="diesel">Third Party</option>
-              <option value="diesel">Workshop</option>
-              <option value="diesel">Transfer</option>
+              <option value="" disabled>Transaction type</option>
+              <option *ngFor="let fuelTransactionType of fuelTransactionTypes" [value]="fuelTransactionType">
+                {{ fuelTransactionType }}
+              </option>
             </select>
           </div>
 
-          <!-- Fleet Number -->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_storage_unit">Fleet Number</label>
+          <!-- Issuance Type (conditional) -->
+          <div class="relative" *ngIf="showIssuanceType">
+            <label for="text-xs fuel_type" class="block text-sm font-medium text-gray-700 mb-1">Issuance To</label>
+            <select
+              id="fuel_type"
+              name="fuel_type"
+              [(ngModel)]="selectedIssuanceType"
+              (ngModelChange)="selectIssuanceType($event)"
+              [ngModelOptions]="{ standalone: true }"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="" disabled>Issuance type</option>
+              <option *ngFor="let fuelIssuanceType of fuelIssuanceTypes" [value]="fuelIssuanceType">
+                {{ fuelIssuanceType }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Fleet Number (conditional) -->
+          <div class="relative" *ngIf="showFleet">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_storage_unit">Fleet Number</label>
             <input
               type="text"
               id="field_fleet_number"
@@ -332,6 +309,7 @@
               name="fleetNumber"
               [(ngModel)]="fleetNumber"
               (keyup)="searchFleet()"
+              (blur)="hideFleetDropdown()"
               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
@@ -344,9 +322,9 @@
             </ul>
           </div>
 
-          <!--User-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_user_full_name">User</label>
+          <!-- User (conditional) -->
+          <div class="relative" *ngIf="showUser">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_user_full_name">User</label>
             <input
               type="text"
               id="field_user_full_name"
@@ -358,9 +336,9 @@
             />
           </div>
 
-          <!--SMR-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_smr">SMR</label>
+          <!-- SMR (conditional) -->
+          <div class="relative" *ngIf="showSmr">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_smr">SMR</label>
             <input
               type="text"
               id="field_smr"
@@ -372,9 +350,9 @@
             />
           </div>
 
-          <!--Unit-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_unit">Unit</label>
+          <!-- Unit (conditional) -->
+          <div class="relative" *ngIf="showUnit">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_unit">Unit</label>
             <input
               type="text"
               id="field_unit"
@@ -386,9 +364,9 @@
             />
           </div>
 
-          <!--Notes-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_notes">Notes</label>
+          <!-- Notes (conditional) -->
+          <div class="relative" *ngIf="showNotes">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_notes">Notes</label>
             <input
               type="text"
               id="field_notes"
@@ -400,23 +378,36 @@
             />
           </div>
 
-          <!--Division/Contract-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_division_contract">Division/Contract</label>
+          <!-- Division/Contract (conditional) -->
+          <div class="relative" *ngIf="showDivisionContract">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_storage_unit">Division/Contract</label>
             <input
               type="text"
-              id="field_division_contract"
-              placeholder="Division or Contract .... "
+              id="field_divisionContract"
+              placeholder="Search Division Contract"
               name="divisionContract"
               [(ngModel)]="divisionContract"
-              [ngModelOptions]="{ standalone: true }"
+              (keyup)="searchDivisionContract()"
+              (blur)="hideDivisionContractDropdown()"
               class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
+            <ul
+              *ngIf="showDivisionContractDropdown && filteredDivisionContracts.length > 0"
+              class="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+            >
+              <li
+                *ngFor="let filteredDivisionContract of filteredDivisionContracts"
+                (mousedown)="selectDivisionContract(filteredDivisionContract)"
+                class="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {{ filteredDivisionContract.contractDivisionNumber }} - {{ filteredDivisionContract.contractDivisionName }}
+              </li>
+            </ul>
           </div>
 
-          <!--Received-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_received_fuel">Received</label>
+          <!-- Received (conditional) -->
+          <div class="relative" *ngIf="showReceived">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_received_fuel">Received</label>
             <input
               type="text"
               id="field_received_fuel"
@@ -427,9 +418,9 @@
             />
           </div>
 
-          <!--Issued-->
-          <div class="relative w-1/2">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_issued_fuel">Issued</label>
+          <!-- Issued (conditional) -->
+          <div class="relative" *ngIf="showIssued">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_issued_fuel">Issued (L)</label>
             <input
               type="text"
               id="field_issued_fuel"
@@ -440,17 +431,43 @@
             />
           </div>
 
-          <!--F/NF-->
-          <div class="relative w-1/2">
+          <!-- Pump readings (conditional) -->
+          <div class="relative" *ngIf="showPumps">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_issued_fuel">Pump Start</label>
+            <input
+              type="text"
+              id="field_pump_start"
+              name="pumpStart"
+              [(ngModel)]="pumpStart"
+              [ngModelOptions]="{ standalone: true }"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Issued (conditional) -->
+          <div class="relative" *ngIf="showPumps">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_issued_fuel">Pump End</label>
+            <input
+              type="text"
+              id="field_pump_end"
+              name="pumpEnd"
+              [(ngModel)]="pumpEnd"
+              [ngModelOptions]="{ standalone: true }"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Fill Up Toggle (conditional) -->
+          <div class="relative" *ngIf="showIsFillUp">
             <p>&nbsp;</p>
             <div class="flex items-center">
               <!-- Hidden actual checkbox for form control -->
               <input
                 type="checkbox"
-                name="isActive"
-                id="field_isActive"
-                data-cy="isActive"
-                formControlName="isActive"
+                name="isFillUp"
+                id="field_isFillUp"
+                data-cy="isFillUp"
+                [(ngModel)]="isFillUp"
                 class="sr-only"
                 #activeToggle
               />
@@ -481,15 +498,19 @@
             </div>
           </div>
 
-          <div class="relative w-1/2">
+          <div class="relative">
             <p>&nbsp;</p>
             <button type="submit" class="p-1 text-red-600 hover:text-red-800">
               <fa-icon icon="add"></fa-icon>
             </button>
           </div>
         </div>
-      </form>
-    </div>
+      </fieldset>
+    </form>
+  </section>
+
+  <!-- Transactions Table -->
+  <section class="bg-white rounded-lg shadow-md overflow-hidden">
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -501,103 +522,97 @@
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Fleet No</span>
+                <span>Fuel Transaction Type</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>User</span>
+                <span>Fuel Type</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Smr</span>
+                <span>Fleet Number</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Unit</span>
+                <span>Meter Reading Start</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Notes</span>
+                <span>Meter Reading End</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Division/Contract</span>
+                <span>litres</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Received</span>
+                <span>contractDivision</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Issued</span>
+                <span>isFillUp</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Balance</span>
+                <span>fuelPump</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Pump</span>
+                <span>note</span>
               </div>
             </th>
-            <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-              <div class="flex items-center">
-                <span>Fill up</span>
-              </div>
-            </th>
+
             <th scope="col" class="px-6 py-1 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr *ngFor="let fuelTransaction of fuelTransactionsArray" class="border-b border-gray-100 hover:bg-gray-50">
             <td class="px-6 py-1 whitespace-nowrap text-sm font-medium text-gray-900">
-              {{ fuelTransaction.date }}
+              {{ fuelTransaction.transactionDate }}
+            </td>
+            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
+              {{ fuelTransaction.fuelTransactionType }}
+            </td>
+            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
+              {{ fuelTransaction.fuelType }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
               {{ fuelTransaction.fleetNumber }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.user }}
+              {{ fuelTransaction.meterReadingStart }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.smr }}
+              {{ fuelTransaction.meterReadingEnd }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.unit }}
+              {{ fuelTransaction.litres }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.notes }}
-            </td>
-            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.divionContract }}
-            </td>
-            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.received }}
-            </td>
-            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.issued }}
-            </td>
-            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.balance }}
-            </td>
-            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
-              {{ fuelTransaction.pump }}
+              {{ fuelTransaction.contractDivision }}
             </td>
             <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
               {{ fuelTransaction.isFillUp }}
             </td>
+            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
+              {{ fuelTransaction.fuelPump }}
+            </td>
+            <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500">
+              {{ fuelTransaction.note }}
+            </td>
+
             <td class="px-6 py-1 whitespace-nowrap text-right text-sm font-medium">
               <div class="flex justify-end space-x-2">
-                <a [routerLink]="['/fuelTransaction', fuelTransaction.id, 'edit']" class="p-1 text-green-600 hover:text-green-800">
+                <a class="p-1 text-green-600 hover:text-green-800">
                   <fa-icon icon="pencil-alt"></fa-icon>
                   Edit
                 </a>
@@ -611,7 +626,5 @@
         </tbody>
       </table>
     </div>
-  </div>
-  <!--    </div>-->
-  <!--  </div>-->
+  </section>
 </div>

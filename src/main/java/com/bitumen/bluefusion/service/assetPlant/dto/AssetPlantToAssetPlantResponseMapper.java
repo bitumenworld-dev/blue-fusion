@@ -1,6 +1,7 @@
 package com.bitumen.bluefusion.service.assetPlant.dto;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
+import com.bitumen.bluefusion.service.assetPlant.payload.AssetPlantResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -13,30 +13,6 @@ const fuelTransactionRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
-  {
-    path: ':id/view',
-    loadComponent: () => import('./detail/fuel-transaction-detail.component').then(m => m.FuelTransactionDetailComponent),
-    resolve: {
-      fuelTransaction: FuelTransactionResolve,
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'new',
-    loadComponent: () => import('./update/fuel-transaction-update.component').then(m => m.FuelTransactionUpdateComponent),
-    resolve: {
-      fuelTransaction: FuelTransactionResolve,
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/edit',
-    loadComponent: () => import('./update/fuel-transaction-update.component').then(m => m.FuelTransactionUpdateComponent),
-    resolve: {
-      fuelTransaction: FuelTransactionResolve,
-    },
-    canActivate: [UserRouteAccessService],
-  },
 ];
 
 export default fuelTransactionRoute;

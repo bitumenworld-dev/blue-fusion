@@ -1,15 +1,19 @@
 import { DivisionType } from 'app/entities/enumerations/division-type.model';
 
-export interface IContractDivision {
-  id: number;
-  contractDivisionId?: number | null;
+export interface ContractDivision {
+  contractDivisionId: number;
   contractDivisionNumber?: string | null;
-  companyId?: number | null;
+  contractDivisionName?: string | null;
+  company?: string | null;
   buildSmartReference?: string | null;
   shiftStart?: string | null;
   shiftEnd?: string | null;
-  type?: keyof typeof DivisionType | null;
+  contractDivisionType?: keyof typeof DivisionType | null;
   completed?: boolean | null;
+  hrHoursMondayThursday?: number | null;
+  hrHoursFriday?: number | null;
+  addHoursMondayFriday?: number | null;
+  addHoursWeekend?: number | null;
 }
 
-export type NewContractDivision = Omit<IContractDivision, 'id'> & { id: null };
+export type NewContractDivision = Omit<ContractDivision, 'contractDivisionId'> & { contractDivisionId: null };

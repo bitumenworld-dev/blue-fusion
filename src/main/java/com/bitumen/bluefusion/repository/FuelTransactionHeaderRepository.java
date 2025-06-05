@@ -1,7 +1,8 @@
 package com.bitumen.bluefusion.repository;
 
 import com.bitumen.bluefusion.domain.FuelTransactionHeader;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface FuelTransactionHeaderRepository extends JpaRepository<FuelTransactionHeader, Long> {}
+public interface FuelTransactionHeaderRepository
+    extends JpaRepository<FuelTransactionHeader, Long>, JpaSpecificationExecutor<FuelTransactionHeader> {}

@@ -2,8 +2,8 @@ package com.bitumen.bluefusion.web.rest;
 
 import com.bitumen.bluefusion.service.assetPlant.AssetPlantService;
 import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantFilterCriteria;
-import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantRequest;
-import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantResponse;
+import com.bitumen.bluefusion.service.assetPlant.payload.AssetPlantRequest;
+import com.bitumen.bluefusion.service.assetPlant.payload.AssetPlantResponse;
 import jakarta.mail.MethodNotSupportedException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

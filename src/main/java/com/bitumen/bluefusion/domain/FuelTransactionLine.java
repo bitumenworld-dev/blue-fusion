@@ -28,19 +28,15 @@ public class FuelTransactionLine extends AbstractAuditingEntity<FuelTransactionL
 
     @ManyToOne
     @JoinColumn(name = "asset_plant_id")
-    private AssetPlant assetPlantId;
+    private AssetPlant assetPlant;
 
     @ManyToOne
     @JoinColumn(name = "contract_division_id")
-    private ContractDivision contractDivisionId;
-
-    @ManyToOne
-    @JoinColumn(name = "issuance_type_id")
-    private FuelIssuanceType issuanceTypeId;
+    private ContractDivision contractDivision;
 
     @ManyToOne
     @JoinColumn(name = "pump_id")
-    private FuelPump pumpId;
+    private FuelPump pump;
 
     @Column(name = "litres")
     private Float litres;
@@ -53,4 +49,7 @@ public class FuelTransactionLine extends AbstractAuditingEntity<FuelTransactionL
 
     @Column(name = "multiplier")
     private Integer multiplier;
+
+    @Column(name = "registration_number")
+    private String registrationNumber;
 }

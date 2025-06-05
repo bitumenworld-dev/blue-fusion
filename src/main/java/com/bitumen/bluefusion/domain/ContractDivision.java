@@ -43,11 +43,8 @@ public class ContractDivision extends AbstractAuditingEntity<ContractDivision> i
     @Column(name = "shift_start")
     private LocalTime shiftStart;
 
-    @Column(name = "shift_end")
-    private LocalTime shiftEnd;
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "type")
+    @Column(name = "contract_division_type")
     private ContractDivisionType contractDivisionType;
 
     @Column(name = "completed")

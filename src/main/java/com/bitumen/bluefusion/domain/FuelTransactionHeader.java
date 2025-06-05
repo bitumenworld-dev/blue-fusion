@@ -1,6 +1,8 @@
 package com.bitumen.bluefusion.domain;
 
+import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
+import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import lombok.*;
@@ -15,7 +17,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "fuel_transaction_header")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactionHeader> implements Serializable {
 
     @Id
@@ -25,19 +26,23 @@ public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactio
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private Company companyId;
+    private Company company;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
-    private Company supplierId;
+    private Company supplier;
 
-    @ManyToOne
-    @JoinColumn(name = "transaction_type_id")
-    private FuelTransactionType transactionTypeId;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "fuel_transaction_type")
+    private FuelTransactionType fuelTransactionType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "issuance_transaction_type")
+    private IssuanceTransactionType issuanceTransactionType;
 
     @ManyToOne
     @JoinColumn(name = "storage_unit_id")
-    private AssetPlant storageUnitId;
+    private Storage storageUnit;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type")
@@ -61,14 +66,13 @@ public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactio
     @Column(name = "note")
     private String note;
 
-    @Column(name = "registration_number")
-    private String registrationNumber;
-
     @ManyToOne
     @JoinColumn(name = "attendee_id")
-    private Employee attendeeId;
+    private Employee attendee;
 
     @ManyToOne
     @JoinColumn(name = "operator_id")
-    private Employee operatorId;
+    private Employee operator;
+
+    private Boolean isFillUp;
 }

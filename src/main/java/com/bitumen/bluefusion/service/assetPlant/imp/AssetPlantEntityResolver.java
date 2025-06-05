@@ -3,7 +3,7 @@ package com.bitumen.bluefusion.service.assetPlant.imp;
 import com.bitumen.bluefusion.repository.*;
 import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantEntities;
 import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantFilterCriteria;
-import com.bitumen.bluefusion.service.assetPlant.dto.AssetPlantRequest;
+import com.bitumen.bluefusion.service.assetPlant.payload.AssetPlantRequest;
 import com.bitumen.bluefusion.service.exceptions.RecordNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

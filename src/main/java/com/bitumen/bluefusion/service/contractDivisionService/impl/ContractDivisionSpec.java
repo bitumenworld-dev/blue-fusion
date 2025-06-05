@@ -1,13 +1,13 @@
 package com.bitumen.bluefusion.service.contractDivisionService.impl;
 
+import com.bitumen.bluefusion.domain.Company;
 import com.bitumen.bluefusion.domain.ContractDivision;
+import java.util.Objects;
 import org.springframework.data.jpa.domain.Specification;
 
 public interface ContractDivisionSpec {
-    static Specification<ContractDivision> withcompanyId(final Long companyId) {
-        return (
-            (root, query, builder) -> (companyId == null) ? builder.conjunction() : builder.equal(root.get("contractDivisionId"), companyId)
-        );
+    static Specification<ContractDivision> withCompany(final Company company) {
+        return ((root, query, builder) -> (Objects.isNull(company)) ? builder.conjunction() : builder.equal(root.get("company"), company));
     }
 
     static Specification<ContractDivision> withContractDivisionNumber(final String contractDivisionNumber) {
