@@ -59,7 +59,7 @@ public class AssetPlantServiceReadingResource {
     public ResponseEntity<AssetPlantServiceReadingResponse> updateAssetPlantServiceReading(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
-    ) throws URISyntaxException {
+    ) {
         AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.update(
             id,
             assetPlantServiceReadingRequest
@@ -80,7 +80,7 @@ public class AssetPlantServiceReadingResource {
     public ResponseEntity<AssetPlantServiceReadingResponse> partialUpdateAssetPlantServiceReading(
         @PathVariable(value = "id", required = false) final Long id,
         @RequestBody AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
-    ) throws URISyntaxException {
+    ) {
         AssetPlantServiceReadingResponse assetPlantServiceReading = assetPlantServiceReadingService.partialUpdate(
             id,
             assetPlantServiceReadingRequest
@@ -127,10 +127,7 @@ public class AssetPlantServiceReadingResource {
         @PathVariable("id") Long assetPlantServiceReadingId,
         AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
     ) {
-        AssetPlantServiceReadingResponse response = AssetPlantServiceReadingMapper.map.apply(
-            assetPlantServiceReadingService.findOne(assetPlantServiceReadingId)
-        );
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(assetPlantServiceReadingService.findOne(assetPlantServiceReadingId));
     }
 
     @DeleteMapping("/{id}")

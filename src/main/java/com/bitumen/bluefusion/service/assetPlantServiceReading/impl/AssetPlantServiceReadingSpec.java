@@ -21,11 +21,10 @@ public interface AssetPlantServiceReadingSpec {
                 ? builder.conjunction()
                 : builder.like(root.get("serviceUnit"), "%" + serviceUnit + "%");
     }
-
-    static Specification<AssetPlantServiceReading> withAssetPlantServiceReadingName(final String assetPlantServiceReadingName) {
-        return (root, query, builder) ->
-            (assetPlantServiceReadingName == null || assetPlantServiceReadingName.isEmpty())
-                ? builder.conjunction()
-                : builder.like(root.get("assetPlantServiceReadingName"), "%" + assetPlantServiceReadingName + "%");
-    }
+    //    static Specification<AssetPlantServiceReading> withAssetPlantServiceReadingName(final String assetPlantServiceReadingName) {
+    //        return (root, query, builder) ->
+    //            (assetPlantServiceReadingName == null || assetPlantServiceReadingName.isEmpty())
+    //                ? builder.conjunction()
+    //                : builder.like(root.get("assetPlantServiceReadingName"), "%" + assetPlantServiceReadingName + "%");
+    //    }
 }

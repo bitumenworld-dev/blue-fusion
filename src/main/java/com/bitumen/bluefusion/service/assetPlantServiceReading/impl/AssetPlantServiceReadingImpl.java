@@ -129,6 +129,7 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
     }
 
     @Transactional(readOnly = true)
+    @Override
     public Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlant, Boolean isActive, String serviceUnit) {
         Specification<AssetPlantServiceReading> specification = AssetPlantServiceReadingSpec.withAssetPlantId(
             AssetPlant.builder().assetPlantId(assetPlant).build()
@@ -140,9 +141,10 @@ public class AssetPlantServiceReadingImpl implements AssetPlantServiceReadingSer
 
     @Transactional(readOnly = true)
     @Override
-    public AssetPlantServiceReading findOne(Long assetPlantServiceReadingId) {
+    public AssetPlantServiceReadingResponse findOne(Long assetPlantServiceReadingId) {
         return assetPlantServiceReadingRepository
             .findById(assetPlantServiceReadingId)
+            .map(AssetPlantServiceReadingMapper.map)
             .orElseThrow(() ->
                 new RecordNotFoundException(String.format("Asset Plant Service Reading not found: %s", assetPlantServiceReadingId))
             );

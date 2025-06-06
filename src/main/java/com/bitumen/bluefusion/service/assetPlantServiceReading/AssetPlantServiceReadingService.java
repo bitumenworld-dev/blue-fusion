@@ -1,6 +1,7 @@
 package com.bitumen.bluefusion.service.assetPlantServiceReading;
 
 import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
+import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingMapper;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingRequest;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingResponse;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public interface AssetPlantServiceReadingService {
 
     Page<AssetPlantServiceReadingResponse> findAll(Pageable pageable, Long assetPlant, Boolean isActive, String serviceUnit);
 
-    AssetPlantServiceReading findOne(Long assetPlantServiceReadingId);
+    AssetPlantServiceReadingResponse findOne(Long assetPlantServiceReadingId);
 
     void delete(Long assetPlantServiceReadingId);
 }
