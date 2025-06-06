@@ -53,6 +53,16 @@
                 <constraints nullable="true" />
             </column>
 
+          <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+          </column>
+
+          <column name="created_date" type="timestamp"/>
+
+          <column name="last_modified_by" type="varchar(50)"/>
+
+          <column name="last_modified_date" type="timestamp"/>
+
         </createTable>
     </changeSet>
 
@@ -73,6 +83,10 @@
             <column name="latest_smr_date" type="date"/>
             <column name="last_service_smr" type="numeric"/>
             <column name="service_unit" type="string"/>
+            <column name="created_by" type="string"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="timestamp"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>
