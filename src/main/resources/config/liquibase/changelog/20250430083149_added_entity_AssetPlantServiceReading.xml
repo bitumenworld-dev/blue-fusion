@@ -69,7 +69,7 @@
     <changeSet id="20250430083149-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/asset_plant_service_reading.csv"
-                  separator=";"
+                  separator=","
                   tableName="asset_plant_service_reading"
                   usePreparedStatements="true">
             <column name="asset_plant_service_reading_id" type="numeric"/>
