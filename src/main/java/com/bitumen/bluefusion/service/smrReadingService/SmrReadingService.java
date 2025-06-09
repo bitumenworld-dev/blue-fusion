@@ -13,11 +13,9 @@ public interface SmrReadingService {
 
     SmrReadingResponse partialUpdate(Long smrReadingId, SmrReadingRequest smrReadingRequest);
 
-    @Transactional(readOnly = true)
-    Page<SmrReadingResponse> findAll(Pageable pageable, Long assetPlantId, String unit, Float smrReading);
+    Page<SmrReadingResponse> findAll(Pageable pageable, Long assetPlantId, String unit, Float smrReadingValue);
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    SmrReadingResponse findOne(Long smrReadingId);
+    SmrReadingResponse findOne(Long smrReadingId, SmrReadingRequest smrReadingRequest);
 
     void delete(Long smrReadingId);
 }

@@ -26,7 +26,7 @@ public class SmrReading extends AbstractAuditingEntity<SmrReading> implements Se
     private AssetPlant assetPlant;
 
     @Column(name = "smr_reading")
-    private Float smrReading;
+    private Float smrReadingValue;
 
     @Column(name = "reading_date_time")
     private java.time.LocalDateTime readingDateTime;

@@ -8,7 +8,7 @@ public interface SmrReadingMapper {
         new SmrReadingResponse(
             smrReading.getSmrReadingId(),
             smrReading.getAssetPlant() != null ? smrReading.getAssetPlant().getAssetPlantId() : null,
-            smrReading.getSmrReading() != null ? smrReading.getSmrReading().doubleValue() : null,
+            smrReading.getSmrReadingValue() != null ? smrReading.getSmrReadingValue().doubleValue() : null,
             smrReading.getReadingDateTime(),
             smrReading.getUnit(),
             smrReading.getFuelTransactionHeaderId() != null ? Long.valueOf(smrReading.getFuelTransactionHeaderId()) : null,

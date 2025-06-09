@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record SmrReadingRequest(
     Long assetPlantId,
-    Double smrReading,
+    Double smrReadingValue,
     LocalDateTime readingDateTime,
     String unit,
     Long fuelTransactionHeaderId,

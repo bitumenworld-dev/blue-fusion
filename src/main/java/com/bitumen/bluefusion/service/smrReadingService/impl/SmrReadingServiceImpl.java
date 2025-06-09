@@ -50,7 +50,7 @@ public class SmrReadingServiceImpl implements SmrReadingService {
             .findById(smrReadingRequest.assetPlantId())
             .orElseThrow(() -> new RecordNotFoundException(String.format("Asset Plant not found: %s", smrReadingRequest.assetPlantId())));
         smrReading.setAssetPlant(assetPlant);
-        smrReading.setSmrReading(smrReadingRequest.smrReading().floatValue());
+        smrReading.setSmrReadingValue(smrReadingRequest.smrReadingValue().floatValue());
         smrReading.setReadingDateTime(smrReadingRequest.readingDateTime());
         smrReading.setUnit(smrReadingRequest.unit());
         smrReading.setFuelTransactionHeaderId(Math.toIntExact(smrReadingRequest.fuelTransactionHeaderId()));
@@ -70,7 +70,9 @@ public class SmrReadingServiceImpl implements SmrReadingService {
                         .orElseThrow(() -> new RecordNotFoundException(String.format("Asset Plant not found: %s", assetPlantId)));
                     existingSmrReading.setAssetPlant(assetPlant);
                 });
-                Optional.ofNullable(smrReadingRequest.smrReading()).ifPresent(val -> existingSmrReading.setSmrReading(val.floatValue()));
+                Optional.ofNullable(smrReadingRequest.smrReadingValue()).ifPresent(val ->
+                    existingSmrReading.setSmrReadingValue(val.floatValue())
+                );
                 Optional.ofNullable(smrReadingRequest.readingDateTime()).ifPresent(existingSmrReading::setReadingDateTime);
                 Optional.ofNullable(smrReadingRequest.unit()).ifPresent(existingSmrReading::setUnit);
                 Optional.ofNullable(smrReadingRequest.fuelTransactionHeaderId()).ifPresent(val ->
@@ -86,21 +88,21 @@ public class SmrReadingServiceImpl implements SmrReadingService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<SmrReadingResponse> findAll(Pageable pageable, Long assetPlantId, String unit, Float smrReading) {
+    public Page<SmrReadingResponse> findAll(Pageable pageable, Long assetPlantId, String unit, Float smrReadingValue) {
         Specification<SmrReading> specification = SmrReadingSpec.withAssetPlantId(assetPlantId)
             .and(SmrReadingSpec.withUnit(unit))
-            .and(SmrReadingSpec.withSmrReading(Double.valueOf(smrReading)));
+            .and(SmrReadingSpec.withSmrReading(Double.valueOf(smrReadingValue)));
 
         return smrReadingRepository.findAll(specification, pageable).map(SmrReadingMapper.map);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public SmrReadingResponse findOne(Long smrReadingId) {
-        return smrReadingRepository
+    public SmrReadingResponse findOne(Long smrReadingId, SmrReadingRequest smrReadingRequest) {
+        SmrReading smrReading = smrReadingRepository
             .findById(smrReadingId)
-            .map(SmrReadingMapper.map)
             .orElseThrow(() -> new RecordNotFoundException(String.format("SMR Reading not found: %s", smrReadingId)));
+        return SmrReadingMapper.map.apply(smrReading);
     }
 
     @Override

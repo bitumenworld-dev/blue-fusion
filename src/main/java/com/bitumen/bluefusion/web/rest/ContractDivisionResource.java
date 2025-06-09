@@ -1,6 +1,5 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.repository.ContractDivisionRepository;
 import com.bitumen.bluefusion.service.contractDivisionService.ContractDivisionService;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionRequest;
 import com.bitumen.bluefusion.service.contractDivisionService.dto.ContractDivisionResponse;
@@ -33,7 +32,6 @@ public class ContractDivisionResource {
     private String applicationName;
 
     private final ContractDivisionService contractDivisionService;
-
 
     @PostMapping("")
     public ResponseEntity<ContractDivisionResponse> createContractDivision(@RequestBody ContractDivisionRequest contractDivisionRequest)
