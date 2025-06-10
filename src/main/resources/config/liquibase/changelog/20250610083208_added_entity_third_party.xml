@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <!--
+      Added the entity ThirdPartyCompany.
+  -->
+  <changeSet id="20250610083208-1" author="Ben">
+    <createTable tableName="third_party">
+      <column name="third_party_id" type="bigint" autoIncrement="true" startWith="1">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="third_party_name" type="varchar(100)"/>
+
+      <column name="third_party_short_name" type="varchar(50)"/>
+
+      <column name="is_active" type="boolean"/>
+
+      <column name="uses_fuel_system" type="boolean"/>
+
+    </createTable>
+  </changeSet>
+
+  <changeSet id="20250610083208-1-data" author="copilot" context="faker">
+    <loadData
+      file="config/liquibase/fake-data/third_party.csv"
+      separator=","
+      tableName="third_party_company"
+      usePreparedStatements="true">
+      <column name="third_party_id" type="bigint" />
+
+      <column name="third_party_name" type="varchar"/>
+
+      <column name="third_party_short_name" type="varchar"/>
+
+      <column name="is_active" type="boolean"/>
+
+      <column name="uses_fuel_system" type="boolean"/>
+
+    </loadData>
+  </changeSet>
+</databaseChangeLog>
+
+
