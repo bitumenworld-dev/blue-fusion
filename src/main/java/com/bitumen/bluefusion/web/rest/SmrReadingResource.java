@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping
+@RequestMapping("/api/smr-reading")
 public class SmrReadingResource {
 
     private static final String ENTITY_NAME = "smrReading";
