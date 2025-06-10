@@ -53,13 +53,23 @@
                 <constraints nullable="true" />
             </column>
 
+          <column name="created_by" type="varchar(50)">
+            <constraints nullable="false"/>
+          </column>
+
+          <column name="created_date" type="timestamp"/>
+
+          <column name="last_modified_by" type="varchar(50)"/>
+
+          <column name="last_modified_date" type="timestamp"/>
+
         </createTable>
     </changeSet>
 
     <changeSet id="20250430083149-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/asset_plant_service_reading.csv"
-                  separator=";"
+                  separator=","
                   tableName="asset_plant_service_reading"
                   usePreparedStatements="true">
             <column name="asset_plant_service_reading_id" type="numeric"/>
@@ -73,6 +83,10 @@
             <column name="latest_smr_date" type="date"/>
             <column name="last_service_smr" type="numeric"/>
             <column name="service_unit" type="string"/>
+            <column name="created_by" type="string"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="timestamp"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>
