@@ -1,12 +1,7 @@
 // Generated DBML from Java Entities
 
-Table make_model {
-  model_id bigint [primary key, increment]
-  model varchar(255)
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
+Table jhi_authority {
+  name varchar(50) [primary key, not null]
 }
 
 Table asset_plant {
@@ -46,13 +41,14 @@ Table asset_plant {
   lastModifiedDate varchar(255)
 }
 
-Table make {
-  make_id bigint [primary key, increment]
-  make varchar(255)
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
+Table asset_plant_photo {
+  id bigint [primary key, increment]
+  asset_plant_id bigint
+  asset_plant_photo_id bigint
+  asset_plant_photo_label varchar(255)
+  image varchar(255)
+  image_content_type varchar(255)
+  name varchar(255)
 }
 
 Table site {
@@ -69,13 +65,23 @@ Table site {
   lastModifiedDate varchar(255)
 }
 
-Table smr_reading {
-  smr_reading_id bigint [primary key, increment]
-  fuel_transaction_header_id int
-  reading_date_time timestamp
-  smr_reading float
-  unit varchar(10)
-  whatsapp_number varchar(50)
+Table make {
+  make_id bigint [primary key, increment]
+  make varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table company {
+  company_id bigint [primary key, increment]
+  access_key varchar(255)
+  address varchar(255)
+  is_active boolean
+  is_iac boolean
+  name varchar(255)
+  uses_fuel_system boolean
   createdBy varchar(255)
   createdDate date
   lastModifiedBy varchar(255)
@@ -88,11 +94,16 @@ Table fuel_issuance_type {
   fuel_issue_type_id bigint
 }
 
-Table workshop {
-  id bigint [primary key, increment]
-  site_id bigint
-  workshop_id bigint
-  workshop_name varchar(255)
+Table fuel_pump {
+  fuel_pump_id bigint [primary key, increment]
+  description varchar(255)
+  fuel_pump_code varchar(255)
+  is_active boolean
+  valid_from date
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
 }
 
 Table jhi_user {
@@ -114,78 +125,12 @@ Table jhi_user {
   lastModifiedDate varchar(255)
 }
 
-Table asset_plant_photo {
+Table employee {
   id bigint [primary key, increment]
-  asset_plant_id bigint
-  asset_plant_photo_id bigint
-  asset_plant_photo_label varchar(255)
-  image varchar(255)
-  image_content_type varchar(255)
-  name varchar(255)
-}
-
-Table fuel_transaction_line {
-  fuel_transaction_line_id bigint [primary key, increment]
-  litres float
-  meter_reading_end float
-  meter_reading_start float
-  multiplier int
-  registration_number varchar(255)
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
-}
-
-Table asset_plant_service_reading {
-  asset_plant_service_reading_id bigint [primary key, increment]
-  estimated_next_service_date date
-  estimated_units_per_day float
-  last_service_date date
-  last_service_smr float
-  latest_smr_date date
-  latest_smr_readings float
-  next_service_smr_reading float
-  service_interval float
-  service_unit varchar(255)
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
-}
-
-Table fuel_pump {
-  fuel_pump_id bigint [primary key, increment]
-  description varchar(255)
-  fuel_pump_code varchar(255)
-  is_active boolean
-  valid_from date
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
-}
-
-Table jhi_authority {
-  name varchar(50) [primary key, not null]
-}
-
-Table fuel_transaction_header {
-  fuel_transaction_header_id bigint [primary key, increment]
-  delivery_note varchar(255)
-  fuel_transaction_type varchar(255)
-  fuel_type varchar(255)
-  grv_number varchar(255)
-  invoice_number varchar(255)
-  isFillUp boolean
-  issuance_transaction_type varchar(255)
-  note varchar(255)
-  order_number varchar(255)
-  price_per_litre float
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
+  contract_active boolean
+  employee_id bigint
+  first_name varchar(255)
+  last_name varchar(255)
 }
 
 Table storage {
@@ -204,10 +149,35 @@ Table storage {
   lastModifiedDate varchar(255)
 }
 
-Table plant_category {
-  plant_category_id bigint [primary key, increment]
-  plant_category_code varchar(255)
-  plant_category_description varchar(255)
+Table fuel_transaction_line {
+  fuel_transaction_line_id bigint [primary key, increment]
+  litres float
+  meter_reading_end float
+  meter_reading_start float
+  multiplier int
+  registration_number varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table plant_subcategory {
+  plant_subcategory_id bigint [primary key, increment]
+  plant_subcategory_code varchar(255)
+  plant_subcategory_description varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table third_party {
+  third_party_id bigint [primary key, increment]
+  is_active boolean
+  third_party_name varchar(255)
+  third_party_short_name varchar(255)
+  uses_fuel_system boolean
   createdBy varchar(255)
   createdDate date
   lastModifiedBy varchar(255)
@@ -232,24 +202,18 @@ Table contract_division {
   lastModifiedDate varchar(255)
 }
 
-Table company {
-  company_id bigint [primary key, increment]
-  access_key varchar(255)
-  address varchar(255)
-  is_active boolean
-  is_iac boolean
-  name varchar(255)
-  uses_fuel_system boolean
-  createdBy varchar(255)
-  createdDate date
-  lastModifiedBy varchar(255)
-  lastModifiedDate varchar(255)
-}
-
-Table plant_subcategory {
-  plant_subcategory_id bigint [primary key, increment]
-  plant_subcategory_code varchar(255)
-  plant_subcategory_description varchar(255)
+Table fuel_transaction_header {
+  fuel_transaction_header_id bigint [primary key, increment]
+  delivery_note varchar(255)
+  fuel_transaction_type varchar(255)
+  fuel_type varchar(255)
+  grv_number varchar(255)
+  invoice_number varchar(255)
+  isFillUp boolean
+  issuance_transaction_type varchar(255)
+  note varchar(255)
+  order_number varchar(255)
+  price_per_litre float
   createdBy varchar(255)
   createdDate date
   lastModifiedBy varchar(255)
@@ -263,12 +227,60 @@ Table site_contract {
   site_id bigint
 }
 
-Table employee {
+Table workshop {
   id bigint [primary key, increment]
-  contract_active boolean
-  employee_id bigint
-  first_name varchar(255)
-  last_name varchar(255)
+  site_id bigint
+  workshop_id bigint
+  workshop_name varchar(255)
+}
+
+Table asset_plant_service_reading {
+  asset_plant_service_reading_id bigint [primary key, increment]
+  estimated_next_service_date date
+  estimated_units_per_day float
+  last_service_date date
+  last_service_smr float
+  latest_smr_date date
+  latest_smr_readings float
+  next_service_smr_reading float
+  service_interval float
+  service_unit varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table plant_category {
+  plant_category_id bigint [primary key, increment]
+  plant_category_code varchar(255)
+  plant_category_description varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table smr_reading {
+  smr_reading_id bigint [primary key, increment]
+  fuel_transaction_header_id int
+  reading_date_time timestamp
+  smr_reading float
+  unit varchar(10)
+  whatsapp_number varchar(50)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
+}
+
+Table make_model {
+  model_id bigint [primary key, increment]
+  model varchar(255)
+  createdBy varchar(255)
+  createdDate date
+  lastModifiedBy varchar(255)
+  lastModifiedDate varchar(255)
 }
 
 // Relationships
@@ -281,19 +293,19 @@ Ref: asset_plant.owner_id > company.id
 Ref: asset_plant.plant_category_id > plant_category.id
 Ref: asset_plant.plant_subcategory_id > plant_subcategory.id
 Ref: site.company_id > company.id
-Ref: smr_reading.asset_plant_id > asset_plant.id
+Ref: fuel_pump.current_storage_id > storage.id
 Ref: jhi_user.company_id > company.id
+Ref: storage.company_id > company.id
+Ref: storage.site_id > site.id
 Ref: fuel_transaction_line.asset_plant_id > asset_plant.id
 Ref: fuel_transaction_line.contract_division_id > contract_division.id
 Ref: fuel_transaction_line.fuel_transaction_header_id > fuel_transaction_header.id
 Ref: fuel_transaction_line.pump_id > fuel_pump.id
-Ref: asset_plant_service_reading.asset_plant_id > asset_plant.id
-Ref: fuel_pump.current_storage_id > storage.id
+Ref: contract_division.company_id > company.id
 Ref: fuel_transaction_header.attendee_id > employee.id
 Ref: fuel_transaction_header.company_id > company.id
 Ref: fuel_transaction_header.operator_id > employee.id
 Ref: fuel_transaction_header.storage_unit_id > storage.id
 Ref: fuel_transaction_header.supplier_id > company.id
-Ref: storage.company_id > company.id
-Ref: storage.site_id > site.id
-Ref: contract_division.company_id > company.id
+Ref: asset_plant_service_reading.asset_plant_id > asset_plant.id
+Ref: smr_reading.asset_plant_id > asset_plant.id
