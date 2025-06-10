@@ -1,18 +1,12 @@
 package com.bitumen.bluefusion.web.rest;
 
-import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
-import com.bitumen.bluefusion.repository.AssetPlantServiceReadingRepository;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.AssetPlantServiceReadingService;
-import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingMapper;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingRequest;
 import com.bitumen.bluefusion.service.assetPlantServiceReading.dto.AssetPlantServiceReadingResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.ResponseUtil;
 
 @RequiredArgsConstructor
 @RestController
@@ -99,9 +92,8 @@ public class AssetPlantServiceReadingResource {
 
     @GetMapping("")
     public ResponseEntity<List<AssetPlantServiceReadingResponse>> getAllAssetPlantServiceReadings(
-        @RequestParam(value = "page", defaultValue = "0") Integer page,
-        @RequestParam(value = "size", defaultValue = "100") Integer size,
-        @RequestParam(value = "assetPlantServiceReadingId", required = false) Long assetPlantServiceReadingId,
+        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
         @RequestParam(value = "assetPlantId", required = false) Long assetPlantId,
         @RequestParam(value = "isActive", required = false) Boolean isActive,
         @RequestParam(value = "serviceUnit", required = false) String serviceUnit
@@ -124,8 +116,7 @@ public class AssetPlantServiceReadingResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<AssetPlantServiceReadingResponse> getAssetPlantServiceReading(
-        @PathVariable("id") Long assetPlantServiceReadingId,
-        AssetPlantServiceReadingRequest assetPlantServiceReadingRequest
+        @PathVariable("id") Long assetPlantServiceReadingId
     ) {
         return ResponseEntity.ok().body(assetPlantServiceReadingService.findOne(assetPlantServiceReadingId));
     }

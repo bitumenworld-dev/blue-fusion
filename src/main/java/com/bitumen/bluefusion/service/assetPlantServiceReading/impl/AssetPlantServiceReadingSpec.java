@@ -2,13 +2,11 @@ package com.bitumen.bluefusion.service.assetPlantServiceReading.impl;
 
 import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.domain.AssetPlantServiceReading;
-import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
 import org.springframework.data.jpa.domain.Specification;
 
 public interface AssetPlantServiceReadingSpec {
     static Specification<AssetPlantServiceReading> withAssetPlantId(final AssetPlant assetPlant) {
-        return (root, query, builder) ->
-            (assetPlant == null) ? builder.conjunction() : builder.equal(root.get("assetPlantId"), assetPlant.getAssetPlantId());
+        return (root, query, builder) -> (assetPlant == null) ? builder.conjunction() : builder.equal(root.get("assetPlant"), assetPlant);
     }
 
     static Specification<AssetPlantServiceReading> withIsActive(final Boolean isActive) {
