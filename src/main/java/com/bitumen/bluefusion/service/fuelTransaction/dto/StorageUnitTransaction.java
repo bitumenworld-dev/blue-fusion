@@ -1,7 +1,5 @@
 package com.bitumen.bluefusion.service.fuelTransaction.dto;
 
-import com.bitumen.bluefusion.domain.FuelPump;
-import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

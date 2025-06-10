@@ -1,11 +1,9 @@
 package com.bitumen.bluefusion.service.fuelTransaction.dto;
 
-import com.bitumen.bluefusion.domain.*;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.bitumen.bluefusion.domain.AssetPlant;
+import com.bitumen.bluefusion.domain.FuelPump;
+import com.bitumen.bluefusion.domain.FuelTransactionLine;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
