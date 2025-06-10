@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CompanyRepository extends JpaRepository<Company, Long>, JpaSpecificationExecutor<Company> {}
+public interface CompanyRepository extends JpaRepository<Company, Long>, JpaSpecificationExecutor<Company> {
+    boolean existsByCompanyId(Long companyId);
+}

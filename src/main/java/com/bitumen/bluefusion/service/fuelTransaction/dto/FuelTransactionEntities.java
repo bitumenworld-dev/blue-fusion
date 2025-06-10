@@ -13,6 +13,7 @@ public class FuelTransactionEntities {
     private final Company company;
     private final AssetPlant assetPlant;
     private final Storage storageUnit;
+    private final Storage transferUnit;
     private final FuelPump fuelPump;
     private final ContractDivision contractDivision;
 }

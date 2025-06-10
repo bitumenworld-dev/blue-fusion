@@ -1,27 +1,19 @@
 export enum FuelTransactionType {
-  ISSUANCE = 'ISSUANCE',
+  FLEET_ISSUANCE = 'FLEET_ISSUANCE',
+  DRUM_ISSUANCE = 'DRUM_ISSUANCE',
+  WORKSHOP_ISSUANCE = 'WORKSHOP_ISSUANCE',
+  THIRD_PARTY_ISSUANCE = 'THIRD_PARTY_ISSUANCE',
   CALIBRATION = 'CALIBRATION',
   TRANSFER = 'TRANSFER',
   GRV = 'GRV',
 }
 
 export const FuelTransactionTypes: FuelTransactionType[] = [
-  FuelTransactionType.ISSUANCE,
+  FuelTransactionType.FLEET_ISSUANCE,
+  FuelTransactionType.DRUM_ISSUANCE,
+  FuelTransactionType.WORKSHOP_ISSUANCE,
+  FuelTransactionType.THIRD_PARTY_ISSUANCE,
   FuelTransactionType.CALIBRATION,
   FuelTransactionType.GRV,
   FuelTransactionType.TRANSFER,
-];
-
-export enum IssuanceTransactionType {
-  FLEET = 'FLEET',
-  DRUM = 'DRUM',
-  WORKSHOP = 'WORKSHOP',
-  THIRD_PARTY = 'THIRD_PARTY',
-}
-
-export const IssuanceTransactionTypes: IssuanceTransactionType[] = [
-  IssuanceTransactionType.DRUM,
-  IssuanceTransactionType.FLEET,
-  IssuanceTransactionType.WORKSHOP,
-  IssuanceTransactionType.THIRD_PARTY,
 ];

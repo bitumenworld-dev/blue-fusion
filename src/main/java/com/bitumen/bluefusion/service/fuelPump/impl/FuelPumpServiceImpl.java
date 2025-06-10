@@ -97,10 +97,7 @@ public class FuelPumpServiceImpl implements FuelPumpService {
             .and(FuelPumpSpec.withFuelPumpCode(fuelPumpCode))
             .and(FuelPumpSpec.withCurrentStorageUnit(storage));
 
-        Page<FuelPumpResponse> response = fuelPumpRepository.findAll(specification, pageable).map(FuelPumpResponseMapper.map);
-
-        log.info("Find all FuelPumps with specification {}", response);
-        return response;
+        return fuelPumpRepository.findAll(specification, pageable).map(FuelPumpResponseMapper.map);
     }
 
     @Override

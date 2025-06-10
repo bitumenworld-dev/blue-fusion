@@ -5,7 +5,6 @@ import com.bitumen.bluefusion.domain.Employee;
 import com.bitumen.bluefusion.domain.FuelTransactionHeader;
 import com.bitumen.bluefusion.domain.Storage;
 import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
-import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
 import java.time.LocalDate;
 import java.util.Objects;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,15 +28,6 @@ public interface FuelTransactionSpec {
                 (Objects.isNull(fuelTransactionType))
                     ? builder.conjunction()
                     : builder.equal(root.get("fuelTransactionType"), fuelTransactionType)
-        );
-    }
-
-    static Specification<FuelTransactionHeader> withIssuanceTransactionType(final IssuanceTransactionType issuanceTransactionType) {
-        return (
-            (root, query, builder) ->
-                (Objects.isNull(issuanceTransactionType))
-                    ? builder.conjunction()
-                    : builder.equal(root.get("issuanceTransactionType"), issuanceTransactionType)
         );
     }
 

@@ -1,10 +1,11 @@
 package com.bitumen.bluefusion.service.fuelTransaction.dto;
 
-import com.bitumen.bluefusion.domain.*;
+import com.bitumen.bluefusion.domain.Company;
+import com.bitumen.bluefusion.domain.Employee;
+import com.bitumen.bluefusion.domain.FuelTransactionHeader;
+import com.bitumen.bluefusion.domain.Storage;
 import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
-import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,6 @@ public class FuelTransactionHeaderResponse {
     private String company;
     private String supplier;
     private FuelTransactionType fuelTransactionType;
-    private IssuanceTransactionType issuanceTransactionType;
     private String storageUnit;
     private FuelType fuelType;
     private String orderNumber;
@@ -40,7 +40,6 @@ public class FuelTransactionHeaderResponse {
             .company(fuelTransactionHeader.getCompany().getName())
             .supplier(extractSupplier(fuelTransactionHeader))
             .fuelTransactionType(fuelTransactionHeader.getFuelTransactionType())
-            .issuanceTransactionType(fuelTransactionHeader.getIssuanceTransactionType())
             .storageUnit(extractStorageUnit(fuelTransactionHeader))
             .fuelType(fuelTransactionHeader.getFuelType())
             .orderNumber(fuelTransactionHeader.getOrderNumber())

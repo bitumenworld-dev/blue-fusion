@@ -71,20 +71,19 @@
         </header>
         <div class="p-3">
           <div class="overflow-y-auto max-h-40 rounded-md border border-gray-100">
+            <h2 class="text-sm font-bold">Balance: {{ balance }}</h2>
             <div class="overflow-x-auto">
               <table class="min-w-full text-sm">
                 <thead class="sticky top-0 bg-gray-300">
                   <tr class="border-b border-gray-200">
-                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Balance</th>
-                    <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
-                    <th class="text-left py-1 px-3 font-heavy text-gray-700">pump01</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Pump</th>
+                    <th class="text-left py-1 px-3 font-heavy text-gray-700">Meter readings</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b border-gray-100 hover:bg-gray-50">
-                    <td class="py-1 px-3">{{ balance }}</td>
-                    <td class="py-1 px-3">{{ pump1 }}</td>
-                    <td class="py-1 px-3">{{ pump2 }}</td>
+                  <tr *ngFor="let storageUnitPump of storageUnitPumps" class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="py-1 px-3">{{ storageUnitPump.fuelPump }}</td>
+                    <td class="py-1 px-3">{{ storageUnitPump.meterReading }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -121,7 +120,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <!-- Company Field -->
           <div class="relative">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_company">Company</label>
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_company">Company</label>
             <input
               type="text"
               id="field_company"
@@ -132,7 +131,7 @@
               (input)="filterCompanies()"
               (focus)="showCompaniesDropdown = true"
               (blur)="hideCompanyDropdown()"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
               *ngIf="showCompaniesDropdown && filteredCompanies.length > 0"
@@ -150,7 +149,7 @@
 
           <!-- Storage Unit Field -->
           <div class="relative">
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="field_storage_unit">Storage Unit</label>
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_storage_unit">Storage Unit</label>
             <input
               type="text"
               id="field_storage_unit"
@@ -161,11 +160,11 @@
               (input)="filterStorageUnits()"
               (focus)="showStorageUnitDropdown = true"
               (blur)="hideStorageUnitDropdown()"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
               *ngIf="showStorageUnitDropdown && filteredStorageUnits.length > 0"
-              class="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+              class="text-xs absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
             >
               <li
                 *ngFor="let storageUnit of filteredStorageUnits"
@@ -179,7 +178,7 @@
 
           <!-- Pump Field -->
           <div class="relative">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Pump</label>
+            <label class="block text-xs font-medium text-gray-700 mb-1">Pump</label>
             <input
               type="text"
               id="field_pump"
@@ -190,7 +189,7 @@
               (input)="filterPumps()"
               (focus)="showPumpDropdown = true"
               (blur)="hidePumpDropdown()"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
               *ngIf="showPumpDropdown && filteredPumps.length > 0"
@@ -204,13 +203,13 @@
 
           <!-- Commodity Field -->
           <div>
-            <label for="fuel_type" class="block text-sm font-medium text-gray-700 mb-1">Commodity</label>
+            <label for="fuel_type" class="block text-xs font-medium text-gray-700 mb-1">Commodity</label>
             <select
               id="fuel_type"
               name="fuel_type"
               [(ngModel)]="selectedFuelType"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="" disabled>Select a commodity</option>
               <option *ngFor="let fuelType of fuelTypes" [value]="fuelType">
@@ -221,27 +220,27 @@
 
           <!-- Start Date -->
           <div>
-            <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <label for="end_date" class="block text-xs font-medium text-gray-700 mb-1">Start Date</label>
             <input
               type="date"
               id="start_date"
               [(ngModel)]="startDate"
               name="start_date"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
           <!-- End Date -->
           <div>
-            <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <label for="end_date" class="block text-xs font-medium text-gray-700 mb-1">End Date</label>
             <input
               type="date"
               id="end_date"
               [(ngModel)]="endDate"
               name="end_date"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
         </div>
@@ -259,7 +258,7 @@
               required
               name="date"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border text-xs border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -281,24 +280,6 @@
             </select>
           </div>
 
-          <!-- Issuance Type (conditional) -->
-          <div class="relative" *ngIf="showIssuanceType">
-            <label for="text-xs fuel_type" class="block text-sm font-medium text-gray-700 mb-1">Issuance To</label>
-            <select
-              id="fuel_type"
-              name="fuel_type"
-              [(ngModel)]="selectedIssuanceType"
-              (ngModelChange)="selectIssuanceType($event)"
-              [ngModelOptions]="{ standalone: true }"
-              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="" disabled>Issuance type</option>
-              <option *ngFor="let fuelIssuanceType of fuelIssuanceTypes" [value]="fuelIssuanceType">
-                {{ fuelIssuanceType }}
-              </option>
-            </select>
-          </div>
-
           <!-- Fleet Number (conditional) -->
           <div class="relative" *ngIf="showFleet">
             <label class="block text-xs font-medium text-gray-700 mb-1" for="field_storage_unit">Fleet Number</label>
@@ -310,7 +291,7 @@
               [(ngModel)]="fleetNumber"
               (keyup)="searchFleet()"
               (blur)="hideFleetDropdown()"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
               *ngIf="showFleetDropdown && filteredFleet.length > 0"
@@ -318,6 +299,35 @@
             >
               <li *ngFor="let fleet of filteredFleet" (mousedown)="selectFleet(fleet)" class="px-4 py-2 hover:bg-blue-100 cursor-pointer">
                 {{ fleet.fleetNumber }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- transfer Unit Field (conditional) -->
+          <div class="relative" *ngIf="showTransferUnit">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_transfer_unit">Transfer Unit</label>
+            <input
+              type="text"
+              id="field_transfer_unit"
+              placeholder="Search Storage Unit"
+              name="transferUnitTerm"
+              [(ngModel)]="transferUnitSearchTerm"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="filterTransferUnits()"
+              (focus)="showTransferUnitDropdown = true"
+              (blur)="hideTransferUnitDropdown()"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <ul
+              *ngIf="showTransferUnitDropdown && filteredTransferUnits.length > 0"
+              class="text-xs absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+            >
+              <li
+                *ngFor="let transferUnit of filteredTransferUnits"
+                (mousedown)="selectTransferUnit(transferUnit)"
+                class="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {{ transferUnit.name }}
               </li>
             </ul>
           </div>
@@ -332,7 +342,7 @@
               name="user"
               [(ngModel)]="userFullName"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -346,7 +356,7 @@
               name="user"
               [(ngModel)]="smr"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -360,7 +370,7 @@
               name="user"
               [(ngModel)]="unit"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -374,7 +384,7 @@
               name="notes"
               [(ngModel)]="notes"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -389,7 +399,7 @@
               [(ngModel)]="divisionContract"
               (keyup)="searchDivisionContract()"
               (blur)="hideDivisionContractDropdown()"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <ul
               *ngIf="showDivisionContractDropdown && filteredDivisionContracts.length > 0"
@@ -398,7 +408,7 @@
               <li
                 *ngFor="let filteredDivisionContract of filteredDivisionContracts"
                 (mousedown)="selectDivisionContract(filteredDivisionContract)"
-                class="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                class="text-xs px-4 py-2 hover:bg-blue-100 cursor-pointer"
               >
                 {{ filteredDivisionContract.contractDivisionNumber }} - {{ filteredDivisionContract.contractDivisionName }}
               </li>
@@ -414,7 +424,7 @@
               name="receivedFuel"
               [(ngModel)]="receivedFuel"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -426,8 +436,9 @@
               id="field_issued_fuel"
               name="issuedFuel"
               [(ngModel)]="issuedFuel"
+              (blur)="populateNote()"
               [ngModelOptions]="{ standalone: true }"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -459,7 +470,6 @@
 
           <!-- Fill Up Toggle (conditional) -->
           <div class="relative" *ngIf="showIsFillUp">
-            <p>&nbsp;</p>
             <div class="flex items-center">
               <!-- Hidden actual checkbox for form control -->
               <input

@@ -18,7 +18,8 @@ export interface StorageUnitPump {
 }
 
 export interface StorageUnitTransactions {
-  currentStorageBalance?: number | null;
+  currentStorageBalance?: string | null;
   pumpReadings?: StorageUnitPump[] | null;
   transactions?: StorageUnitTransaction[] | null;
+  latestTransactionDate?: Date | null;
 }

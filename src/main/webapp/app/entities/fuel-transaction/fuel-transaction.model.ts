@@ -1,12 +1,11 @@
 import { FuelType } from 'app/entities/enumerations/fuel-type.model';
-import { FuelTransactionType, IssuanceTransactionType } from '../enumerations/transaction-type.model';
+import { FuelTransactionType } from '../enumerations/transaction-type.model';
 
 export interface FuelTransaction {
   fuelTransactionId: number;
   companyId?: number | null;
   supplierId?: number | null;
   transactionType?: keyof typeof FuelTransactionType | null;
-  issuanceType?: keyof typeof IssuanceTransactionType | null;
   fuelType?: keyof typeof FuelType | null;
   orderNumber?: string | null;
   deliveryNote?: string | null;
@@ -26,6 +25,7 @@ export interface FuelTransaction {
   issuanceTypeId?: number | null;
   pumpId?: number | null;
   storageId?: number | null;
+  transferUnitId?: number | null;
   litres?: string | null;
   meterReadingStart?: string | null;
   meterReadingEnd?: string | null;

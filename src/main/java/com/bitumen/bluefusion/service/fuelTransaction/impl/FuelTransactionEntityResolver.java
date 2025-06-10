@@ -25,6 +25,7 @@ public class FuelTransactionEntityResolver {
             .fuelPump(resolveEntityOptional(fuelTransactionRequest.pumpId(), fuelPumpRepository))
             .contractDivision(resolveEntityOptional(fuelTransactionRequest.contractDivisionId(), contractDivisionRepository))
             .assetPlant(resolveEntityOptional(fuelTransactionRequest.assetPlantId(), assetPlantRepository))
+            .transferUnit(resolveEntityOptional(fuelTransactionRequest.storageId(), storageRepository))
             .build();
     }
 

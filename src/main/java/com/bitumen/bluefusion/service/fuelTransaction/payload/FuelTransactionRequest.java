@@ -2,7 +2,6 @@ package com.bitumen.bluefusion.service.fuelTransaction.payload;
 
 import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
-import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
 import java.time.LocalDate;
 
 public record FuelTransactionRequest(
@@ -11,7 +10,6 @@ public record FuelTransactionRequest(
     Long pumpId,
     FuelType fuelType,
     FuelTransactionType transactionType,
-    IssuanceTransactionType issuanceType,
     Long assetPlantId,
     Long contractDivisionId,
     Long smr,
@@ -20,5 +18,8 @@ public record FuelTransactionRequest(
     String note,
     Boolean isFillUp,
     Float meterReadingStart,
-    Float meterReadingEnd
+    Float meterReadingEnd,
+    Long transferUnitId,
+    Long thirdPartyId,
+    String registrationNumber
 ) {}

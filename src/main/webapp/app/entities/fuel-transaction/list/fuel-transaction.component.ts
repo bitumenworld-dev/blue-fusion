@@ -15,16 +15,11 @@ import {
   FuelTransactionService,
 } from '../service/fuel-transaction.service';
 import { FuelType, FuelTypes } from '../../enumerations/fuel-type.model';
-import { StorageUnitTransaction, StorageUnitTransactions } from '../storage-unit.model';
+import { StorageUnitTransaction, StorageUnitTransactions, StorageUnitPump } from '../storage-unit.model';
 import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
 import { ICompany } from '../../company/company.model';
 import { Storage } from '../../storage/storage.model';
-import {
-  FuelTransactionType,
-  FuelTransactionTypes,
-  IssuanceTransactionType,
-  IssuanceTransactionTypes,
-} from '../../enumerations/transaction-type.model';
+import { FuelTransactionType, FuelTransactionTypes } from '../../enumerations/transaction-type.model';
 import {
   ContractDivisionEntityArrayResponseType,
   ContractDivisionService,
@@ -47,25 +42,23 @@ export class FuelTransactionComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
-  selectedIssuanceType = '';
   selectedTransactionType = '';
   userFullName: string | null | undefined = '';
   smr: string = '';
+  storageUnitPumps: StorageUnitPump[] | null = [];
   pumpStart: string = '';
   pumpEnd: string = '';
   receivedFuel: string = '';
   issuedFuel: string = '';
   unit: string | null | undefined = '';
   notes: string = '';
-  transactionDate: Date | null = null;
+  transactionDate: Date | null | undefined = null;
   startDate: string | null = null;
   endDate: string | null = null;
   newFuelTransaction: NewFuelTransaction = {
     fuelTransactionId: null,
   };
-  balance = 15000;
-  pump1 = 1233123;
-  pump2 = 123123123;
+  balance: string | null | undefined = '';
 
   //Fleet
   fleetArray: AssetPlant[] | null = [];
@@ -89,6 +82,13 @@ export class FuelTransactionComponent implements OnInit {
   filteredStorageUnits = [...this.storageUnitArray];
   showStorageUnitDropdown = false;
 
+  //Transfer Unit variables
+  transferUnitArray: Storage[] | null = [];
+  transferUnitSearchTerm: string | null | undefined = '';
+  // @ts-ignore
+  filteredTransferUnits = [...this.transferUnitArray];
+  showTransferUnitDropdown = false;
+
   //Pump variable
   pumpsArray: FuelPump[] | null = [];
   pumpSearchTerm: string | null | undefined = '';
@@ -107,9 +107,7 @@ export class FuelTransactionComponent implements OnInit {
   selectedFuelType = '';
 
   fuelTransactionTypes: FuelTransactionType[] = FuelTransactionTypes;
-  fuelIssuanceTypes: IssuanceTransactionType[] = IssuanceTransactionTypes;
 
-  showIssuanceType = false;
   showFleet = false;
   showUser = false;
   showSmr = false;
@@ -120,6 +118,7 @@ export class FuelTransactionComponent implements OnInit {
   showIssued = false;
   showIsFillUp = false;
   showPumps = false;
+  showTransferUnit = false;
 
   // fuelTransactionsArray
   storageUnitTransactions: StorageUnitTransactions | null | undefined = null;
@@ -152,7 +151,6 @@ export class FuelTransactionComponent implements OnInit {
   ];
 
   public readonly router = inject(Router);
-  protected readonly fuelTransactionHeaderService = inject(FuelTransactionService);
   protected readonly fuelTransactionService = inject(FuelTransactionService);
   protected readonly fuelPumpService = inject(FuelPumpService);
   protected readonly storageService = inject(StorageService);
@@ -178,35 +176,6 @@ export class FuelTransactionComponent implements OnInit {
     this.endDate = endDate.toISOString().split('T')[0];
   }
 
-  delete(fuelTransactionHeader: FuelTransaction): void {
-    // const modalRef = this.modalService.open(FuelTransactionHeaderDeleteDialogComponent, {
-    //   size: 'lg',
-    //   backdrop: 'static'
-    // });
-    // modalRef.componentInstance.fuelTransactionHeader = fuelTransactionHeader;
-    // // unsubscribe not needed because closed completes on modal close
-    // modalRef.closed
-    //   .pipe(
-    //     filter(reason => reason === ITEM_DELETED_EVENT),
-    //     tap(() => this.load())
-    //   )
-    //   .subscribe();
-  }
-
-  protected handleNavigation(page: number): void {
-    const queryParamsObj = {
-      page,
-      size: this.itemsPerPage,
-    };
-
-    this.ngZone.run(() => {
-      this.router.navigate(['./'], {
-        relativeTo: this.activatedRoute,
-        queryParams: queryParamsObj,
-      });
-    });
-  }
-
   // Company Filtering & Selection Logic
   filterCompanies(): void {
     const term = this.companiesSearchTerm.toLowerCase();
@@ -225,6 +194,7 @@ export class FuelTransactionComponent implements OnInit {
     this.storageService.query(queryObject).subscribe({
       next: (res: StorageEntityArrayResponseType) => {
         this.storageUnitArray = res.body;
+        this.transferUnitArray = res.body;
         this.filteredStorageUnits = [...this.storageUnitArray];
       },
     });
@@ -241,9 +211,38 @@ export class FuelTransactionComponent implements OnInit {
     }, 200);
   }
 
-  hideDivisionContractDropdown(): void {
+  filterPumps(): void {
+    if (!this.pumpSearchTerm) {
+      this.filteredPumps = [...this.pumpsArray];
+      return;
+    }
+    const term = this.pumpSearchTerm.toLowerCase().trim();
+    if (this.pumpsArray) {
+      this.filteredPumps = this.pumpsArray.filter(pump => pump.fuelPumpCode?.toLowerCase().includes(term));
+    }
+  }
+
+  filterTransferUnits(): void {
+    if (!this.transferUnitSearchTerm) {
+      this.filteredTransferUnits = [...this.transferUnitArray];
+      return;
+    }
+
+    const term = this.transferUnitSearchTerm.toLowerCase().trim();
+    if (this.transferUnitArray) {
+      this.filteredTransferUnits = this.transferUnitArray.filter(transferUnit => transferUnit.name?.toLowerCase().includes(term));
+    }
+  }
+
+  selectTransferUnit(transferUnit: Storage): void {
+    this.transferUnitSearchTerm = transferUnit.name;
+    this.showTransferUnitDropdown = false;
+    this.newFuelTransaction.transferUnitId = transferUnit.id;
+  }
+
+  hideTransferUnitDropdown(): void {
     setTimeout(() => {
-      this.showDivisionContractDropdown = false;
+      this.showTransferUnitDropdown = false;
     }, 200);
   }
 
@@ -256,17 +255,6 @@ export class FuelTransactionComponent implements OnInit {
     const term = this.storageUnitSearchTerm.toLowerCase().trim();
     if (this.storageUnitArray) {
       this.filteredStorageUnits = this.storageUnitArray.filter(storageUnit => storageUnit.name?.toLowerCase().includes(term));
-    }
-  }
-
-  filterPumps(): void {
-    if (!this.pumpSearchTerm) {
-      this.filteredPumps = [...this.pumpsArray];
-      return;
-    }
-    const term = this.pumpSearchTerm.toLowerCase().trim();
-    if (this.pumpsArray) {
-      this.filteredPumps = this.pumpsArray.filter(pump => pump.fuelPumpCode?.toLowerCase().includes(term));
     }
   }
 
@@ -304,6 +292,12 @@ export class FuelTransactionComponent implements OnInit {
     this.getTransactions(storageUnit.id);
   }
 
+  hideStorageUnitDropdown(): void {
+    setTimeout(() => {
+      this.showStorageUnitDropdown = false;
+    }, 200);
+  }
+
   getTransactions(storageId: number): void {
     //fuelTransactionsArray
     const fuelTransactionsQueryObject: any = {
@@ -314,15 +308,18 @@ export class FuelTransactionComponent implements OnInit {
     this.fuelTransactionService.query(fuelTransactionsQueryObject).subscribe({
       next: (res: StorageUnitTransactionsResponseType) => {
         this.storageUnitTransactions = res.body;
-        this.fuelTransactionsArray = this.storageUnitTransactions?.transactions;
+        if (this.storageUnitTransactions) {
+          if (this.storageUnitTransactions.latestTransactionDate) {
+            this.transactionDate = this.storageUnitTransactions.latestTransactionDate;
+          }
+          this.balance = this.storageUnitTransactions.currentStorageBalance;
+          this.fuelTransactionsArray = this.storageUnitTransactions.transactions;
+          this.transactionDate = this.storageUnitTransactions.latestTransactionDate;
+          // @ts-ignore
+          this.storageUnitPumps = [...this.storageUnitTransactions.pumpReadings];
+        }
       },
     });
-  }
-
-  hideStorageUnitDropdown(): void {
-    setTimeout(() => {
-      this.showStorageUnitDropdown = false;
-    }, 200);
   }
 
   selectPump(pump: FuelPump): void {
@@ -377,26 +374,21 @@ export class FuelTransactionComponent implements OnInit {
   selectTransactionType(transactionType: FuelTransactionType): void {
     this.resetFields();
     this.selectedTransactionType = transactionType;
-    if (transactionType === FuelTransactionType.ISSUANCE) {
-      this.showIssuanceType = true;
+    if (transactionType === FuelTransactionType.FLEET_ISSUANCE) {
+      this.showIssuanceFields();
+    }
+    if (transactionType === FuelTransactionType.THIRD_PARTY_ISSUANCE) {
+      this.showIssuanceFields();
     }
     if (transactionType === FuelTransactionType.GRV) {
       this.showReceived = true;
       this.showNotes = true;
     }
+    if (transactionType === FuelTransactionType.TRANSFER) {
+      this.showTransferFields();
+    }
 
     this.newFuelTransaction.transactionType = transactionType;
-  }
-
-  selectIssuanceType(issuanceType: IssuanceTransactionType): void {
-    if (issuanceType === IssuanceTransactionType.FLEET) {
-      this.showIssuanceFields();
-    }
-    if (issuanceType === IssuanceTransactionType.THIRD_PARTY) {
-      this.showIssuanceFields();
-    }
-
-    this.newFuelTransaction.issuanceType = issuanceType;
   }
 
   searchDivisionContract(): void {
@@ -427,6 +419,19 @@ export class FuelTransactionComponent implements OnInit {
     this.newFuelTransaction.contractDivisionId = contractDivision.contractDivisionId;
   }
 
+  hideDivisionContractDropdown(): void {
+    setTimeout(() => {
+      this.showDivisionContractDropdown = false;
+    }, 200);
+  }
+
+  showTransferFields(): void {
+    this.showTransferUnit = true;
+    this.showNotes = true;
+    this.showIssued = true;
+    this.showPumps = true;
+  }
+
   showIssuanceFields(): void {
     this.showFleet = true;
     this.showUser = true;
@@ -440,7 +445,6 @@ export class FuelTransactionComponent implements OnInit {
   }
 
   resetFields(): void {
-    this.showIssuanceType = false;
     this.showFleet = false;
     this.showUser = false;
     this.showSmr = false;
@@ -451,6 +455,7 @@ export class FuelTransactionComponent implements OnInit {
     this.showIssued = false;
     this.showIsFillUp = false;
     this.showPumps = false;
+    this.showTransferUnit = false;
   }
 
   saveFuelTransaction(): void {
@@ -463,13 +468,36 @@ export class FuelTransactionComponent implements OnInit {
     this.newFuelTransaction.litres = this.issuedFuel;
 
     this.fuelTransactionService.create(this.newFuelTransaction).subscribe({
-      next: (res: FuelTransactionResponseType) => {
-        console.log('Fuel Transaction Save: ' + JSON.stringify(res.body));
-      },
+      next: (res: FuelTransactionResponseType) => {},
     });
+
+    // @ts-ignore
+    this.getTransactions(this.newFuelTransaction.storageId);
+    this.newFuelTransactionLineReset();
+  }
+  populateNote(): void {
+    this.notes = this.issuedFuel + 'L  ' + this.newFuelTransaction.transactionType + ' TO ' + this.fleetNumber;
   }
 
-  newFuelTransactionLine(): void {}
+  newFuelTransactionLineReset(): void {
+    this.newFuelTransaction.smr = '';
+    this.newFuelTransaction.note = '';
+    this.newFuelTransaction.isFillUp = false;
+    this.newFuelTransaction.meterReadingStart = '';
+    this.newFuelTransaction.meterReadingEnd = '';
+    this.newFuelTransaction.litres = '';
+    this.newFuelTransaction.assetPlantId = null;
+    this.newFuelTransaction.contractDivisionId = null;
+    this.newFuelTransaction.transferUnitId = null;
 
-  resetFuelTransaction(): void {}
+    this.smr = '';
+    this.unit = '';
+    this.notes = '';
+    this.isFillUp = false;
+    this.pumpStart = '';
+    this.pumpEnd = '';
+    this.issuedFuel = '';
+    this.fleetNumber = '';
+    this.divisionContract = '';
+  }
 }

@@ -4,22 +4,23 @@ import com.bitumen.bluefusion.domain.AssetPlant;
 import com.bitumen.bluefusion.domain.FuelTransactionHeader;
 import com.bitumen.bluefusion.domain.FuelTransactionLine;
 import com.bitumen.bluefusion.domain.Storage;
-import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
-import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
 import com.bitumen.bluefusion.repository.FuelTransactionHeaderRepository;
 import com.bitumen.bluefusion.repository.FuelTransactionLineRepository;
 import com.bitumen.bluefusion.repository.StorageRepository;
 import com.bitumen.bluefusion.service.exceptions.RecordNotFoundException;
 import com.bitumen.bluefusion.service.fuelTransaction.FuelTransactionService;
+import com.bitumen.bluefusion.service.fuelTransaction.dto.StorageUnitPump;
 import com.bitumen.bluefusion.service.fuelTransaction.dto.StorageUnitTransaction;
-import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactions.FleetIssuanceFuelTransaction;
+import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.FleetIssuanceFuelTransactionHandler;
+import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.InterStoreTransferFuelTransactionHandler;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionRequest;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionResponse;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.StorageUnitTransactions;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
@@ -31,22 +32,22 @@ import org.springframework.util.StringUtils;
 @RequiredArgsConstructor
 public class FuelTransactionServiceImpl implements FuelTransactionService {
 
-    private final FleetIssuanceFuelTransaction fleetIssuanceFuelTransaction;
+    private final FleetIssuanceFuelTransactionHandler fleetIssuanceFuelTransactionHandler;
     private final StorageRepository storageRepository;
     private final FuelTransactionHeaderRepository fuelTransactionHeaderRepository;
     private final FuelTransactionLineRepository fuelTransactionLineRepository;
+    private final InterStoreTransferFuelTransactionHandler interStoreTransferFuelTransactionHandler;
 
     @Override
     public FuelTransactionResponse save(FuelTransactionRequest fuelTransactionRequest) {
         switch (fuelTransactionRequest.transactionType()) {
-            case ISSUANCE:
-                return fleetIssuanceFuelTransaction.createFleetIssuanceFuelTransaction(fuelTransactionRequest);
+            case FLEET_ISSUANCE:
+                return fleetIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
             case GRV:
                 // execute GRV code
                 break;
             case TRANSFER:
-                // execute transfer code
-                break;
+                return interStoreTransferFuelTransactionHandler.handle(fuelTransactionRequest);
             case CALIBRATION:
                 // execute calibration code
                 break;
@@ -58,7 +59,7 @@ public class FuelTransactionServiceImpl implements FuelTransactionService {
     }
 
     @Override
-    public StorageUnitTransactions findAll(Long storageUnitId, LocalDate fromDate, LocalDate toDate) {
+    public StorageUnitTransactions findAll(@NonNull Long storageUnitId, @NonNull LocalDate fromDate, @NonNull LocalDate toDate) {
         Storage storage = storageRepository
             .findById(storageUnitId)
             .orElseThrow(() -> new RecordNotFoundException(String.format("Storage unit with id %d not found", storageUnitId)));
@@ -67,80 +68,107 @@ public class FuelTransactionServiceImpl implements FuelTransactionService {
             FuelTransactionSpec.withCreatedDateBetween(fromDate, toDate)
         );
 
-        List<StorageUnitTransaction> storageTransactions = fuelTransactionHeaderRepository
-            .findAll(specification)
-            .stream()
-            .map(fuelTransactionHeader -> {
-                List<FuelTransactionLine> byFuelTransactionHeader = fuelTransactionLineRepository.findByFuelTransactionHeader(
-                    fuelTransactionHeader
-                );
-                FuelTransactionLine fuelTransactionLine = byFuelTransactionHeader.get(0);
+        List<FuelTransactionHeader> transactionHeaders = fuelTransactionHeaderRepository.findAll(specification);
 
-                return StorageUnitTransaction.builder()
-                    .transactionDate(fuelTransactionHeader.getCreatedDate())
-                    .fuelTransactionType(
-                        extractTransactionType(
-                            fuelTransactionHeader.getFuelTransactionType(),
-                            fuelTransactionHeader.getIssuanceTransactionType()
-                        )
-                    )
-                    .fuelType(fuelTransactionHeader.getFuelType())
-                    .fleetNumber(extractFleetNumber(fuelTransactionLine.getAssetPlant()))
-                    .meterReadingStart(extractMeterReadingStart(fuelTransactionLine))
-                    .meterReadingEnd(extractMeterReadingEnd(fuelTransactionLine))
-                    .litres(extractLitres(fuelTransactionLine))
-                    .contractDivision(extractContractDivision(fuelTransactionLine))
-                    .isFillUp(fuelTransactionHeader.getIsFillUp())
-                    .fuelPump(extractPump(fuelTransactionLine))
-                    .note(fuelTransactionHeader.getNote())
-                    .build();
-            })
-            .toList();
+        List<StorageUnitTransaction> storageTransactions = transactionHeaders
+            .parallelStream()
+            .map(this::mapToStorageUnitTransaction)
+            .collect(Collectors.toList());
 
-        return new StorageUnitTransactions(null, null, storageTransactions);
+        BigDecimal totalFuelByStorageUnitId = fuelTransactionLineRepository.getTotalFuelByStorageUnitId(storageUnitId);
+        List<StorageUnitPump> highestMeterReadingByPump = getHighestMeterReadingByPump(storageTransactions);
+        LocalDate latestTransactionDate = getLatestTransactionDateFromHeaders(transactionHeaders);
+
+        return new StorageUnitTransactions(totalFuelByStorageUnitId, highestMeterReadingByPump, storageTransactions, latestTransactionDate);
     }
 
-    private String extractTransactionType(FuelTransactionType fuelTransactionType, IssuanceTransactionType issuanceTransactionType) {
-        StringBuilder transactionType = new StringBuilder();
-        Optional.ofNullable(fuelTransactionType).ifPresent(fuelTransaction -> transactionType.append(fuelTransactionType.name()));
-        Optional.ofNullable(issuanceTransactionType).ifPresent(issuanceTransaction ->
-            transactionType.append(" - ").append(issuanceTransactionType.name())
-        );
-        return transactionType.toString();
+    private StorageUnitTransaction mapToStorageUnitTransaction(FuelTransactionHeader header) {
+        try {
+            List<FuelTransactionLine> transactionLines = fuelTransactionLineRepository.findByFuelTransactionHeader(header);
+
+            if (transactionLines.isEmpty()) {
+                log.warn("No transaction lines found for header ID: {}", header.getFuelTransactionHeaderId());
+                return createEmptyTransaction(header);
+            }
+
+            FuelTransactionLine transactionLine = transactionLines.get(0);
+
+            return StorageUnitTransaction.builder()
+                .transactionDate(header.getCreatedDate())
+                .fuelTransactionType(buildTransactionTypeString(header))
+                .fuelType(header.getFuelType())
+                .fleetNumber(extractFleetNumber(transactionLine.getAssetPlant()))
+                .meterReadingStart(transactionLine.getMeterReadingStart())
+                .meterReadingEnd(transactionLine.getMeterReadingEnd())
+                .litres(transactionLine.getLitres())
+                .contractDivision(buildContractDivisionString(transactionLine))
+                .isFillUp(header.getIsFillUp())
+                .fuelPump(extractPumpIdentifier(transactionLine))
+                .note(header.getNote())
+                .build();
+        } catch (Exception e) {
+            log.error("Error processing transaction header ID: {}", header.getFuelTransactionHeaderId(), e);
+            return createEmptyTransaction(header);
+        }
+    }
+
+    private StorageUnitTransaction createEmptyTransaction(FuelTransactionHeader header) {
+        return StorageUnitTransaction.builder()
+            .transactionDate(header.getCreatedDate())
+            .fuelTransactionType(buildTransactionTypeString(header))
+            .fuelType(header.getFuelType())
+            .isFillUp(header.getIsFillUp())
+            .note(header.getNote())
+            .build();
+    }
+
+    private String buildTransactionTypeString(FuelTransactionHeader header) {
+        StringBuilder transactionTypeString = new StringBuilder();
+
+        Optional.ofNullable(header.getFuelTransactionType()).map(Enum::name).ifPresent(transactionTypeString::append);
+
+        return transactionTypeString.toString();
     }
 
     private String extractFleetNumber(AssetPlant assetPlant) {
-        return Objects.isNull(assetPlant) ? null : assetPlant.getFleetNumber();
+        return Optional.ofNullable(assetPlant).map(AssetPlant::getFleetNumber).orElse(null);
     }
 
-    private Float extractMeterReadingStart(FuelTransactionLine fuelTransactionLine) {
-        return fuelTransactionLine.getMeterReadingStart();
+    private String buildContractDivisionString(FuelTransactionLine line) {
+        return Optional.ofNullable(line.getContractDivision())
+            .map(division -> String.format("%s - %s", division.getContractDivisionNumber(), division.getContractDivisionName()))
+            .orElse(null);
     }
 
-    private Float extractMeterReadingEnd(FuelTransactionLine fuelTransactionLine) {
-        return fuelTransactionLine.getMeterReadingEnd();
+    private String extractPumpIdentifier(FuelTransactionLine line) {
+        return Optional.ofNullable(line.getPump())
+            .map(pump -> StringUtils.hasText(pump.getFuelPumpCode()) ? pump.getFuelPumpCode() : pump.getDescription())
+            .orElse(null);
     }
 
-    private Float extractLitres(FuelTransactionLine fuelTransactionLine) {
-        return fuelTransactionLine.getLitres();
+    private LocalDate getLatestTransactionDateFromHeaders(List<FuelTransactionHeader> transactions) {
+        return transactions
+            .stream()
+            .map(FuelTransactionHeader::getTransactionDate)
+            .filter(Objects::nonNull)
+            .max(LocalDate::compareTo)
+            .orElse(null);
     }
 
-    private String extractContractDivision(FuelTransactionLine fuelTransactionLine) {
-        StringBuilder contractDivision = new StringBuilder();
-        if (Objects.isNull(fuelTransactionLine.getContractDivision())) return null;
-        else return contractDivision
-            .append(fuelTransactionLine.getContractDivision().getContractDivisionNumber())
-            .append(" - ")
-            .append(fuelTransactionLine.getContractDivision().getContractDivisionName())
-            .toString();
-    }
-
-    private String extractPump(FuelTransactionLine fuelTransactionLine) {
-        if (Objects.isNull(fuelTransactionLine.getPump())) return null;
-        else {
-            return !StringUtils.hasText(fuelTransactionLine.getPump().getFuelPumpCode())
-                ? fuelTransactionLine.getPump().getDescription()
-                : fuelTransactionLine.getPump().getFuelPumpCode();
-        }
+    private List<StorageUnitPump> getHighestMeterReadingByPump(List<StorageUnitTransaction> storageTransactions) {
+        return storageTransactions
+            .stream()
+            .filter(line -> line.getFuelPump() != null && line.getMeterReadingEnd() != null)
+            .collect(
+                Collectors.groupingBy(
+                    StorageUnitTransaction::getFuelPump,
+                    Collectors.mapping(StorageUnitTransaction::getMeterReadingEnd, Collectors.maxBy(Float::compareTo))
+                )
+            )
+            .entrySet()
+            .stream()
+            .filter(entry -> entry.getValue().isPresent())
+            .map(entry -> new StorageUnitPump(entry.getKey(), entry.getValue().get()))
+            .collect(Collectors.toList());
     }
 }

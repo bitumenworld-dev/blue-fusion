@@ -15,4 +15,6 @@ public interface StorageRepository extends JpaRepository<Storage, Long>, JpaSpec
     List<Storage> findByIsFixed(Boolean isFixed);
 
     List<Storage> findByCompany(Company company);
+
+    Boolean existsByStorageId(Long storageId);
 }

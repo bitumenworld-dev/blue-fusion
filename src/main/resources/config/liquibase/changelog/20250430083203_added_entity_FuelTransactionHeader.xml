@@ -61,6 +61,7 @@
         <constraints nullable="true"/>
       </column>
 
+      <column name="transaction_date" type="timestamp"/>
 
       <column name="attendee_id" type="bigint">
         <constraints nullable="true"/>

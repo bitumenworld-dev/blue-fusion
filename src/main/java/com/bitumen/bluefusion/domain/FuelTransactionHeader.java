@@ -2,9 +2,9 @@ package com.bitumen.bluefusion.domain;
 
 import com.bitumen.bluefusion.domain.enumeration.FuelTransactionType;
 import com.bitumen.bluefusion.domain.enumeration.FuelType;
-import com.bitumen.bluefusion.domain.enumeration.IssuanceTransactionType;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import lombok.*;
 
 /**
@@ -36,10 +36,6 @@ public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactio
     @Column(name = "fuel_transaction_type")
     private FuelTransactionType fuelTransactionType;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "issuance_transaction_type")
-    private IssuanceTransactionType issuanceTransactionType;
-
     @ManyToOne
     @JoinColumn(name = "storage_unit_id")
     private Storage storageUnit;
@@ -47,6 +43,9 @@ public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactio
     @Enumerated(EnumType.STRING)
     @Column(name = "fuel_type")
     private FuelType fuelType;
+
+    @Column(name = "transaction_date")
+    private LocalDate transactionDate;
 
     @Column(name = "order_number")
     private String orderNumber;
@@ -74,5 +73,5 @@ public class FuelTransactionHeader extends AbstractAuditingEntity<FuelTransactio
     @JoinColumn(name = "operator_id")
     private Employee operator;
 
-    private Boolean isFillUp;
+    private Boolean isFillUp = false;
 }
