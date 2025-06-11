@@ -23,10 +23,14 @@
 
       <column name="uses_fuel_system" type="boolean"/>
 
+      <column name="created_by" type="varchar(50)"/>
+      <column name="modified_by" type="varchar(50)"/>
+      <column name="modified_date" type="datetime"/>
+
     </createTable>
   </changeSet>
 
-  <changeSet id="20250610083208-1-data" author="copilot" context="faker">
+  <changeSet id="20250610083208-1-data" author="ben" context="faker">
     <loadData
       file="config/liquibase/fake-data/third_party.csv"
       separator=","
@@ -42,8 +46,10 @@
 
       <column name="uses_fuel_system" type="boolean"/>
 
+      <column name="created_by" type="varchar"/>
+      <column name="modified_by" type="varchar"/>
+      <column name="modified_date" type="datetime"/>
+
     </loadData>
   </changeSet>
 </databaseChangeLog>
-
-

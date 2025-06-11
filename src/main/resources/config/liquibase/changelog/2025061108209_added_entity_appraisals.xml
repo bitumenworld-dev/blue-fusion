@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <!--
+      Added the entity Appraisals.
+  -->
+  <changeSet id="2025061108209-1" author="ben">
+    <createTable tableName="appraisals_table">
+      <column name="appraisal_id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="employee_number" type="varchar(255)"/>
+      <column name="appraisal_period" type="int"/>
+      <column name="appraisal_value" type="int"/>
+      <column name="created_by" type="varchar(50)"/>
+      <column name="modified_by" type="varchar(50)"/>
+      <column name="modified_date" type="datetime"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="2025061108209-1-data" author="ben" context="faker">
+    <loadData
+      file="config/liquibase/fake-data/appraisals.csv"
+      separator=","
+      tableName="appraisals_table"
+      usePreparedStatements="true">
+      <column name="appraisal_id" type="bigint" />
+      <column name="employee_number" type="varchar" />
+      <column name="appraisal_period" type="int" />
+      <column name="appraisal_value" type="int" />
+      <column name="created_by" type="varchar" />
+      <column name="modified_by" type="varchar" />
+      <column name="modified_date" type="datetime" />
+    </loadData>
+  </changeSet>
+</databaseChangeLog>
