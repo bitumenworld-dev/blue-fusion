@@ -46,8 +46,8 @@
 
       <column name="uses_fuel_system" type="boolean"/>
 
-      <column name="created_by" type="varchar"/>
-      <column name="modified_by" type="varchar"/>
+      <column name="created_by" type="varchar(50)"/>
+      <column name="modified_by" type="varchar(50)"/>
       <column name="modified_date" type="datetime"/>
 
     </loadData>
