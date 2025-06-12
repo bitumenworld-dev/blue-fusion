@@ -30,7 +30,15 @@
         <constraints nullable="true"/>
       </column>
 
-      <column name="registration_number" type="varchar(255)">
+      <column name="transfer_unit_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="third_party_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="registration_number" type="varchar(100)">
         <constraints nullable="true"/>
       </column>
 

@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ import tech.jhipster.web.util.ResponseUtil;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/third-party-resources")
+@RequestMapping("/api/third-party")
 public class ThirdPartyResource {
 
     private static final String ENTITY_NAME = "thirdParty";
@@ -74,7 +73,7 @@ public class ThirdPartyResource {
         @RequestParam(required = false) String thirdPartyShortName,
         @RequestParam(required = false) Boolean isActive
     ) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
         Page<ThirdPartyResponse> thirdParties = thirdPartyService.findAll(pageable, thirdPartyName, thirdPartyShortName, isActive);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), thirdParties);
         return ResponseEntity.ok().headers(headers).body(thirdParties.getContent());
@@ -85,7 +84,7 @@ public class ThirdPartyResource {
         ThirdPartyResponse thirdParty = thirdPartyService.findOne(id, thirdPartyRequest);
         return ResponseUtil.wrapOrNotFound(
             Optional.ofNullable(thirdParty),
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(thirdParty.thirdPartyId()))
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(id))
         );
     }
 

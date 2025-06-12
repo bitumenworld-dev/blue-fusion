@@ -22,4 +22,9 @@ public interface ThirdPartySpec {
         return (root, query, builder) ->
             (isActive == null) ? builder.conjunction() : builder.equal(root.get("isActive"), "%" + isActive + "%");
     }
+
+    static Specification<ThirdParty> withUsesFuelSystem(final Boolean usesFuelSystem) {
+        return (root, query, builder) ->
+            (usesFuelSystem == null) ? builder.conjunction() : builder.equal(root.get("usesFuelSystem"), usesFuelSystem);
+    }
 }

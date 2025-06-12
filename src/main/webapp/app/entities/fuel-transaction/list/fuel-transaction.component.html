@@ -280,6 +280,35 @@
             </select>
           </div>
 
+          <!-- Third Party (conditional) -->
+          <div class="relative" *ngIf="showThirdParty">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_third_party">Third Party </label>
+            <input
+              type="text"
+              id="field_third_party"
+              placeholder="Search Third Party"
+              name="thirdParty"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="filterThirdParty()"
+              (focus)="showThirdPartyDropdown = true"
+              [(ngModel)]="thirdParty"
+              (blur)="hideThirdPartyDropdown()"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <ul
+              *ngIf="showThirdPartyDropdown && filteredThirdParties.length > 0"
+              class="absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+            >
+              <li
+                *ngFor="let filteredThirdParty of filteredThirdParties"
+                (mousedown)="selectThirdParty(filteredThirdParty)"
+                class="text-xs px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {{ filteredThirdParty.thirdPartyName }}
+              </li>
+            </ul>
+          </div>
+
           <!-- Fleet Number (conditional) -->
           <div class="relative" *ngIf="showFleet">
             <label class="block text-xs font-medium text-gray-700 mb-1" for="field_storage_unit">Fleet Number</label>
@@ -330,6 +359,20 @@
                 {{ transferUnit.name }}
               </li>
             </ul>
+          </div>
+
+          <!-- Reg Number (conditional) -->
+          <div class="relative" *ngIf="showRegNumber">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_smr">Reg Number</label>
+            <input
+              type="text"
+              id="field_reg_number"
+              placeholder="REG NUMBER .... "
+              name="regNumber"
+              [(ngModel)]="regNumber"
+              [ngModelOptions]="{ standalone: true }"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
           </div>
 
           <!-- User (conditional) -->
@@ -542,7 +585,7 @@
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>Fleet Number</span>
+                <span>Fleet </span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
@@ -562,17 +605,17 @@
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>contractDivision</span>
+                <span>contract/Division</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>isFillUp</span>
+                <span>is Fill Up</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
               <div class="flex items-center">
-                <span>fuelPump</span>
+                <span>fuel Pump</span>
               </div>
             </th>
             <th scope="col" class="px-6 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">

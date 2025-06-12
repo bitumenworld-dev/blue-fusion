@@ -6,7 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Builder
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-import { Component, inject, NgZone, OnInit, signal } from '@angular/core';
+import { Component, inject, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,15 +7,16 @@ import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
-import { FuelTransaction, NewFuelTransaction } from '../fuel-transaction.model';
+import { NewFuelTransaction } from '../fuel-transaction.model';
+import { ThirdParty } from '../../third-party/third-party.model';
+import { ThirdPartyArrayResponseType, ThirdPartyService } from '../../third-party/service/third-party.service';
 import {
-  StorageUnitTransactionsResponseType,
-  FuelTransactionArrayResponseType,
   FuelTransactionResponseType,
   FuelTransactionService,
+  StorageUnitTransactionsResponseType,
 } from '../service/fuel-transaction.service';
 import { FuelType, FuelTypes } from '../../enumerations/fuel-type.model';
-import { StorageUnitTransaction, StorageUnitTransactions, StorageUnitPump } from '../storage-unit.model';
+import { StorageUnitPump, StorageUnitTransaction, StorageUnitTransactions } from '../storage-unit.model';
 import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
 import { ICompany } from '../../company/company.model';
 import { Storage } from '../../storage/storage.model';
@@ -45,6 +46,7 @@ export class FuelTransactionComponent implements OnInit {
   selectedTransactionType = '';
   userFullName: string | null | undefined = '';
   smr: string = '';
+  regNumber: string = '';
   storageUnitPumps: StorageUnitPump[] | null = [];
   pumpStart: string = '';
   pumpEnd: string = '';
@@ -103,6 +105,13 @@ export class FuelTransactionComponent implements OnInit {
   filteredDivisionContracts = [...this.contractDivisionArray];
   showDivisionContractDropdown = false;
 
+  // Third Party Search Dropdown
+  thirdPartArray: ThirdParty[] | null = [];
+  thirdParty: string | null | undefined = '';
+  // @ts-ignore
+  filteredThirdParties = [...this.thirdPartArray];
+  showThirdPartyDropdown = false;
+
   fuelTypes: FuelType[] = FuelTypes;
   selectedFuelType = '';
 
@@ -119,6 +128,8 @@ export class FuelTransactionComponent implements OnInit {
   showIsFillUp = false;
   showPumps = false;
   showTransferUnit = false;
+  showThirdParty = false;
+  showRegNumber = false;
 
   // fuelTransactionsArray
   storageUnitTransactions: StorageUnitTransactions | null | undefined = null;
@@ -152,6 +163,7 @@ export class FuelTransactionComponent implements OnInit {
 
   public readonly router = inject(Router);
   protected readonly fuelTransactionService = inject(FuelTransactionService);
+  protected readonly thirdPartyService = inject(ThirdPartyService);
   protected readonly fuelPumpService = inject(FuelPumpService);
   protected readonly storageService = inject(StorageService);
   protected readonly assetPlantService = inject(AssetPlantService);
@@ -378,7 +390,7 @@ export class FuelTransactionComponent implements OnInit {
       this.showIssuanceFields();
     }
     if (transactionType === FuelTransactionType.THIRD_PARTY_ISSUANCE) {
-      this.showIssuanceFields();
+      this.showThirdPartyFields();
     }
     if (transactionType === FuelTransactionType.GRV) {
       this.showReceived = true;
@@ -425,6 +437,54 @@ export class FuelTransactionComponent implements OnInit {
     }, 200);
   }
 
+  showThirdPartyFields(): void {
+    this.showThirdParty = true;
+    this.showNotes = true;
+    this.showIssued = true;
+    this.showPumps = true;
+    this.showDivisionContract = true;
+
+    this.thirdPartyService.query().subscribe({
+      next: (res: ThirdPartyArrayResponseType) => {
+        this.thirdPartArray = res.body;
+        this.filteredThirdParties = [...this.thirdPartArray];
+      },
+    });
+  }
+
+  filterThirdParty(): void {
+    if (!this.thirdParty) {
+      this.filteredThirdParties = [...this.thirdPartArray];
+      return;
+    }
+
+    const term = this.thirdParty.toLowerCase().trim();
+    if (this.thirdPartArray) {
+      this.filteredThirdParties = this.thirdPartArray.filter(thirdPart => thirdPart.thirdPartyName?.toLowerCase().includes(term));
+    }
+  }
+
+  hideThirdPartyDropdown(): void {
+    setTimeout(() => {
+      this.showThirdPartyDropdown = false;
+    }, 200);
+  }
+
+  selectThirdParty(thirdParty: ThirdParty): void {
+    this.showFleet = false;
+
+    this.showRegNumber = false;
+    this.thirdParty = thirdParty.thirdPartyName;
+    this.newFuelTransaction.thirdPartyId = thirdParty.thirdPartyId;
+    this.hideThirdPartyDropdown();
+
+    if (thirdParty.usesFuelSystem) {
+      this.showFleet = true;
+    } else {
+      this.showRegNumber = true;
+    }
+  }
+
   showTransferFields(): void {
     this.showTransferUnit = true;
     this.showNotes = true;
@@ -456,6 +516,7 @@ export class FuelTransactionComponent implements OnInit {
     this.showIsFillUp = false;
     this.showPumps = false;
     this.showTransferUnit = false;
+    this.showRegNumber = false;
   }
 
   saveFuelTransaction(): void {
@@ -466,6 +527,7 @@ export class FuelTransactionComponent implements OnInit {
     this.newFuelTransaction.meterReadingStart = this.pumpStart;
     this.newFuelTransaction.meterReadingEnd = this.pumpEnd;
     this.newFuelTransaction.litres = this.issuedFuel;
+    this.newFuelTransaction.registrationNumber = this.regNumber;
 
     this.fuelTransactionService.create(this.newFuelTransaction).subscribe({
       next: (res: FuelTransactionResponseType) => {},
@@ -490,6 +552,7 @@ export class FuelTransactionComponent implements OnInit {
     this.newFuelTransaction.contractDivisionId = null;
     this.newFuelTransaction.transferUnitId = null;
 
+    this.regNumber = '';
     this.smr = '';
     this.unit = '';
     this.notes = '';

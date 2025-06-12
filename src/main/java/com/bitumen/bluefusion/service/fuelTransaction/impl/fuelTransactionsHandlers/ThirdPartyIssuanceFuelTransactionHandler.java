@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FleetIssuanceFuelTransactionHandler extends AbstractFuelTransactionHandler {
+public class ThirdPartyIssuanceFuelTransactionHandler extends AbstractFuelTransactionHandler {
 
     private final FuelTransactionValidator fuelTransactionValidator;
 
     @Override
     public void validateFuelTransaction(FuelTransactionRequest fuelTransactionRequest) {
-        fuelTransactionValidator.validateFleetIssuance(fuelTransactionRequest);
+        fuelTransactionValidator.validateThirdPartyIssuance(fuelTransactionRequest);
     }
 }

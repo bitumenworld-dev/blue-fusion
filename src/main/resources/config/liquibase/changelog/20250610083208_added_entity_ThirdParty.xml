@@ -23,6 +23,16 @@
 
       <column name="uses_fuel_system" type="boolean"/>
 
+      <column name="created_by" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
+
     </createTable>
   </changeSet>
 
@@ -30,7 +40,7 @@
     <loadData
       file="config/liquibase/fake-data/third_party.csv"
       separator=","
-      tableName="third_party_company"
+      tableName="third_party"
       usePreparedStatements="true">
       <column name="third_party_id" type="bigint" />
 
@@ -41,6 +51,14 @@
       <column name="is_active" type="boolean"/>
 
       <column name="uses_fuel_system" type="boolean"/>
+
+      <column name="created_by" type="string"/>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
 
     </loadData>
   </changeSet>

@@ -1,38 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <property name="now" value="now()" dbms="mysql"/>
-    <property name="floatType" value="float" dbms="mysql"/>
-    <property name="clobType" value="clob" dbms="mysql"/>
-    <property name="blobType" value="longblob" dbms="mysql"/>
-    <property name="uuidType" value="varchar(36)" dbms="mysql"/>
-    <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
-    <property name="timeType" value="time(6)" dbms="mysql"/>
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+  <property name="now" value="now()" dbms="mysql"/>
+  <property name="floatType" value="float" dbms="mysql"/>
+  <property name="clobType" value="clob" dbms="mysql"/>
+  <property name="blobType" value="longblob" dbms="mysql"/>
+  <property name="uuidType" value="varchar(36)" dbms="mysql"/>
+  <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
+  <property name="timeType" value="time(6)" dbms="mysql"/>
 
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083148_added_entity_AssetPlant.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083149_added_entity_AssetPlantServiceReading.xml" relativeToChangelogFile="false"/>
-    <include file="/config/liquibase/changelog/20250430083150_added_entity_FuelIssuanceType.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083151_added_entity_AssetPlantPhoto.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083152_added_entity_ContractDivision.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083153_added_entity_Site.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083154_added_entity_Make.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083155_added_entity_MakeModel.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083156_added_entity_Company.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083157_added_entity_PlantCategory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083158_added_entity_PlantSubcategory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083159_added_entity_Workshop.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083200_added_entity_SiteContract.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083201_added_entity_Employee.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083202_added_entity_FuelTransactionType.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083203_added_entity_FuelTransactionHeader.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083204_added_entity_FuelTransactionLine.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083205_added_entity_FuelPump.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250430083206_added_entity_SmrReading.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20250516083207_added_entity_Storage.xml" relativeToChangelogFile="false"/>
-    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
-    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+  <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083148_added_entity_AssetPlant.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083149_added_entity_AssetPlantServiceReading.xml"
+           relativeToChangelogFile="false"/>
+  <include file="/config/liquibase/changelog/20250430083150_added_entity_FuelIssuanceType.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083151_added_entity_AssetPlantPhoto.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083152_added_entity_ContractDivision.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083153_added_entity_Site.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083154_added_entity_Make.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083155_added_entity_MakeModel.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083156_added_entity_Company.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083157_added_entity_PlantCategory.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083158_added_entity_PlantSubcategory.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083159_added_entity_Workshop.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083200_added_entity_SiteContract.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083201_added_entity_Employee.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083202_added_entity_FuelTransactionType.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083203_added_entity_FuelTransactionHeader.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083204_added_entity_FuelTransactionLine.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083205_added_entity_FuelPump.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250430083206_added_entity_SmrReading.xml"
+           relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250516083207_added_entity_Storage.xml" relativeToChangelogFile="false"/>
+  <include file="config/liquibase/changelog/20250610083208_added_entity_ThirdParty.xml"
+           relativeToChangelogFile="false"/>
+  <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+  <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+  <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
