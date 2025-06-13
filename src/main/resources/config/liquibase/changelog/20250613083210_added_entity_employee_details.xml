@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+  <changeSet id="20250613083210-1" author="Ben">
+    <createTable tableName="employee_details">
+      <column name="employee_id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="employee_number" type="varchar(255)"/>
+      <column name="company_id" type="bigint"/>
+      <column name="surname" type="varchar(255)"/>
+      <column name="first_names" type="varchar(255)"/>
+      <column name="middle_name" type="varchar(255)"/>
+      <column name="date_engaged" type="date"/>
+      <column name="on_current_payroll" type="boolean"/>
+      <column name="nec_grade" type="varchar(255)"/>
+      <column name="email" type="varchar(255)"/>
+      <column name="gender" type="varchar(50)"/>
+      <column name="id_copy" type="boolean"/>
+      <column name="national_id_number" type="varchar(255)"/>
+      <column name="team_name" type="varchar(255)"/>
+      <column name="special_abilities" type="varchar(255)"/>
+      <column name="driver_code_payslip" type="varchar(255)"/>
+      <column name="date_of_birth" type="date"/>
+      <column name="drivers_license_number" type="varchar(255)"/>
+      <column name="license_classes" type="varchar(255)"/>
+      <column name="defensive_certificate_number" type="varchar(255)"/>
+      <column name="defensive_expiry_date" type="date"/>
+      <column name="retest_expiry_date" type="date"/>
+      <column name="medical_expiry_date" type="date"/>
+      <column name="job_title" type="varchar(255)"/>
+      <column name="last_audit_date" type="date"/>
+      <column name="sme_appointment" type="boolean"/>
+      <column name="haz_chem_training_date" type="date"/>
+      <column name="pin" type="varchar(255)"/>
+      <column name="colour_number" type="varchar(255)"/>
+      <column name="chat_name" type="varchar(255)"/>
+      <column name="whatsapp_number" type="varchar(255)"/>
+      <column name="allow_whatsapp" type="boolean"/>
+      <column name="assigned_workshop" type="varchar(255)"/>
+      <column name="notify_alert" type="boolean"/>
+      <column name="current_contract" type="varchar(255)"/>
+      <column name="current_site_id" type="bigint"/>
+      <column name="address" type="varchar(255)"/>
+      <column name="display_order" type="char(1)"/>
+      <column name="preferred_language" type="boolean"/>
+      <column name="temp_code_corrected" type="boolean"/>
+      <column name="cost_centre" type="varchar(255)"/>
+      <column name="verified" type="boolean"/>
+      <column name="whatsapp_payslip_confirmed" type="boolean"/>
+      <column name="document_prefix" type="varchar(255)"/>
+      <column name="capture_wages_hours" type="boolean"/>
+      <column name="department" type="varchar(255)"/>
+      <column name="allowed_to_receive_fuel" type="boolean"/>
+      <column name="bank" type="int"/>
+      <column name="branch" type="varchar(255)"/>
+      <column name="accountno" type="varchar(255)"/>
+      <column name="accountname" type="varchar(255)"/>
+      <column name="bankz" type="int"/>
+      <column name="branchz" type="varchar(255)"/>
+      <column name="accountnoz" type="varchar(255)"/>
+      <column name="accountnamez" type="varchar(255)"/>
+      <column name="ecocash" type="varchar(255)"/>
+      <column name="ecocashfirstname" type="varchar(255)"/>
+      <column name="ecocashlastname" type="varchar(255)"/>
+      <column name="dlcopy" type="boolean"/>
+      <column name="dflcopy" type="boolean"/>
+      <column name="rtcopy" type="boolean"/>
+      <column name="mccopy" type="boolean"/>
+      <column name="debtor_account" type="varchar(255)"/>
+      <column name="medcopy" type="varchar(255)"/>
+      <column name="dccopy" type="varchar(255)"/>
+      <column name="cvcopy" type="varchar(255)"/>
+      <column name="dvcopy" type="varchar(255)"/>
+      <column name="fuel_pin" type="varchar(255)"/>
+      <column name="nok" type="varchar(255)"/>
+      <column name="nok_phone" type="varchar(255)"/>
+      <column name="date_terminated" type="date"/>
+      <column name="date_probation" type="date"/>
+      <column name="contract_expired" type="date"/>
+      <column name="idcard" type="boolean"/>
+      <column name="employee_record_form" type="boolean"/>
+      <column name="other" type="varchar(255)"/>
+      <column name="occupation" type="varchar(255)"/>
+      <column name="activity_contract" type="varchar(255)"/>
+      <column name="activity_short_description" type="varchar(255)"/>
+      <column name="ohs_appointment" type="boolean"/>
+      <column name="compliance_agreement" type="boolean"/>
+      <column name="roles_responsibilities" type="boolean"/>
+      <column name="bw_operator_authority" type="boolean"/>
+      <column name="planned_task_observation" type="boolean"/>
+      <column name="drivers_medical_copy" type="boolean"/>
+      <column name="pneumoconsis_medical_bureau_number" type="varchar(255)"/>
+      <column name="medical_fitness_certificate" type="boolean"/>
+      <column name="food_handlers_expiry_date" type="date"/>
+      <column name="cv_ref" type="boolean"/>
+      <column name="certificate_of_competence" type="boolean"/>
+      <column name="mobile_number" type="int"/>
+      <column name="comments" type="varchar(255)"/>
+      <column name="bw_staff_contract" type="boolean"/>
+      <column name="allocated_to_multi_contracts" type="boolean"/>
+      <column name="position_on_payslip" type="varchar(255)"/>
+      <column name="medical_pneumonconsis_expiry_date" type="date"/>
+      <column name="city" type="varchar(255)"/>
+      <column name="medical_fitness_certificate_expiry_date" type="date"/>
+      <column name="social_security_number" type="varchar(255)"/>
+      <column name="company_vehicle_policy" type="boolean"/>
+      <column name="confidentiality_agreement" type="boolean"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="20250613083210-1-data" author="ben" context="faker">
+    <loadData
+      file="config/liquibase/fake-data/employee_details.csv"
+      separator=","
+      tableName="employee_details"
+      usePreparedStatements="true">
+      <column name="employee_id" type="bigint"/>
+      <column name="employee_number" type="varchar"/>
+      <column name="company_id" type="bigint"/>
+      <column name="surname" type="varchar"/>
+      <column name="first_names" type="varchar"/>
+      <column name="middle_name" type="varchar"/>
+      <column name="date_engaged" type="date"/>
+      <column name="on_current_payroll" type="boolean"/>
+      <column name="nec_grade" type="varchar"/>
+      <column name="email" type="varchar"/>
+      <column name="gender" type="varchar"/>
+      <column name="id_copy" type="boolean"/>
+      <column name="national_id_number" type="varchar"/>
+      <column name="team_name" type="varchar"/>
+      <column name="special_abilities" type="varchar"/>
+      <column name="driver_code_payslip" type="varchar"/>
+      <column name="date_of_birth" type="date"/>
+      <column name="drivers_license_number" type="varchar"/>
+      <column name="license_classes" type="varchar"/>
+      <column name="defensive_certificate_number" type="varchar"/>
+      <column name="defensive_expiry_date" type="date"/>
+      <column name="retest_expiry_date" type="date"/>
+      <column name="medical_expiry_date" type="date"/>
+      <column name="job_title" type="varchar"/>
+      <column name="last_audit_date" type="date"/>
+      <column name="sme_appointment" type="boolean"/>
+      <column name="haz_chem_training_date" type="date"/>
+      <column name="pin" type="varchar"/>
+      <column name="colour_number" type="varchar"/>
+      <column name="chat_name" type="varchar"/>
+      <column name="whatsapp_number" type="varchar"/>
+      <column name="allow_whatsapp" type="boolean"/>
+      <column name="assigned_workshop" type="varchar"/>
+      <column name="notify_alert" type="boolean"/>
+      <column name="current_contract" type="varchar"/>
+      <column name="current_site_id" type="bigint"/>
+      <column name="address" type="varchar"/>
+      <column name="display_order" type="char"/>
+      <column name="preferred_language" type="boolean"/>
+      <column name="temp_code_corrected" type="boolean"/>
+      <column name="cost_centre" type="varchar"/>
+      <column name="verified" type="boolean"/>
+      <column name="whatsapp_payslip_confirmed" type="boolean"/>
+      <column name="document_prefix" type="varchar"/>
+      <column name="capture_wages_hours" type="boolean"/>
+      <column name="department" type="varchar"/>
+      <column name="allowed_to_receive_fuel" type="boolean"/>
+      <column name="bank" type="int"/>
+      <column name="branch" type="varchar"/>
+      <column name="accountno" type="varchar"/>
+      <column name="accountname" type="varchar"/>
+      <column name="bankz" type="int"/>
+      <column name="branchz" type="varchar"/>
+      <column name="accountnoz" type="varchar"/>
+      <column name="accountnamez" type="varchar"/>
+      <column name="ecocash" type="varchar"/>
+      <column name="ecocashfirstname" type="varchar"/>
+      <column name="ecocashlastname" type="varchar"/>
+      <column name="dlcopy" type="boolean"/>
+      <column name="dflcopy" type="boolean"/>
+      <column name="rtcopy" type="boolean"/>
+      <column name="mccopy" type="boolean"/>
+      <column name="debtor_account" type="varchar"/>
+      <column name="medcopy" type="varchar"/>
+      <column name="dccopy" type="varchar"/>
+      <column name="cvcopy" type="varchar"/>
+      <column name="dvcopy" type="varchar"/>
+      <column name="fuel_pin" type="varchar"/>
+      <column name="nok" type="varchar"/>
+      <column name="nok_phone" type="varchar"/>
+      <column name="date_terminated" type="date"/>
+      <column name="date_probation" type="date"/>
+      <column name="contract_expired" type="date"/>
+      <column name="idcard" type="boolean"/>
+      <column name="employee_record_form" type="boolean"/>
+      <column name="other" type="varchar"/>
+      <column name="occupation" type="varchar"/>
+      <column name="activity_contract" type="varchar"/>
+      <column name="activity_short_description" type="varchar"/>
+      <column name="ohs_appointment" type="boolean"/>
+      <column name="compliance_agreement" type="boolean"/>
+      <column name="roles_responsibilities" type="boolean"/>
+      <column name="bw_operator_authority" type="boolean"/>
+      <column name="planned_task_observation" type="boolean"/>
+      <column name="drivers_medical_copy" type="boolean"/>
+      <column name="pneumoconsis_medical_bureau_number" type="varchar"/>
+      <column name="medical_fitness_certificate" type="boolean"/>
+      <column name="food_handlers_expiry_date" type="date"/>
+      <column name="cv_ref" type="boolean"/>
+      <column name="certificate_of_competence" type="boolean"/>
+      <column name="mobile_number" type="int"/>
+      <column name="comments" type="varchar"/>
+      <column name="bw_staff_contract" type="boolean"/>
+      <column name="allocated_to_multi_contracts" type="boolean"/>
+      <column name="position_on_payslip" type="varchar"/>
+      <column name="medical_pneumonconsis_expiry_date" type="date"/>
+      <column name="city" type="varchar"/>
+      <column name="medical_fitness_certificate_expiry_date" type="date"/>
+      <column name="social_security_number" type="varchar"/>
+      <column name="company_vehicle_policy" type="boolean"/>
+      <column name="confidentiality_agreement" type="boolean"/>
+    </loadData>
+  </changeSet>
+</databaseChangeLog>
