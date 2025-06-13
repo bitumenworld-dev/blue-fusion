@@ -31,6 +31,10 @@ public class FuelTransactionLine extends AbstractAuditingEntity<FuelTransactionL
     private AssetPlant assetPlant;
 
     @ManyToOne
+    @JoinColumn(name = "workshop_id")
+    private Site workshop;
+
+    @ManyToOne
     @JoinColumn(name = "third_party_id")
     private ThirdParty thirdParty;
 

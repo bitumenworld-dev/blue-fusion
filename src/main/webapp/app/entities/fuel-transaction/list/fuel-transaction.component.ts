@@ -15,11 +15,13 @@ import {
   FuelTransactionService,
   StorageUnitTransactionsResponseType,
 } from '../service/fuel-transaction.service';
+import { SiteArrayResponseType, SiteService } from '../../site/service/site.service';
 import { FuelType, FuelTypes } from '../../enumerations/fuel-type.model';
 import { StorageUnitPump, StorageUnitTransaction, StorageUnitTransactions } from '../storage-unit.model';
 import { CompanyEntityArrayResponseType, CompanyService } from '../../company/service/company.service';
 import { ICompany } from '../../company/company.model';
 import { Storage } from '../../storage/storage.model';
+import { Site } from '../../site/site.model';
 import { FuelTransactionType, FuelTransactionTypes } from '../../enumerations/transaction-type.model';
 import {
   ContractDivisionEntityArrayResponseType,
@@ -112,24 +114,32 @@ export class FuelTransactionComponent implements OnInit {
   filteredThirdParties = [...this.thirdPartArray];
   showThirdPartyDropdown = false;
 
+  // Workshop Search Dropdown
+  workshopArray: Site[] | null = [];
+  workshop: string | null | undefined = '';
+  // @ts-ignore
+  filteredWorkshops = [...this.workshopArray];
+  showWorkshopDropdown = false;
+
   fuelTypes: FuelType[] = FuelTypes;
   selectedFuelType = '';
 
   fuelTransactionTypes: FuelTransactionType[] = FuelTransactionTypes;
 
-  showFleet = false;
-  showUser = false;
-  showSmr = false;
-  showUnit = false;
-  showNotes = false;
-  showDivisionContract = false;
-  showReceived = false;
-  showIssued = false;
-  showIsFillUp = false;
-  showPumps = false;
-  showTransferUnit = false;
-  showThirdParty = false;
-  showRegNumber = false;
+  showFleet: boolean = false;
+  showUser: boolean = false;
+  showSmr: boolean = false;
+  showUnit: boolean = false;
+  showNotes: boolean = false;
+  showDivisionContract: boolean = false;
+  showReceived: boolean = false;
+  showIssued: boolean = false;
+  showIsFillUp: boolean = false;
+  showPumps: boolean = false;
+  showTransferUnit: boolean = false;
+  showThirdParty: boolean = false;
+  showRegNumber: boolean = false;
+  showWorkshop: boolean = false;
 
   // fuelTransactionsArray
   storageUnitTransactions: StorageUnitTransactions | null | undefined = null;
@@ -167,6 +177,7 @@ export class FuelTransactionComponent implements OnInit {
   protected readonly fuelPumpService = inject(FuelPumpService);
   protected readonly storageService = inject(StorageService);
   protected readonly assetPlantService = inject(AssetPlantService);
+  protected readonly siteService = inject(SiteService);
   protected contractDivisionService = inject(ContractDivisionService);
   protected readonly companyService = inject(CompanyService);
   protected readonly activatedRoute = inject(ActivatedRoute);
@@ -393,11 +404,19 @@ export class FuelTransactionComponent implements OnInit {
       this.showThirdPartyFields();
     }
     if (transactionType === FuelTransactionType.GRV) {
-      this.showReceived = true;
-      this.showNotes = true;
+      this.showGRVFields();
     }
     if (transactionType === FuelTransactionType.TRANSFER) {
       this.showTransferFields();
+    }
+    if (transactionType === FuelTransactionType.WORKSHOP_ISSUANCE) {
+      this.showWorkshopFields();
+    }
+    if (transactionType === FuelTransactionType.DRUM_ISSUANCE) {
+      this.showDrumFields();
+    }
+    if (transactionType === FuelTransactionType.CALIBRATION) {
+      this.showCalibrationFields();
     }
 
     this.newFuelTransaction.transactionType = transactionType;
@@ -485,6 +504,67 @@ export class FuelTransactionComponent implements OnInit {
     }
   }
 
+  showDrumFields(): void {
+    this.showNotes = true;
+    this.showIssued = true;
+    this.showPumps = true;
+  }
+
+  showCalibrationFields(): void {
+    this.showNotes = true;
+    this.showIssued = true;
+    this.showPumps = true;
+  }
+
+  showWorkshopFields(): void {
+    this.showWorkshop = true;
+    this.showNotes = true;
+    this.showIssued = true;
+    this.showPumps = true;
+
+    const queryObject: any = {
+      companyId: this.companyId,
+      hasWorkshop: true,
+    };
+
+    this.siteService.query(queryObject).subscribe({
+      next: (res: SiteArrayResponseType) => {
+        this.workshopArray = res.body;
+        this.filteredWorkshops = [...this.workshopArray];
+      },
+    });
+  }
+
+  filterWorkshops(): void {
+    if (!this.workshop) {
+      this.filteredWorkshops = [...this.workshopArray];
+      return;
+    }
+
+    const term = this.workshop.toLowerCase().trim();
+    if (this.workshopArray) {
+      this.filteredWorkshops = this.workshopArray.filter(workshop => workshop.siteName?.toLowerCase().includes(term));
+    }
+  }
+
+  selectWorkshop(workshop: Site): void {
+    this.workshop = workshop.siteName;
+    this.showWorkshopDropdown = false;
+    this.newFuelTransaction.workshopId = workshop.siteId;
+  }
+
+  hideWorkshopDropdown(): void {
+    setTimeout(() => {
+      this.showWorkshopDropdown = false;
+    }, 200);
+  }
+
+  showGRVFields(): void {
+    this.showTransferUnit = true;
+    this.showNotes = true;
+    this.showIssued = true;
+  }
+
   showTransferFields(): void {
     this.showTransferUnit = true;
     this.showNotes = true;
@@ -517,6 +597,7 @@ export class FuelTransactionComponent implements OnInit {
     this.showPumps = false;
     this.showTransferUnit = false;
     this.showRegNumber = false;
+    this.showThirdParty = false;
   }
 
   saveFuelTransaction(): void {
@@ -537,6 +618,7 @@ export class FuelTransactionComponent implements OnInit {
     this.getTransactions(this.newFuelTransaction.storageId);
     this.newFuelTransactionLineReset();
   }
+
   populateNote(): void {
     this.notes = this.issuedFuel + 'L  ' + this.newFuelTransaction.transactionType + ' TO ' + this.fleetNumber;
   }
@@ -551,6 +633,7 @@ export class FuelTransactionComponent implements OnInit {
     this.newFuelTransaction.assetPlantId = null;
     this.newFuelTransaction.contractDivisionId = null;
     this.newFuelTransaction.transferUnitId = null;
+    this.newFuelTransaction.workshopId = null;
 
     this.regNumber = '';
     this.smr = '';

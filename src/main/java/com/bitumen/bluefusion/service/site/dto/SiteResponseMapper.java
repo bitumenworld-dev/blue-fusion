@@ -1,10 +1,9 @@
-package com.bitumen.bluefusion.service.site.impl;
+package com.bitumen.bluefusion.service.site.dto;
 
 import com.bitumen.bluefusion.domain.Site;
-import com.bitumen.bluefusion.service.site.dto.SiteResponse;
 import java.util.function.Function;
 
-interface SiteResponseMapper {
+public interface SiteResponseMapper {
     Function<Site, SiteResponse> map = site ->
         new SiteResponse(
             site.getSiteId(),
@@ -12,6 +11,7 @@ interface SiteResponseMapper {
             site.getLatitude(),
             site.getLongitude(),
             site.getSiteNotes(),
+            site.getHasWorkshop(),
             site.getCompany() == null ? "" : site.getCompany().getName(),
             site.getSiteImage()
         );

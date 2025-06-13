@@ -18,6 +18,10 @@
         <constraints nullable="true"/>
       </column>
 
+      <column name="workshop_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
       <column name="asset_plant_id" type="bigint">
         <constraints nullable="true"/>
       </column>

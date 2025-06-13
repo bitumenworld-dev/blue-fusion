@@ -21,6 +21,38 @@ public class FuelTransactionValidator {
     private final FuelPumpRepository fuelPumpRepository;
     private final ContractDivisionRepository contractDivisionRepository;
     private final ThirdPartyRepository thirdPartyRepository;
+    private final SiteRepository siteRepository;
+
+    public void validateGRV(FuelTransactionRequest request) {
+        ValidationResult result = new ValidationResult();
+
+        validateCompany(request.companyId(), result);
+        validateStorage(request.storageId(), result, "storage");
+
+        result.throwIfHasErrors();
+    }
+
+    public void validateDrumIssuance(FuelTransactionRequest request) {
+        ValidationResult result = new ValidationResult();
+
+        validateCompany(request.companyId(), result);
+        validateStorage(request.storageId(), result, "storage");
+        validateFuelPump(request.pumpId(), result);
+
+        result.throwIfHasErrors();
+    }
+
+    public void validateWorkshopIssuance(FuelTransactionRequest request) {
+        log.info("Validating workshop issuance: {}", request);
+        ValidationResult result = new ValidationResult();
+
+        validateWorkshop(request.workshopId(), result);
+        validateCompany(request.companyId(), result);
+        validateStorage(request.storageId(), result, "storage");
+        validateFuelPump(request.pumpId(), result);
+
+        result.throwIfHasErrors();
+    }
 
     public void validateThirdPartyIssuance(FuelTransactionRequest request) {
         log.info("Validating third party issuance: {}", request);
@@ -115,6 +147,23 @@ public class FuelTransactionValidator {
         if (!assetPlantRepository.existsByAssetPlantId(assetPlantId)) {
             result.addError(String.format("Asset plant ID %d does not exist", assetPlantId));
         }
+    }
+
+    private void validateWorkshop(Long workshopId, ValidationResult result) {
+        if (workshopId == null) {
+            result.addError("Workshop ID is required");
+            return;
+        }
+        siteRepository
+            .findBySiteId(workshopId)
+            .ifPresentOrElse(
+                site -> {
+                    if (!site.getHasWorkshop()) {
+                        result.addError("Site does not have a workshop");
+                    }
+                },
+                () -> result.addError("Workshop required")
+            );
     }
 
     // Inner class to handle validation results

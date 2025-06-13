@@ -27,9 +27,18 @@ public class StorageUnitTransactionBuilder {
             case TRANSFER -> mapFromTransferTransaction(header);
             case CALIBRATION -> mapFromCalibrationTransaction(header);
             case THIRD_PARTY_ISSUANCE -> mapFromThirdPartyTransaction(header);
-            default -> null;
+            case WORKSHOP_ISSUANCE -> mapFromWorkshop(header);
+            case DRUM_ISSUANCE -> mapFromDrum(header);
             //            case null -> throw new IllegalArgumentException("FuelTransactionType cannot be null");
         };
+    }
+
+    private StorageUnitTransaction mapFromDrum(FuelTransactionHeader header) {
+        return mapTransaction(header, this::extractDrumInfo);
+    }
+
+    private StorageUnitTransaction mapFromWorkshop(FuelTransactionHeader header) {
+        return mapTransaction(header, this::extractWorkshopInfo);
     }
 
     private StorageUnitTransaction mapFromFleetIssuanceTransaction(FuelTransactionHeader header) {
@@ -45,20 +54,13 @@ public class StorageUnitTransactionBuilder {
     }
 
     private StorageUnitTransaction mapFromGrvTransaction(FuelTransactionHeader header) {
-        // TODO: Implement GRV transaction mapping logic
-        log.warn("GRV transaction mapping not yet implemented for header ID: {}", header.getFuelTransactionHeaderId());
-        return createEmptyTransaction(header);
+        return mapTransaction(header, this::extractGRV);
     }
 
     private StorageUnitTransaction mapFromCalibrationTransaction(FuelTransactionHeader header) {
-        // TODO: Implement calibration transaction mapping logic
-        log.warn("Calibration transaction mapping not yet implemented for header ID: {}", header.getFuelTransactionHeaderId());
-        return createEmptyTransaction(header);
+        return mapTransaction(header, this::extractCalibrationInfo);
     }
 
-    /**
-     * Generic method to map transactions with different fleet number extraction strategies
-     */
     private StorageUnitTransaction mapTransaction(FuelTransactionHeader header, FleetNumberExtractor fleetNumberExtractor) {
         try {
             List<FuelTransactionLine> transactionLines = getTransactionLines(header);
@@ -98,6 +100,22 @@ public class StorageUnitTransactionBuilder {
         }
     }
 
+    private String extractGRV(FuelTransactionLine transactionLine) {
+        return "GRV";
+    }
+
+    private String extractCalibrationInfo(FuelTransactionLine transactionLine) {
+        return "Calibration";
+    }
+
+    private String extractDrumInfo(FuelTransactionLine transactionLine) {
+        return "Drum";
+    }
+
+    private String extractWorkshopInfo(FuelTransactionLine transactionLine) {
+        return Optional.ofNullable(transactionLine.getWorkshop()).map(Site::getSiteName).orElse(null);
+    }
+
     private String extractFleetNumberFromAssetPlant(FuelTransactionLine transactionLine) {
         return Optional.ofNullable(transactionLine.getAssetPlant()).map(AssetPlant::getFleetNumber).orElse(null);
     }
@@ -113,9 +131,7 @@ public class StorageUnitTransactionBuilder {
 
         if (thirdParty.getUsesFuelSystem()) {
             AssetPlant assetPlant = transactionLine.getAssetPlant();
-            if (assetPlant != null) {
-                thirdPartyInfo.append(" - ").append(assetPlant.getFleetNumber());
-            }
+            if (assetPlant != null) thirdPartyInfo.append(" - ").append(assetPlant.getFleetNumber());
         } else {
             thirdPartyInfo.append(" - ").append(transactionLine.getRegistrationNumber());
         }

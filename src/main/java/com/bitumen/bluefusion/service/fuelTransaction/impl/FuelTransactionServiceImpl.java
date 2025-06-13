@@ -5,14 +5,13 @@ import com.bitumen.bluefusion.domain.Storage;
 import com.bitumen.bluefusion.repository.FuelTransactionHeaderRepository;
 import com.bitumen.bluefusion.repository.FuelTransactionLineRepository;
 import com.bitumen.bluefusion.repository.StorageRepository;
+import com.bitumen.bluefusion.service.exceptions.FuelTransactionValidationException;
 import com.bitumen.bluefusion.service.exceptions.RecordNotFoundException;
 import com.bitumen.bluefusion.service.fuelTransaction.FuelTransactionService;
 import com.bitumen.bluefusion.service.fuelTransaction.dto.StorageUnitPump;
 import com.bitumen.bluefusion.service.fuelTransaction.dto.StorageUnitTransaction;
 import com.bitumen.bluefusion.service.fuelTransaction.dto.StorageUnitTransactionBuilder;
-import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.FleetIssuanceFuelTransactionHandler;
-import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.InterStoreTransferFuelTransactionHandler;
-import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.ThirdPartyIssuanceFuelTransactionHandler;
+import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.handler.*;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionRequest;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionResponse;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.StorageUnitTransactions;
@@ -39,27 +38,23 @@ public class FuelTransactionServiceImpl implements FuelTransactionService {
     private final InterStoreTransferFuelTransactionHandler interStoreTransferFuelTransactionHandler;
     private final ThirdPartyIssuanceFuelTransactionHandler thirdPartyIssuanceFuelTransactionHandler;
     private final StorageUnitTransactionBuilder storageUnitTransactionBuilder;
+    private final WorkshopIssuanceFuelTransactionHandler workshopIssuanceFuelTransactionHandler;
+    private final DrumFuelTransactionHandler drumFuelTransactionHandler;
+    private final CalibrationFuelTransactionHandler calibrationFuelTransactionHandler;
+    private final GrvFuelTransactionHandler grvFuelTransactionHandler;
 
     @Override
     public FuelTransactionResponse save(FuelTransactionRequest fuelTransactionRequest) {
-        switch (fuelTransactionRequest.transactionType()) {
-            case FLEET_ISSUANCE:
-                return fleetIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
-            case GRV:
-                // execute GRV code
-                break;
-            case TRANSFER:
-                return interStoreTransferFuelTransactionHandler.handle(fuelTransactionRequest);
-            case CALIBRATION:
-                // execute calibration code
-                break;
-            case THIRD_PARTY_ISSUANCE:
-                return thirdPartyIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
-            default:
-            // throw exception
-        }
-
-        return null;
+        return switch (fuelTransactionRequest.transactionType()) {
+            case FLEET_ISSUANCE -> fleetIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
+            case GRV -> grvFuelTransactionHandler.handle(fuelTransactionRequest);
+            case TRANSFER -> interStoreTransferFuelTransactionHandler.handle(fuelTransactionRequest);
+            case CALIBRATION -> calibrationFuelTransactionHandler.handle(fuelTransactionRequest);
+            case THIRD_PARTY_ISSUANCE -> thirdPartyIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
+            case WORKSHOP_ISSUANCE -> workshopIssuanceFuelTransactionHandler.handle(fuelTransactionRequest);
+            case DRUM_ISSUANCE -> drumFuelTransactionHandler.handle(fuelTransactionRequest);
+            default -> throw new FuelTransactionValidationException("Invalid transaction type");
+        };
     }
 
     @Override

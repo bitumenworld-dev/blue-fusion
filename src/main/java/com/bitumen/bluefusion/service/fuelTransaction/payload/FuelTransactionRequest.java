@@ -21,5 +21,6 @@ public record FuelTransactionRequest(
     Float meterReadingEnd,
     Long transferUnitId,
     Long thirdPartyId,
-    String registrationNumber
+    String registrationNumber,
+    Long workshopId
 ) {}

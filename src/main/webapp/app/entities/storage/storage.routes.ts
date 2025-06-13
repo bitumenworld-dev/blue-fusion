@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import StorageResolve from './route/storage-routing-resolve.service';
-import SiteResolve from '../site/route/site-routing-resolve.service';
 
 const storageRoute: Routes = [
   {

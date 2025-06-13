@@ -18,6 +18,7 @@ public class FuelTransactionEntityResolver {
     private final ContractDivisionRepository contractDivisionRepository;
     private final StorageRepository storageRepository;
     private final ThirdPartyRepository thirdPartyRepository;
+    private final SiteRepository siteRepository;
 
     public FuelTransactionEntities resolveFuelTransactionEntities(final FuelTransactionRequest fuelTransactionRequest) {
         return FuelTransactionEntities.builder()
@@ -28,6 +29,7 @@ public class FuelTransactionEntityResolver {
             .assetPlant(resolveEntityOptional(fuelTransactionRequest.assetPlantId(), assetPlantRepository))
             .transferUnit(resolveEntityOptional(fuelTransactionRequest.storageId(), storageRepository))
             .thirdParty(resolveEntityOptional(fuelTransactionRequest.thirdPartyId(), thirdPartyRepository))
+            .workshop(resolveEntityOptional(fuelTransactionRequest.workshopId(), siteRepository))
             .build();
     }
 

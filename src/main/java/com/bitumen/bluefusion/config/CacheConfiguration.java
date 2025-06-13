@@ -64,7 +64,6 @@ public class CacheConfiguration {
             createCache(cm, com.bitumen.bluefusion.domain.Company.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.PlantCategory.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.PlantSubcategory.class.getName());
-            createCache(cm, com.bitumen.bluefusion.domain.Workshop.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.SiteContract.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.Employee.class.getName());
             createCache(cm, com.bitumen.bluefusion.domain.FuelTransactionHeader.class.getName());

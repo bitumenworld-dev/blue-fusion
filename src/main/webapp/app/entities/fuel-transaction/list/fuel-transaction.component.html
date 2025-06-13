@@ -332,6 +332,35 @@
             </ul>
           </div>
 
+          <!-- Workshop (conditional) -->
+          <div class="relative" *ngIf="showWorkshop">
+            <label class="block text-xs font-medium text-gray-700 mb-1" for="field_workshop">Workshop</label>
+            <input
+              type="text"
+              id="field_workshop"
+              placeholder="Search Workshop"
+              name="workshop"
+              [(ngModel)]="workshop"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="filterWorkshops()"
+              (focus)="showWorkshopDropdown = true"
+              (blur)="hideWorkshopDropdown()"
+              class="text-xs w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <ul
+              *ngIf="showWorkshopDropdown && filteredWorkshops.length > 0"
+              class="text-xs absolute z-10 w-full bg-white border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg"
+            >
+              <li
+                *ngFor="let workshopObject of filteredWorkshops"
+                (mousedown)="selectWorkshop(workshopObject)"
+                class="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+              >
+                {{ workshopObject.siteName }}
+              </li>
+            </ul>
+          </div>
+
           <!-- transfer Unit Field (conditional) -->
           <div class="relative" *ngIf="showTransferUnit">
             <label class="block text-xs font-medium text-gray-700 mb-1" for="field_transfer_unit">Transfer Unit</label>

@@ -89,7 +89,9 @@ public class FuelPumpServiceImpl implements FuelPumpService {
     public Page<FuelPumpResponse> findAll(Pageable pageable, Long storageUnitId, Boolean isActive, String fuelPumpCode) {
         Storage storage = null;
         if (!Objects.isNull(storageUnitId) && storageUnitId > 0) {
-            storage = storageRepository.findById(storageUnitId).get();
+            storage = storageRepository
+                .findById(storageUnitId)
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Storage unit not found: %s", storageUnitId)));
         }
 
         Specification<FuelPump> specification = FuelPumpSpec.withFuelPumpCode(fuelPumpCode)

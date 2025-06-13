@@ -8,6 +8,7 @@ import com.bitumen.bluefusion.service.exceptions.RecordNotFoundException;
 import com.bitumen.bluefusion.service.site.SiteService;
 import com.bitumen.bluefusion.service.site.dto.SiteRequest;
 import com.bitumen.bluefusion.service.site.dto.SiteResponse;
+import com.bitumen.bluefusion.service.site.dto.SiteResponseMapper;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,7 @@ public class SiteServiceImpl implements SiteService {
             .siteName(siteRequest.siteName())
             .latitude(siteRequest.latitude())
             .longitude(siteRequest.longitude())
+            .hasWorkshop(siteRequest.hasWorkshop())
             .siteNotes(siteRequest.siteNotes())
             .build();
 
@@ -74,6 +77,7 @@ public class SiteServiceImpl implements SiteService {
         site.setSiteName(siteRequest.siteName());
         site.setLatitude(siteRequest.latitude());
         site.setLongitude(siteRequest.longitude());
+        site.setHasWorkshop(siteRequest.hasWorkshop());
         site.setSiteNotes(siteRequest.siteNotes());
 
         Site savedSite = siteRepository.save(site);
@@ -109,8 +113,18 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<SiteResponse> findAll(Pageable pageable) {
-        return siteRepository.findAll(pageable).map(SiteResponseMapper.map);
+    public Page<SiteResponse> findAll(Pageable pageable, Long companyId, Boolean hasWorkshop, Boolean isActive, String siteName) {
+        Company company = null;
+        if (!Objects.isNull(companyId)) {
+            company = companyRepository
+                .findById(companyId)
+                .orElseThrow(() -> new RecordNotFoundException(String.format("Company with id %s not found", companyId)));
+        }
+        Specification<Site> specification = SiteSpec.hasWorkshop(hasWorkshop)
+            .and(SiteSpec.isActive(isActive))
+            .and(SiteSpec.withSiteName(siteName))
+            .and(SiteSpec.withCompany(company));
+        return siteRepository.findAll(specification, pageable).map(SiteResponseMapper.map);
     }
 
     @Override

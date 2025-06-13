@@ -4,7 +4,6 @@ import com.bitumen.bluefusion.service.smrReadingService.dto.SmrReadingRequest;
 import com.bitumen.bluefusion.service.smrReadingService.dto.SmrReadingResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface SmrReadingService {
     SmrReadingResponse save(SmrReadingRequest smrReadingRequest);

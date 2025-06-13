@@ -1,81 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <!--
-        Added the entity Site.
-    -->
-    <changeSet id="20250430083153-1" author="jhipster">
-        <createTable tableName="site">
-            <column name="site_id" type="bigint" autoIncrement="true" startWith="1500">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
+  <!--
+      Added the entity Site.
+  -->
+  <changeSet id="20250430083153-1" author="jhipster">
+    <createTable tableName="site">
+      <column name="site_id" type="bigint" autoIncrement="true" startWith="1500">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
 
-            <column name="site_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="site_name" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="latitude" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="latitude" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="longitude" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="longitude" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="is_active" type="boolean">
-                <constraints nullable="true" />
-            </column>
+      <column name="is_active" type="boolean">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="site_notes" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="site_notes" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="site_image" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
+      <column name="site_image" type="varchar(255)">
+        <constraints nullable="true"/>
+      </column>
 
-            <column name="company_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="created_by" type="varchar(50)">
-              <constraints nullable="false"/>
-            </column>
-
-            <column name="created_date" type="timestamp"/>
-
-            <column name="last_modified_by" type="varchar(50)"/>
-
-            <column name="last_modified_date" type="timestamp"/>
-
-        </createTable>
-    </changeSet>
+      <column name="has_workshop" type="boolean">
+        <constraints nullable="true"/>
+      </column>
 
 
-    <changeSet id="20250430083153-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/fake-data/site.csv"
-                  separator=";"
-                  tableName="site"
-                  usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="site_id" type="numeric"/>
-            <column name="site_name" type="string"/>
-            <column name="latitude" type="string"/>
-            <column name="longitude" type="string"/>
-            <column name="is_active" type="boolean"/>
-            <column name="site_notes" type="string"/>
-            <column name="site_image" type="string"/>
-            <column name="company_id" type="numeric"/>
-            <column name="created_by" type="varchar(50)"/>
-            <column name="created_date" type="timestamp"/>
-            <column name="last_modified_by" type="varchar(50)"/>
-            <column name="last_modified_date" type="timestamp"/>
-        </loadData>
-    </changeSet>
+      <column name="company_id" type="bigint">
+        <constraints nullable="true"/>
+      </column>
+
+      <column name="created_by" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="created_date" type="timestamp"/>
+
+      <column name="last_modified_by" type="varchar(50)"/>
+
+      <column name="last_modified_date" type="timestamp"/>
+
+    </createTable>
+  </changeSet>
+
+
+  <changeSet id="20250430083153-1-data" author="jhipster" context="faker">
+    <loadData
+      file="config/liquibase/fake-data/site.csv"
+      separator=","
+      tableName="site"
+      usePreparedStatements="true">
+      <column name="id" type="numeric"/>
+      <column name="site_id" type="numeric"/>
+      <column name="site_name" type="string"/>
+      <column name="latitude" type="string"/>
+      <column name="longitude" type="string"/>
+      <column name="has_workshop" type="boolean"/>
+      <column name="is_active" type="boolean"/>
+      <column name="site_notes" type="string"/>
+      <column name="site_image" type="string"/>
+      <column name="company_id" type="numeric"/>
+      <column name="created_by" type="varchar(50)"/>
+      <column name="created_date" type="timestamp"/>
+      <column name="last_modified_by" type="varchar(50)"/>
+      <column name="last_modified_date" type="timestamp"/>
+    </loadData>
+  </changeSet>
 </databaseChangeLog>

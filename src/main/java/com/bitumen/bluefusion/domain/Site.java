@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import lombok.*;
 
-/**
- * A Site.
- */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
@@ -14,7 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "site")
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Site extends AbstractAuditingEntity<Site> implements Serializable {
 
     @Id
@@ -34,6 +30,9 @@ public class Site extends AbstractAuditingEntity<Site> implements Serializable {
     @Column(name = "is_active")
     private Boolean isActive;
 
+    @Column(name = "has_workshop")
+    private Boolean hasWorkshop;
+
     @Column(name = "site_notes")
     private String siteNotes;
 
@@ -43,8 +42,4 @@ public class Site extends AbstractAuditingEntity<Site> implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
-
-    public Long getId() {
-        return this.siteId;
-    }
 }

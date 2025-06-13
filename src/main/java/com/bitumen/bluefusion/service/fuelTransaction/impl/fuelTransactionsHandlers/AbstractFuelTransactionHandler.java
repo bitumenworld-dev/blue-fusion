@@ -10,6 +10,7 @@ import com.bitumen.bluefusion.service.fuelTransaction.dto.FuelTransactionLineRes
 import com.bitumen.bluefusion.service.fuelTransaction.impl.FuelTransactionEntityResolver;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionRequest;
 import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionResponse;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,7 +47,7 @@ public abstract class AbstractFuelTransactionHandler {
         );
     }
 
-    private FuelTransactionHeader createFuelTransactionHeader(
+    protected FuelTransactionHeader createFuelTransactionHeader(
         FuelTransactionRequest fuelTransactionRequest,
         FuelTransactionEntities fuelTransactionEntities
     ) {
@@ -56,11 +57,11 @@ public abstract class AbstractFuelTransactionHandler {
             .fuelTransactionType(fuelTransactionRequest.transactionType())
             .fuelType(fuelTransactionRequest.fuelType())
             .isFillUp(fuelTransactionRequest.isFillUp())
-            .transactionDate(fuelTransactionRequest.transactionDate())
+            .transactionDate(fuelTransactionRequest.transactionDate() == null ? LocalDate.now() : fuelTransactionRequest.transactionDate())
             .build();
     }
 
-    private FuelTransactionLine createFuelTransactionLine(
+    protected FuelTransactionLine createFuelTransactionLine(
         FuelTransactionHeader fuelTransactionHeader,
         FuelTransactionRequest fuelTransactionRequest,
         FuelTransactionEntities fuelTransactionEntities
@@ -76,6 +77,7 @@ public abstract class AbstractFuelTransactionHandler {
             .meterReadingEnd(fuelTransactionRequest.meterReadingEnd())
             .thirdParty(fuelTransactionEntities.getThirdParty())
             .registrationNumber(fuelTransactionRequest.registrationNumber())
+            .workshop(fuelTransactionEntities.getWorkshop())
             .multiplier(-1)
             .build();
     }

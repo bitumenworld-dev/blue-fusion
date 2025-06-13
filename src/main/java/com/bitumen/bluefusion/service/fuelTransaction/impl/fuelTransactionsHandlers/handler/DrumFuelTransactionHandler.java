@@ -1,0 +1,19 @@
+package com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.handler;
+
+import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.AbstractFuelTransactionHandler;
+import com.bitumen.bluefusion.service.fuelTransaction.impl.fuelTransactionsHandlers.FuelTransactionValidator;
+import com.bitumen.bluefusion.service.fuelTransaction.payload.FuelTransactionRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class DrumFuelTransactionHandler extends AbstractFuelTransactionHandler {
+
+    private final FuelTransactionValidator fuelTransactionValidator;
+
+    @Override
+    public void validateFuelTransaction(FuelTransactionRequest fuelTransactionRequest) {
+        fuelTransactionValidator.validateDrumIssuance(fuelTransactionRequest);
+    }
+}

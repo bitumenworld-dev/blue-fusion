@@ -17,6 +17,7 @@ export interface FuelTransaction {
   registrationNumber?: string | null;
   smr?: string | null;
   attendeeId?: number | null;
+  workshopId?: number | null;
   thirdPartyId?: number | null;
   operatorId?: number | null;
   fuelTransactionLineId?: number | null;

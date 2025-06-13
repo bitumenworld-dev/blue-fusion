@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Storage, NewStorage } from '../storage.model';
-import { ISite, NewSite } from '../../site/site.model';
-import { SiteFormGroup } from '../../site/update/site-form.service';
+import { Site, NewSite } from '../../site/site.model';
 
 type PartialWithRequiredKeyOf<T extends { id: unknown }> = Partial<Omit<T, 'id'>> & { id: T['id'] };
 type StorageFormGroupInput = Storage | PartialWithRequiredKeyOf<NewStorage>;

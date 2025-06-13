@@ -12,9 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,8 +43,8 @@ public class SiteResource {
     @PostMapping("")
     public ResponseEntity<SiteResponse> createSite(@RequestBody SiteRequest siteRequest) throws URISyntaxException, IOException {
         SiteResponse siteResponse = siteService.save(siteRequest);
-        return ResponseEntity.created(new URI("/api/sites/" + siteResponse.id()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, siteResponse.id().toString()))
+        return ResponseEntity.created(new URI("/api/sites/" + siteResponse.siteId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, siteResponse.siteId().toString()))
             .body(siteResponse);
     }
 
@@ -60,7 +61,7 @@ public class SiteResource {
         throws IOException {
         SiteResponse siteResponse = siteService.update(id, siteRequest);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, siteResponse.id().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, siteResponse.siteId().toString()))
             .body(siteResponse);
     }
 
@@ -72,15 +73,26 @@ public class SiteResource {
         SiteResponse result = siteService.partialUpdate(id, siteRequest);
         return ResponseUtil.wrapOrNotFound(
             Optional.of(result),
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.id().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.siteId().toString())
         );
     }
 
     @GetMapping("")
-    public ResponseEntity<List<SiteResponse>> getAllSites(Pageable pageable) {
-        Page<SiteResponse> page = siteService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    public ResponseEntity<List<SiteResponse>> getAllSites(
+        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+        @RequestParam(value = "size", defaultValue = "100", required = false) Integer size,
+        @RequestParam(value = "companyId", required = false) Long companyId,
+        @RequestParam(value = "hasWorkshop", required = false) Boolean hasWorkshop,
+        @RequestParam(value = "isActive", required = false) Boolean isActive,
+        @RequestParam(value = "siteName", required = false) String siteName
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdDate").descending());
+        Page<SiteResponse> siteResponsePage = siteService.findAll(pageable, companyId, hasWorkshop, isActive, siteName);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(
+            ServletUriComponentsBuilder.fromCurrentRequest(),
+            siteResponsePage
+        );
+        return ResponseEntity.ok().headers(headers).body(siteResponsePage.getContent());
     }
 
     @GetMapping("/{id}")

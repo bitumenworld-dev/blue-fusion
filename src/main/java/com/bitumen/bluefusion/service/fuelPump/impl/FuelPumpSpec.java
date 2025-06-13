@@ -16,8 +16,10 @@ public interface FuelPumpSpec {
         );
     }
 
-    static Specification<FuelPump> isActive(final Boolean isFixed) {
-        return ((root, query, builder) -> (Objects.isNull(isFixed)) ? builder.conjunction() : builder.equal(root.get("isActive"), isFixed));
+    static Specification<FuelPump> isActive(final Boolean isActive) {
+        return (
+            (root, query, builder) -> (Objects.isNull(isActive)) ? builder.conjunction() : builder.equal(root.get("isActive"), isActive)
+        );
     }
 
     static Specification<FuelPump> withCurrentStorageUnit(final Storage storageUnit) {

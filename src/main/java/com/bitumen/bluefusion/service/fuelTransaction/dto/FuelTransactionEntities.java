@@ -17,4 +17,5 @@ public class FuelTransactionEntities {
     private final FuelPump fuelPump;
     private final ContractDivision contractDivision;
     private final ThirdParty thirdParty;
+    private final Site workshop;
 }

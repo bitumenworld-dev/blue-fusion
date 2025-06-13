@@ -46,7 +46,7 @@ public interface SiteService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<SiteResponse> findAll(Pageable pageable);
+    Page<SiteResponse> findAll(Pageable pageable, Long companyId, Boolean hasWorkshop, Boolean isActive, String siteName);
 
     /**
      * Get the "id" site.
